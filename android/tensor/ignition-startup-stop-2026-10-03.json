@@ -1,0 +1,57 @@
+{
+  "date_utc": "2026-10-03T23:09:14.472383+00:00",
+  "source_sha256": "09d080f36965bb2a0790500452bd328aa03c484d0222aa79d1ad9f021a522aec",
+  "transport": "direct comma USB",
+  "driving_ready": false,
+  "requested_frames": 120,
+  "warmup_frames": 20,
+  "failures": [
+    "Panda permits vehicle control"
+  ],
+  "usb_ownership": "legacy exclusive",
+  "ignition_mode": "on_stationary",
+  "health_at_stop_error": "gadget write had no reader before deadline; link abandoned",
+  "vehicle_gate": {
+    "phase": "waiting",
+    "failure": "Panda permits vehicle control",
+    "samples": [],
+    "deployment": "5c76b6b9ff17f94b4f0b7b76d507c39197f558e1",
+    "startup_link_disabled": true,
+    "max_fast_message_age_s": 0.5,
+    "max_ignition_message_age_s": 1.5,
+    "poll_ms": 50,
+    "speed_tolerance_m_s": 0.01
+  },
+  "accelerator_link_restored": true,
+  "elapsed_s": 49.613,
+  "thermal_samples": [],
+  "blocks_100": [],
+  "timing_guard": "100-frame p95 <50 ms and each exchange/server <100 ms",
+  "measured_frames": 0,
+  "protocol_pass": false,
+  "analysis": {
+    "phase": "startup, before inference",
+    "measured_frames": 0,
+    "stationary_controls_now_confirmed": true,
+    "full_rate_startup_transitions": [
+      {
+        "route_elapsed_s": 9.746,
+        "safety_model": "hondaNidec",
+        "controls_allowed": false,
+        "controls_allowed_lateral": true,
+        "controls_allowed_longitudinal": false
+      },
+      {
+        "route_elapsed_s": 12.259,
+        "safety_model": "hondaNidec",
+        "controls_allowed": false,
+        "controls_allowed_lateral": false,
+        "controls_allowed_longitudinal": false
+      }
+    ],
+    "interpretation": "The transient lateral-permission bit is consistent with MADS requesting lateral control on the first cruise MAIN rising edge, then clearing on the disengaged heartbeat. Logged selfdrive/control commands remained inactive. The guard correctly refused to start.",
+    "retry_procedure": "Turn cruise MAIN off, cycle ignition off, and re-arm with all existing safety gates unchanged.",
+    "cleanup_repair": "Do not request phone health before a validated HELLO. The original attempt tried this while no USB reader was ready, adding a 15-second write watchdog delay. The fixed harness passed all 50 guard/cleanup tests.",
+    "fixed_harness_sha256": "f7972ad87b6fd46e5a15a8b308bdcf6c39bcb486793ae6b28c9a2024598a477d"
+  }
+}

@@ -27,11 +27,17 @@ class ParkedHarnessTests(unittest.TestCase):
                                      packed_layout={'traffic_convention':(slice(0,2),None),'action_t':(slice(2,4),None)})
         client.ensure_engine = lambda *a,**kw: spec
         good_health={'device_health': {'sample_age_s':0.1,'thermal_status':0,'battery_c':25.0}}
-        client.state = lambda **kw: {'device_health': {'sample_age_s':0.1,'thermal_status':3,'battery_c':25.0}} if bad_health else good_health
+        state_reads=[]
+        def read_state(**kw):
+            state_reads.append(True)
+            return {'device_health': {'sample_age_s':0.1,'thermal_status':3,'battery_c':25.0}} if bad_health else good_health
+        client.state=read_state
         client.last_state = {} if health_lost else good_health
         client.last_timings = (110000,10,110010) if slow else (100,10,110)
         handlers={}
+        infer_deadlines=[]
         def infer(*a,**kw):
+            infer_deadlines.append(kw['deadline'])
             if interrupted: handlers[module.signal.SIGTERM]()
             return np.array([np.nan] if bad_output else [0.0],dtype=np.float32)
         client.infer=infer
@@ -86,6 +92,14 @@ class ParkedHarnessTests(unittest.TestCase):
                 self.assertEqual(changes, [])
                 return
             status=module.main()
+            report=json.loads((Path(d)/'result.json').read_text())
+            if status==0:
+                self.assertEqual(report['warmup_completed'],20)
+                self.assertEqual(len(report['warmup_timings']),20)
+                self.assertEqual(infer_deadlines[:20],[2]*20)
+                self.assertEqual(infer_deadlines[20:],[0.2 if ignition_on else 2]*20)
+            if readiness_error or connect_error or bad_peer:
+                self.assertEqual(state_reads,[], 'Do not send a health request before a valid peer handshake')
             if bad_health:
                 self.assertEqual(json.loads((Path(d)/'result.json').read_text())['health_at_stop']['thermal_status'],3)
             self.assertEqual(loan.closed, not legacy and not lock_error)

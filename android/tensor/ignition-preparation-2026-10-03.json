@@ -1,6 +1,6 @@
 {
-  "status": "prepared_for_supervised_stationary_test",
-  "physical_ignition_on_test_run": false,
+  "status": "stationary_ignition_on_test_stopped_on_timing",
+  "physical_ignition_on_test_run": true,
   "driving_ready": false,
   "apk": {
     "apk_sha256": "aef63a15da83f168b79bca04196c447214e07b6e96fa8357f8d287357d7e472b",
@@ -77,5 +77,17 @@
     "requires_operator_present": true,
     "usb_speed": "super-speed"
   },
-  "published_patch_sha256": "abab24bf0c3a180c84259bd719d5df4f08cc5a0bf6d2cab024aa6c7e412409f0"
+  "published_patch_sha256": "abab24bf0c3a180c84259bd719d5df4f08cc5a0bf6d2cab024aa6c7e412409f0",
+  "latest_physical_result": {
+    "evidence": "ignition-timing-stop-2026-10-03.json",
+    "requested_frames": 120,
+    "completed_finite_measured_frames": 100,
+    "warmups_completed": 20,
+    "timing_pass": false,
+    "round_trip_p95_ms": 53.42654215055517,
+    "server_p95_ms": 39.825199999999995,
+    "harness_sha256": "e7ee93d7f2ad57e0a3f3ac766a0da43eba324219d2065ad782ba4c6608ae757f",
+    "guard_tests_passed_after_changes": 50,
+    "vehicle_gates_unchanged": true
+  }
 }

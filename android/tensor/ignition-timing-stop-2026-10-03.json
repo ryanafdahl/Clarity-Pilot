@@ -1,0 +1,1013 @@
+{
+  "date_utc": "2026-10-03T23:18:03.688544+00:00",
+  "source_sha256": "09d080f36965bb2a0790500452bd328aa03c484d0222aa79d1ad9f021a522aec",
+  "transport": "direct comma USB",
+  "driving_ready": false,
+  "requested_frames": 120,
+  "warmup_frames": 20,
+  "failures": [
+    "100-frame p95 timing limit reached; test stopped"
+  ],
+  "usb_ownership": "legacy exclusive",
+  "ignition_mode": "on_stationary",
+  "phase": "measured",
+  "warmup_completed": 20,
+  "warmup_timings": [
+    {
+      "frame_id": 0,
+      "round_trip_ms": 66.23681999917608,
+      "server_total_ms": 47.397
+    },
+    {
+      "frame_id": 1,
+      "round_trip_ms": 41.77788300148677,
+      "server_total_ms": 37.263
+    },
+    {
+      "frame_id": 2,
+      "round_trip_ms": 41.472117001831066,
+      "server_total_ms": 35.824
+    },
+    {
+      "frame_id": 3,
+      "round_trip_ms": 41.453055000602035,
+      "server_total_ms": 35.238
+    },
+    {
+      "frame_id": 4,
+      "round_trip_ms": 40.17525700328406,
+      "server_total_ms": 34.675
+    },
+    {
+      "frame_id": 5,
+      "round_trip_ms": 40.737780000199564,
+      "server_total_ms": 36.064
+    },
+    {
+      "frame_id": 6,
+      "round_trip_ms": 41.23244199945475,
+      "server_total_ms": 33.515
+    },
+    {
+      "frame_id": 7,
+      "round_trip_ms": 39.92818600090686,
+      "server_total_ms": 34.107
+    },
+    {
+      "frame_id": 8,
+      "round_trip_ms": 39.498938000178896,
+      "server_total_ms": 32.177
+    },
+    {
+      "frame_id": 9,
+      "round_trip_ms": 44.049847001588205,
+      "server_total_ms": 33.698
+    },
+    {
+      "frame_id": 10,
+      "round_trip_ms": 38.24051400079043,
+      "server_total_ms": 32.64
+    },
+    {
+      "frame_id": 11,
+      "round_trip_ms": 37.16759999952046,
+      "server_total_ms": 32.327
+    },
+    {
+      "frame_id": 12,
+      "round_trip_ms": 38.608724000368966,
+      "server_total_ms": 33.036
+    },
+    {
+      "frame_id": 13,
+      "round_trip_ms": 39.987350999581395,
+      "server_total_ms": 32.821
+    },
+    {
+      "frame_id": 14,
+      "round_trip_ms": 38.83808800310362,
+      "server_total_ms": 34.127
+    },
+    {
+      "frame_id": 15,
+      "round_trip_ms": 56.733199999143835,
+      "server_total_ms": 35.141
+    },
+    {
+      "frame_id": 16,
+      "round_trip_ms": 40.65002499919501,
+      "server_total_ms": 32.494
+    },
+    {
+      "frame_id": 17,
+      "round_trip_ms": 46.34983299911255,
+      "server_total_ms": 33.861
+    },
+    {
+      "frame_id": 18,
+      "round_trip_ms": 40.46763900259975,
+      "server_total_ms": 35.588
+    },
+    {
+      "frame_id": 19,
+      "round_trip_ms": 37.306553000235,
+      "server_total_ms": 32.614
+    }
+  ],
+  "warmup_transport_deadline_s": 2,
+  "measured_transport_deadline_s": 0.2,
+  "link": {
+    "kind": "usb",
+    "usb_speed": "super-speed"
+  },
+  "runtime": "2.2.0",
+  "attempted_frame_id": 119,
+  "health_at_stop": {
+    "power_save": false,
+    "thermal_status": 2,
+    "sample_age_s": 0.16968990900204517,
+    "battery_percent": 100,
+    "plugged": true,
+    "charging": true,
+    "battery_c": 37.9
+  },
+  "vehicle_gate": {
+    "phase": "active",
+    "failure": null,
+    "samples": [
+      {
+        "ignition": true,
+        "panda_controls": false,
+        "started": true,
+        "gear": "park",
+        "parking_brake": true,
+        "standstill": true,
+        "speeds": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": false,
+        "lat_active": false,
+        "long_active": false,
+        "big_model": false,
+        "elapsed_s": 32.175
+      },
+      {
+        "ignition": true,
+        "panda_controls": false,
+        "started": true,
+        "gear": "park",
+        "parking_brake": true,
+        "standstill": true,
+        "speeds": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": false,
+        "lat_active": false,
+        "long_active": false,
+        "big_model": false,
+        "elapsed_s": 33.177
+      },
+      {
+        "ignition": true,
+        "panda_controls": false,
+        "started": true,
+        "gear": "park",
+        "parking_brake": true,
+        "standstill": true,
+        "speeds": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": false,
+        "lat_active": false,
+        "long_active": false,
+        "big_model": false,
+        "elapsed_s": 34.18
+      },
+      {
+        "ignition": true,
+        "panda_controls": false,
+        "started": true,
+        "gear": "park",
+        "parking_brake": true,
+        "standstill": true,
+        "speeds": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": false,
+        "lat_active": false,
+        "long_active": false,
+        "big_model": false,
+        "elapsed_s": 35.18
+      },
+      {
+        "ignition": true,
+        "panda_controls": false,
+        "started": true,
+        "gear": "park",
+        "parking_brake": true,
+        "standstill": true,
+        "speeds": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": false,
+        "lat_active": false,
+        "long_active": false,
+        "big_model": false,
+        "elapsed_s": 36.18
+      },
+      {
+        "ignition": true,
+        "panda_controls": false,
+        "started": true,
+        "gear": "park",
+        "parking_brake": true,
+        "standstill": true,
+        "speeds": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": false,
+        "lat_active": false,
+        "long_active": false,
+        "big_model": false,
+        "elapsed_s": 37.181
+      },
+      {
+        "ignition": true,
+        "panda_controls": false,
+        "started": true,
+        "gear": "park",
+        "parking_brake": true,
+        "standstill": true,
+        "speeds": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": false,
+        "lat_active": false,
+        "long_active": false,
+        "big_model": false,
+        "elapsed_s": 38.187
+      },
+      {
+        "ignition": true,
+        "panda_controls": false,
+        "started": true,
+        "gear": "park",
+        "parking_brake": true,
+        "standstill": true,
+        "speeds": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": false,
+        "lat_active": false,
+        "long_active": false,
+        "big_model": false,
+        "elapsed_s": 39.191
+      },
+      {
+        "ignition": true,
+        "panda_controls": false,
+        "started": true,
+        "gear": "park",
+        "parking_brake": true,
+        "standstill": true,
+        "speeds": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": false,
+        "lat_active": false,
+        "long_active": false,
+        "big_model": false,
+        "elapsed_s": 40.195
+      },
+      {
+        "ignition": true,
+        "panda_controls": false,
+        "started": true,
+        "gear": "park",
+        "parking_brake": true,
+        "standstill": true,
+        "speeds": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": false,
+        "lat_active": false,
+        "long_active": false,
+        "big_model": false,
+        "elapsed_s": 41.196
+      },
+      {
+        "ignition": true,
+        "panda_controls": false,
+        "started": true,
+        "gear": "park",
+        "parking_brake": true,
+        "standstill": true,
+        "speeds": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": false,
+        "lat_active": false,
+        "long_active": false,
+        "big_model": false,
+        "elapsed_s": 42.196
+      },
+      {
+        "ignition": true,
+        "panda_controls": false,
+        "started": true,
+        "gear": "park",
+        "parking_brake": true,
+        "standstill": true,
+        "speeds": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": false,
+        "lat_active": false,
+        "long_active": false,
+        "big_model": false,
+        "elapsed_s": 43.198
+      },
+      {
+        "ignition": true,
+        "panda_controls": false,
+        "started": true,
+        "gear": "park",
+        "parking_brake": true,
+        "standstill": true,
+        "speeds": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": false,
+        "lat_active": false,
+        "long_active": false,
+        "big_model": false,
+        "elapsed_s": 44.199
+      },
+      {
+        "ignition": true,
+        "panda_controls": false,
+        "started": true,
+        "gear": "park",
+        "parking_brake": true,
+        "standstill": true,
+        "speeds": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": false,
+        "lat_active": false,
+        "long_active": false,
+        "big_model": false,
+        "elapsed_s": 45.201
+      },
+      {
+        "ignition": true,
+        "panda_controls": false,
+        "started": true,
+        "gear": "park",
+        "parking_brake": true,
+        "standstill": true,
+        "speeds": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": false,
+        "lat_active": false,
+        "long_active": false,
+        "big_model": false,
+        "elapsed_s": 46.205
+      },
+      {
+        "ignition": true,
+        "panda_controls": false,
+        "started": true,
+        "gear": "park",
+        "parking_brake": true,
+        "standstill": true,
+        "speeds": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": false,
+        "lat_active": false,
+        "long_active": false,
+        "big_model": false,
+        "elapsed_s": 47.21
+      },
+      {
+        "ignition": true,
+        "panda_controls": false,
+        "started": true,
+        "gear": "park",
+        "parking_brake": true,
+        "standstill": true,
+        "speeds": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": false,
+        "lat_active": false,
+        "long_active": false,
+        "big_model": false,
+        "elapsed_s": 48.214
+      },
+      {
+        "ignition": true,
+        "panda_controls": false,
+        "started": true,
+        "gear": "park",
+        "parking_brake": true,
+        "standstill": true,
+        "speeds": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": false,
+        "lat_active": false,
+        "long_active": false,
+        "big_model": false,
+        "elapsed_s": 49.215
+      },
+      {
+        "ignition": true,
+        "panda_controls": false,
+        "started": true,
+        "gear": "park",
+        "parking_brake": true,
+        "standstill": true,
+        "speeds": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": false,
+        "lat_active": false,
+        "long_active": false,
+        "big_model": false,
+        "elapsed_s": 50.225
+      },
+      {
+        "ignition": true,
+        "panda_controls": false,
+        "started": true,
+        "gear": "park",
+        "parking_brake": true,
+        "standstill": true,
+        "speeds": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": false,
+        "lat_active": false,
+        "long_active": false,
+        "big_model": false,
+        "elapsed_s": 51.227
+      },
+      {
+        "ignition": true,
+        "panda_controls": false,
+        "started": true,
+        "gear": "park",
+        "parking_brake": true,
+        "standstill": true,
+        "speeds": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": false,
+        "lat_active": false,
+        "long_active": false,
+        "big_model": false,
+        "elapsed_s": 52.231
+      },
+      {
+        "ignition": true,
+        "panda_controls": false,
+        "started": true,
+        "gear": "park",
+        "parking_brake": true,
+        "standstill": true,
+        "speeds": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": false,
+        "lat_active": false,
+        "long_active": false,
+        "big_model": false,
+        "elapsed_s": 53.242
+      },
+      {
+        "ignition": true,
+        "panda_controls": false,
+        "started": true,
+        "gear": "park",
+        "parking_brake": true,
+        "standstill": true,
+        "speeds": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": false,
+        "lat_active": false,
+        "long_active": false,
+        "big_model": false,
+        "elapsed_s": 54.244
+      },
+      {
+        "ignition": true,
+        "panda_controls": false,
+        "started": true,
+        "gear": "park",
+        "parking_brake": true,
+        "standstill": true,
+        "speeds": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": false,
+        "lat_active": false,
+        "long_active": false,
+        "big_model": false,
+        "elapsed_s": 55.246
+      },
+      {
+        "ignition": true,
+        "panda_controls": false,
+        "started": true,
+        "gear": "park",
+        "parking_brake": true,
+        "standstill": true,
+        "speeds": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": false,
+        "lat_active": false,
+        "long_active": false,
+        "big_model": false,
+        "elapsed_s": 56.252
+      },
+      {
+        "ignition": true,
+        "panda_controls": false,
+        "started": true,
+        "gear": "park",
+        "parking_brake": true,
+        "standstill": true,
+        "speeds": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": false,
+        "lat_active": false,
+        "long_active": false,
+        "big_model": false,
+        "elapsed_s": 57.255
+      },
+      {
+        "ignition": true,
+        "panda_controls": false,
+        "started": true,
+        "gear": "park",
+        "parking_brake": true,
+        "standstill": true,
+        "speeds": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": false,
+        "lat_active": false,
+        "long_active": false,
+        "big_model": false,
+        "elapsed_s": 58.26
+      },
+      {
+        "ignition": true,
+        "panda_controls": false,
+        "started": true,
+        "gear": "park",
+        "parking_brake": true,
+        "standstill": true,
+        "speeds": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": false,
+        "lat_active": false,
+        "long_active": false,
+        "big_model": false,
+        "elapsed_s": 59.269
+      },
+      {
+        "ignition": true,
+        "panda_controls": false,
+        "started": true,
+        "gear": "park",
+        "parking_brake": true,
+        "standstill": true,
+        "speeds": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": false,
+        "lat_active": false,
+        "long_active": false,
+        "big_model": false,
+        "elapsed_s": 60.272
+      },
+      {
+        "ignition": true,
+        "panda_controls": false,
+        "started": true,
+        "gear": "park",
+        "parking_brake": true,
+        "standstill": true,
+        "speeds": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": false,
+        "lat_active": false,
+        "long_active": false,
+        "big_model": false,
+        "elapsed_s": 61.275
+      },
+      {
+        "ignition": true,
+        "panda_controls": false,
+        "started": true,
+        "gear": "park",
+        "parking_brake": true,
+        "standstill": true,
+        "speeds": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": false,
+        "lat_active": false,
+        "long_active": false,
+        "big_model": false,
+        "elapsed_s": 62.277
+      },
+      {
+        "ignition": true,
+        "panda_controls": false,
+        "started": true,
+        "gear": "park",
+        "parking_brake": true,
+        "standstill": true,
+        "speeds": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": false,
+        "lat_active": false,
+        "long_active": false,
+        "big_model": false,
+        "elapsed_s": 63.28
+      },
+      {
+        "ignition": true,
+        "panda_controls": false,
+        "started": true,
+        "gear": "park",
+        "parking_brake": true,
+        "standstill": true,
+        "speeds": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": false,
+        "lat_active": false,
+        "long_active": false,
+        "big_model": false,
+        "elapsed_s": 64.285
+      },
+      {
+        "ignition": true,
+        "panda_controls": false,
+        "started": true,
+        "gear": "park",
+        "parking_brake": true,
+        "standstill": true,
+        "speeds": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": false,
+        "lat_active": false,
+        "long_active": false,
+        "big_model": false,
+        "elapsed_s": 65.29
+      }
+    ],
+    "deployment": "5c76b6b9ff17f94b4f0b7b76d507c39197f558e1",
+    "startup_link_disabled": true,
+    "max_fast_message_age_s": 0.5,
+    "max_ignition_message_age_s": 1.5,
+    "poll_ms": 50,
+    "speed_tolerance_m_s": 0.01
+  },
+  "accelerator_link_restored": true,
+  "elapsed_s": 64.811,
+  "thermal_samples": [
+    {
+      "plugged": true,
+      "battery_percent": 100,
+      "sample_age_s": 0.12109325399796944,
+      "charging": true,
+      "thermal_status": 2,
+      "battery_c": 37.9,
+      "power_save": false,
+      "elapsed_s": 58.585
+    },
+    {
+      "battery_c": 37.9,
+      "sample_age_s": 0.12109325399796944,
+      "power_save": false,
+      "thermal_status": 2,
+      "plugged": true,
+      "charging": true,
+      "battery_percent": 100,
+      "elapsed_s": 58.669,
+      "frame": 0
+    },
+    {
+      "battery_c": 37.9,
+      "sample_age_s": 0.12346892200002912,
+      "power_save": false,
+      "thermal_status": 2,
+      "battery_percent": 100,
+      "plugged": true,
+      "charging": true,
+      "elapsed_s": 59.682,
+      "frame": 20
+    },
+    {
+      "battery_c": 37.9,
+      "sample_age_s": 0.1311584629875142,
+      "thermal_status": 2,
+      "power_save": false,
+      "plugged": true,
+      "charging": true,
+      "battery_percent": 100,
+      "elapsed_s": 60.697,
+      "frame": 40
+    },
+    {
+      "power_save": false,
+      "thermal_status": 2,
+      "sample_age_s": 0.1772572640038561,
+      "battery_percent": 100,
+      "plugged": true,
+      "charging": true,
+      "battery_c": 37.9,
+      "elapsed_s": 61.694,
+      "frame": 60
+    },
+    {
+      "plugged": true,
+      "thermal_status": 2,
+      "battery_c": 37.9,
+      "charging": true,
+      "sample_age_s": 0.09525695200136397,
+      "battery_percent": 100,
+      "power_save": false,
+      "elapsed_s": 62.709,
+      "frame": 80
+    },
+    {
+      "plugged": true,
+      "thermal_status": 2,
+      "battery_c": 37.9,
+      "charging": true,
+      "sample_age_s": 0.11850517000129912,
+      "battery_percent": 100,
+      "power_save": false,
+      "elapsed_s": 63.746,
+      "frame": 100
+    }
+  ],
+  "blocks_100": [
+    {
+      "end_frame": 100,
+      "elapsed_s": 64.701,
+      "round_trip": {
+        "mean_ms": 43.43610580013774,
+        "p95_ms": 53.42654215055517,
+        "p99_ms": 57.70249827968656,
+        "max_ms": 58.56560800020816,
+        "over_50ms": 7
+      },
+      "inference": {
+        "mean_ms": 34.26901,
+        "p95_ms": 38.9753,
+        "p99_ms": 40.08143000000001,
+        "max_ms": 42.5,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 35.34579,
+        "p95_ms": 39.825199999999995,
+        "p99_ms": 42.006210000000024,
+        "max_ms": 47.373,
+        "over_50ms": 0
+      }
+    }
+  ],
+  "timing_guard": "100-frame p95 <50 ms and each exchange/server <100 ms",
+  "measured_frames": 100,
+  "protocol_pass": false,
+  "round_trip": {
+    "mean_ms": 43.43610580013774,
+    "p95_ms": 53.42654215055517,
+    "p99_ms": 57.70249827968656,
+    "max_ms": 58.56560800020816,
+    "over_50ms": 7
+  },
+  "inference": {
+    "mean_ms": 34.26901,
+    "p95_ms": 38.9753,
+    "p99_ms": 40.08143000000001,
+    "max_ms": 42.5,
+    "over_50ms": 0
+  },
+  "queues": {
+    "mean_ms": 0.9706,
+    "p95_ms": 3.3242999999999996,
+    "p99_ms": 3.845940000000005,
+    "max_ms": 4.83,
+    "over_50ms": 0
+  },
+  "server_total": {
+    "mean_ms": 35.34579,
+    "p95_ms": 39.825199999999995,
+    "p99_ms": 42.006210000000024,
+    "max_ms": 47.373,
+    "over_50ms": 0
+  },
+  "timing_pass": false,
+  "analysis": {
+    "harness_sha256": "e7ee93d7f2ad57e0a3f3ac766a0da43eba324219d2065ad782ba4c6608ae757f",
+    "completed_finite_warmups": 20,
+    "completed_finite_measured_frames": 100,
+    "reason_protocol_pass_is_false": "The timing guard stopped the requested 120-frame run at the first 100-frame block; completed frames did not show protocol or non-finite-output failures.",
+    "interpretation": "Full-exchange latency failed the declared p95 limit, while every measured phone/server time stayed below 50 ms. The excess involves work outside reported phone/server execution, such as transport or comma-side scheduling; this run does not isolate which component. Thermal status 2 was present, but does not alone establish thermal throttling as the cause.",
+    "startup_timeout_resolved": false,
+    "startup_timeout_note": "The earlier 200 ms write timeout did not recur. This retry used a two-second warmup deadline, but its slowest warmup was only 66.24 ms; it cannot establish that the deadline change fixed the earlier timeout.",
+    "limits": "Only 100 measured frames, stopped on timing. No sustained qualification or driving validation.",
+    "cleanup_verified": {
+      "test_processes_remaining": 0,
+      "accelerator_link_enabled": true
+    }
+  }
+}

@@ -118,6 +118,7 @@ def main():
     signal.alarm(max(180, a.frames // 10) + a.connect_timeout + 60 + (a.ignition_timeout if ignition else 0))
     client = loan = test_lock = None
     restore_link = False
+    peer_ready = False
     rows = []
     samples = []
     started = time.monotonic()
@@ -125,7 +126,9 @@ def main():
     report = {'date_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(), 'source_sha256':SOURCE, 'transport':'direct comma USB', 'driving_ready':False,
               'requested_frames':a.frames, 'warmup_frames':20, 'failures':[],
               'usb_ownership':'legacy exclusive' if a.legacy_owner else 'loan',
-              'ignition_mode':'on_stationary' if ignition else 'off'}
+              'ignition_mode':'on_stationary' if ignition else 'off',
+              'phase':'usb_isolation','warmup_completed':0,'warmup_timings':[],
+              'warmup_transport_deadline_s':2,'measured_transport_deadline_s':0.2 if ignition else 2}
     try:
         test_lock = acquire_test_lock()
         parked()
@@ -142,13 +145,17 @@ def main():
             if loan is None: raise RuntimeError('JetLink owner could not lend USB; no settings were changed')
             parked()
             client = JetlinkClient.open_loan(loan, name='clarity-parked-test', want_hidden=True, deadline=2)
+        report['phase']='waiting_for_stationary_vehicle'
         if ignition: ignition.wait_until_ready(a.ignition_timeout)
+        report['phase']='waiting_for_phone'
         wait_usb_host(client, parked, a.connect_timeout)
         report['link'] = client.t.link_info()
+        report['phase']='hello'
         hello = client.hello(timeout=20)
         parked()
         if hello.get('validation') != 'parked_only' or hello.get('device') != 'tensor-Tensor_G6':
             raise RuntimeError('Expected the Tensor G6 parked-only app; peer did not match')
+        peer_ready = True
         report['runtime'] = hello.get('runtime_version')
         report['link'] = client.t.link_info()
         if report['link'].get('usb_speed') not in ('super-speed', 'super-speed-plus'):
@@ -160,6 +167,7 @@ def main():
             if kind == P.Msg.ENGINE_REQ: data = dict(data, validation_mode='parked')
             return send_json(kind, seq, data, flags)
         client.t.send_json = parked_request
+        report['phase']='engine_setup'
         spec = client.ensure_engine(SOURCE, SOURCE_BYTES, frame_skip=4, build_timeout=30)
         if spec.output_nelem != 18452: raise RuntimeError('Unexpected output shape')
         # Deterministic synthetic image; features/desires are queued by the server.
@@ -174,22 +182,28 @@ def main():
             parked()
             time.sleep(max(0,due-time.monotonic()))
             parked()
+            report['phase']='warmup' if i<20 else 'measured'
+            report['attempted_frame_id']=i
             start = time.monotonic()
-            out = client.infer(warped,packed,frame_id=i,reset=(i==0),want_state=True,deadline=0.2 if ignition else None)
+            out = client.infer(warped,packed,frame_id=i,reset=(i==0),want_state=True,deadline=0.2 if ignition and i>=20 else 2)
             elapsed=(time.monotonic()-start)*1000
             parked()
             if not np.isfinite(out).all(): raise RuntimeError('Non-finite output')
             health = device_health(client.last_state)
             if i % 20 == 0: samples.append(dict(health, elapsed_s=round(time.monotonic()-started,3), frame=i))
+            if i<20:
+                report['warmup_completed']+=1
+                report['warmup_timings'].append({'frame_id':i,'round_trip_ms':elapsed,'server_total_ms':client.last_timings[2]/1000})
             if i>=20:
                 row = [elapsed]+[v/1000 for v in client.last_timings]
                 rows.append(row)
                 guard.observe(row, time.monotonic()-started)
+            if i==19: print('20 warm-up frames completed; starting measured frames with the unchanged timing limits.',flush=True)
             due=max(due+0.05,time.monotonic())
             if i and i%200==0: print(f'{len(rows)} measured frames; latest exchange {elapsed:.2f} ms',flush=True)
     except Exception as e:
         report['failures'].append(str(e))
-        if client:
+        if client and peer_ready:
             try: report['health_at_stop'] = client.state(timeout=1).get('device_health')
             except Exception as health_error: report['health_at_stop_error'] = str(health_error)
     finally:
