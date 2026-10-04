@@ -157,7 +157,7 @@ class SelfdriveD(CruiseHelper):
     self.state_machine = StateMachine()
     self.rk = Ratekeeper(100, print_delay_threshold=None)
 
-    self.ignored_processes = {'mapd', }
+    self.ignored_processes = {'mapd', *AcceleratorEvents.OPTIONAL_PROCESSES}
 
     # Determine startup event
     is_remote = build_metadata.openpilot.comma_remote or build_metadata.openpilot.sunnypilot_remote
@@ -224,7 +224,7 @@ class SelfdriveD(CruiseHelper):
       self.big_model_active = True
     if not self.enabled and not model_unavailable:
       self.big_model_active = False
-    self.accelerator_events.update(self.sm, self.enabled, self.events, self.events_sp)
+    self.accelerator_events.update(self.sm, self.enabled or self.mads.enabled, self.events, self.events_sp)
 
     if self.sm.recv_frame['lateralManeuverPlan'] > 0:
       self.events.add(EventName.lateralManeuver)
@@ -441,7 +441,8 @@ class SelfdriveD(CruiseHelper):
     has_disable_events = self.events.contains(ET.NO_ENTRY) and (self.events.contains(ET.SOFT_DISABLE) or self.events.contains(ET.IMMEDIATE_DISABLE))
     no_system_errors = (not has_disable_events) or (len(self.events) == num_events)
     warmup_sec = 5.
-    big_model_settling = self.big_model_loading or time.monotonic() < self.big_model_ready_t + warmup_sec
+    big_model_settling = (self.big_model_loading or time.monotonic() < self.big_model_ready_t + warmup_sec
+                          or self.accelerator_events.settling)
     if not self.sm.all_checks() and no_system_errors and not big_model_settling:  # the load holds modelV2 and friends back on purpose
       if not self.sm.all_alive():
         self.events.add(EventName.commIssue)

@@ -119,6 +119,8 @@ class DeveloperLayoutMici(NavScroller):
     for item in onroad_blocked_toggles:
       item.set_enabled(lambda: ui_state.is_offroad())
 
+    self._adb_toggle.set_enabled(lambda: ui_state.is_offroad() and not ui_state.adb_blocked)
+
     # Disable toggles that require not engaged
     for item in engaged_blocked_toggles:
       item.set_enabled(lambda: not ui_state.engaged)

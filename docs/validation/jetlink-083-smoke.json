@@ -1,0 +1,21 @@
+{
+  "protocol": 3,
+  "sha256": "09d080f36965bb2a0790500452bd328aa03c484d0222aa79d1ad9f021a522aec",
+  "frames": 21,
+  "finite": true,
+  "full_raw_output": true,
+  "transport": "desk TCP, not USB",
+  "client_pin": "fd42477",
+  "server_release": "0.8.3",
+  "hello": {
+    "device": "Orin-sm87",
+    "backend": "trt",
+    "loaded": "09d080f36965bb2a0790500452bd328aa03c484d0222aa79d1ad9f021a522aec",
+    "engine_state": "none"
+  },
+  "mean_ms": 84.92122118990491,
+  "max_ms": 103.33602500031702,
+  "date": "2026-10-04",
+  "qualification": "Protocol compatibility only; not a USB or 50 ms timing pass",
+  "comma_deployment": "f35471af9756181166393e9da61ddf8bf3d4a5d0"
+}

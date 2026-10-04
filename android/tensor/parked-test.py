@@ -82,6 +82,8 @@ def main():
     p.add_argument('--ignition-on', action='store_true', help='arm while offroad, then test in Park with ignition/A/C on')
     p.add_argument('--ignition-timeout', type=int, default=180, help='seconds to start the car and obtain stationary state (30..300)')
     a = p.parse_args()
+    if Path('/data/openpilot/openpilot/sunnypilot/jetlink_adapter').is_dir():
+        p.error('This Pixel test requires a new startup/USB ownership review for the updated comma; no test was armed')
     if a.ignition_on and not a.legacy_owner: p.error('--ignition-on requires --legacy-owner for this deployment')
     if not 30 <= a.ignition_timeout <= 300: p.error('ignition-timeout must be 30..300')
     if not 20 <= a.frames <= 6000: p.error('frames must be 20..6000')

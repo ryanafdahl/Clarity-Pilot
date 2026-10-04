@@ -481,6 +481,7 @@ struct ModelDataV2SP @0xa1680744031fdb2d {
     running @2;
     retrying @3;
     unavailable @4;
+    ready @5;  # proved timely in shadow frames, waiting for disengagement
   }
 
   enum TurnDirection {

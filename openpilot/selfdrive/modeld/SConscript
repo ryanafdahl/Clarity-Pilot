@@ -34,6 +34,9 @@ else:
   tg_backend = 'CPU'
   tg_flags = f'DEV=CPU' if arch == 'Darwin' else 'DEV=CPU:LLVM'
 
+# Share the source build camera geometry with the Jetlink warp build.
+Export('camera_configs')
+
 tg_devices = { # which device to put jit inputs to at runtime
   'openpilot.selfdrive.modeld.dmonitoringmodeld': {
     'default': {'DEV': tg_backend}

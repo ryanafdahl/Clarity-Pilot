@@ -29,6 +29,8 @@ def main():
   parser.add_argument('--write-chunk', type=int, choices=[16384, 32768, 65536, 131072, 262144, 524288],
                       help='bench-only FunctionFS write quantum override, in bytes')
   args = parser.parse_args()
+  if (Path(BASEDIR) / 'openpilot/sunnypilot/jetlink_adapter').is_dir():
+    parser.error('This legacy bench requires review for the resident JetLink USB owner; no test was started')
   if args.seconds <= 0:
     parser.error('--seconds must be positive')
   live = Params()

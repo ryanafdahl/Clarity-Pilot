@@ -1,5 +1,7 @@
 # Google Tensor TPU support
 
+**October 4 compatibility update:** the comma now uses the resident JetLink USB owner and adapter. The Pixel APK is unchanged. The test procedures below describe the previous comma deployment; the harness now refuses this new adapter before arming or changing settings. Its original deployment manifest remains pinned. Review startup isolation and endpoint borrowing again before enabling another Pixel test. [Comma/Jetson update record](../../docs/JETLINK_UPDATE_2026-10-04.md).
+
 **The latest ignition-on USB run stopped after 100 measured frames at full-exchange p95 53.43 ms, above the 50 ms limit. Driving remains blocked in Tensor mode.** The earlier 2,400-frame ignition-off run also failed sustained timing after shorter 120- and 1,200-frame passes. The Pixel runs Cinque Terre V2 on Tensor G6 using LiteRT 2.2.0 and the locally supplied Google Tensor SDK. The installed app is `0.8.0-clarity-tensor.4` (code 804), with instructions for the new stationary ignition-on/A/C harness. Phone telemetry and automatic test stops were added in `.3`; `.4` retains that inference implementation unchanged. The failed hot-car run used the archived `.2` build.
 
 ## Driving-test preparation

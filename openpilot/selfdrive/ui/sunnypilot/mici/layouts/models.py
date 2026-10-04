@@ -10,15 +10,14 @@ import pyray as rl
 
 from openpilot.cereal import custom
 from openpilot.sunnypilot.models.initial_model import cancel_download, remember_small_model_choice
-from openpilot.sunnypilot import accelerators
 from openpilot.selfdrive.ui.mici.widgets.dialog import BigConfirmationDialog, BigDialog
 from openpilot.sunnypilot.models.helpers import ACTIVE_BUNDLE_KEYS, get_selected_bundle
-from openpilot.selfdrive.ui.mici.widgets.button import BigButton, BigToggle
+from openpilot.selfdrive.ui.mici.widgets.button import BigButton, BigMultiToggle
 from openpilot.selfdrive.ui.ui_state import ui_state, device
-from openpilot.selfdrive.ui.sunnypilot.accelerator_link import link_enabled, link_toggle_meaningful, set_link_enabled
-from openpilot.selfdrive.ui.sunnypilot.model_info import (active_source, big_model_progress, big_model_state, bundles_for_source, carrying_model,
-                                                           default_model_name, model_cache_size_mb, model_info, queued_name,
-                                                           refresh_in_progress, refresh_model_list)
+from openpilot.selfdrive.ui.sunnypilot.accelerator_link import LINK_MODES, LINK_PARAM, link_mode, link_toggle_meaningful
+from openpilot.selfdrive.ui.sunnypilot.model_info import (active_source, big_model_progress, big_model_state, bundles_for_source,
+                                                           carrying_model, default_model_name, model_cache_size_mb, model_info,
+                                                           queued_name, refresh_in_progress, refresh_model_list)
 from openpilot.system.ui.lib.application import FontWeight, gui_app
 from openpilot.system.ui.lib.multilang import tr
 from openpilot.system.ui.widgets import Widget
@@ -26,20 +25,42 @@ from openpilot.system.ui.widgets.label import UnifiedLabel
 from openpilot.system.ui.widgets.scroller import NavScroller
 
 
-class AcceleratorLinkToggle(BigToggle):
-  """not BigParamControl: the write also drops manager's runner cache and is refused onroad"""
+# the value line: the mode
+LINK_MODE_LABELS = {"off": "off", "usb": "usb", "ios": "iOS"}
+
+
+class AcceleratorLinkToggle(BigMultiToggle):
+  """off, usb, ios, a pill each, and the value line names the mode.
+  The pills follow the param, not a tap. Locked while onroad and drawn so, like
+  the model buttons beside it: jetlink switches the link only parked."""
 
   def __init__(self):
-    super().__init__(tr("accelerator link"), initial_state=link_enabled(), toggle_callback=self._store)
+    super().__init__(tr("jetlink"), [tr(LINK_MODE_LABELS[m]) for m in LINK_MODES])
+    self._mode = link_mode()
+    self._show()
+    self.set_enabled(lambda: ui_state.is_offroad())
 
-  def _store(self, checked: bool) -> None:
-    if not ui_state.is_offroad():
-      self.set_checked(link_enabled())
-      return
-    set_link_enabled(checked)
+  def _show(self) -> None:
+    value = self._options[LINK_MODES.index(self._mode)]
+    if value != self.get_value():
+      self.set_value(value)
+
+  def _handle_mouse_release(self, mouse_pos) -> None:
+    BigButton._handle_mouse_release(self, mouse_pos)
+    if self.enabled:
+      self._mode = LINK_MODES[(LINK_MODES.index(self._mode) + 1) % len(LINK_MODES)]
+      ui_state.params.put(LINK_PARAM, LINK_MODES.index(self._mode), block=True)
+    self._show()
+
+  def _draw_content(self, btn_y: float) -> None:
+    BigButton._draw_content(self, btn_y)
+    x = self._rect.x + self._rect.width - self._txt_enabled_toggle.width
+    for i in range(len(LINK_MODES)):
+      self._draw_pill(x, btn_y + 35 * i, LINK_MODES[i] == self._mode)
 
   def refresh(self) -> None:
-    self.set_checked(link_enabled())
+    self._mode = link_mode()
+    self._show()
 
 
 def _model_info() -> tuple[str, str, str]:
@@ -58,9 +79,9 @@ def _model_info() -> tuple[str, str, str]:
     stage, frac, msg = provisioning
     if stage == 'failed':
       return active_text, tr("big model"), tr("unavailable")
-    # "waiting for the jetson" says more than "connect 0%"; no percentage for a stage
+    # "waiting for jetlink" says more than "connect 0%"; no percentage for a stage
     # with nothing to measure
-    detail = tr(msg) if msg else tr(stage)
+    detail = msg or tr(stage)
     return active_text, tr("big model"), f"{detail} {frac * 100:.0f}%" if frac > 0 else detail
   if state == 'failed':
     return active_text, tr("big model"), tr("unavailable")
@@ -122,12 +143,13 @@ class ModelsLayoutMici(NavScroller):
 
     self.link_toggle = AcceleratorLinkToggle()
     self.link_toggle.set_visible(link_toggle_meaningful())
+
     self.clear_cache_btn = BigButton(tr("clear cache"), value=f"{model_cache_size_mb():.1f} MB")
     self.clear_cache_btn.set_click_callback(self._confirm_clear_cache)
     self._cache_size_time = 0.0
 
-    self.main_items = [self.current_model_info, self.select_model_btn, self.cancel_download_btn, self.link_toggle,
-                       self.refresh_btn, self.clear_cache_btn]
+    self.main_items = [self.current_model_info, self.select_model_btn, self.cancel_download_btn, self.link_toggle, self.refresh_btn,
+                       self.clear_cache_btn]
     self._scroller.add_widgets(self.main_items)
 
   @property
@@ -164,30 +186,7 @@ class ModelsLayoutMici(NavScroller):
       btn = BigButton(label.lower(), value=value)
       btn.set_click_callback(lambda s=source: self._select_hardware(s))
       hardware_btns.append(btn)
-    choices = accelerators.model_choices()
-    if choices:
-      selected = next((m['name'] for m in choices if m['selected']), '')
-      btn = BigButton(tr('accelerator models'), value=selected.lower())
-      btn.set_click_callback(self._select_accelerator)
-      hardware_btns.append(btn)
     self._push_selection_view(hardware_btns)
-
-  def _select_accelerator(self):
-    buttons = []
-    for choice in accelerators.model_choices():
-      value = tr('cached on accelerator') if choice['cached'] else tr('build required')
-      if choice['selected']:
-        value += f" ({tr('selected')})"
-      btn = BigButton(choice['name'].lower(), value=value)
-      btn.set_click_callback(lambda m=choice: self._choose_accelerator(m))
-      buttons.append(btn)
-    self._push_selection_view(buttons)
-
-  def _choose_accelerator(self, choice):
-    if not ui_state.is_offroad():
-      return
-    accelerators.select_model(choice['name'])
-    self._pop_to_main()
 
   def _select_hardware(self, source):
     self._selection_source = source
@@ -221,14 +220,10 @@ class ModelsLayoutMici(NavScroller):
     self._scroller.scroll_panel.set_offset(0.0)
 
   def _select_model(self, bundle):
-    if self._selection_source == "qcom":
-      remember_small_model_choice(ui_state.params)
     ui_state.params.put("ModelManager_DownloadRef", bundle.ref)
     self._pop_to_main()
 
   def _select_default(self, source):
-    if source == "qcom":
-      remember_small_model_choice(ui_state.params)
     ui_state.params.remove(ACTIVE_BUNDLE_KEYS[source])
     self._pop_to_main()
 

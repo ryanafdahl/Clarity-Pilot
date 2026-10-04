@@ -209,6 +209,8 @@ def main() -> int:
   p.add_argument('--frames', type=int, default=60)
   p.add_argument('--dump', help='write per-frame model outputs to this .npz')
   args = p.parse_args()
+  if (Path(__file__).resolve().parents[1] / 'openpilot/sunnypilot/jetlink_adapter').is_dir():
+    p.error('This legacy replay requires review for the resident JetLink USB owner; no test was started')
 
   seg = Path(args.segment)
   rlog = next((seg / n for n in ('rlog.zst', 'rlog') if (seg / n).exists()), None)

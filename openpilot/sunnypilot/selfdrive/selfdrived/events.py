@@ -36,6 +36,16 @@ def soft_disable_alert(alert_text_2: str) -> AlertCallbackType:
   return func
 
 
+def big_model_ready_alert(CP: car.CarParams, CS: car.CarState, sm: messaging.SubMaster, metric: bool, soft_disable_time: int, personality) -> Alert:
+  # an accelerator's comes a second after its swap, when the driver can engage;
+  # its offer to switch is the one titled "Big Model Ready"
+  accelerator = sm['modelDataV2SP'].acceleratorState != custom.ModelDataV2SP.AcceleratorState.none
+  return Alert("Big Model Active" if accelerator else "Big Model Ready", "",
+               AlertStatus.normal, AlertSize.small,
+               Priority.LOW, VisualAlert.none, AudibleAlert.prompt, 2.)
+
+
+
 def speed_limit_adjust_alert(CP: car.CarParams, CS: car.CarState, sm: messaging.SubMaster, metric: bool, soft_disable_time: int, personality) -> Alert:
   speedLimit = sm['longitudinalPlanSP'].speedLimit.resolver.speedLimit
   speed = round(speedLimit * (CV.MS_TO_KPH if metric else CV.MS_TO_MPH))
@@ -264,23 +274,26 @@ EVENTS_SP: dict[int, dict[str, Alert | AlertCallbackType]] = {
 
   EventNameSP.bigModelAvailable: {
     ET.PERMANENT: Alert(
-      "Model Available" if IS_MICI else "Big Model Available",
-      "Disengage to switch",
+      "Big Model Ready",
+      "Re-engage to switch",
       AlertStatus.normal, AlertSize.mid,
-      Priority.LOW, VisualAlert.none, AudibleAlert.prompt, 3.),
+      Priority.LOW, VisualAlert.none, AudibleAlert.prompt, .2),
   },
 
   EventNameSP.bigModelReady: {
-    ET.PERMANENT: Alert(
-      "Big Model Ready",
-      "",
-      AlertStatus.normal, AlertSize.small,
-      Priority.LOW, VisualAlert.none, AudibleAlert.prompt, 2.),
+    ET.PERMANENT: big_model_ready_alert,
   },
 
-  # an accelerator on its own power reconnects mid-drive, so no "restart the car"
+  # an accelerator lost or too slow while engaged: the small model drives on
+  # from a reset history and nothing disengages. As loud as a soft disable for
+  # 5 s (accelerator_events), but it says what happened, not TAKE CONTROL:
+  # nothing has let go, and a driver told to take control on every drop read
+  # it as a disengage (2026-10-04). A disengage ends it
   EventNameSP.bigModelLinkLost: {
-    ET.SOFT_DISABLE: soft_disable_alert("Big Model Lost"),
-    ET.PERMANENT: NormalPermanentAlert("Big Model Lost", "Small model is driving,\nreconnecting if it comes back", duration=20.),
+    ET.WARNING: Alert(
+      "Big Model Lost",
+      "Using small model",
+      AlertStatus.userPrompt, AlertSize.mid,
+      Priority.MID, VisualAlert.steerRequired, AudibleAlert.warningSoft, .2),
   },
 }
