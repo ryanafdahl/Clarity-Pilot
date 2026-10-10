@@ -15,7 +15,7 @@ if [ -f "$pidfile" ]; then
   esac
 fi
 mkdir -p "$out"
-nohup timeout 3600 logcat -b main -b system -b crash -b kernel \
+nohup timeout 3600 logcat -b main -b system -b crash \
   -v threadtime -T 1 -f "$out/usb.log" -r 1024 -n 3 \
   'jetlink:V' 'Jetlink:V' 'JetLink:V' 'litert:W' \
   'UsbHostManager:V' 'UsbPortManager:V' 'UsbDeviceManager:V' \
