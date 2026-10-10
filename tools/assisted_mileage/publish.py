@@ -40,7 +40,7 @@ def public_summary(summary, today, baseline):
     'hours': round(history['hours'] + max(0, added_hours), 1),
     'updated_date': today,
     'historical_baseline': {'miles': history['miles'], 'drives': history['drives'], 'hours': history['hours'],
-                            'source': 'Owner-reported comma 4 and comma 3 totals, combined on 2026-10-10.'},
+                            'source': 'Owner-reported historical totals, updated on 2026-10-10.'},
     'method': 'Owner-reported historical totals plus new logged distance with lateral or longitudinal AI control active.',
     'coverage': 'Logs present at setup are treated as included in the historical baseline and are not added again.',
     'schedule': 'Nightly at 11 p.m. Pacific, or when next powered, offroad and online.',

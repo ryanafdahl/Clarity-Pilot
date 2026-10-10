@@ -2,7 +2,7 @@
 
 The comma runs this maintenance task independently of the desktop computer. It integrates valid `carState.vEgo` speed over time while `carControl.latActive` **or** `longActive` is true, including lateral-only MADS assistance. It counts the union once, not the sum of steering and speed-control distances. A running model alone does not count as assistance.
 
-The October 10, 2026 historical baseline is owner-reported: comma 4 **11,571 miles / 722 drives / 348 hours**, plus comma 3 **49,220 miles / 2,673 drives / 1,313 hours**, totaling **60,791 miles / 3,395 drives / 1,661 hours**. These historical figures were not independently classified from raw logs. `baseline.json` anchors the existing retained-log totals; they are treated as already included and are not added again. Only increases after this anchor are added to the historical baseline. A new recording with any active assistance adds one drive; active-assistance duration adds hours.
+The October 10, 2026 historical baseline is owner-reported: comma 4 **11,571 miles / 722 drives / 348 hours**, plus comma 3 **49,220 miles / 2,673 drives / 1,313 hours**, initially totaling **60,791 miles / 3,395 drives / 1,661 hours**. The owner then added **32,487 miles** and corrected total hours to **2,391**, making the current baseline **93,278 miles / 3,395 drives / 2,391 hours**. The additional history is not assigned to either device. These historical figures were not independently classified from raw logs. `baseline.json` anchors the existing retained-log totals; they are treated as already included and are not added again. Only increases after this anchor are added to the historical baseline. A new recording with any active assistance adds one drive; active-assistance duration adds hours.
 
 `core.py` linearly interpolates speed and splits intervals at control changes. It excludes invalid/CAN-invalid speed, impossible speed, stationary drift, speed gaps over 250 ms and control state older than 250 ms. Each segment starts fresh; the tiny unobserved interval between segments is omitted. Distances are estimates from vehicle speed, not GPS or a certified odometer.
 
@@ -43,7 +43,7 @@ Disable with `sudo systemctl disable --now clarity-ai-mileage.timer`; preserve t
 ## Initial verification — October 10, 2026
 
 - Eleven on-device tests passed: active lateral-only counting, control transitions, stale/invalid data, recording boundaries, nightly cutoff, daylight-saving handling, public-field allowlist, historical overlap and lost-ledger rejection.
-- The initial pass counted 248 full-rate segments across eight retained recordings. Six had active assistance: 149.4256 assisted miles and 3.5720 assisted hours. These are anchored as already included in the owner's history, not added to the 60,791-mile baseline.
+- The initial pass counted 248 full-rate segments across eight retained recordings. Six had active assistance: 149.4256 assisted miles and 3.5720 assisted hours. These are anchored as already included in the owner's history, not added to the historical baseline.
 - A repeat pass decoded zero segments, reused all 248, and returned unchanged distance.
 - The comma's dedicated key successfully committed and pushed the aggregate JSON to the website repository. The installed systemd service then returned `Result=success`, exit status zero, and the timer was enabled.
 - The calendar resolved the next 11 p.m. Pacific publication to 06:00 UTC on October 11. The earlier 30-minute timer wakes collect only; publication is gated by the local nightly date.
