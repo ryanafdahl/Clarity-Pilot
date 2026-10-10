@@ -11,6 +11,7 @@ import sys
 from zoneinfo import ZoneInfo
 
 from collect import atomic_json, require_offroad
+from engagement import refresh
 
 REPOSITORY = 'git@github.com:ryanafdahl/t3st.site.git'
 BRANCH = 'master'
@@ -33,7 +34,7 @@ def public_summary(stats, today, verified_devices):
     raise ValueError('Invalid route count')
   devices = []
   for device in verified_devices:
-    if device['source'] != 'comma Connect display':
+    if device['source'] not in ('comma Connect display', 'comma Connect API'):
       raise ValueError('Historical device must be verified from Connect')
     row = {key: device[key] for key in ('name', 'miles', 'drives', 'hours', 'verified_date', 'source')}
     if any(type(row[key]) is not int or row[key] < 0 for key in ('miles', 'drives', 'hours')):
@@ -51,7 +52,7 @@ def public_summary(stats, today, verified_devices):
           'updated_date': today, 'devices': devices,
           'method': 'Sum of verified comma Connect device statistics; whole-number display precision.',
           'coverage': 'Driving totals, not independently verified active-assistance miles. No manual additions or local-log increments.',
-          'schedule': 'Current device refreshed nightly offroad and online; older device retains its dated Connect observation.'}
+          'schedule': 'Both devices queried nightly offroad and online; failed refreshes retain dated verified observations.'}
 
 
 def connect_statistics():
@@ -65,6 +66,15 @@ def connect_statistics():
   if response.status_code != 200:
     raise RuntimeError(f'Connect statistics unavailable: HTTP {response.status_code}')
   return response.json()
+
+
+def connect_client():
+  from openpilot.common.params import Params
+  from openpilot.common.api import Api
+  identity = Params().get('DongleId')
+  if isinstance(identity, bytes): identity = identity.decode()
+  if not identity: raise RuntimeError('Device identity unavailable')
+  return Api(identity), identity
 
 
 def main():
@@ -114,13 +124,23 @@ def main():
     # previous push is recomputed from the durable ledger without a force push.
     git('checkout', '--detach', f'origin/{BRANCH}')
     verified_devices = json.loads((base / 'connect-devices.json').read_text())
-    public = public_summary(connect_statistics(), now.date().isoformat(), verified_devices)
+    today = now.date().isoformat()
+    api, identity = connect_client()
+    engagement, device_stats = refresh(base, api, identity, today)
+    for index, device in enumerate(verified_devices):
+      if device['name'] in device_stats:
+        # Reuse the validator before rounding any API values.
+        validated = public_summary(device_stats[device['name']], today, [])['devices'][0]
+        verified_devices[index] = dict(validated, name=device['name'])
+    public = public_summary(device_stats.get('comma 4') or connect_statistics(), today, verified_devices)
     target = checkout / PUBLIC_FILE
     require_offroad()
     atomic_json(target, public)
+    atomic_json(checkout / 'data/engagement.json', engagement)
+    atomic_json(base / 'connect-devices.json', verified_devices)
     if git('diff', '--name-only') or git('ls-files', '--others', '--exclude-standard'):
-      git('add', '--', PUBLIC_FILE)
-      if git('diff', '--cached', '--name-only') != PUBLIC_FILE:
+      git('add', '--', PUBLIC_FILE, 'data/engagement.json')
+      if not set(git('diff', '--cached', '--name-only').splitlines()).issubset({PUBLIC_FILE, 'data/engagement.json'}):
         raise RuntimeError('Unexpected staged publication paths')
       git('-c', 'user.name=Clarity mileage tracker', '-c', 'user.email=ryanafdahl@users.noreply.github.com',
           '-c', 'commit.gpgsign=false', 'commit', '-m', 'Update verified Connect driving history')
