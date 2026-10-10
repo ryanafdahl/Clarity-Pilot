@@ -120,6 +120,7 @@ def aggregate(ledger, statuses, today):
                     'recorded_seconds': round(sum(r['duration_seconds'] for r in available), 3),
                     'timeline_routes': sum(r['source'] == 'Connect timeline' for r in available),
                     'event_routes': sum(r['source'] == 'Connect events' for r in available),
+                    'recovered_log_routes': sum(r['source'] == 'Recovered device logs' for r in available),
                     'first_date': min((r['date'] for r in available), default=None),
                     'last_date': max((r['date'] for r in available), default=None)})
   # Month-level aggregates deliberately omit trip times and identifiers.
@@ -130,8 +131,14 @@ def aggregate(ledger, statuses, today):
     period = periods.setdefault(key, {'month': key[0], 'device': key[1], 'engaged_seconds': 0, 'routes': 0})
     period['engaged_seconds'] += r.get('engaged_seconds', 0); period['routes'] += 1
   for p in periods.values(): p['engaged_seconds'] = round(p['engaged_seconds'], 3)
+  sources = []
+  for name in ('Connect', 'Recovered device logs'):
+    rows = [r for r in ledger['routes'].values() if r.get('available') and
+            (r['source'] == 'Recovered device logs') == (name == 'Recovered device logs')]
+    sources.append({'name': name, 'reviewed_routes': len(rows),
+                    'engaged_seconds': round(sum(r.get('engaged_seconds', 0) for r in rows), 3)})
   return {'schema_version': 1, 'updated_date': today,
           'observed_engaged_seconds': round(sum(d['observed_engaged_seconds'] for d in devices), 3),
-          'devices': devices, 'periods': sorted(periods.values(), key=lambda p: (p['month'], p['device'])),
-          'refresh': statuses, 'coverage': 'Partial retained Connect history; not lifetime or model-specific engagement.',
-          'method': 'Connect enabled events plus dated, approximate Connect timeline observations. Routes deduplicated privately; missing data is unknown.'}
+          'devices': devices, 'sources': sources, 'periods': sorted(periods.values(), key=lambda p: (p['month'], p['device'])),
+          'refresh': statuses, 'coverage': 'Partial Connect and recovered device-log evidence; not lifetime or model-specific engagement.',
+          'method': 'Connect enabled events, approximate Connect timeline observations, and separately labeled sampled device logs. Routes deduplicated privately; missing data is unknown.'}

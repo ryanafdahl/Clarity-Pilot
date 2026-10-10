@@ -49,4 +49,16 @@ class EngagementTests(unittest.TestCase):
       self.assertEqual(result['observed_engaged_seconds'],5)
       self.assertEqual(again['devices'][0]['reviewed_routes'],1)
 
+  def test_recovered_sources_separate_and_api_replacement_not_additive(self):
+    row={'device':'comma 4','date':'2026-09-28','duration_seconds':100,'available':True,
+         'source':'Recovered device logs','engaged_seconds':42}
+    ledger={'routes':{'same-route':row}}
+    result=aggregate(ledger,[],'2026-10-10')
+    self.assertEqual(result['sources'][1]['engaged_seconds'],42)
+    self.assertEqual(result['devices'][0]['recovered_log_routes'],1)
+    ledger['routes']['same-route']=dict(row,source='Connect events',engaged_seconds=43)
+    result=aggregate(ledger,[],'2026-10-10')
+    self.assertEqual(result['observed_engaged_seconds'],43)
+    self.assertEqual(result['sources'][1]['engaged_seconds'],0)
+
 if __name__=='__main__': unittest.main()
