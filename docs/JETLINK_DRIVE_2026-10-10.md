@@ -1,5 +1,7 @@
 # JetLink 0.8.5 drive review — October 10, 2026
 
+**Scope clarification, October 10:** the owner reports Jetson-assisted commuting to and from work throughout the preceding week. This report analyzes the latest two retained sessions in detail; it is not a claim that the Jetson has only been tested twice. Earlier use is not all attributed to this software version, and no exact week-long mileage or trip count is inferred.
+
 Two new recordings on the updated comma/Jetson pair contain **53,609 large-model outputs**, with consecutive frame IDs within each recording and **no fallback after either join**. The user reported no unusual warnings, disconnects, startup delay or steering/braking behavior. The logs still show startup delays and retries, a GPS backup warning, and one controls-mismatch event during shutdown.
 
 These observations support successful USB operation in these two sessions. They do not establish that the earlier intermittent failures are fixed, qualify every vehicle-control behavior, or validate the separate Pixel backend or modified EPS firmware.

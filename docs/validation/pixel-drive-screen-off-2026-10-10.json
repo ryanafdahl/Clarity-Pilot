@@ -1,0 +1,271 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-10",
+  "device": "Pixel 11 Pro XL / Tensor G6",
+  "app": "0.8.5-clarity-tensor.8",
+  "runtime": "LiteRT 2.3.0",
+  "model": "Cinque Terre V2",
+  "protocol": 3,
+  "recording_seconds": 1153.8634146429977,
+  "segments": 20,
+  "archive_verification": {
+    "files_verified": 40,
+    "segments": 20,
+    "all_sha256_match": true
+  },
+  "large_outputs": 22093,
+  "large_valid_outputs": 22093,
+  "small_outputs": 755,
+  "invalid_model_outputs": 1,
+  "distance": {
+    "method": "valid speed trapezoids; latActive OR longActive; 250 ms control/model freshness; segment boundaries excluded",
+    "meters": {
+      "total": 14328.850218539745,
+      "assisted": 14010.556434247641,
+      "large": 13954.823217207066,
+      "small": 51.064941178612756,
+      "unknown": 4.6682758619626945
+    },
+    "segments": 20,
+    "speed_samples": 114485,
+    "control_samples": 114554,
+    "model_samples": 22848,
+    "skipped_intervals": 299,
+    "reference_assisted_meters": 14010.556434247645,
+    "reference_total_meters": 14328.850218539745,
+    "miles": {
+      "total": 8.903534743684224,
+      "assisted": 8.705756155456907,
+      "large": 8.671125139937182,
+      "small": 0.03173028338168394,
+      "unknown": 0.0029007321380405274
+    }
+  },
+  "unexpected_fallbacks": [
+    {
+      "seconds": 152.44245440699888,
+      "duration_s": 4.761034055998607,
+      "kernel_delta_s": 0.06854009628295898,
+      "moving": false,
+      "gear": "drive",
+      "controls_enabled": true,
+      "phone_battery_c": 32.9,
+      "phone_thermal": 0
+    },
+    {
+      "seconds": 372.00211097099964,
+      "duration_s": 3.0930274880010984,
+      "kernel_delta_s": 0.019637584686279297,
+      "moving": false,
+      "gear": "drive",
+      "controls_enabled": false,
+      "phone_battery_c": 34,
+      "phone_thermal": 1
+    },
+    {
+      "seconds": 443.6587392369984,
+      "duration_s": 2.8539297210008954,
+      "kernel_delta_s": 0.013526439666748047,
+      "moving": true,
+      "gear": "drive",
+      "controls_enabled": true,
+      "phone_battery_c": 35.1,
+      "phone_thermal": 1
+    }
+  ],
+  "phases": [
+    {
+      "name": "JetLink foreground",
+      "duration_s": 467.91594314575195,
+      "large_outputs": 9146,
+      "small_outputs": 211,
+      "unexpected_fallbacks": 3,
+      "comma_execution_ms": {
+        "n": 9146,
+        "mean": 40.080736041898525,
+        "p95": 43.14347729086876,
+        "p99": 44.722702354192734,
+        "max": 102.478988468647,
+        "above_50": 4
+      },
+      "camera_to_publication_ms": {
+        "n": 9146,
+        "mean": 65.5737463071288,
+        "p95": 68.669531,
+        "p99": 70.28688,
+        "max": 127.572834,
+        "above_50": 9135
+      },
+      "phone_battery_min_c": 31,
+      "phone_battery_max_c": 35.1,
+      "phone_thermal_counts": {
+        "0": 267,
+        "1": 176
+      },
+      "start_relative_seconds": 36.901,
+      "end_relative_seconds": 504.817
+    },
+    {
+      "name": "Dreamliner foreground",
+      "duration_s": 306.45499992370605,
+      "large_outputs": 6129,
+      "small_outputs": 0,
+      "unexpected_fallbacks": 0,
+      "comma_execution_ms": {
+        "n": 6129,
+        "mean": 39.97522166387361,
+        "p95": 42.82307252287865,
+        "p99": 44.324032962322235,
+        "max": 47.00411111116409,
+        "above_50": 0
+      },
+      "camera_to_publication_ms": {
+        "n": 6129,
+        "mean": 65.25654620084842,
+        "p95": 68.142381,
+        "p99": 69.69313,
+        "max": 72.372483,
+        "above_50": 6127
+      },
+      "phone_battery_min_c": 35.1,
+      "phone_battery_max_c": 35.9,
+      "phone_thermal_counts": {
+        "1": 295
+      },
+      "start_relative_seconds": 504.817,
+      "end_relative_seconds": 811.272
+    },
+    {
+      "name": "Android Auto connection transition",
+      "duration_s": 9.723000049591064,
+      "large_outputs": 194,
+      "small_outputs": 0,
+      "unexpected_fallbacks": 0,
+      "comma_execution_ms": {
+        "n": 194,
+        "mean": 39.5690040877713,
+        "p95": 43.82587969303131,
+        "p99": 46.80410027503967,
+        "max": 46.91186547279358,
+        "above_50": 0
+      },
+      "camera_to_publication_ms": {
+        "n": 194,
+        "mean": 64.76610541237113,
+        "p95": 68.910434,
+        "p99": 72.001942,
+        "max": 72.227161,
+        "above_50": 193
+      },
+      "phone_battery_min_c": 35.5,
+      "phone_battery_max_c": 35.5,
+      "phone_thermal_counts": {
+        "1": 10
+      },
+      "start_relative_seconds": 811.272,
+      "end_relative_seconds": 820.995
+    },
+    {
+      "name": "Display off with Android Auto",
+      "duration_s": 331.2276978492737,
+      "large_outputs": 6624,
+      "small_outputs": 0,
+      "unexpected_fallbacks": 0,
+      "comma_execution_ms": {
+        "n": 6624,
+        "mean": 39.74308931282249,
+        "p95": 42.305488139390945,
+        "p99": 43.602220714092255,
+        "max": 47.13672026991844,
+        "above_50": 0
+      },
+      "camera_to_publication_ms": {
+        "n": 6624,
+        "mean": 64.93613958710749,
+        "p95": 67.572138,
+        "p99": 68.820429,
+        "max": 72.44863,
+        "above_50": 6624
+      },
+      "phone_battery_min_c": 35.5,
+      "phone_battery_max_c": 36.1,
+      "phone_thermal_counts": {
+        "1": 322
+      },
+      "start_relative_seconds": 820.995,
+      "end_relative_seconds": 1152.222
+    }
+  ],
+  "large_execution_ms": {
+    "n": 22093,
+    "min": 1.1830279836431146,
+    "mean": 39.94573646939072,
+    "median": 39.928704500198364,
+    "p95": 42.861457914114,
+    "p99": 44.37371715903282,
+    "max": 102.478988468647,
+    "over_50": 4
+  },
+  "camera_to_publication_ms": {
+    "n": 22093,
+    "min": 26.288946,
+    "mean": 65.2874878226135,
+    "median": 65.26166,
+    "p95": 68.273779,
+    "p99": 69.782354,
+    "max": 127.572834,
+    "over_50": 22079
+  },
+  "phone": {
+    "health_samples": 1070,
+    "battery_min_c": 31,
+    "battery_max_c": 36.1,
+    "thermal_counts": {
+      "0": 267,
+      "1": 803
+    },
+    "max_health_age_s": 1.0028834769909736,
+    "power_save_samples": 0
+  },
+  "comma": {
+    "cpu_max_c": 68.19999694824219,
+    "gpu_max_c": 67.9000015258789,
+    "thermal_counts": {
+      "ok": 2298
+    },
+    "memory_max_percent": 73,
+    "free_storage_min_pct": 58.044349670410156
+  },
+  "usb_send_telemetry": {
+    "samples": 1070,
+    "max_submit_ms": 1.4354939994518645,
+    "max_backlog_ms": 0.0,
+    "refused_max_counter": 0
+  },
+  "parse_errors": [],
+  "required_process_stops": 0,
+  "steady_finish": {
+    "seconds": 705.7097005844116,
+    "large_outputs": 14114,
+    "small_outputs": 0,
+    "seconds_before_background": 58.30400276184082,
+    "start_relative_seconds": 446.512,
+    "end_relative_seconds": 1152.222,
+    "held_counter_reached": 15
+  },
+  "unexpected_small_model_seconds": 10.7079912650006,
+  "jetson_use_history": {
+    "source": "Owner report on 2026-10-10",
+    "description": "Used for commutes to and from work throughout the preceding week. The two-session detailed analysis is not a lifetime test count.",
+    "exact_trip_count": null,
+    "attributed_miles": null
+  },
+  "limits": [
+    "Detailed phone app stage logs unavailable; isolated Tensor invoke durations cannot be reconstructed.",
+    "Large-labelled outputs may include held predictions.",
+    "Screen, charger and Android Auto phases were sequential, not a controlled comparison.",
+    "Final unplug in Park excluded from unexpected reset count.",
+    "Miles are a subset of project use; do not add them manually to the independent cumulative ledger.",
+    "No claim that USB resets or rare inference stalls are fixed."
+  ]
+}

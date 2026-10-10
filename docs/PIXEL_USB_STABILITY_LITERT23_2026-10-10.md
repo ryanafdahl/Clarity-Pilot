@@ -1,5 +1,7 @@
 # Pixel USB stability and LiteRT 2.3 — October 10, 2026
 
+**Subsequent road evidence:** the [later October 10 Pixel drive review](PIXEL_DRIVE_SCREEN_OFF_2026-10-10.md) records approximately 8.67 assisted miles on the large-model path, three early USB resets and an uninterrupted 11 min 45.7 s finish. This page preserves the earlier repair and desk-validation record; its proposed next test predates that drive. USB reliability and rare inference stalls remain unresolved.
+
 The Pixel has **JetLink 0.8.5-clarity-tensor.8** with **LiteRT 2.3.0**, and the comma has a verified USB inference backpressure patch. Cinque Terre V2 remains fully on the Tensor G6 NPU. Numerical and desk timing checks passed. **The physical USB resets and the earlier isolated 124 ms inference spike are not yet proven eliminated.** The next check is parked, with Android Auto unplugged and the Pixel off the wireless charger.
 
 ## Evidence from the drive and parked comparison
