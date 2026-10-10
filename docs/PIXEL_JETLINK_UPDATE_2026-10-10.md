@@ -27,7 +27,7 @@ The comma and Jetson remain on their separately deployed v0.8.5 revisions. Their
 | Runtime | LiteRT 2.2.0, NPU(Tensor G6), existing FP16/minimal-sharding compilation |
 | Model/source manifests | [qualified-model.json](../android/tensor/qualified-model.json) |
 
-[Install and rebuild instructions](../android/README.md) · [Tensor source patch](../android/tensor/tensor-support.patch) · [Normal handshake evidence](../android/tensor/installed-protocol-2026-10-10.json) · [Machine-readable update record](../android/tensor/update-2026-10-10.json).
+[Install and rebuild instructions](../android/README-0.8.5-clarity-tensor.5.md) · [Tensor source patch](../android/tensor/tensor-support-0.8.5-clarity-tensor.5.patch) · [Normal handshake evidence](../android/tensor/installed-protocol-2026-10-10.json) · [Machine-readable update record](../android/tensor/update-2026-10-10.json).
 
 ## Numerical and runtime checks
 
@@ -49,6 +49,6 @@ All 60 phone timing blocks passed the existing criterion: 100-frame p95 below 50
 
 ## Use and archives
 
-Select **Tensor TPU (precompiled)** and **Cinque Terre Model V2**, and use the ordinary [USB connection procedure](../android/README.md#connect-to-the-comma). No special parked-test switch is needed. The app's Developer TCP listener was used only for the desk checks and is disabled afterward; direct USB remains enabled.
+Select **Tensor TPU (precompiled)** and **Cinque Terre Model V2**, and use the ordinary [USB connection procedure](../android/README-0.8.5-clarity-tensor.5.md#connect-to-the-comma). No special parked-test switch is needed. The app's Developer TCP listener was used only for the desk checks and is disabled afterward; direct USB remains enabled.
 
 Previous APKs, the previous source patch and [October 3 instructions/results](../android/tensor/history-2026-10-03.md) are retained. The historical comma test harness and its original deployment manifest are unchanged; this update does not bypass that harness's compatibility checks. The private Tensor SDK, compiled model, signing key and device credentials are not published.

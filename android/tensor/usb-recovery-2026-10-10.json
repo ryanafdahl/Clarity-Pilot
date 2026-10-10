@@ -1,0 +1,103 @@
+{
+  "date_utc": "2026-10-10T20:00:29.432857+00:00",
+  "apk": {
+    "version": "0.8.5-clarity-tensor.6",
+    "version_code": 80506,
+    "bytes": 103915440,
+    "sha256": "e17bdb13f6f9748825837b3ce376194887a15145ca7c238f69fecf48d15e491a",
+    "installed_readback_match": true,
+    "temporary_tcp_listener_disabled": true,
+    "adb_forward_removed": true
+  },
+  "android_base": "b079496816e617ffd891ea12e5bee5d116db1383",
+  "comma_base": "4b747aebad3d8d96ab26d76f1668f2b2ecb1b667",
+  "physical_usb_verified": false,
+  "driving_ready": false,
+  "parity": {
+    "frames": 32,
+    "identical_input_arrays": 64,
+    "passed_slices": 15,
+    "criteria_unchanged": true
+  },
+  "tests": {
+    "android": 59,
+    "native_usb_protocol_thermal": 41,
+    "comma": 217,
+    "comma_subtests": 9,
+    "installer_checks_pass": true
+  },
+  "desk": {
+    "transport": "desk ADB/TCP; not direct comma USB",
+    "source_sha256": "09d080f36965bb2a0790500452bd328aa03c484d0222aa79d1ad9f021a522aec",
+    "backend": "litert",
+    "device": "tensor-Tensor_G6",
+    "warmup_frames": 20,
+    "measured_frames": 1200,
+    "finite_frames": 1200,
+    "failures": [],
+    "round_trip": {
+      "mean_ms": 51.612499835318886,
+      "p50_ms": 50.852200016379356,
+      "p95_ms": 59.16079502785578,
+      "p99_ms": 69.32819195091724,
+      "max_ms": 77.28389999829233,
+      "over_50ms": 837
+    },
+    "inference": {
+      "mean_ms": 34.57561416666667,
+      "p50_ms": 34.5865,
+      "p95_ms": 36.268,
+      "p99_ms": 37.278,
+      "max_ms": 39.933,
+      "over_50ms": 0
+    },
+    "server_total": {
+      "mean_ms": 35.830895,
+      "p50_ms": 35.8885,
+      "p95_ms": 37.64645,
+      "p99_ms": 38.61252,
+      "max_ms": 41.053,
+      "over_50ms": 0
+    },
+    "protocol_pass": true,
+    "server_timing_pass": true,
+    "round_trip_timing_pass": false,
+    "thermal_samples": [
+      {
+        "elapsed_s": 0.4,
+        "status": 0,
+        "battery_c": 30.1
+      },
+      {
+        "elapsed_s": 10.5,
+        "status": 0,
+        "battery_c": 30.3
+      },
+      {
+        "elapsed_s": 20.7,
+        "status": 0,
+        "battery_c": 30.3
+      },
+      {
+        "elapsed_s": 30.9,
+        "status": 0,
+        "battery_c": 30.3
+      },
+      {
+        "elapsed_s": 41.1,
+        "status": 0,
+        "battery_c": 30.3
+      },
+      {
+        "elapsed_s": 51.3,
+        "status": 0,
+        "battery_c": 30.3
+      },
+      {
+        "elapsed_s": 61.4,
+        "status": 0,
+        "battery_c": 31.0
+      }
+    ]
+  }
+}

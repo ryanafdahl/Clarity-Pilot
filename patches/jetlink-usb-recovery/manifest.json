@@ -1,0 +1,21 @@
+{
+  "base_revision": "4b747aebad3d8d96ab26d76f1668f2b2ecb1b667",
+  "files": {
+    "jetlink/transport/ffs.py": {
+      "before": "e472c9bd8414ea31165f19add22b0407cfc99b2e2483e14f21224cacf9d0907e",
+      "after": "a709a6accedbd717b5de425ba9db246de391c79cba57de6b46c6c22c8204134f"
+    },
+    "jetlink/openpilot/link.py": {
+      "before": "d8940c76bd0d8c45cdcafd26b58f0a66757da642164f19c65102cc5907327326",
+      "after": "5389134ef0dc9c4f46a8e5ddcbc70785d0accd51a149e1b9dc79aee86e0d302c"
+    },
+    "tests/test_ffs_send.py": {
+      "before": "02815335419c5a0b04a4711ff759ee844b4209d0bfaa1f2d8fdba213b0d28cb1",
+      "after": "480c940c7d96104482fc7df2836d253cf68160e5a932aacd670a7e39b3d8562f"
+    },
+    "tests/openpilot/test_link.py": {
+      "before": "660ddc40b880d6acafaeb762eaba54eb8bc097c0aa6c21974e22c2783556de71",
+      "after": "484b7881fc1e3963dc67fa06240071bb25dac3653cf7413ab6f9f21d6e97d650"
+    }
+  }
+}

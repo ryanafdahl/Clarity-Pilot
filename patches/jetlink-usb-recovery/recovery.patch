@@ -1,0 +1,106 @@
+--- a/jetlink/transport/ffs.py
++++ b/jetlink/transport/ffs.py
+@@ -491,6 +491,25 @@
+     self.unbind(self._owner_gadget)
+ 
+   # -- writes: AIO ---------------------------------------------------------
++
++  def check_health(self) -> None:
++    """Check an existing transport before a background reconnect handshake.
++
++    LEAVE only queues its writes. A reset can complete them with ESHUTDOWN
++    after that call returned, while the client still looks alive. Reap those
++    completions before reusing it; otherwise HELLO wastes an entire retry.
++    Never wait for the host, open endpoints, or reject an ordinary backlog.
++    """
++    with self._tx_lock:
++      if self._closing:
++        raise LinkError('gadget closing')
++      if self._aio is not None:
++        self._collect()
++      if self._tx_error is not None:
++        raise LinkError(self._tx_error)
++    with self._cv:
++      if self._reader_error is not None:
++        raise LinkError(self._reader_error)
+ 
+   def try_send(self, msg_type: int, seq: int, parts=(), timeout: float | None = None) -> bool:
+     """Queue one message unless that means waiting for the host: False, and
+--- a/jetlink/openpilot/link.py
++++ b/jetlink/openpilot/link.py
+@@ -105,6 +105,15 @@
+     """The client, opening one if we have not got one yet, or if the one held
+     is dead: a big model retired after a link loss closes its client, and
+     reusing it failed the next attempt with EBADF, 5 s after every loss."""
++    if self.client is not None and not self.client.dead:
++      from jetlink.transport.base import LinkError
++      check = getattr(self.client.t, 'check_health', None)
++      if check is not None:
++        try:
++          check()
++        except LinkError as e:
++          self.log.warning("jetlink: replacing failed transport before rejoin (%s)", e)
++          self.client.dead = True
+     if self.client is not None and self.client.dead:
+       self.close()
+     if self.client is None:
+--- a/tests/test_ffs_send.py
++++ b/tests/test_ffs_send.py
+@@ -213,3 +213,29 @@
+     else:
+       merged.append((addr, n))
+   assert merged == spans
++
++
++def test_rejoin_health_reaps_reset_before_another_hello(sender):
++  t, aio = sender
++  aio.holding = True
++  t.send(P.Msg.LEAVE, 4, (b'{}',))
++  aio.shutdown()
++  submitted = aio.submits
++  with pytest.raises(LinkError, match='shutdown'):
++    t.check_health()
++  assert aio.submits == submitted, 'a health probe must not send a handshake'
++
++
++def test_rejoin_health_keeps_a_slow_but_live_transport(sender):
++  t, aio = sender
++  aio.holding = True
++  t.send(P.Msg.LEAVE, 4, (b'{}',))
++  t.check_health()
++  assert not t._unbound and aio.outstanding > 0
++
++
++def test_rejoin_health_reports_reader_failure_without_waiting(sender):
++  t, _ = sender
++  t._fail('USB reader stopped after reset')
++  with pytest.raises(LinkError, match='reader stopped'):
++    t.check_health()
+--- a/tests/openpilot/test_link.py
++++ b/tests/openpilot/test_link.py
+@@ -142,6 +142,25 @@
+       self.link.open()
+     borrow.assert_called_once()
+     assert all(c.kwargs['loan'] is loan for c in connect.call_args_list)
++
++  def test_async_endpoint_failure_replaces_client_before_hello(self):
++    from jetlink.transport.base import LinkError
++    old = mock.Mock(dead=False)
++    old.t.check_health.side_effect = LinkError('Cannot send after transport endpoint shutdown')
++    loan = mock.Mock(closed=False)
++    self.link.client, self.link.loan = old, loan
++    with mock.patch.object(link, 'connect') as connect:
++      assert self.link.open() is connect.return_value
++    old.close.assert_called_once()
++    old.hello.assert_not_called()
++    assert connect.call_args.kwargs['loan'] is loan
++
++  def test_live_transport_is_reused_without_a_new_handshake(self):
++    old = mock.Mock(dead=False)
++    self.link.client = old
++    assert self.link.open() is old
++    old.close.assert_not_called()
++    old.t.check_health.assert_called_once()
+ 
+   def test_a_dead_client_is_replaced_not_reused(self):
+     # a big model retired after a link loss closes its client; the next

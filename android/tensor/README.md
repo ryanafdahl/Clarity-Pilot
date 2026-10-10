@@ -1,6 +1,6 @@
 # Google Tensor support on the Pixel
 
-The installed **0.8.5-clarity-tensor.5** app uses the latest upstream source checked on October 10, 2026, plus precompiled Tensor support. **The parked-only handshake and Parked USB Test switch are removed.** Ordinary protocol-v3 engine requests and USB service are enabled. The selected processor is **Tensor TPU (precompiled)**, and the selected model remains **Cinque Terre V2**. [APK, installation and build provenance](../README.md).
+The installed **0.8.5-clarity-tensor.6** app uses pinned upstream source plus precompiled Tensor support and the October 10 USB receive/recovery fixes. **The parked-only handshake and Parked USB Test switch are removed.** Ordinary protocol-v3 engine requests and USB service are enabled. The selected processor is **Tensor TPU (precompiled)**, and the selected model remains **Cinque Terre V2**. [APK, installation and build provenance](../README.md).
 
 The app retains phone health monitoring in its foreground service, including when its screen is hidden. Tensor engine requests and inference stop if telemetry is missing, malformed or five seconds old, Android thermal status is severe (3+), or battery temperature reaches 43°C. After a thermal refusal, a fresh engine request is needed once health recovers. These app thresholds do not alter Android's thermal or charging limits.
 
@@ -8,7 +8,7 @@ The separate **Tensor NPU (on-device)** choice uses upstream's runtime compiler 
 
 ## Current results and remaining checks
 
-[October 10 update report](../../docs/PIXEL_JETLINK_UPDATE_2026-10-10.md) records the installed APK identity, normal handshake, numerical comparison, sustained desk timing and test counts. Removal of the parked restriction is a functional change, not driving qualification. Direct comma USB on this APK, repeated reconnects, sustained cooling/charging in the intended mount, camera-derived outputs and fallback behavior still need physical verification. The comma's existing warmup, timing and fallback logic is unchanged.
+[October 10 USB repair report](../../docs/PIXEL_USB_RECOVERY_2026-10-10.md) records the installed APK identity, normal handshake, numerical comparison, sustained desk timing and test counts. Removal of the parked restriction is a functional change, not driving qualification. Direct comma USB on this APK, repeated reconnects, sustained cooling/charging in the intended mount, camera-derived outputs and fallback behavior still need physical verification. The comma's existing warmup, timing and fallback logic is unchanged.
 
 The [October 3 archive](history-2026-10-03.md) retains the short direct-USB passes and subsequent timing failures. Its stationary scripts and deployment manifest describe the previous comma integration and are not the setup procedure for this app. They have not been changed to bypass their compatibility checks.
 
@@ -24,7 +24,7 @@ The update reused the existing compiled model and verified its output again. Ima
 
 ## Rebuild and compile
 
-Check out upstream `b079496816e617ffd891ea12e5bee5d116db1383`, apply [tensor-support.patch](tensor-support.patch), and build using [the Android instructions](../README.md#validation-and-rebuilding). The patch is for that exact base. The previous patch remains [archived](tensor-support-0.8.0-clarity-tensor.4.patch).
+Check out upstream `b079496816e617ffd891ea12e5bee5d116db1383`, apply [tensor-support.patch](tensor-support.patch), and build using [the Android instructions](../README.md#validation-and-rebuilding). The patch is for that exact base. The previous [`.5` patch](tensor-support-0.8.5-clarity-tensor.5.patch) and [`.4` patch](tensor-support-0.8.0-clarity-tensor.4.patch) remain archived.
 
 The app build uses upstream's hash-checked LiteRT 2.2.0 NPU runtime bundle. It does not download the private SDK compiler. If compiling a new model, extract your SDK locally and use Python with `ai-edge-litert==2.2.0`:
 

@@ -507,6 +507,27 @@ index 1e42eae..db9b037 100644
      sampleDesire(into: desire.pointer, as: desire.type)
      for scalar in scalars {
        Stage.store(f32: packed + scalar.offset, count: scalar.count, into: scalar.target.pointer, as: scalar.target.type)
+diff --git a/JetlinkKit/Sources/JetlinkServer/ReadRing.swift b/JetlinkKit/Sources/JetlinkServer/ReadRing.swift
+index debe537..5ddf050 100644
+--- a/JetlinkKit/Sources/JetlinkServer/ReadRing.swift
++++ b/JetlinkKit/Sources/JetlinkServer/ReadRing.swift
+@@ -81,10 +81,14 @@ final class ReadRing: @unchecked Sendable {
+     while true {
+       let copied = try take(into: buffer, count: count)
+       if copied > 0 {
++        // Keep the full receive reserve posted before inference starts.
++        // A 400 KB request consumes 25 of our 32 slots; leaving only seven
++        // posted stalls the next request if the server is still computing.
++        // A submit failure must not discard bytes already copied: the next
++        // read retries refill and reports failure if no slots can be posted.
++        try? refill()
+         return copied
+       }
+-      // Emptied slots go back only now, when the reader would wait: the
+-      // read that ends a message returns without posting on its way out.
+       try refill()
+       if let deadline, deadline.passed() {
+         return 0
 diff --git a/JetlinkKit/Sources/JetlinkServer/ServerHooks.swift b/JetlinkKit/Sources/JetlinkServer/ServerHooks.swift
 index 1833863..a9c15ed 100644
 --- a/JetlinkKit/Sources/JetlinkServer/ServerHooks.swift
@@ -603,6 +624,19 @@ index d8d8715..fb3d742 100644
      let (sha, skip) = wanted()
      host.lock.lock()
      guard let loaded = host.loaded, loaded.sha256 == sha, loaded.spec.frameSkip == skip, !host.benchmarking else {
+diff --git a/JetlinkKit/Sources/JetlinkServer/UsbfsPipes.swift b/JetlinkKit/Sources/JetlinkServer/UsbfsPipes.swift
+index c67e34b..b359c12 100644
+--- a/JetlinkKit/Sources/JetlinkServer/UsbfsPipes.swift
++++ b/JetlinkKit/Sources/JetlinkServer/UsbfsPipes.swift
+@@ -312,7 +312,7 @@ final class UsbfsDevice: @unchecked Sendable {
+   }
+ 
+   private static func failure(_ urb: UsbfsURB) -> LinkError {
+-    .closed("USB transfer on endpoint \(String(format: "%02x", urb.endpoint)) failed: \(LinuxErrno.describe(urb.status))")
++    .closed("USB transfer on endpoint \(String(format: "%02x", urb.endpoint)) failed: \(LinuxErrno.describe(urb.status)) (status \(urb.status), \(urb.actual)/\(urb.count) bytes)")
+   }
+ 
+   /// Under the lock: queues `urb` for `count` bytes.
 diff --git a/JetlinkKit/Sources/JetlinkServer/ValidationHealth.swift b/JetlinkKit/Sources/JetlinkServer/ValidationHealth.swift
 new file mode 100644
 index 0000000..863cf30
@@ -792,6 +826,34 @@ index 0000000..b5ca847
 +    }
 +  }
 +}
+diff --git a/JetlinkKit/Tests/JetlinkServerTests/UsbfsPipesTests.swift b/JetlinkKit/Tests/JetlinkServerTests/UsbfsPipesTests.swift
+index 4e489f3..b8067df 100644
+--- a/JetlinkKit/Tests/JetlinkServerTests/UsbfsPipesTests.swift
++++ b/JetlinkKit/Tests/JetlinkServerTests/UsbfsPipesTests.swift
+@@ -547,3 +547,23 @@ struct MonotonicDeadlineTests {
+     #expect(!deadline.passed(now: 100.5))
+   }
+ }
++
++@Suite("USB receive reserve")
++struct UsbReceiveReserveTests {
++  @Test("The next camera request crosses USB while the server processes the previous one")
++  func requestAheadOfInference() throws {
++    let kernel = FakeUsbfs()
++    let transport = USBTransport(pipes: UsbfsPipes(device: UsbfsDevice(kernel: kernel), inEndpoint: 0x81, outEndpoint: 0x01))
++    defer { transport.close() }
++    let payload = Data((0..<(400 * 1024 - Wire.headerSize)).map { UInt8(truncatingIfNeeded: $0) })
++    for seq: UInt32 in 1...4 {
++      kernel.feed(FakeUsbfs.gadgetFrame(.inferReq, seq: seq, payload: payload))
++      if seq > 1 {
++        #expect(kernel.buffered == 0, "the reader left too few URBs posted while inference was busy")
++      }
++      let message = try transport.recv()
++      #expect(message.seq == seq)
++      #expect(Data(message.payload) == payload)
++    }
++  }
++}
 diff --git a/JetlinkKit/Tests/JetlinkServerTests/ValidationHealthTests.swift b/JetlinkKit/Tests/JetlinkServerTests/ValidationHealthTests.swift
 new file mode 100644
 index 0000000..c3b70b9
@@ -878,7 +940,7 @@ index 0000000..c3b70b9
 +  }
 +}
 diff --git a/android/app/build.gradle.kts b/android/app/build.gradle.kts
-index 058b1c9..898d317 100644
+index 058b1c9..a767bf9 100644
 --- a/android/app/build.gradle.kts
 +++ b/android/app/build.gradle.kts
 @@ -34,8 +34,8 @@ android {
@@ -887,8 +949,8 @@ index 058b1c9..898d317 100644
          targetSdk = 36
 -        versionCode = jetlinkVersionCode
 -        versionName = jetlinkVersion
-+        versionCode = jetlinkVersionCode * 100 + 5
-+        versionName = jetlinkVersion + "-clarity-tensor.5"
++        versionCode = jetlinkVersionCode * 100 + 6
++        versionName = jetlinkVersion + "-clarity-tensor.6"
          // The QNN runtime is arm64 only, and so is every Snapdragon with an NPU
          // worth driving on. The emulator on an Apple silicon Mac is arm64 too.
          ndk { abiFilters += "arm64-v8a" }
@@ -999,6 +1061,36 @@ index c14ae1c..fd77e4e 100644
      }
  
      /** Follows the snapshot and the log for as long as the app runs. */
+diff --git a/android/app/src/main/java/io/zoompilot/jetlink/server/ServerService.kt b/android/app/src/main/java/io/zoompilot/jetlink/server/ServerService.kt
+index 86e11b7..791f328 100644
+--- a/android/app/src/main/java/io/zoompilot/jetlink/server/ServerService.kt
++++ b/android/app/src/main/java/io/zoompilot/jetlink/server/ServerService.kt
+@@ -23,6 +23,7 @@ import io.zoompilot.jetlink.graph
+ import io.zoompilot.jetlink.settings.SettingsValues
+ import io.zoompilot.jetlink.ui.status.StatusState
+ import io.zoompilot.jetlink.usb.CommaUsb
++import io.zoompilot.jetlink.usb.UsbState
+ import kotlinx.coroutines.Dispatchers
+ import kotlinx.coroutines.flow.collectLatest
+ import kotlinx.coroutines.flow.combine
+@@ -81,7 +82,7 @@ class ServerService : LifecycleService() {
+         lifecycleScope.launch {
+             // the line under the Status title
+             combine(graph.server.runState, graph.server.snapshot, graph.usb.usb) { run, snapshot, usb ->
+-                StatusState(run, snapshot, usb = usb).subtitle to snapshot.connected
++                StatusState(run, snapshot, usb = usb).subtitle to (snapshot.connected || usb == UsbState.Attached)
+             }.distinctUntilChanged().collectLatest { (text, connected) ->
+                 getSystemService(NotificationManager::class.java).notify(NOTIFICATION_ID, notification(text))
+                 holdWakeLock(connected)
+@@ -111,7 +112,7 @@ class ServerService : LifecycleService() {
+         super.onDestroy()
+     }
+ 
+-    /** Held while a comma is connected: frames are not user input, and the CPU must not sleep between them. */
++    /** Hold through USB handshake and reconnects too; release on detach or service stop. */
+     private fun holdWakeLock(hold: Boolean) {
+         val held = wakeLock
+         if (hold && held == null) {
 diff --git a/android/app/src/main/java/io/zoompilot/jetlink/settings/Chip.kt b/android/app/src/main/java/io/zoompilot/jetlink/settings/Chip.kt
 index 1addc86..924f6e6 100644
 --- a/android/app/src/main/java/io/zoompilot/jetlink/settings/Chip.kt
