@@ -1,0 +1,18 @@
+[Unit]
+Description=Clarity AI-assisted mileage collection and website publication
+After=network-online.target
+ConditionPathExists=/data/maintenance/ai-mileage/publish.py
+
+[Service]
+Type=oneshot
+User=comma
+Environment=PYTHONPATH=/data/openpilot
+ExecStart=/usr/local/venv/bin/python /data/maintenance/ai-mileage/publish.py
+Nice=19
+IOSchedulingClass=idle
+CPUQuota=20%
+MemoryMax=512M
+TimeoutStartSec=35min
+NoNewPrivileges=true
+PrivateTmp=true
+UMask=0077

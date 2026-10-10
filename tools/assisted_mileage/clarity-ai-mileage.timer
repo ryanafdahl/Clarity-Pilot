@@ -1,0 +1,13 @@
+[Unit]
+Description=Check offroad mileage and publish nightly at 11 PM Pacific
+
+[Timer]
+OnCalendar=*-*-* 23:00:00 America/Los_Angeles
+OnBootSec=5min
+OnUnitInactiveSec=30min
+Persistent=true
+AccuracySec=1min
+Unit=clarity-ai-mileage.service
+
+[Install]
+WantedBy=timers.target
