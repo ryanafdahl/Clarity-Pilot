@@ -1,0 +1,14 @@
+{
+  "base_revision": "4b747aebad3d8d96ab26d76f1668f2b2ecb1b667",
+  "prerequisite": "jetlink-usb-stability",
+  "files": {
+    "jetlink/transport/ffs.py": {
+      "before": "4ba0cf729d9e7cb24be168360e046ab7cc2d24a301df7cf51fa4d4db0bfdf2ba",
+      "after": "8377db0abae8aa2a302e8a4e63a3f5f059dd5264951fa7cf230e781718f03e49"
+    },
+    "tests/test_ffs.py": {
+      "before": "a930b3c3fd9c64c9d3223081b72d14199fdb319646068d99618958cff41715af",
+      "after": "474bebed614f1e552301d8f57a3845972fd882a0c3ea694a0f3b37d91b242127"
+    }
+  }
+}

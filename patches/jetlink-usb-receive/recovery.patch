@@ -1,0 +1,54 @@
+--- a/jetlink/transport/ffs.py
++++ b/jetlink/transport/ffs.py
+@@ -48,19 +48,20 @@
+ EP_OUT = 0x01  # host -> device
+ EP_IN = 0x82   # device -> host
+ 
+-# FunctionFS kmallocs a contiguous buffer per read and frees it on return. 16 KB
+-# is an order-2 page allocation, which this kernel retries without bound under
+-# memory pressure; vm.extra_free_kbytes (jetlink-root.sh) keeps that from
+-# stalling: no reclaim in 3,396 reads of a recording bench (2026-10-07). 8 KB
+-# would come from the slab like the writes, but a reply is 8,356 bytes, so it
+-# took a second read: +0.3 ms a frame at p50.
+-READ_CHUNK = 16 * P.USB_MAX_PACKET
++# FunctionFS kmallocs a contiguous kernel buffer on every read even when the
++# userspace buffer is pooled. Keep this within kmalloc-8192, as on the send
++# path, instead of requesting an order-2 allocation for every reply. The
++# 8,356-byte inference reply now takes two reads (previous bench: +0.3 ms
++# p50); StreamTransport reassembles it without changing framing or deadlines.
++# Slab allocation can still stall: this removes the larger allocation risk,
++# not a guarantee that every observed interruption had that cause.
++READ_CHUNK = 8 * P.USB_MAX_PACKET
+ # How much the reader may queue before it stops. Only bounds memory if the
+ # consumer stalls: inference never needs more than one response.
+ MAX_QUEUED = 512 << 10
+ # Read buffers kept for reuse. Steady state has one or two in flight, so this is
+-# only a ceiling for a transient backlog. 8 * 16 KB = 128 KB.
+-FREE_BUFS = 8
++# only a ceiling for a transient backlog. 16 * 8 KB = 128 KB.
++FREE_BUFS = 16
+ # Just below modeld's frame loop (54), so the loop wins a contended core and the
+ # reader still preempts everything else. See _raise_reader_priority.
+ READER_RT_PRIORITY = 51
+--- a/tests/test_ffs.py
++++ b/tests/test_ffs.py
+@@ -93,7 +93,7 @@
+     t.close()
+ 
+ 
+-@pytest.mark.parametrize('nelem', [18452, (2 << 20) // 4])
++@pytest.mark.parametrize('nelem', [2081, 18452, (2 << 20) // 4])
+ def test_inference_reply_spans_bounded_kernel_reads(mount, monkeypatch, nelem):
+   from types import SimpleNamespace
+ 
+@@ -133,8 +133,8 @@
+       assert not writer.is_alive()
+       assert bytes(msg.payload) == payload
+       assert msg.seq == 7
+-      assert len(reads) >= 5
+-      assert max(reads) <= 16 * 1024
++      assert len(reads) >= (len(wire) + 8191) // 8192
++      assert max(reads) <= 8 * 1024
+       assert all(n % P.USB_MAX_PACKET == 0 for n in reads)
+     finally:
+       real_os.close(host)

@@ -2,44 +2,44 @@ from datetime import datetime
 import unittest
 from publish import nightly_bucket, public_summary, ZONE
 
-
 class PublicationTests(unittest.TestCase):
-  BASELINE = {'reported_totals': {'miles': 60791, 'drives': 3395, 'hours': 1661},
-              'recorded_anchor': {'assisted_miles': 10, 'assisted_hours': 1, 'assisted_recordings': 2}}
-  def test_nightly_cutoff_and_catchup(self):
-    self.assertEqual(nightly_bucket(datetime(2026, 10, 10, 22, 59, tzinfo=ZONE)), '2026-10-09')
-    self.assertEqual(nightly_bucket(datetime(2026, 10, 10, 23, 0, tzinfo=ZONE)), '2026-10-10')
-    self.assertEqual(nightly_bucket(datetime(2026, 10, 11, 9, 0, tzinfo=ZONE)), '2026-10-10')
+  DEVICES = [{'name': 'comma 3', 'miles': 49220, 'drives': 2673, 'hours': 1313,
+              'verified_date': '2026-10-10', 'source': 'comma Connect display'}]
+  STATS = {'all': {'distance': 11584.522297826737, 'minutes': 20912, 'routes': 726}}
 
-  def test_dst_does_not_change_local_cutoff(self):
-    self.assertEqual(nightly_bucket(datetime(2026, 11, 1, 22, 59, tzinfo=ZONE)), '2026-10-31')
-    self.assertEqual(nightly_bucket(datetime(2026, 11, 1, 23, 0, tzinfo=ZONE)), '2026-11-01')
+  def test_nightly_cutoff_and_dst(self):
+    for month, day in ((10, 10), (11, 1)):
+      before = nightly_bucket(datetime(2026, month, day, 22, 59, tzinfo=ZONE))
+      after = nightly_bucket(datetime(2026, month, day, 23, 0, tzinfo=ZONE))
+      self.assertNotEqual(before, after)
+      self.assertEqual(after, f'2026-{month:02d}-{day:02d}')
 
-  def test_allowlist_excludes_private_fields(self):
-    public = public_summary({'assisted_miles': 12.345, 'total_recorded_miles': 20,
-                             'assisted_hours': 1.5, 'assisted_recordings': 3,
-                             'route_id': 'private', 'latitude': 1, 'segments': 20}, '2026-10-10', self.BASELINE)
-    self.assertEqual(public['assisted_miles'], 60793.3)
-    self.assertEqual(public['drives'], 3396)
-    self.assertEqual(public['hours'], 1661.5)
-    self.assertEqual(set(public), {'schema_version', 'assisted_miles', 'updated_date',
-                                  'drives', 'hours', 'historical_baseline', 'method', 'coverage', 'schedule'})
+  def test_only_connect_totals(self):
+    stats = dict(self.STATS, reported_totals={'miles': 999999}, assisted_miles=999999,
+                 route_id='private', latitude=1)
+    result = public_summary(stats, '2026-10-10', self.DEVICES)
+    self.assertEqual((result['driving_miles'], result['drives'], result['hours']), (60805, 3399, 1662))
+    self.assertEqual(set(result), {'schema_version', 'driving_miles', 'drives', 'hours',
+                                  'updated_date', 'devices', 'method', 'coverage', 'schedule'})
+    self.assertNotIn('private', str(result))
+    self.assertNotIn('historical_baseline', result)
 
-  def test_existing_logs_are_not_added_to_history_again(self):
-    summary = {'assisted_miles': 10, 'total_recorded_miles': 20, 'assisted_hours': 1, 'assisted_recordings': 2}
-    public = public_summary(summary, '2026-10-10', self.BASELINE)
-    self.assertEqual((public['assisted_miles'], public['drives'], public['hours']), (60791, 3395, 1661))
+  def test_repeated_snapshot_does_not_accumulate(self):
+    self.assertEqual(public_summary(self.STATS, '2026-10-10', self.DEVICES),
+                     public_summary(self.STATS, '2026-10-10', self.DEVICES))
+    self.assertEqual(len(self.DEVICES), 1)
 
-  def test_lost_ledger_is_rejected(self):
+  def test_duplicate_or_unverified_devices_rejected(self):
+    for devices in (self.DEVICES * 2, [dict(self.DEVICES[0], name='comma 4')],
+                    [dict(self.DEVICES[0], source='Owner reported')]):
+      with self.assertRaises(ValueError): public_summary(self.STATS, '2026-10-10', devices)
+
+  def test_invalid_totals_rejected(self):
+    for key in ('distance', 'minutes', 'routes'):
+      for value in (-1, float('nan'), float('inf'), True, '10'):
+        with self.assertRaises(ValueError):
+          public_summary({'all': dict(self.STATS['all'], **{key: value})}, '2026-10-10', self.DEVICES)
     with self.assertRaises(ValueError):
-      public_summary({'assisted_miles': 9, 'total_recorded_miles': 20, 'assisted_hours': 1,
-                      'assisted_recordings': 2}, '2026-10-10', self.BASELINE)
+      public_summary({'all': dict(self.STATS['all'], routes=1.5)}, '2026-10-10', self.DEVICES)
 
-  def test_invalid_totals_are_rejected(self):
-    for value in (-1, float('nan'), float('inf'), 11):
-      with self.assertRaises(ValueError):
-        public_summary({'assisted_miles': value, 'total_recorded_miles': 10}, '2026-10-10', self.BASELINE)
-
-
-if __name__ == '__main__':
-  unittest.main()
+if __name__ == '__main__': unittest.main()

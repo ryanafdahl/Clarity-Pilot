@@ -1,4 +1,4 @@
-"""Publish only aggregate mileage from a private ledger to the website repo."""
+"""Publish verified Connect totals; retain local assistance logs separately."""
 import argparse
 from datetime import datetime, timedelta
 import fcntl
@@ -22,29 +22,49 @@ def nightly_bucket(now):
   return (now.astimezone(ZONE) - timedelta(hours=23)).date().isoformat()
 
 
-def public_summary(summary, today, baseline):
-  miles = summary['assisted_miles']
-  if not math.isfinite(miles) or miles < 0 or miles > summary['total_recorded_miles'] + 0.001:
-    raise ValueError('Invalid assisted-distance summary')
-  anchor = baseline['recorded_anchor']
-  added_miles = miles - anchor['assisted_miles']
-  added_hours = summary['assisted_hours'] - anchor['assisted_hours']
-  added_drives = summary['assisted_recordings'] - anchor['assisted_recordings']
-  if min(added_miles, added_hours, added_drives) < -0.000001:
-    raise ValueError('Private ledger is smaller than its historical anchor; restore the ledger')
-  history = baseline['reported_totals']
-  return {
-    'schema_version': 1,
-    'assisted_miles': round(history['miles'] + max(0, added_miles), 1),
-    'drives': history['drives'] + max(0, added_drives),
-    'hours': round(history['hours'] + max(0, added_hours), 1),
-    'updated_date': today,
-    'historical_baseline': {'miles': history['miles'], 'drives': history['drives'], 'hours': history['hours'],
-                            'source': 'Owner-reported historical totals, updated on 2026-10-10.'},
-    'method': 'Owner-reported historical totals plus new logged distance with lateral or longitudinal AI control active.',
-    'coverage': 'Logs present at setup are treated as included in the historical baseline and are not added again.',
-    'schedule': 'Nightly at 11 p.m. Pacific, or when next powered, offroad and online.',
-  }
+def public_summary(stats, today, verified_devices):
+  """Only Connect observations; never add a manual baseline or local routes."""
+  current = stats['all']
+  for key in ('distance', 'minutes', 'routes'):
+    value = current[key]
+    if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value) or value < 0:
+      raise ValueError('Invalid Connect statistics')
+  if int(current['routes']) != current['routes']:
+    raise ValueError('Invalid route count')
+  devices = []
+  for device in verified_devices:
+    if device['source'] != 'comma Connect display':
+      raise ValueError('Historical device must be verified from Connect')
+    row = {key: device[key] for key in ('name', 'miles', 'drives', 'hours', 'verified_date', 'source')}
+    if any(type(row[key]) is not int or row[key] < 0 for key in ('miles', 'drives', 'hours')):
+      raise ValueError('Invalid verified device totals')
+    if row['name'] == 'comma 4' or any(d['name'] == row['name'] for d in devices):
+      raise ValueError('Duplicate device')
+    devices.append(row)
+  # Match Connect's whole-number display. The older offline device is a dated
+  # browser observation, not an API refresh or an owner-supplied estimate.
+  devices.append({'name': 'comma 4', 'miles': math.floor(current['distance'] + .5),
+                  'drives': int(current['routes']), 'hours': math.floor(current['minutes'] / 60 + .5),
+                  'verified_date': today, 'source': 'comma Connect API'})
+  return {'schema_version': 2, 'driving_miles': sum(d['miles'] for d in devices),
+          'drives': sum(d['drives'] for d in devices), 'hours': sum(d['hours'] for d in devices),
+          'updated_date': today, 'devices': devices,
+          'method': 'Sum of verified comma Connect device statistics; whole-number display precision.',
+          'coverage': 'Driving totals, not independently verified active-assistance miles. No manual additions or local-log increments.',
+          'schedule': 'Current device refreshed nightly offroad and online; older device retains its dated Connect observation.'}
+
+
+def connect_statistics():
+  from openpilot.common.params import Params
+  from openpilot.common.api import Api
+  identity = Params().get('DongleId')
+  if isinstance(identity, bytes): identity = identity.decode()
+  if not identity: raise RuntimeError('Device identity unavailable')
+  api = Api(identity)
+  response = api.get(f'v1.1/devices/{identity}/stats', access_token=api.get_token(), timeout=20)
+  if response.status_code != 200:
+    raise RuntimeError(f'Connect statistics unavailable: HTTP {response.status_code}')
+  return response.json()
 
 
 def main():
@@ -93,13 +113,9 @@ def main():
     # This dedicated cache always starts from the current remote commit. A rejected
     # previous push is recomputed from the durable ledger without a force push.
     git('checkout', '--detach', f'origin/{BRANCH}')
-    summary = json.loads((base / 'summary.json').read_text())
-    baseline = json.loads((base / 'baseline.json').read_text())
-    public = public_summary(summary, now.date().isoformat(), baseline)
+    verified_devices = json.loads((base / 'connect-devices.json').read_text())
+    public = public_summary(connect_statistics(), now.date().isoformat(), verified_devices)
     target = checkout / PUBLIC_FILE
-    previous = json.loads(target.read_text()) if target.exists() else {}
-    if previous.get('assisted_miles', 0) > public['assisted_miles']:
-      raise RuntimeError('Mileage would decrease; recover the private ledger before publishing')
     require_offroad()
     atomic_json(target, public)
     if git('diff', '--name-only') or git('ls-files', '--others', '--exclude-standard'):
@@ -107,15 +123,15 @@ def main():
       if git('diff', '--cached', '--name-only') != PUBLIC_FILE:
         raise RuntimeError('Unexpected staged publication paths')
       git('-c', 'user.name=Clarity mileage tracker', '-c', 'user.email=ryanafdahl@users.noreply.github.com',
-          '-c', 'commit.gpgsign=false', 'commit', '-m', 'Update recorded AI-assisted mileage')
+          '-c', 'commit.gpgsign=false', 'commit', '-m', 'Update verified Connect driving history')
       require_offroad()
       git('push', 'origin', f'HEAD:{BRANCH}')
     sha = git('rev-parse', 'HEAD')
     remote_sha = git('ls-remote', 'origin', f'refs/heads/{BRANCH}').split()[0]
     if sha != remote_sha:
       raise RuntimeError('Remote changed during verification; retry on the next check')
-    atomic_json(receipt_path, {'nightly_bucket': bucket, 'commit': sha, 'assisted_miles': public['assisted_miles']})
-    print(json.dumps({'published_miles': public['assisted_miles'], 'commit': sha}))
+    atomic_json(receipt_path, {'nightly_bucket': bucket, 'commit': sha, 'driving_miles': public['driving_miles']})
+    print(json.dumps({'published_miles': public['driving_miles'], 'commit': sha}))
 
 
 if __name__ == '__main__':

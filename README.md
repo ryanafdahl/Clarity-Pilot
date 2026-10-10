@@ -10,7 +10,7 @@ Clarity Pilot is a personal, experimental [sunnypilot](https://github.com/sunnyp
 
 **Storage maintenance:** the comma now keeps a 20 GiB offroad recording budget, with its newest two routes and marked recordings protected; the Jetson has bounded journal storage and hourly system-log rotation. See [retention policies, installation, and rollback](scripts/maintenance/README.md). October 3 cleanup increased comma free space from 8.9 GiB to 56 GiB.
 
-**Assisted-mileage tracker:** an independent offroad job on the comma adds newly recorded active steering or speed assistance, including lateral-only MADS, to the owner-reported historical baseline of **93,278 miles, 3,395 drives and 2,391 hours**. Existing logs are anchored as already included to prevent double counting. It publishes aggregate totals to [t3st.site](https://t3st.site/mileage.html) nightly at 11 p.m. Pacific, catching up when the device is next powered, parked and online. The private ledger preserves counted mileage after log deletion. [Method, historical-data limits, tests, installation, private backup and disable instructions](tools/assisted_mileage/README.md).
+**Driving-history tracker:** only verified comma Connect totals are published: **60,805 miles, 3,399 drives and 1,662 hours** at the October 10 check. Manual additions are removed. The comma refreshes its own Connect statistics nightly at 11 p.m. Pacific; the older device retains a dated Connect observation. Local active-assistance logs stay separate and are not added twice. [Method and publisher](tools/assisted_mileage/README.md) · [Website](https://t3st.site/mileage.html).
 
 The comma handles cameras, image warp, model-output parsing, vehicle control, driver monitoring, and communication with the car. The Jetson runs TensorRT inference; the Pixel app offers LiteRT GPU inference and experimental precompiled Tensor TPU inference. Either returns model outputs over the same JetLink protocol. Attach one accelerator at a time. Neither accelerator has a CAN connection.
 
@@ -228,3 +228,5 @@ The server analyzer summarizes logged slow-frame warnings, not every inference. 
 Vehicle support, including Honda Clarity and modified-EPS behavior, depends on the exact fingerprint and firmware. This repository does not perform an EPS torque modification or establish that a modified EPS is supported. See the project's [safety documentation](docs/SAFETY.md) and [limitations](docs/LIMITATIONS.md).
 
 Built on [sunnypilot](https://github.com/sunnypilot/sunnypilot), [comma.ai openpilot](https://github.com/commaai/openpilot), and [Zoompilot JetLink](https://github.com/zoompilot/jetlink), including the accelerator integration from sunnypilot [PR #2001](https://github.com/sunnypilot/sunnypilot/pull/2001). See [LICENSE](LICENSE) and [LICENSE.md](LICENSE.md) for the applicable notices.
+
+Latest USB work: [bounded receive-buffer mitigation and pending parked check](docs/PIXEL_USB_RECEIVE_2026-10-10.md).
