@@ -16,7 +16,7 @@ if [ -f "$pidfile" ]; then
 fi
 mkdir -p "$out"
 nohup timeout 3600 logcat -b main -b system -b crash \
-  -v threadtime -T 1 -f "$out/usb.log" -r 1024 -n 3 \
+  -v threadtime -f "$out/usb.log" -r 1024 -n 3 \
   'jetlink:V' 'Jetlink:V' 'JetLink:V' 'litert:W' \
   'UsbHostManager:V' 'UsbPortManager:V' 'UsbDeviceManager:V' \
   'UsbService:V' 'UsbAlsaManager:V' '*:S' > "$out/capture-status.txt" 2>&1 < /dev/null &
