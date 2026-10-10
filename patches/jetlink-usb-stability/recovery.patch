@@ -1,0 +1,120 @@
+--- a/jetlink/transport/base.py
++++ b/jetlink/transport/base.py
+@@ -68,6 +68,10 @@
+   Implementations must preserve message boundaries and ordering. recv() hands
+   back a view into a reusable buffer: copy anything you need to keep.
+   """
++
++  # Optional inference requests may hold the last output instead of adding
++  # work beyond this bound. Blocking calls and datagrams retain their policy.
++  max_in_flight: int | None = None
+ 
+   def link_info(self) -> dict:
+     """What the comma's hello says about this link: its kind (usb, cable or
+--- a/jetlink/transport/ffs.py
++++ b/jetlink/transport/ffs.py
+@@ -179,6 +179,9 @@
+   # ends on a short packet.
+   write_chunk = P.GADGET_TX_ALIGN // 2
+   tx_align = P.GADGET_TX_ALIGN
++  # The bulk server executes one inference at a time. Keep expensive camera
++  # work out of its input queue while a previous inference is still pending.
++  max_in_flight = 1
+ 
+   def __init__(self, mount: str = MOUNT, gadget: str | None = None,
+                udc: str | None = None):
+--- a/jetlink/client.py
++++ b/jetlink/client.py
+@@ -420,6 +420,20 @@
+     if self.waiting_for() > self.deadline:
+       self.dead = True
+       raise LinkError(f"no answer to {len(self._in_flight)} frames in {self.deadline:.1f}s; link abandoned")
++    # A completed USB write only says the host accepted bytes, not that its
++    # engine is free. After a slow inference, queuing more frames here makes
++    # them stale before execution and can exhaust the host's receive reserve.
++    # prepare() drains late replies before this call. Do not wait, reset the
++    # oldest request's deadline, or suppress a real transport error.
++    limit = getattr(self.t, 'max_in_flight', None)
++    if skip_if_busy and not self.t.datagrams and limit is not None and len(self._in_flight) >= limit:
++      try:
++        if check_health := getattr(self.t, 'check_health', None):
++          check_health()
++      except LinkError:
++        self.dead = True
++        raise
++      return None
+     warped = _as_bytes(warped, self.spec.warped_nbytes, 'warped')
+     packed = _as_bytes(packed, self.spec.packed_nbytes, 'packed')
+     seq = self._next_seq()
+--- a/tests/test_client.py
++++ b/tests/test_client.py
+@@ -293,3 +293,69 @@
+       for frame_id in range(1, 4):
+         self.lose(frame_id)
+     self.assertTrue(self.client.dead)
++
++
++class USBInferenceBackpressure(FramesInFlight):
++  """A slow inference must not turn USB's empty write queue into a backlog
++  of expensive, already-old camera frames. The fake clock avoids sleeps."""
++
++  def setUp(self):
++    super().setUp()
++    self.ours.max_in_flight = 1
++
++  def optional(self, frame_id):
++    spec = self.client.spec
++    return self.client.infer_begin(bytes(spec.warped_nbytes), bytes(spec.packed_nbytes),
++                                   frame_id=frame_id, skip_if_busy=True)
++
++  def test_124ms_spike_does_not_queue_two_more_inferences(self):
++    clock = [100.0]
++    with mock.patch('jetlink.client.time.monotonic', side_effect=lambda: clock[0]):
++      first = self.optional(1)
++      self.assertIsNotNone(first)
++      for elapsed in (0.050, 0.100):
++        clock[0] = 100 + elapsed
++        with mock.patch.object(self.ours, 'try_send', return_value=True) as send:
++          self.assertIsNone(self.optional(int(elapsed * 20) + 1))
++          send.assert_not_called()
++        self.assertEqual(self.client.unanswered, 1)
++        self.assertFalse(self.client.dead)
++      clock[0] = 100.124
++      self.answer()
++      self.assertEqual(self.client.infer_end(first)[0], 1.0)
++      clock[0] = 100.150
++      next_seq = self.optional(4)
++      self.assertIsNotNone(next_seq)
++      self.answer()
++      self.assertEqual(self.client.infer_end(next_seq)[0], 4.0)
++      self.assertEqual(self.client.unanswered, 0)
++
++  def test_an_unanswered_request_still_expires(self):
++    clock = [100.0]
++    with mock.patch('jetlink.client.time.monotonic', side_effect=lambda: clock[0]):
++      self.optional(1)
++      clock[0] += self.client.deadline + 0.001
++      with self.assertRaisesRegex(LinkError, 'no answer to 1 frames'):
++        self.optional(2)
++      self.assertTrue(self.client.dead)
++
++  def test_endpoint_failure_is_not_hidden_by_backpressure(self):
++    self.optional(1)
++    with mock.patch.object(self.ours, 'check_health', create=True,
++                           side_effect=LinkError('endpoint shutdown')):
++      with self.assertRaisesRegex(LinkError, 'endpoint shutdown'):
++        self.optional(2)
++    self.assertTrue(self.client.dead)
++
++  def test_blocking_requests_keep_the_existing_pipeline(self):
++    t = self.answering(2)
++    self.send(1)
++    second = self.send(2)
++    self.assertEqual(self.client.infer_end(second)[0], 2.0)
++    t.join(2.0)
++
++  def test_transport_limit_is_only_on_functionfs(self):
++    from jetlink.transport.ffs import FfsTransport
++    from jetlink.transport.base import Transport
++    self.assertEqual(FfsTransport.max_in_flight, 1)
++    self.assertIsNone(Transport.max_in_flight)

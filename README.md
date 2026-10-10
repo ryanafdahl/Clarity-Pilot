@@ -25,7 +25,7 @@ The small model starts first. The updated JetLink adapter warms the large model 
 
 ## Verified hardware and software
 
-Comma and Jetson software were updated on October 10, 2026; CD210 and Cinque Terre V2 were preserved. The home screen now displays **Clarity Pilot**, and both the source repository and installation branch include this update. The Pixel was subsequently updated to `0.8.5-clarity-tensor.6` using upstream `b0794968` plus Tensor and USB receive fixes, with a companion comma recovery patch. [Comma/Jetson record](docs/JETLINK_UPDATE_2026-10-10.md) · [Pixel USB repair and results](docs/PIXEL_USB_RECOVERY_2026-10-10.md). Hardware details retain the earlier live checks:
+Comma and Jetson software were updated on October 10, 2026; CD210 and Cinque Terre V2 were preserved. The home screen now displays **Clarity Pilot**, and both the source repository and installation branch include this update. The Pixel was subsequently updated to `0.8.5-clarity-tensor.8` using upstream `b0794968` plus Tensor, USB recovery and inference backpressure fixes, with the matched LiteRT 2.3.0 runtime and recompiled V2 model. [Comma/Jetson record](docs/JETLINK_UPDATE_2026-10-10.md) · [Pixel stability and LiteRT results](docs/PIXEL_USB_STABILITY_LITERT23_2026-10-10.md). Hardware details retain the earlier live checks:
 
 | Component | Verified configuration |
 | --- | --- |
@@ -33,8 +33,8 @@ Comma and Jetson software were updated on October 10, 2026; CD210 and Cinque Ter
 | Accelerator | NVIDIA Jetson Orin Nano Super Developer Kit, 8 GB |
 | Jetson OS | Ubuntu 24.04.4, JetPack 7.2.1 / L4T 39.2.1 |
 | JetLink server | 0.8.5, native systemd service, protocol v3 |
-| Android accelerator | Pixel 11 Pro XL, Android 17, JetLink 0.8.5-clarity-tensor.6 / version code 80506 |
-| Pixel inference runtime | LiteRT 2.2.0; precompiled V2 on Tensor G6 NPU; normal requests enabled, thermal protections retained |
+| Android accelerator | Pixel 11 Pro XL, Android 17, JetLink 0.8.5-clarity-tensor.8 / version code 80508 |
+| Pixel inference runtime | LiteRT 2.3.0; precompiled V2 on Tensor G6 NPU; normal requests enabled, thermal protections retained |
 | Inference runtime | TensorRT 10.16.2.10 |
 | Power profile | MAXN_SUPER, mode 2 |
 | Car power behavior | Switched with the car; suspend timer disabled |
@@ -129,13 +129,13 @@ A TensorRT or model change can require a new engine even when the ONNX download 
 
 ## Pixel setup
 
-The installed app is **0.8.5-clarity-tensor.6**, built from pinned upstream `b0794968` with Tensor and USB receive fixes. **The parked-only handshake and temporary USB test switch are removed.** Normal Tensor engine requests are accepted; phone health monitoring and thermal stops remain active. [USB recovery changes and measured results](docs/PIXEL_USB_RECOVERY_2026-10-10.md).
+The installed app is **0.8.5-clarity-tensor.8**, built from pinned upstream `b0794968` with Tensor, USB recovery, bounded requests and Android CPU performance hints. **The parked-only handshake and temporary USB test switch are removed.** Normal Tensor engine requests are accepted; phone health monitoring and thermal stops remain active. [USB stability, LiteRT upgrade and results](docs/PIXEL_USB_STABILITY_LITERT23_2026-10-10.md).
 
-The [Android directory](android/README.md) contains the **exact installed APK**, its SHA-256, source patch and install steps. [Download the Tensor APK](https://github.com/ryanafdahl/Clarity-Pilot/raw/refs/heads/main/android/jetlink-0.8.5-clarity-tensor.6-pixel.apk). Install with `adb install -r android/jetlink-0.8.5-clarity-tensor.6-pixel.apk`, open JetLink and allow notifications. The installed processor is **Tensor TPU (precompiled)** with **Cinque Terre Model V2**; both were preserved by the update.
+The [Android directory](android/README.md) contains the **exact installed APK**, its SHA-256, source patch and install steps. [Download the Tensor APK](https://github.com/ryanafdahl/Clarity-Pilot/raw/refs/heads/main/android/jetlink-0.8.5-clarity-tensor.8-pixel.apk). Install with `adb install -r android/jetlink-0.8.5-clarity-tensor.8-pixel.apk`, open JetLink and allow notifications. The installed processor is **Tensor TPU (precompiled)** with **Cinque Terre Model V2**; both were preserved by the update.
 
-Connect through the intended powered USB 3 hub and data cable, accept the Pixel USB prompt, and select **Jetlink: USB** and **Cinque Terre Model V2** on the comma. No parked-test switch or special handshake is needed. The existing comma warmup, timing checks and small-model fallback are unchanged.
+Connect using the direct USB-C data cable, leave Android Auto unplugged and wireless charging off for the next parked test, accept the Pixel USB prompt, and select **Jetlink: USB** and **Cinque Terre Model V2** on the comma. No parked-test switch or special handshake is needed. The existing comma warmup, timing checks and small-model fallback are unchanged.
 
-A fresh 32-frame comparison passed all 15 output slices against the original V2 model reference. The current repair passed 1,200 desk frames, 59 Android tests, 41 native tests and 217 comma tests plus 9 subtests. Phone processing p95 was 37.646 ms; desk ADB/TCP round-trip p95 was 59.161 ms. The companion [comma patch and guarded installer](docs/PIXEL_USB_RECOVERY_2026-10-10.md#reapply-and-rollback-on-the-comma) are included; a fresh installation must apply that patch explicitly. The next stationary test removes the separately connected wireless Android Auto adapter. **Direct comma USB and driving with this APK remain unverified.** Earlier short USB passes and sustained timing failures remain in the [October 3 archive](android/tensor/history-2026-10-03.md). The old stationary harness still refuses an incompatible comma deployment; it is not the normal connection procedure. Jetson drive results do not qualify the Pixel backend.
+A fresh 32-frame recurrent comparison passed all 15 output slices against the original V2 reference. The update passed 59 Android tests, 53 native tests and 285 comma tests plus 9 subtests. The 6,000-frame desk run had phone processing p95 36.580 ms and ADB/TCP round-trip p95 55.087 ms. The [two comma patch bundles and guarded installer](docs/PIXEL_USB_STABILITY_LITERT23_2026-10-10.md#reapply-and-roll-back-the-comma-patch) must be applied explicitly on a fresh installation. **The complete updated pair still needs a parked direct-USB test; physical resets and the isolated inference spike are not proven eliminated.** Keep the phone cooled. Earlier short USB passes and sustained failures remain in the [October 3 archive](android/tensor/history-2026-10-03.md). Jetson drive results do not qualify the Pixel backend.
 
 ## October 3 sunnypilot sync
 
@@ -194,6 +194,7 @@ sudo journalctl -b -u nvpmodel.service -u nvidia-cdi-refresh.service -u jetlink-
 | --- | --- |
 | [October 10 JetLink v0.8.5 drive review](docs/JETLINK_DRIVE_2026-10-10.md) | Two USB sessions, 53,609 continuous large-model outputs, startup retries, shutdown event, GPS backup warning and journal limits |
 | [October 10 JetLink v0.8.5 and branding update](docs/JETLINK_UPDATE_2026-10-10.md) | Published reinstall build, device updates, security packages, tests and remaining validation |
+| [October 10 Pixel stability and LiteRT 2.3](docs/PIXEL_USB_STABILITY_LITERT23_2026-10-10.md) | Parked reset analysis, Tensor hints, bounded USB requests, matched runtime/model and desk comparisons |
 | [October 10 Pixel USB recovery repair](docs/PIXEL_USB_RECOVERY_2026-10-10.md) | Installed APK, receive reserve and reconnect fixes, regressions, desk results and adapter-off test |
 | [October 10 Pixel JetLink update](docs/PIXEL_JETLINK_UPDATE_2026-10-10.md) | Latest upstream Android source, normal Tensor USB, installed APK and desk validation |
 | [October 4 JetLink v0.8.3 update](docs/JETLINK_UPDATE_2026-10-04.md) | Device pins, resident USB owner, preserved V2 selection, tests and pending parked validation |

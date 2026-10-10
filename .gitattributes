@@ -3,6 +3,7 @@
 # These files are copied from Windows to Linux/Android without conversion.
 android/tensor/*.patch text eol=lf
 patches/jetlink-usb-recovery/*.patch text eol=lf
+patches/jetlink-usb-stability/*.patch text eol=lf
 scripts/maintenance/capture_pixel_usb.sh text eol=lf
 
 # to move existing files into LFS:

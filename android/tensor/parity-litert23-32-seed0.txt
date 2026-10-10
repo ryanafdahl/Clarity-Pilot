@@ -1,0 +1,19 @@
+
+pooled over 32 frames, per slice and per column:
+    action                   corr 0.999996  by error, max abs 0.03125 <= 0.55       max abs   0.0312  mean abs 0.00777
+    desire_pred              corr 0.999983  (compared whole)                        max abs   0.1016  mean abs 0.03022
+    desire_state             corr 0.999988  by error, max abs 0.2773 <= 2.753       max abs   0.2773  mean abs 0.04308
+    hidden_state             corr 0.999977  (compared whole)                        max abs   0.2031  mean abs 0.01177
+    lane_lines               corr 0.999961  worst col 0.999915 mu[1]                    max abs   0.1680  mean abs 0.01401
+    lane_lines_prob          corr 0.999842  by error, max abs 0.1875 <= 0.7691      max abs   0.1875  mean abs 0.04851
+    lead                     corr 0.999985  worst col 0.999942 mu[2]    (4 by error)    max abs   1.1875  mean abs 0.04357
+    lead_prob                corr 0.999952  by error, max abs 0.06384 <= 0.5047     max abs   0.0638  mean abs 0.01996
+    meta                     corr 0.999963  (compared whole)                        max abs   0.1328  mean abs 0.03418
+    pad                      corr 1.000000  by error, max abs 0 <= 0                max abs   0.0000  mean abs 0.00000
+    plan                     corr 0.999974  worst col 0.999904 std[13]  (11 by error)   max abs   1.0000  mean abs 0.01124
+    pose                     corr 0.999992  no column correlated        (12 by error)   max abs   0.1367  mean abs 0.01402
+    road_edges               corr 0.999971  worst col 0.999891 mu[1]                    max abs   0.1660  mean abs 0.01590
+    road_transform           corr 0.999998  no column correlated        (12 by error)   max abs   0.0625  mean abs 0.01585
+    wide_from_device_euler   corr 0.999997  no column correlated        (6 by error)    max abs   0.0625  mean abs 0.01083
+
+OK: every slice and every column at or above corr 0.999, or within 10% of its largest value where too small or too quiet to correlate, per frame and pooled over all 32 frames

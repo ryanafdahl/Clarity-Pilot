@@ -1,0 +1,318 @@
+{
+  "date": "2026-10-10",
+  "apk": {
+    "version": "0.8.5-clarity-tensor.8",
+    "version_code": 80508,
+    "bytes": 104211360,
+    "sha256": "a51d60b8445a5f89664d34658292e0d44cf946bbc5604045ffe3870690220df5",
+    "signer_sha256": "50e670489a4ba19aec5e9fbad6f06074556d4d07be629ba012b3ca78f1eabb4e",
+    "android_tests": 59,
+    "android_skipped": 0,
+    "installed_readback_match": true,
+    "temporary_tcp_listener_disabled": true,
+    "adb_forward_removed": true,
+    "correct_runtime_label_verified": true,
+    "native_libraries_match_benchmarked_build": 27,
+    "benchmark_apk_sha256": "ff680096efacba0dcf38180694a8d20e804f937449b3fb92ef9b82918a35bcba",
+    "final_apk_smoke_frames": 120
+  },
+  "model": {
+    "source_sha256": "09d080f36965bb2a0790500452bd328aa03c484d0222aa79d1ad9f021a522aec",
+    "compiled_sha256": "fc393523c5c1ddba9774382db513a5c62fad50cb187968ea25bc96db5480b51b",
+    "soc": "Tensor_G6",
+    "litert": "2.3.0",
+    "sdk_sha256": "d74bea45081aa90a39505a675c15f566d46dbcc35e55a98f755c02017464cd1f",
+    "precision": "half",
+    "sharding": "minimal",
+    "compiled_bytes": 834528528
+  },
+  "tests": {
+    "android": 59,
+    "native": 53,
+    "native_suites": 9,
+    "native_skipped": 0,
+    "comma": 285,
+    "comma_subtests": 9,
+    "installer_checks_pass": true,
+    "source_files_reconstructed": 47
+  },
+  "android_source_base": "b079496816e617ffd891ea12e5bee5d116db1383",
+  "comma_jetlink_base": "4b747aebad3d8d96ab26d76f1668f2b2ecb1b667",
+  "physical_usb_verified_after_update": false,
+  "driving_ready": false,
+  "parity": {
+    "frames": 32,
+    "identical_input_arrays": 64,
+    "passed_slices": 15,
+    "criteria_unchanged": true
+  },
+  "desk": {
+    "litert22_hints_off": {
+      "transport": "desk ADB/TCP; not direct comma USB",
+      "measured_frames": 1200,
+      "finite_frames": 1200,
+      "failures": [],
+      "elapsed_s": 63.57799999997951,
+      "inference": {
+        "mean_ms": 34.659665,
+        "p50_ms": 34.631,
+        "p95_ms": 36.32535,
+        "p99_ms": 37.055060000000005,
+        "max_ms": 39.185,
+        "over_50ms": 0
+      },
+      "queues": {
+        "mean_ms": 1.1285733333333334,
+        "p50_ms": 1.112,
+        "p95_ms": 1.5523999999999998,
+        "p99_ms": 2.0122099999999996,
+        "max_ms": 4.279,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 35.868070833333334,
+        "p50_ms": 35.870999999999995,
+        "p95_ms": 37.64245,
+        "p99_ms": 38.449259999999995,
+        "max_ms": 42.963,
+        "over_50ms": 0
+      },
+      "round_trip": {
+        "mean_ms": 51.51697200043903,
+        "p50_ms": 50.85160001181066,
+        "p95_ms": 58.46553999581374,
+        "p99_ms": 66.20602803537622,
+        "max_ms": 74.66190005652606,
+        "over_50ms": 832
+      },
+      "server_timing_pass": true,
+      "round_trip_timing_pass": false,
+      "protocol_pass": true,
+      "blocks_1200": [
+        {
+          "start_frame": 0,
+          "frames": 1200,
+          "round_trip_p95_ms": 58.46553999581374,
+          "server_p95_ms": 37.64245
+        }
+      ],
+      "battery_c_range": [
+        24.6,
+        24.8
+      ],
+      "thermal_statuses": [
+        0
+      ]
+    },
+    "litert22_hints_on": {
+      "transport": "desk ADB/TCP with Android CPU hints; not direct USB",
+      "measured_frames": 1200,
+      "finite_frames": 1200,
+      "failures": [],
+      "elapsed_s": 62.32799999997951,
+      "inference": {
+        "mean_ms": 33.57349166666666,
+        "p50_ms": 33.589,
+        "p95_ms": 35.200250000000004,
+        "p99_ms": 35.843120000000006,
+        "max_ms": 36.933,
+        "over_50ms": 0
+      },
+      "queues": {
+        "mean_ms": 0.9312033333333333,
+        "p50_ms": 0.9635,
+        "p95_ms": 1.2080499999999998,
+        "p99_ms": 1.3944699999999994,
+        "max_ms": 2.56,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 34.63271333333333,
+        "p50_ms": 34.695,
+        "p95_ms": 36.39315,
+        "p99_ms": 37.16025,
+        "max_ms": 38.089,
+        "over_50ms": 0
+      },
+      "round_trip": {
+        "mean_ms": 49.524345249131635,
+        "p50_ms": 48.95990004297346,
+        "p95_ms": 54.436210048152134,
+        "p99_ms": 63.791427937103435,
+        "max_ms": 79.57079994957894,
+        "over_50ms": 336
+      },
+      "server_timing_pass": true,
+      "round_trip_timing_pass": false,
+      "protocol_pass": true,
+      "blocks_1200": [
+        {
+          "start_frame": 0,
+          "frames": 1200,
+          "round_trip_p95_ms": 54.436210048152134,
+          "server_p95_ms": 36.39315
+        }
+      ],
+      "battery_c_range": [
+        25.6,
+        26.4
+      ],
+      "thermal_statuses": [
+        0
+      ]
+    },
+    "litert23_hints_on": {
+      "transport": "desk ADB/TCP; not direct comma USB",
+      "measured_frames": 1200,
+      "finite_frames": 1200,
+      "failures": [],
+      "elapsed_s": 62.31299999996554,
+      "inference": {
+        "mean_ms": 33.72031750000001,
+        "p50_ms": 33.6465,
+        "p95_ms": 35.4155,
+        "p99_ms": 36.41869,
+        "max_ms": 37.408,
+        "over_50ms": 0
+      },
+      "queues": {
+        "mean_ms": 0.785345,
+        "p50_ms": 0.828,
+        "p95_ms": 1.1260499999999998,
+        "p99_ms": 1.3061399999999999,
+        "max_ms": 1.79,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 34.62618833333333,
+        "p50_ms": 34.596000000000004,
+        "p95_ms": 36.56315,
+        "p99_ms": 37.536319999999996,
+        "max_ms": 38.831,
+        "over_50ms": 0
+      },
+      "round_trip": {
+        "mean_ms": 49.37158074986655,
+        "p50_ms": 48.775099974591285,
+        "p95_ms": 53.7363150389865,
+        "p99_ms": 64.17387405410409,
+        "max_ms": 80.99050004966557,
+        "over_50ms": 338
+      },
+      "server_timing_pass": true,
+      "round_trip_timing_pass": false,
+      "protocol_pass": true,
+      "blocks_1200": [
+        {
+          "start_frame": 0,
+          "frames": 1200,
+          "round_trip_p95_ms": 53.7363150389865,
+          "server_p95_ms": 36.56315
+        }
+      ],
+      "battery_c_range": [
+        27,
+        28.2
+      ],
+      "thermal_statuses": [
+        0
+      ]
+    },
+    "litert23_soak": {
+      "transport": "desk ADB/TCP; not direct comma USB",
+      "measured_frames": 6000,
+      "finite_frames": 6000,
+      "failures": [],
+      "elapsed_s": 306.844000000041,
+      "inference": {
+        "mean_ms": 33.743491999999996,
+        "p50_ms": 33.64,
+        "p95_ms": 35.50705,
+        "p99_ms": 36.38105,
+        "max_ms": 38.315,
+        "over_50ms": 0
+      },
+      "queues": {
+        "mean_ms": 0.7688904999999999,
+        "p50_ms": 0.823,
+        "p95_ms": 1.0920500000000002,
+        "p99_ms": 1.2280100000000003,
+        "max_ms": 2.343,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 34.6178155,
+        "p50_ms": 34.5835,
+        "p95_ms": 36.58,
+        "p99_ms": 37.466080000000005,
+        "max_ms": 38.989,
+        "over_50ms": 0
+      },
+      "round_trip": {
+        "mean_ms": 49.40496443310985,
+        "p50_ms": 48.77019999548793,
+        "p95_ms": 55.08745000697673,
+        "p99_ms": 63.445591082563666,
+        "max_ms": 85.37079999223351,
+        "over_50ms": 1764
+      },
+      "server_timing_pass": true,
+      "round_trip_timing_pass": false,
+      "protocol_pass": true,
+      "blocks_1200": [
+        {
+          "start_frame": 0,
+          "frames": 1200,
+          "round_trip_p95_ms": 54.76982000982388,
+          "server_p95_ms": 36.5248
+        },
+        {
+          "start_frame": 1200,
+          "frames": 1200,
+          "round_trip_p95_ms": 53.736215044045814,
+          "server_p95_ms": 36.6042
+        },
+        {
+          "start_frame": 2400,
+          "frames": 1200,
+          "round_trip_p95_ms": 56.21965501923114,
+          "server_p95_ms": 36.59305
+        },
+        {
+          "start_frame": 3600,
+          "frames": 1200,
+          "round_trip_p95_ms": 54.816575039876625,
+          "server_p95_ms": 36.565
+        },
+        {
+          "start_frame": 4800,
+          "frames": 1200,
+          "round_trip_p95_ms": 55.911549978191026,
+          "server_p95_ms": 36.57785
+        }
+      ],
+      "battery_c_range": [
+        28.2,
+        32.4
+      ],
+      "thermal_statuses": [
+        0
+      ]
+    }
+  },
+  "parked_before_update": {
+    "span_seconds": 500.731841459,
+    "large_outputs": 9694,
+    "small_outputs": 87,
+    "large_execution_p95_ms": 43.6957255,
+    "unexpected_usb_fallbacks": 1,
+    "unexpected_small_interval_s": 0.455124877,
+    "final_user_unplug_excluded": true
+  },
+  "comma_install": {
+    "bundle": "/data/jetlink-usb-stability-20261010",
+    "live_hashes_verified": true,
+    "offroad_deployment_verified": true,
+    "rollback_zip": "rollback-1791665395766901782.zip"
+  }
+}

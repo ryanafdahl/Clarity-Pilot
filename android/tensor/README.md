@@ -1,6 +1,6 @@
 # Google Tensor support on the Pixel
 
-The installed **0.8.5-clarity-tensor.6** app uses pinned upstream source plus precompiled Tensor support and the October 10 USB receive/recovery fixes. **The parked-only handshake and Parked USB Test switch are removed.** Ordinary protocol-v3 engine requests and USB service are enabled. The selected processor is **Tensor TPU (precompiled)**, and the selected model remains **Cinque Terre V2**. [APK, installation and build provenance](../README.md).
+The installed **0.8.5-clarity-tensor.8** app uses pinned upstream source plus precompiled Tensor support and the October 10 USB stability repairs, optional Android CPU hints and the matched LiteRT 2.3.0 runtime. **The parked-only handshake and Parked USB Test switch are removed.** Ordinary protocol-v3 engine requests and USB service are enabled. The selected processor is **Tensor TPU (precompiled)**, and the selected model remains **Cinque Terre V2**. [APK, installation and build provenance](../README.md).
 
 The app retains phone health monitoring in its foreground service, including when its screen is hidden. Tensor engine requests and inference stop if telemetry is missing, malformed or five seconds old, Android thermal status is severe (3+), or battery temperature reaches 43°C. After a thermal refusal, a fresh engine request is needed once health recovers. These app thresholds do not alter Android's thermal or charging limits.
 
@@ -8,7 +8,7 @@ The separate **Tensor NPU (on-device)** choice uses upstream's runtime compiler 
 
 ## Current results and remaining checks
 
-[October 10 USB repair report](../../docs/PIXEL_USB_RECOVERY_2026-10-10.md) records the installed APK identity, normal handshake, numerical comparison, sustained desk timing and test counts. Removal of the parked restriction is a functional change, not driving qualification. Direct comma USB on this APK, repeated reconnects, sustained cooling/charging in the intended mount, camera-derived outputs and fallback behavior still need physical verification. The comma's existing warmup, timing and fallback logic is unchanged.
+[October 10 stability and LiteRT report](../../docs/PIXEL_USB_STABILITY_LITERT23_2026-10-10.md) records the installed APK identity, normal handshake, numerical comparison, sustained desk timing and test counts. Removal of the parked restriction is a functional change, not driving qualification. Direct comma USB on this APK, repeated reconnects, sustained cooling/charging in the intended mount, camera-derived outputs and fallback behavior still need physical verification. The comma retains its existing warmup, deadlines and fallback limits and now bounds optional USB inference to one outstanding request.
 
 The [October 3 archive](history-2026-10-03.md) retains the short direct-USB passes and subsequent timing failures. Its stationary scripts and deployment manifest describe the previous comma integration and are not the setup procedure for this app. They have not been changed to bypass their compatibility checks.
 
@@ -17,16 +17,16 @@ The [October 3 archive](history-2026-10-03.md) retains the short direct-USB pass
 - Original V2 ONNX: `09d080f36965bb2a0790500452bd328aa03c484d0222aa79d1ad9f021a522aec`, 766,040,736 bytes.
 - Compiled model: `fc393523c5c1ddba9774382db513a5c62fad50cb187968ea25bc96db5480b51b`, 834,528,528 bytes.
 - Compiler: `d74bea45081aa90a39505a675c15f566d46dbcc35e55a98f755c02017464cd1f`.
-- Target `Tensor_G6`, precision `half`, sharding `minimal`, LiteRT `2.2.0`; original compilation placed all 2,424 operators in one TPU partition.
+- Target `Tensor_G6`, precision `half`, sharding `minimal`, LiteRT `2.3.0`; all 2,424 operators compiled into one NPU partition, and the live engine requires full NPU execution.
 - [Machine-readable manifest](qualified-model.json). Model weights and the private SDK compiler are not redistributed.
 
-The update reused the existing compiled model and verified its output again. Image history retains exact bytes; feature/desire history retains the existing half-precision rounding. Burst scheduling is unchanged from the previously tested Tensor build.
+The update recompiled V2 with ai-edge-litert 2.3.0 and verified its output again. Image history retains exact bytes; feature/desire history retains the existing half-precision rounding. Burst scheduling is unchanged from the previously tested Tensor build.
 
 ## Rebuild and compile
 
-Check out upstream `b079496816e617ffd891ea12e5bee5d116db1383`, apply [tensor-support.patch](tensor-support.patch), and build using [the Android instructions](../README.md#validation-and-rebuilding). The patch is for that exact base. The previous [`.5` patch](tensor-support-0.8.5-clarity-tensor.5.patch) and [`.4` patch](tensor-support-0.8.0-clarity-tensor.4.patch) remain archived.
+Check out upstream `b079496816e617ffd891ea12e5bee5d116db1383`, apply [tensor-support.patch](tensor-support.patch), and build using [the Android instructions](../README.md#validation-and-rebuilding). The patch is for that exact base. The previous [`.6` patch](tensor-support-0.8.5-clarity-tensor.6.patch), [`.5` patch](tensor-support-0.8.5-clarity-tensor.5.patch) and [`.4` patch](tensor-support-0.8.0-clarity-tensor.4.patch) remain archived.
 
-The app build uses upstream's hash-checked LiteRT 2.2.0 NPU runtime bundle. It does not download the private SDK compiler. If compiling a new model, extract your SDK locally and use Python with `ai-edge-litert==2.2.0`:
+The app build pins and verifies all three LiteRT 2.3.0 Maven AARs: core, GPU and Google Tensor NPU runtime. It does not download the private SDK compiler. Extract your SDK locally and use Python with `ai-edge-litert==2.3.0`. The [Tensor SDK codelab](https://codelabs.developers.google.com/codelabs/google-tensor-ml-sdk#0) documents the stable backend switch; the compiler script sets it before importing LiteRT and points explicitly at your private compiler directory:
 
 ```sh
 cd JetlinkKit
@@ -39,7 +39,7 @@ python android/scripts/compile-tensor.py \
   --soc Tensor_G6 --precision half --sharding minimal
 ```
 
-Use the actual phone chipset and validate each new model. Automatic precision was an unsuccessful earlier candidate for this V2 model. Compilation previously required around 14.7 GiB peak compiler RSS; allow additional memory for the OS and other processes.
+Use the actual phone chipset and validate each new model. Automatic precision was an unsuccessful earlier candidate for this V2 model. This large model needs substantial compilation memory. WSL exhausted its default memory while compiling this update; use an isolated compiler run and sufficient RAM/swap, and avoid concurrent Android builds. Do not change model precision just to reduce build memory.
 
 ## Import into the Pixel
 
@@ -82,4 +82,7 @@ Remove forwarding afterward with `adb forward --remove tcp:5599`, and tap Versio
 
 - [Google Tensor support](https://developers.google.com/edge/litert/next/tensor-sdk)
 - [Compiler precision and sharding flags](https://developers.google.com/edge/tensor-sdk/compilation-flags)
-- [LiteRT 2.2.0 performance modes](https://github.com/google-ai-edge/LiteRT/blob/v2.2.0/litert/c/options/litert_google_tensor_options_type.h)
+- [LiteRT 2.3.0 performance modes](https://github.com/google-ai-edge/LiteRT/blob/v2.3.0/litert/c/options/litert_google_tensor_options_type.h)
+
+- [LiteRT 2.3 release and Android artifact split](https://github.com/google-ai-edge/LiteRT/releases/tag/v2.3.0)
+- [Google Tensor ML SDK codelab](https://codelabs.developers.google.com/codelabs/google-tensor-ml-sdk#0)

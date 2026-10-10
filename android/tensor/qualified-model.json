@@ -2,8 +2,9 @@
   "source_sha256": "09d080f36965bb2a0790500452bd328aa03c484d0222aa79d1ad9f021a522aec",
   "compiled_sha256": "fc393523c5c1ddba9774382db513a5c62fad50cb187968ea25bc96db5480b51b",
   "soc": "Tensor_G6",
-  "litert": "2.2.0",
+  "litert": "2.3.0",
   "sdk_sha256": "d74bea45081aa90a39505a675c15f566d46dbcc35e55a98f755c02017464cd1f",
   "precision": "half",
-  "sharding": "minimal"
+  "sharding": "minimal",
+  "compiled_bytes": 834528528
 }

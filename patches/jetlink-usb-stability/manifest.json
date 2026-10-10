@@ -1,0 +1,22 @@
+{
+  "base_revision": "4b747aebad3d8d96ab26d76f1668f2b2ecb1b667",
+  "prerequisite": "jetlink-usb-recovery",
+  "files": {
+    "jetlink/transport/base.py": {
+      "before": "b31667855c45361299573b109cf85787e9eebe53e6507fcfec74d9ed0258e0c4",
+      "after": "200b4fde6ef02083f951245cae10abad0a06bb7265a423fd52fb832a6ae8d97f"
+    },
+    "jetlink/transport/ffs.py": {
+      "before": "a709a6accedbd717b5de425ba9db246de391c79cba57de6b46c6c22c8204134f",
+      "after": "4ba0cf729d9e7cb24be168360e046ab7cc2d24a301df7cf51fa4d4db0bfdf2ba"
+    },
+    "jetlink/client.py": {
+      "before": "7e7691fca5089834cf37f16860a4a65afea9db4632234eb1d5c3a91c80ed2a28",
+      "after": "4045ce41ab7852c1842719dac1c3b55f8ab3b77a74f6454c51a64481e118ca34"
+    },
+    "tests/test_client.py": {
+      "before": "010b1a42450dad566f59b543c95b4d602ddf245ab971079ad3399e2f72449b3f",
+      "after": "fd2606662635366d38da4783b82545ed4fb55d91590466cb84ec137cb9a4d817"
+    }
+  }
+}

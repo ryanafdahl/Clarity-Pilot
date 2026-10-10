@@ -1,12 +1,14 @@
 # Pixel USB recovery preparation — October 10, 2026
 
-The Pixel now has **JetLink 0.8.5-clarity-tensor.6**, and the comma has a tested USB transport recovery patch. These changes address receive-buffer starvation and a stale reconnect attempt. **The physical USB resets from the drive are not yet proven fixed.** The next check is stationary with the Android Auto adapter unplugged, followed by log review before another driving test.
+> Historical repair record. [Current update and results](PIXEL_USB_STABILITY_LITERT23_2026-10-10.md).
+
+The Pixel then received **JetLink 0.8.5-clarity-tensor.6**, and the comma has a tested USB transport recovery patch. These changes address receive-buffer starvation and a stale reconnect attempt. **The physical USB resets from the drive are not yet proven fixed.** The next check is stationary with the Android Auto adapter unplugged, followed by log review before another driving test.
 
 ## What the evidence supports
 
 The preceding Pixel drive contained repeated large-model fallback and USB errors. Comma kernel records show disconnect/reconfigure cycles near +36, +149 and +418 seconds, returning at SuperSpeed. There was no corresponding Type-C detach until the final unplug. This supports real USB bus/controller resets, but does not identify a cable, power supply, controller or software root cause.
 
-The Android Auto adapter was plugged into the car separately; the Pixel connected to it wirelessly. It therefore did not share the Pixel-to-comma USB hub. Removing it eliminates the phone's wireless Android Auto workload for comparison. The user's approximate halfway removal time is insufficient to establish causation. Detailed route logs remain private.
+The Android Auto adapter was plugged into the car separately; the Pixel connected to it wirelessly. It therefore did not share the Pixel-to-comma USB connection. Removing it eliminates the phone's wireless Android Auto workload for comparison. The user's approximate halfway removal time is insufficient to establish causation. Detailed route logs remain private.
 
 ## Changes installed
 
@@ -24,7 +26,7 @@ Protocol v3, the normal Tensor handshake, Cinque Terre V2, precompiled Tensor G6
 | Pixel APK | `0.8.5-clarity-tensor.6`, version code `80506` |
 | APK SHA-256 | `e17bdb13f6f9748825837b3ce376194887a15145ca7c238f69fecf48d15e491a` |
 | APK bytes | `103915440` |
-| Android source base | `b079496816e617ffd891ea12e5bee5d116db1383` plus [complete source patch](../android/tensor/tensor-support.patch) |
+| Android source base | `b079496816e617ffd891ea12e5bee5d116db1383` plus [complete source patch](../android/tensor/tensor-support-0.8.5-clarity-tensor.6.patch) |
 | Comma JetLink base | v0.8.5, `4b747aebad3d8d96ab26d76f1668f2b2ecb1b667` plus [recovery patch](../patches/jetlink-usb-recovery/recovery.patch) |
 | V2 source model SHA-256 | `09d080f36965bb2a0790500452bd328aa03c484d0222aa79d1ad9f021a522aec` |
 
