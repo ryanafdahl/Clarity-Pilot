@@ -43,7 +43,8 @@ class TestLinkStaysOff(OpenpilotTestCase):
     super().setUp()
     Params().put(jetlink_adapter.KEYS.link, jetlink_adapter.MODES.index('usb'), block=True)
     for p in (mock.patch.object(gadget, 'gadget_error', return_value='not set up'),
-              mock.patch.object(jetlink_adapter, '_bound', None)):
+              mock.patch.object(jetlink_adapter, '_bound', None),
+              mock.patch('jetlink.openpilot.status.owner_record', return_value=(None, None))):
       p.start()
       self.addCleanup(p.stop)
 
