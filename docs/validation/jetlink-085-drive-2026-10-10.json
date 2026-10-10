@@ -1,0 +1,138 @@
+{
+  "report_date": "2026-10-10",
+  "jetlink_version": "0.8.5",
+  "protocol_version": 3,
+  "adapter_api_version": 2,
+  "large_model": "Cinque Terre V2",
+  "percentile_method": "nearest rank",
+  "time_origin": "first retained message in each recording",
+  "large_outputs_total": 53609,
+  "large_execution_weighted_mean_ms": 22.553846888038045,
+  "sessions": [
+    {
+      "label": "A",
+      "rlog_segments": 37,
+      "recorded_span_seconds": 2165.6932835270004,
+      "large_join_seconds": 26.204375237000022,
+      "large_outputs": 42788,
+      "small_outputs": 317,
+      "large_frame_ids_consecutive": true,
+      "fallbacks_after_join": 0,
+      "large_metrics": {
+        "execution_ms": {
+          "n": 42788,
+          "min": 21.56866528093815,
+          "mean": 22.567372579361578,
+          "median": 22.338046692311764,
+          "p95": 24.241367354989052,
+          "p99": 25.46427771449089,
+          "max": 37.52490505576134,
+          "over_50": 0
+        },
+        "publish_after_camera_ms": {
+          "n": 42788,
+          "min": 46.07581,
+          "mean": 47.51078993248107,
+          "median": 47.263106,
+          "p95": 49.217116,
+          "p99": 50.286013,
+          "max": 62.328148,
+          "over_50": 645
+        },
+        "publish_interval_ms": {
+          "n": 42787,
+          "min": 37.354594000134966,
+          "mean": 50.00148443263141,
+          "median": 49.996159999864176,
+          "p95": 51.727773000038724,
+          "p99": 52.637454999967304,
+          "max": 58.54576199999428,
+          "over_50": 21254
+        },
+        "drop_percent": {
+          "n": 42788,
+          "min": 0.0,
+          "mean": 0.0,
+          "median": 0.0,
+          "p95": 0.0,
+          "p99": 0.0,
+          "max": 0.0,
+          "over_50": 0
+        }
+      },
+      "telemetry_samples": 2060,
+      "max_reported_temperature_c": 61,
+      "max_reported_power_w": 12.87,
+      "controls_mismatch_event_records": 0,
+      "communication_or_lag_event_records": 0,
+      "almanac_save_errors": 7,
+      "parse_errors": 0
+    },
+    {
+      "label": "B",
+      "rlog_segments": 10,
+      "recorded_span_seconds": 567.0581198690006,
+      "large_join_seconds": 25.95848113000011,
+      "large_outputs": 10821,
+      "small_outputs": 344,
+      "large_frame_ids_consecutive": true,
+      "fallbacks_after_join": 0,
+      "large_metrics": {
+        "execution_ms": {
+          "n": 10821,
+          "min": 21.615851670503616,
+          "mean": 22.50036409713597,
+          "median": 22.41668291389942,
+          "p95": 23.83417636156082,
+          "p99": 24.111520498991013,
+          "max": 33.00362080335617,
+          "over_50": 0
+        },
+        "publish_after_camera_ms": {
+          "n": 10821,
+          "min": 46.217588,
+          "mean": 47.324577318085204,
+          "median": 47.210449,
+          "p95": 48.691276,
+          "p99": 49.217003,
+          "max": 57.631294,
+          "over_50": 26
+        },
+        "publish_interval_ms": {
+          "n": 10820,
+          "min": 42.18191699965246,
+          "mean": 50.00092436626615,
+          "median": 50.010767499770736,
+          "p95": 51.2915699991936,
+          "p99": 52.01359800048522,
+          "max": 57.345191999957024,
+          "over_50": 5510
+        },
+        "drop_percent": {
+          "n": 10821,
+          "min": 0.0,
+          "mean": 0.0,
+          "median": 0.0,
+          "p95": 0.0,
+          "p99": 0.0,
+          "max": 0.0,
+          "over_50": 0
+        }
+      },
+      "telemetry_samples": 526,
+      "max_reported_temperature_c": 61.8,
+      "max_reported_power_w": 12.87,
+      "controls_mismatch_event_records": 1,
+      "communication_or_lag_event_records": 0,
+      "almanac_save_errors": 1,
+      "parse_errors": 0
+    }
+  ],
+  "limits": [
+    "Recorded span includes startup, parked time and shutdown; it is not engagement duration.",
+    "Reported execution is not pure GPU inference or camera-to-actuator latency.",
+    "The only controls mismatch was during disabled, stationary shutdown after ignition off and noOutput mode.",
+    "Complete independent Jetson server logs for these car sessions were unavailable.",
+    "Two successful sessions do not qualify intermittent failure recovery or long-term reliability."
+  ]
+}

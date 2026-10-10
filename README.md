@@ -123,7 +123,7 @@ With the car powered off, connect **Jetson USB-A → comma USB-C** with a USB 3 
 
 A TensorRT or model change can require a new engine even when the ONNX download is already cached. The October 3 V2 engine build took 32.7 seconds; build time varies. For manual preparation, follow the [model preparation guide](https://github.com/zoompilot/jetlink/blob/v0.8.5/docs/models.md): stop the server before preparing an engine in a separate process, then start it again.
 
-`jetlink update` retains the saved release ref. Choose explicit `--ref v0.8.5` to update an older pinned installation. Preserve settings and engine cache for rollback. The [October 10 update record](docs/JETLINK_UPDATE_2026-10-10.md) contains the current pins, backups, compatibility checks and remaining USB validation. The Jetson also received 246 compatible Ubuntu security-package updates; its kernel and NVIDIA runtime were retained.
+`jetlink update` retains the saved release ref. Choose explicit `--ref v0.8.5` to update an older pinned installation. Preserve settings and engine cache for rollback. The [October 10 update record](docs/JETLINK_UPDATE_2026-10-10.md) contains the current pins, backups and compatibility checks; the subsequent [USB drive review](docs/JETLINK_DRIVE_2026-10-10.md) covers two sessions on this build. The Jetson also received 246 compatible Ubuntu security-package updates; its kernel and NVIDIA runtime were retained.
 
 ## Pixel setup
 
@@ -135,7 +135,7 @@ Install with `adb install -r android/jetlink-0.8.0-clarity-tensor.4-pixel.apk`, 
 
 Byte image history and TPU burst mode reduced short-run mean inference from **49.55 ms to 32.97 ms**. A **12,000-frame / 10-minute** desk soak returned only finite outputs: inference p95 **35.47 ms**, server-total p95 **36.72 ms**, and no server frame exceeded 50 ms. Battery temperature peaked at **34.6°C**, with Android thermal status 0 throughout.
 
-**Pixel testing paused pending compatibility review; driving remains blocked.** The APK still offers a temporary **Parked USB Test** switch and rejects ordinary modeld engine requests. The comma adapter also rejects parked-only peers. The staged legacy harness refuses the new adapter before changing settings. See [historical results and test procedure](android/tensor/README.md). The updated Jetson backend is the next connection-test target.
+**Pixel testing paused pending compatibility review; driving remains blocked.** The APK still offers a temporary **Parked USB Test** switch and rejects ordinary modeld engine requests. The comma adapter also rejects parked-only peers. The staged legacy harness refuses the new adapter before changing settings. See [historical results and test procedure](android/tensor/README.md). The Jetson's subsequent USB drive results do not qualify the Pixel backend.
 
 ## October 3 sunnypilot sync
 
@@ -145,7 +145,11 @@ The source repository imports upstream changes as commits because its initial sn
 
 ## What has been verified
 
-The [October 10 update](docs/JETLINK_UPDATE_2026-10-10.md) built successfully on the comma. Its installed integration ran 387 tests (381 passed, six skipped), the startup/MADS suite passed 16 tests, and upstream Linux regressions passed 955 tests plus 64 subtests (two skipped). A protocol-v3 desk-network check returned 21 finite V2 frames, including full raw output. **This was a compatibility check, not a USB timing pass.** Both devices rebooted successfully. A fresh direct cable connection and supervised stationary check remain pending for 0.8.5.
+The [October 10 post-update drive review](docs/JETLINK_DRIVE_2026-10-10.md) read all 47 full-rate segments from two USB sessions on **JetLink 0.8.5**. Across 45 minutes 32.75 seconds of recorded time, the large model joined at **+26.20 s / +25.96 s** and produced **53,609 outputs**, with consecutive frame IDs within each session and no fallback after joining. Output-weighted reported execution averaged **22.55 ms**; the per-session p95 values were **24.24 / 23.83 ms**. Camera-to-publication timing is a separate metric and did include samples over 50 ms.
+
+The user noticed no unusual behavior. Neither recording contained communication or model/selfdrive lag events or a soft-disabling state. One controls-mismatch event occurred during shutdown, after assistance was disabled, the car was in Park, ignition was off and the panda had selected no-output mode. Startup still included an approximately 1.15-second invalid first small-model output and a USB retry in each session; one initialization wait reached six seconds. GPS almanac-save requests were rejected eight times. Complete paired Jetson drive journals remain unavailable, and intermittent failure recovery is not yet qualified. [Detailed measurements, event context and limits](docs/JETLINK_DRIVE_2026-10-10.md).
+
+The [October 10 update](docs/JETLINK_UPDATE_2026-10-10.md) built successfully on the comma. Its installed integration ran 387 tests (381 passed, six skipped), the startup/MADS suite passed 16 tests, and upstream Linux regressions passed 955 tests plus 64 subtests (two skipped). A protocol-v3 desk-network check returned 21 finite V2 frames, including full raw output. **That earlier check established compatibility, not USB timing.** Both devices rebooted successfully before the subsequent USB drive review above.
 
 The latest retained trip on the previous 0.8.3 build produced 64,175 consecutive large-model outputs across about 54 minutes: 26.44 ms mean reported execution, 29.04 ms p95, and 46.18 ms maximum. Earlier sessions had handbacks, including a brief soft-disabling interval. [Full maintenance analysis](https://t3st.site/maintenance-005.html).
 
@@ -188,6 +192,7 @@ sudo journalctl -b -u nvpmodel.service -u nvidia-cdi-refresh.service -u jetlink-
 
 | Report | Covers |
 | --- | --- |
+| [October 10 JetLink v0.8.5 drive review](docs/JETLINK_DRIVE_2026-10-10.md) | Two USB sessions, 53,609 continuous large-model outputs, startup retries, shutdown event, GPS backup warning and journal limits |
 | [October 10 JetLink v0.8.5 and branding update](docs/JETLINK_UPDATE_2026-10-10.md) | Published reinstall build, device updates, security packages, tests and remaining validation |
 | [October 4 JetLink v0.8.3 update](docs/JETLINK_UPDATE_2026-10-04.md) | Device pins, resident USB owner, preserved V2 selection, tests and pending parked validation |
 | [October 3 V2 drive and Wi-Fi retirement](docs/JETLINK_DRIVE_2026-10-03.md) | Full-rate frame timings, startup retry, telemetry, journal limits, and external USB Wi-Fi driver removal |

@@ -2,6 +2,8 @@
 
 The comma and Jetson now use JetLink **0.8.5**. The comma home screen displays **Clarity Pilot**; the comma 4 label uses a smaller font so the full name fits its 480-pixel area. The matching runtime changes are published in both the source repository and the installation branch.
 
+**Post-update follow-up:** the [October 10 drive review](JETLINK_DRIVE_2026-10-10.md) now covers two physical USB sessions on this build: 53,609 consecutive large-model outputs within the sessions and no fallback after joining. It also documents startup retries, a shutdown-only controls-mismatch event, GPS backup warnings and missing paired server journals.
+
 ## Reinstallation
 
 Enter **`installer.comma.ai/ryanafdahl/Clarity-Pilot`** in the comma Custom Software installer. This resolves to **`ryanafdahl/openpilot`, branch `Clarity-Pilot`**, rather than this source repository's `main` branch.
@@ -39,9 +41,9 @@ The Jetson received 246 Ubuntu security-package upgrades with no additions or re
 
 That synthetic exchange used desk TCP during other checks: mean 86.87 ms, maximum 113.45 ms. It verifies compatibility, not a 50 ms budget or USB driving performance. The temporary server was stopped and normal USB service restored. Post-update reboot checks preserved offroad/no-ignition state, the selected models, USB mode and disabled ADB; expected offroad services ran.
 
-The latest retained drive was on the **previous 0.8.3 build**: 54 full-rate log segments contained 64,175 consecutive large-model outputs, 26.44 ms mean reported execution, 29.04 ms p95 and 46.18 ms maximum. Earlier sessions included handbacks and a brief soft-disabling interval. See the [sanitized maintenance analysis](https://t3st.site/maintenance-005.html). Raw logs, route identifiers and location data remain private.
+The latest drive reviewed **before this update** was on the **previous 0.8.3 build**: 54 full-rate log segments contained 64,175 consecutive large-model outputs, 26.44 ms mean reported execution, 29.04 ms p95 and 46.18 ms maximum. Earlier sessions included handbacks and a brief soft-disabling interval. See the [sanitized maintenance analysis](https://t3st.site/maintenance-005.html). The subsequent 0.8.5 sessions are covered separately in the follow-up above. Raw logs, route identifiers and location data remain private.
 
-New cold-start USB and supervised vehicle validation remain pending. Three pre-existing Jetson networking units also remain failed: dnsmasq cannot bind port 53, while the IPv4/IPv6 ISC DHCP units have no configured listening interfaces/subnets. Existing Ethernet access and JetLink service operation were verified; unrelated network configuration was not changed.
+The subsequent drive review supplies initial physical USB evidence for 0.8.5; longer-term reliability and recovery from the earlier intermittent failures remain open. Three pre-existing Jetson networking units also remain failed: dnsmasq cannot bind port 53, while the IPv4/IPv6 ISC DHCP units have no configured listening interfaces/subnets. Existing Ethernet access and JetLink service operation were verified; unrelated network configuration was not changed.
 
 ## Rollback
 
