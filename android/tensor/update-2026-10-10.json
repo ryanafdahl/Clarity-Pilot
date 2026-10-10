@@ -1,0 +1,94 @@
+{
+  "date": "2026-10-10",
+  "source_base": "b079496816e617ffd891ea12e5bee5d116db1383",
+  "latest_tag": "v0.8.5",
+  "installed": {
+    "version": [
+      "versionCode=80505 minSdk=31 targetSdk=36",
+      "versionName=0.8.5-clarity-tensor.5"
+    ],
+    "apk_sha256": "6fd1bf4690a21156b29fd2033b3e6455627a0c72122453e47214c36aab66c642",
+    "apk_bytes": 103915328,
+    "signer_certificate_sha256": "50e670489a4ba19aec5e9fbad6f06074556d4d07be629ba012b3ca78f1eabb4e",
+    "same_signer_as_previous": true,
+    "in_place_install": true
+  },
+  "source_patch_sha256": "74bba4f77bb864061bb501f8357ae31e31a50b62a196e5a2571ebe7d51752e59",
+  "model": {
+    "source_sha256": "09d080f36965bb2a0790500452bd328aa03c484d0222aa79d1ad9f021a522aec",
+    "compiled_sha256": "fc393523c5c1ddba9774382db513a5c62fad50cb187968ea25bc96db5480b51b",
+    "soc": "Tensor_G6",
+    "litert": "2.2.0",
+    "sdk_sha256": "d74bea45081aa90a39505a675c15f566d46dbcc35e55a98f755c02017464cd1f",
+    "precision": "half",
+    "sharding": "minimal"
+  },
+  "parked_only_removed": true,
+  "phone_health_retained": true,
+  "developer_listener_disabled_after_testing": true,
+  "tests": {
+    "android": {
+      "tests": 59,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "native": {
+      "passed": 47,
+      "suites": 13
+    },
+    "python": {
+      "passed": 88,
+      "subtests": 2
+    },
+    "windows_framing_function_passed_on_windows": true,
+    "patch_apply_checked_against_base": true
+  },
+  "parity": {
+    "frames": 32,
+    "seed": 0,
+    "output_slices_passed": 15,
+    "input_arrays_byte_identical_to_original_reference": 64
+  },
+  "desk_soak": {
+    "measured_frames": 6000,
+    "elapsed_s": 315.7029999999795,
+    "server_total": {
+      "mean_ms": 35.84279733333333,
+      "p50_ms": 35.7705,
+      "p95_ms": 38.00815,
+      "p99_ms": 40.189650000000015,
+      "max_ms": 83.896,
+      "over_50ms": 3
+    },
+    "inference": {
+      "mean_ms": 34.64375383333333,
+      "p50_ms": 34.543499999999995,
+      "p95_ms": 36.58215,
+      "p99_ms": 38.59330000000001,
+      "max_ms": 82.667,
+      "over_50ms": 2
+    },
+    "adb_round_trip": {
+      "mean_ms": 51.903757434124906,
+      "p50_ms": 50.966499955393374,
+      "p95_ms": 60.29335994971917,
+      "p99_ms": 69.14141704095529,
+      "max_ms": 155.81429994199425,
+      "over_50ms": 4124
+    },
+    "phone_samples": 302,
+    "battery_c_min": 26.2,
+    "battery_c_max": 30.5,
+    "thermal_statuses": [
+      0
+    ],
+    "max_health_age_s": 1.0021435289963847,
+    "timing_blocks": 60,
+    "failures": []
+  },
+  "direct_comma_usb_tested": false,
+  "driving_qualified": false,
+  "temporary_adb_forwarding_removed": true,
+  "final_app_server_running": true
+}

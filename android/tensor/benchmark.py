@@ -14,7 +14,6 @@ import time
 import numpy as np
 from validation import TimingGuard, device_health, first_health
 from jetlink.client import JetlinkClient
-from jetlink import protocol as P
 from scripts.verify_parity import make_inputs
 
 
@@ -69,12 +68,6 @@ def main():
         c = JetlinkClient.open_tcp(a.host, a.port, want_hidden=True)
         hello = c.hello()
         result.update(backend=hello.get('backend'), device=hello.get('device'))
-        if hello.get('validation') == 'parked_only':
-            send_json = c.t.send_json
-            def parked_request(kind, seq, data, flags=0):
-                if kind == P.Msg.ENGINE_REQ: data = dict(data, validation_mode='parked')
-                return send_json(kind, seq, data, flags)
-            c.t.send_json = parked_request
         phone_samples.append(dict(first_health(c), elapsed_s=round(time.monotonic()-started,3)))
         spec = c.ensure_engine(a.source_sha256, a.source_bytes)
         frames = make_inputs(spec, 32, seed=17)

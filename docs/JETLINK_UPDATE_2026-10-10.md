@@ -4,6 +4,8 @@ The comma and Jetson now use JetLink **0.8.5**. The comma home screen displays *
 
 **Post-update follow-up:** the [October 10 drive review](JETLINK_DRIVE_2026-10-10.md) now covers two physical USB sessions on this build: 53,609 consecutive large-model outputs within the sessions and no fallback after joining. It also documents startup retries, a shutdown-only controls-mismatch event, GPS backup warnings and missing paired server journals.
 
+**Subsequent Pixel update:** the [Android update report](PIXEL_JETLINK_UPDATE_2026-10-10.md) records the new APK and removal of its parked-only restriction. The endpoint update below predates that change; the comma and Jetson runtime pins remain unchanged.
+
 ## Reinstallation
 
 Enter **`installer.comma.ai/ryanafdahl/Clarity-Pilot`** in the comma Custom Software installer. This resolves to **`ryanafdahl/openpilot`, branch `Clarity-Pilot`**, rather than this source repository's `main` branch.

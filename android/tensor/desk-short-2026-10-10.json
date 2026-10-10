@@ -1,0 +1,182 @@
+{
+  "date_utc": "2026-10-10T19:07:45.328240+00:00",
+  "transport": "desk USB ADB forwarding; normal protocol; not comma direct USB",
+  "source_sha256": "09d080f36965bb2a0790500452bd328aa03c484d0222aa79d1ad9f021a522aec",
+  "warmup_frames": 20,
+  "requested_frames": 120,
+  "period_ms": 50,
+  "backend": "litert",
+  "device": "tensor-Tensor_G6",
+  "measured_frames": 120,
+  "finite_frames": 120,
+  "failures": [],
+  "elapsed_s": 7.453000000095926,
+  "thermal_samples": [
+    {
+      "elapsed_s": 0.4,
+      "status": 0,
+      "battery_c": 26.2
+    }
+  ],
+  "phone_thermal_samples": [
+    {
+      "thermal_status": 0,
+      "battery_c": 26.2,
+      "battery_percent": 100,
+      "sample_age_s": 0.3126986669958569,
+      "power_save": false,
+      "charging": true,
+      "plugged": true,
+      "elapsed_s": 0.015
+    },
+    {
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 0.47234137399937026,
+      "battery_percent": 100,
+      "battery_c": 26.2,
+      "thermal_status": 0,
+      "power_save": false,
+      "elapsed_s": 0.234,
+      "frame": 0
+    },
+    {
+      "plugged": true,
+      "battery_c": 26.2,
+      "battery_percent": 100,
+      "sample_age_s": 0.535937232998549,
+      "thermal_status": 0,
+      "power_save": false,
+      "charging": true,
+      "elapsed_s": 1.297,
+      "frame": 20
+    },
+    {
+      "battery_c": 26.2,
+      "battery_percent": 100,
+      "plugged": true,
+      "sample_age_s": 0.5845577009895351,
+      "thermal_status": 0,
+      "power_save": false,
+      "charging": true,
+      "elapsed_s": 2.359,
+      "frame": 40
+    },
+    {
+      "plugged": true,
+      "battery_c": 26.2,
+      "battery_percent": 100,
+      "sample_age_s": 0.4893067289958708,
+      "thermal_status": 0,
+      "power_save": false,
+      "charging": true,
+      "elapsed_s": 3.359,
+      "frame": 60
+    },
+    {
+      "power_save": false,
+      "battery_c": 26.2,
+      "charging": true,
+      "plugged": true,
+      "sample_age_s": 0.5650163459940813,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 4.39,
+      "frame": 80
+    },
+    {
+      "plugged": true,
+      "battery_c": 26.2,
+      "battery_percent": 100,
+      "sample_age_s": 0.6401977800123859,
+      "power_save": false,
+      "charging": true,
+      "thermal_status": 0,
+      "elapsed_s": 5.422,
+      "frame": 100
+    },
+    {
+      "power_save": false,
+      "plugged": true,
+      "charging": true,
+      "battery_c": 26.2,
+      "sample_age_s": 0.6695320220023859,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 6.469,
+      "frame": 120
+    }
+  ],
+  "blocks_100": [
+    {
+      "end_frame": 100,
+      "elapsed_s": 6.406,
+      "round_trip": {
+        "mean_ms": 51.029865003656596,
+        "p95_ms": 56.31020494038239,
+        "p99_ms": 63.12648204388098,
+        "max_ms": 65.54029998369515,
+        "over_50ms": 60
+      },
+      "inference": {
+        "mean_ms": 34.41618,
+        "p95_ms": 35.90385,
+        "p99_ms": 37.04347,
+        "max_ms": 37.288,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 35.52933999999999,
+        "p95_ms": 36.9928,
+        "p99_ms": 38.234840000000005,
+        "max_ms": 38.615,
+        "over_50ms": 0
+      }
+    }
+  ],
+  "driving_ready": false,
+  "server_guard": "100-frame server p95 <50 ms and each server time <100 ms",
+  "round_trip": {
+    "mean_ms": 51.131260835488014,
+    "p50_ms": 50.48580002039671,
+    "p95_ms": 56.31020494038239,
+    "p99_ms": 65.07704199524596,
+    "max_ms": 66.47339998744428,
+    "over_50ms": 74
+  },
+  "inference": {
+    "mean_ms": 34.44538333333333,
+    "p50_ms": 34.4385,
+    "p95_ms": 36.1899,
+    "p99_ms": 36.975069999999995,
+    "max_ms": 37.288,
+    "over_50ms": 0
+  },
+  "queues": {
+    "mean_ms": 1.0478333333333332,
+    "p50_ms": 1.0335,
+    "p95_ms": 1.48905,
+    "p99_ms": 1.67036,
+    "max_ms": 1.892,
+    "over_50ms": 0
+  },
+  "server_total": {
+    "mean_ms": 35.568774999999995,
+    "p50_ms": 35.669,
+    "p95_ms": 37.4321,
+    "p99_ms": 38.19927,
+    "max_ms": 38.615,
+    "over_50ms": 0
+  },
+  "blocks_1200": [
+    {
+      "start_frame": 0,
+      "frames": 120,
+      "round_trip_p95_ms": 56.31020494038239,
+      "server_p95_ms": 37.4321
+    }
+  ],
+  "protocol_pass": true,
+  "server_timing_pass": true,
+  "round_trip_timing_pass": false
+}

@@ -1,0 +1,34 @@
+{
+  "hello": {
+    "phone_health": "required",
+    "backend": "litert",
+    "sleep_after": 0,
+    "runtime_version": "2.2.0",
+    "frames_served": 0,
+    "engine_state": "none",
+    "device": "tensor-Tensor_G6",
+    "telemetry": {},
+    "protocol": 3,
+    "loaded": "09d080f36965bb2a0790500452bd328aa03c484d0222aa79d1ad9f021a522aec",
+    "cached_models": [
+      "09d080f36965bb2a0790500452bd328aa03c484d0222aa79d1ad9f021a522aec"
+    ]
+  },
+  "state": {
+    "detail": "",
+    "engine_state": "ready",
+    "frames_served": 0,
+    "device_health": {
+      "plugged": true,
+      "sample_age_s": 0.5532234470010735,
+      "battery_c": 26.2,
+      "charging": true,
+      "thermal_status": 0,
+      "power_save": false,
+      "battery_percent": 100
+    },
+    "loaded": "09d080f36965bb2a0790500452bd328aa03c484d0222aa79d1ad9f021a522aec"
+  },
+  "normal_engine_request": true,
+  "source_sha256": "09d080f36965bb2a0790500452bd328aa03c484d0222aa79d1ad9f021a522aec"
+}

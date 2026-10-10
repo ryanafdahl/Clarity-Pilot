@@ -1,0 +1,5065 @@
+{
+  "date_utc": "2026-10-10T19:07:52.912378+00:00",
+  "transport": "desk USB ADB forwarding; normal protocol; not comma direct USB",
+  "source_sha256": "09d080f36965bb2a0790500452bd328aa03c484d0222aa79d1ad9f021a522aec",
+  "warmup_frames": 20,
+  "requested_frames": 6000,
+  "period_ms": 50,
+  "backend": "litert",
+  "device": "tensor-Tensor_G6",
+  "measured_frames": 6000,
+  "finite_frames": 6000,
+  "failures": [],
+  "elapsed_s": 315.7029999999795,
+  "thermal_samples": [
+    {
+      "elapsed_s": 0.4,
+      "status": 0,
+      "battery_c": 26.2
+    },
+    {
+      "elapsed_s": 10.6,
+      "status": 0,
+      "battery_c": 26.2
+    },
+    {
+      "elapsed_s": 20.8,
+      "status": 0,
+      "battery_c": 26.2
+    },
+    {
+      "elapsed_s": 31.0,
+      "status": 0,
+      "battery_c": 26.2
+    },
+    {
+      "elapsed_s": 41.1,
+      "status": 0,
+      "battery_c": 26.2
+    },
+    {
+      "elapsed_s": 51.3,
+      "status": 0,
+      "battery_c": 26.2
+    },
+    {
+      "elapsed_s": 61.5,
+      "status": 0,
+      "battery_c": 26.2
+    },
+    {
+      "elapsed_s": 71.8,
+      "status": 0,
+      "battery_c": 27.2
+    },
+    {
+      "elapsed_s": 82.0,
+      "status": 0,
+      "battery_c": 27.2
+    },
+    {
+      "elapsed_s": 92.2,
+      "status": 0,
+      "battery_c": 27.2
+    },
+    {
+      "elapsed_s": 102.4,
+      "status": 0,
+      "battery_c": 27.2
+    },
+    {
+      "elapsed_s": 112.6,
+      "status": 0,
+      "battery_c": 27.2
+    },
+    {
+      "elapsed_s": 122.8,
+      "status": 0,
+      "battery_c": 27.2
+    },
+    {
+      "elapsed_s": 133.0,
+      "status": 0,
+      "battery_c": 28.4
+    },
+    {
+      "elapsed_s": 143.1,
+      "status": 0,
+      "battery_c": 28.4
+    },
+    {
+      "elapsed_s": 153.3,
+      "status": 0,
+      "battery_c": 28.4
+    },
+    {
+      "elapsed_s": 163.5,
+      "status": 0,
+      "battery_c": 28.4
+    },
+    {
+      "elapsed_s": 173.7,
+      "status": 0,
+      "battery_c": 28.4
+    },
+    {
+      "elapsed_s": 183.9,
+      "status": 0,
+      "battery_c": 29.1
+    },
+    {
+      "elapsed_s": 194.1,
+      "status": 0,
+      "battery_c": 29.1
+    },
+    {
+      "elapsed_s": 204.3,
+      "status": 0,
+      "battery_c": 29.1
+    },
+    {
+      "elapsed_s": 214.5,
+      "status": 0,
+      "battery_c": 29.1
+    },
+    {
+      "elapsed_s": 224.7,
+      "status": 0,
+      "battery_c": 29.1
+    },
+    {
+      "elapsed_s": 234.9,
+      "status": 0,
+      "battery_c": 29.1
+    },
+    {
+      "elapsed_s": 245.0,
+      "status": 0,
+      "battery_c": 29.9
+    },
+    {
+      "elapsed_s": 255.2,
+      "status": 0,
+      "battery_c": 29.9
+    },
+    {
+      "elapsed_s": 265.4,
+      "status": 0,
+      "battery_c": 29.9
+    },
+    {
+      "elapsed_s": 275.6,
+      "status": 0,
+      "battery_c": 29.9
+    },
+    {
+      "elapsed_s": 285.8,
+      "status": 0,
+      "battery_c": 29.9
+    },
+    {
+      "elapsed_s": 296.0,
+      "status": 0,
+      "battery_c": 29.9
+    },
+    {
+      "elapsed_s": 306.1,
+      "status": 0,
+      "battery_c": 30.5
+    }
+  ],
+  "phone_thermal_samples": [
+    {
+      "charging": true,
+      "thermal_status": 0,
+      "battery_percent": 100,
+      "sample_age_s": 0.8593076459947042,
+      "plugged": true,
+      "power_save": false,
+      "battery_c": 26.2,
+      "elapsed_s": 0.031
+    },
+    {
+      "thermal_status": 0,
+      "sample_age_s": 0.017984245001571253,
+      "power_save": false,
+      "battery_percent": 100,
+      "charging": true,
+      "plugged": true,
+      "battery_c": 26.2,
+      "elapsed_s": 0.25,
+      "frame": 0
+    },
+    {
+      "plugged": true,
+      "battery_c": 26.2,
+      "thermal_status": 0,
+      "charging": true,
+      "power_save": false,
+      "battery_percent": 100,
+      "sample_age_s": 0.08017483200819697,
+      "elapsed_s": 1.297,
+      "frame": 20
+    },
+    {
+      "thermal_status": 0,
+      "power_save": false,
+      "sample_age_s": 0.0026109890022780746,
+      "battery_percent": 100,
+      "charging": true,
+      "plugged": true,
+      "battery_c": 26.2,
+      "elapsed_s": 2.328,
+      "frame": 40
+    },
+    {
+      "thermal_status": 0,
+      "power_save": false,
+      "sample_age_s": 0.027122516999952495,
+      "battery_percent": 100,
+      "charging": true,
+      "plugged": true,
+      "battery_c": 26.2,
+      "elapsed_s": 3.359,
+      "frame": 60
+    },
+    {
+      "charging": false,
+      "sample_age_s": 0.16951653399155475,
+      "thermal_status": 0,
+      "power_save": false,
+      "battery_percent": 100,
+      "battery_c": 26.2,
+      "plugged": true,
+      "elapsed_s": 4.406,
+      "frame": 80
+    },
+    {
+      "charging": false,
+      "plugged": true,
+      "battery_c": 26.2,
+      "battery_percent": 100,
+      "sample_age_s": 0.14718521699251141,
+      "power_save": false,
+      "thermal_status": 0,
+      "elapsed_s": 5.437,
+      "frame": 100
+    },
+    {
+      "power_save": false,
+      "thermal_status": 0,
+      "battery_percent": 100,
+      "plugged": true,
+      "charging": false,
+      "battery_c": 26.2,
+      "sample_age_s": 0.23405645599996205,
+      "elapsed_s": 6.484,
+      "frame": 120
+    },
+    {
+      "charging": false,
+      "power_save": false,
+      "thermal_status": 0,
+      "battery_c": 26.2,
+      "sample_age_s": 0.22933018999174237,
+      "plugged": true,
+      "battery_percent": 100,
+      "elapsed_s": 7.531,
+      "frame": 140
+    },
+    {
+      "sample_age_s": 0.3054942930029938,
+      "battery_percent": 100,
+      "plugged": true,
+      "battery_c": 26.2,
+      "power_save": false,
+      "thermal_status": 0,
+      "charging": false,
+      "elapsed_s": 8.562,
+      "frame": 160
+    },
+    {
+      "plugged": true,
+      "battery_c": 26.2,
+      "thermal_status": 0,
+      "charging": false,
+      "power_save": false,
+      "battery_percent": 100,
+      "sample_age_s": 0.3256808029982494,
+      "elapsed_s": 9.578,
+      "frame": 180
+    },
+    {
+      "battery_c": 26.2,
+      "plugged": true,
+      "charging": false,
+      "power_save": false,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "sample_age_s": 0.37183331900450867,
+      "elapsed_s": 10.641,
+      "frame": 200
+    },
+    {
+      "thermal_status": 0,
+      "charging": false,
+      "sample_age_s": 0.35452159399574157,
+      "power_save": false,
+      "plugged": true,
+      "battery_percent": 100,
+      "battery_c": 26.2,
+      "elapsed_s": 11.672,
+      "frame": 220
+    },
+    {
+      "plugged": true,
+      "sample_age_s": 0.4404080780077493,
+      "charging": false,
+      "power_save": false,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "battery_c": 26.2,
+      "elapsed_s": 12.703,
+      "frame": 240
+    },
+    {
+      "thermal_status": 0,
+      "battery_percent": 100,
+      "power_save": false,
+      "battery_c": 26.2,
+      "sample_age_s": 0.40391090599587187,
+      "plugged": true,
+      "charging": false,
+      "elapsed_s": 13.734,
+      "frame": 260
+    },
+    {
+      "thermal_status": 0,
+      "battery_percent": 100,
+      "battery_c": 26.2,
+      "charging": false,
+      "plugged": true,
+      "sample_age_s": 0.3938949529983802,
+      "power_save": false,
+      "elapsed_s": 14.781,
+      "frame": 280
+    },
+    {
+      "sample_age_s": 0.4876256809948245,
+      "battery_c": 26.2,
+      "plugged": true,
+      "charging": false,
+      "power_save": false,
+      "thermal_status": 0,
+      "battery_percent": 100,
+      "elapsed_s": 15.812,
+      "frame": 300
+    },
+    {
+      "plugged": true,
+      "battery_percent": 100,
+      "battery_c": 26.2,
+      "thermal_status": 0,
+      "sample_age_s": 0.49431159799860325,
+      "charging": false,
+      "power_save": false,
+      "elapsed_s": 16.875,
+      "frame": 320
+    },
+    {
+      "plugged": true,
+      "charging": false,
+      "power_save": false,
+      "battery_c": 26.2,
+      "thermal_status": 0,
+      "sample_age_s": 0.5920464869996067,
+      "battery_percent": 100,
+      "elapsed_s": 17.937,
+      "frame": 340
+    },
+    {
+      "battery_c": 26.2,
+      "thermal_status": 0,
+      "sample_age_s": 0.6131790450017434,
+      "plugged": true,
+      "battery_percent": 100,
+      "power_save": false,
+      "charging": false,
+      "elapsed_s": 18.969,
+      "frame": 360
+    },
+    {
+      "thermal_status": 0,
+      "charging": false,
+      "sample_age_s": 0.7209027770004468,
+      "power_save": false,
+      "plugged": true,
+      "battery_percent": 100,
+      "battery_c": 26.2,
+      "elapsed_s": 20.016,
+      "frame": 380
+    },
+    {
+      "plugged": true,
+      "thermal_status": 0,
+      "battery_c": 26.2,
+      "power_save": false,
+      "sample_age_s": 0.7047056419978617,
+      "battery_percent": 100,
+      "charging": false,
+      "elapsed_s": 21.062,
+      "frame": 400
+    },
+    {
+      "thermal_status": 0,
+      "power_save": false,
+      "battery_percent": 100,
+      "sample_age_s": 0.7099421790044289,
+      "plugged": true,
+      "charging": false,
+      "battery_c": 26.2,
+      "elapsed_s": 22.109,
+      "frame": 420
+    },
+    {
+      "sample_age_s": 0.8134932450047927,
+      "thermal_status": 0,
+      "power_save": false,
+      "battery_percent": 100,
+      "plugged": true,
+      "charging": false,
+      "battery_c": 26.2,
+      "elapsed_s": 23.172,
+      "frame": 440
+    },
+    {
+      "thermal_status": 0,
+      "charging": false,
+      "sample_age_s": 0.862790640007006,
+      "power_save": false,
+      "plugged": true,
+      "battery_percent": 100,
+      "battery_c": 26.2,
+      "elapsed_s": 24.219,
+      "frame": 460
+    },
+    {
+      "plugged": true,
+      "power_save": false,
+      "sample_age_s": 0.880550233006943,
+      "battery_percent": 100,
+      "battery_c": 26.2,
+      "thermal_status": 0,
+      "charging": false,
+      "elapsed_s": 25.25,
+      "frame": 480
+    },
+    {
+      "power_save": false,
+      "sample_age_s": 0.8974152999871876,
+      "battery_percent": 100,
+      "charging": false,
+      "battery_c": 26.2,
+      "thermal_status": 0,
+      "plugged": true,
+      "elapsed_s": 26.266,
+      "frame": 500
+    },
+    {
+      "sample_age_s": 0.9211357690073783,
+      "power_save": false,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "charging": false,
+      "battery_c": 26.2,
+      "plugged": true,
+      "elapsed_s": 27.312,
+      "frame": 520
+    },
+    {
+      "power_save": false,
+      "sample_age_s": 0.9721415509993676,
+      "thermal_status": 0,
+      "charging": false,
+      "battery_c": 26.2,
+      "battery_percent": 100,
+      "plugged": true,
+      "elapsed_s": 28.359,
+      "frame": 540
+    },
+    {
+      "thermal_status": 0,
+      "plugged": true,
+      "sample_age_s": 0.007106599005055614,
+      "battery_percent": 100,
+      "charging": false,
+      "battery_c": 26.2,
+      "power_save": false,
+      "elapsed_s": 29.406,
+      "frame": 560
+    },
+    {
+      "power_save": false,
+      "battery_percent": 100,
+      "charging": false,
+      "plugged": true,
+      "sample_age_s": 0.02608132800378371,
+      "battery_c": 26.2,
+      "thermal_status": 0,
+      "elapsed_s": 30.422,
+      "frame": 580
+    },
+    {
+      "power_save": false,
+      "battery_percent": 100,
+      "charging": false,
+      "plugged": true,
+      "battery_c": 26.2,
+      "sample_age_s": 0.13655565000954084,
+      "thermal_status": 0,
+      "elapsed_s": 31.484,
+      "frame": 600
+    },
+    {
+      "power_save": false,
+      "battery_percent": 100,
+      "charging": false,
+      "plugged": true,
+      "battery_c": 26.2,
+      "sample_age_s": 0.12811227999918628,
+      "thermal_status": 0,
+      "elapsed_s": 32.531,
+      "frame": 620
+    },
+    {
+      "thermal_status": 0,
+      "power_save": false,
+      "sample_age_s": 0.15678325299813878,
+      "charging": false,
+      "battery_c": 26.2,
+      "battery_percent": 100,
+      "plugged": true,
+      "elapsed_s": 33.562,
+      "frame": 640
+    },
+    {
+      "sample_age_s": 0.2650639030034654,
+      "power_save": false,
+      "thermal_status": 0,
+      "charging": false,
+      "battery_c": 26.2,
+      "battery_percent": 100,
+      "plugged": true,
+      "elapsed_s": 34.625,
+      "frame": 660
+    },
+    {
+      "charging": false,
+      "battery_percent": 100,
+      "plugged": true,
+      "power_save": false,
+      "sample_age_s": 0.3174119330069516,
+      "thermal_status": 0,
+      "battery_c": 26.2,
+      "elapsed_s": 35.672,
+      "frame": 680
+    },
+    {
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "charging": false,
+      "power_save": false,
+      "battery_c": 26.2,
+      "sample_age_s": 0.3476822090015048,
+      "plugged": true,
+      "elapsed_s": 36.719,
+      "frame": 700
+    },
+    {
+      "charging": false,
+      "battery_percent": 100,
+      "power_save": false,
+      "plugged": true,
+      "sample_age_s": 0.39344356300716754,
+      "thermal_status": 0,
+      "battery_c": 26.2,
+      "elapsed_s": 37.766,
+      "frame": 720
+    },
+    {
+      "power_save": false,
+      "charging": false,
+      "battery_percent": 100,
+      "plugged": true,
+      "battery_c": 26.2,
+      "thermal_status": 0,
+      "sample_age_s": 0.4545099940005457,
+      "elapsed_s": 38.828,
+      "frame": 740
+    },
+    {
+      "sample_age_s": 0.5667514770029811,
+      "thermal_status": 0,
+      "battery_percent": 100,
+      "plugged": true,
+      "charging": false,
+      "battery_c": 26.2,
+      "power_save": false,
+      "elapsed_s": 39.953,
+      "frame": 760
+    },
+    {
+      "battery_c": 26.2,
+      "battery_percent": 100,
+      "charging": false,
+      "thermal_status": 0,
+      "power_save": false,
+      "plugged": true,
+      "sample_age_s": 0.6556728559953626,
+      "elapsed_s": 41.047,
+      "frame": 780
+    },
+    {
+      "plugged": true,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "charging": false,
+      "sample_age_s": 0.6829770120093599,
+      "battery_c": 26.2,
+      "power_save": false,
+      "elapsed_s": 42.125,
+      "frame": 800
+    },
+    {
+      "plugged": true,
+      "battery_percent": 100,
+      "power_save": false,
+      "battery_c": 26.2,
+      "thermal_status": 0,
+      "sample_age_s": 0.7922368239960633,
+      "charging": false,
+      "elapsed_s": 43.203,
+      "frame": 820
+    },
+    {
+      "plugged": true,
+      "battery_percent": 100,
+      "power_save": false,
+      "battery_c": 26.2,
+      "sample_age_s": 0.8467103020084323,
+      "thermal_status": 0,
+      "charging": false,
+      "elapsed_s": 44.25,
+      "frame": 840
+    },
+    {
+      "plugged": true,
+      "battery_percent": 100,
+      "power_save": false,
+      "battery_c": 26.2,
+      "thermal_status": 0,
+      "sample_age_s": 0.8932880880020093,
+      "charging": false,
+      "elapsed_s": 45.297,
+      "frame": 860
+    },
+    {
+      "plugged": true,
+      "battery_percent": 100,
+      "power_save": false,
+      "battery_c": 26.2,
+      "sample_age_s": 0.9120172179973451,
+      "thermal_status": 0,
+      "charging": false,
+      "elapsed_s": 46.328,
+      "frame": 880
+    },
+    {
+      "plugged": true,
+      "battery_percent": 100,
+      "power_save": false,
+      "battery_c": 26.2,
+      "sample_age_s": 0.9097173689951887,
+      "thermal_status": 0,
+      "charging": false,
+      "elapsed_s": 47.406,
+      "frame": 900
+    },
+    {
+      "charging": false,
+      "battery_c": 26.2,
+      "battery_percent": 100,
+      "sample_age_s": 0.04210216099454556,
+      "thermal_status": 0,
+      "power_save": false,
+      "plugged": true,
+      "elapsed_s": 48.469,
+      "frame": 920
+    },
+    {
+      "sample_age_s": 0.019734207991859876,
+      "thermal_status": 0,
+      "battery_percent": 100,
+      "power_save": false,
+      "charging": false,
+      "battery_c": 26.2,
+      "plugged": true,
+      "elapsed_s": 49.5,
+      "frame": 940
+    },
+    {
+      "plugged": true,
+      "battery_c": 26.2,
+      "battery_percent": 100,
+      "sample_age_s": 0.11715851399640087,
+      "thermal_status": 0,
+      "power_save": false,
+      "charging": false,
+      "elapsed_s": 50.547,
+      "frame": 960
+    },
+    {
+      "thermal_status": 0,
+      "battery_percent": 100,
+      "sample_age_s": 0.1820677849900676,
+      "plugged": true,
+      "charging": false,
+      "power_save": false,
+      "battery_c": 26.2,
+      "elapsed_s": 51.625,
+      "frame": 980
+    },
+    {
+      "charging": false,
+      "battery_c": 26.2,
+      "battery_percent": 100,
+      "sample_age_s": 0.15911057199991774,
+      "thermal_status": 0,
+      "power_save": false,
+      "plugged": true,
+      "elapsed_s": 52.656,
+      "frame": 1000
+    },
+    {
+      "sample_age_s": 0.1788141379947774,
+      "thermal_status": 0,
+      "battery_percent": 100,
+      "charging": false,
+      "power_save": false,
+      "battery_c": 26.2,
+      "plugged": true,
+      "elapsed_s": 53.687,
+      "frame": 1020
+    },
+    {
+      "thermal_status": 0,
+      "battery_percent": 100,
+      "sample_age_s": 0.249626366989105,
+      "plugged": true,
+      "charging": false,
+      "power_save": false,
+      "battery_c": 26.2,
+      "elapsed_s": 54.75,
+      "frame": 1040
+    },
+    {
+      "charging": false,
+      "battery_c": 26.2,
+      "battery_percent": 100,
+      "sample_age_s": 0.23346580400539096,
+      "thermal_status": 0,
+      "power_save": false,
+      "plugged": true,
+      "elapsed_s": 55.797,
+      "frame": 1060
+    },
+    {
+      "thermal_status": 0,
+      "battery_percent": 100,
+      "sample_age_s": 0.3553474020009162,
+      "plugged": true,
+      "charging": false,
+      "power_save": false,
+      "battery_c": 26.2,
+      "elapsed_s": 56.828,
+      "frame": 1080
+    },
+    {
+      "sample_age_s": 0.3259056109964149,
+      "thermal_status": 0,
+      "battery_percent": 100,
+      "charging": false,
+      "power_save": false,
+      "battery_c": 26.2,
+      "plugged": true,
+      "elapsed_s": 57.844,
+      "frame": 1100
+    },
+    {
+      "thermal_status": 0,
+      "battery_percent": 100,
+      "sample_age_s": 0.35962298000231385,
+      "plugged": true,
+      "charging": false,
+      "power_save": false,
+      "battery_c": 26.2,
+      "elapsed_s": 58.891,
+      "frame": 1120
+    },
+    {
+      "thermal_status": 0,
+      "battery_percent": 100,
+      "sample_age_s": 0.4004557330044918,
+      "plugged": true,
+      "charging": false,
+      "power_save": false,
+      "battery_c": 26.2,
+      "elapsed_s": 59.937,
+      "frame": 1140
+    },
+    {
+      "thermal_status": 0,
+      "battery_percent": 100,
+      "sample_age_s": 0.4445705420075683,
+      "plugged": true,
+      "charging": false,
+      "power_save": false,
+      "battery_c": 26.2,
+      "elapsed_s": 61.016,
+      "frame": 1160
+    },
+    {
+      "thermal_status": 0,
+      "battery_percent": 100,
+      "sample_age_s": 0.6028710870014038,
+      "plugged": true,
+      "charging": false,
+      "power_save": false,
+      "battery_c": 26.2,
+      "elapsed_s": 62.094,
+      "frame": 1180
+    },
+    {
+      "thermal_status": 0,
+      "battery_percent": 100,
+      "sample_age_s": 0.538584081994486,
+      "plugged": true,
+      "charging": false,
+      "power_save": false,
+      "battery_c": 26.2,
+      "elapsed_s": 63.141,
+      "frame": 1200
+    },
+    {
+      "sample_age_s": 0.5797294980002334,
+      "thermal_status": 0,
+      "battery_percent": 100,
+      "charging": false,
+      "power_save": false,
+      "battery_c": 26.2,
+      "plugged": true,
+      "elapsed_s": 64.172,
+      "frame": 1220
+    },
+    {
+      "battery_percent": 100,
+      "charging": false,
+      "sample_age_s": 0.6016395500046201,
+      "thermal_status": 0,
+      "battery_c": 27.2,
+      "plugged": true,
+      "power_save": false,
+      "elapsed_s": 65.203,
+      "frame": 1240
+    },
+    {
+      "thermal_status": 0,
+      "battery_percent": 100,
+      "sample_age_s": 0.7038912819989491,
+      "charging": false,
+      "battery_c": 27.2,
+      "power_save": false,
+      "plugged": true,
+      "elapsed_s": 66.266,
+      "frame": 1260
+    },
+    {
+      "sample_age_s": 0.7006533390085679,
+      "charging": false,
+      "plugged": true,
+      "battery_c": 27.2,
+      "battery_percent": 100,
+      "power_save": false,
+      "thermal_status": 0,
+      "elapsed_s": 67.312,
+      "frame": 1280
+    },
+    {
+      "power_save": false,
+      "charging": false,
+      "battery_percent": 100,
+      "plugged": true,
+      "sample_age_s": 0.8061222030082718,
+      "battery_c": 27.2,
+      "thermal_status": 0,
+      "elapsed_s": 68.391,
+      "frame": 1300
+    },
+    {
+      "plugged": true,
+      "thermal_status": 0,
+      "sample_age_s": 0.9141811349982163,
+      "power_save": false,
+      "battery_percent": 100,
+      "charging": false,
+      "battery_c": 27.2,
+      "elapsed_s": 69.437,
+      "frame": 1320
+    },
+    {
+      "charging": false,
+      "plugged": true,
+      "battery_c": 27.2,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "sample_age_s": 0.9174257959966781,
+      "power_save": false,
+      "elapsed_s": 70.484,
+      "frame": 1340
+    },
+    {
+      "thermal_status": 0,
+      "plugged": true,
+      "battery_c": 27.2,
+      "battery_percent": 100,
+      "power_save": false,
+      "charging": false,
+      "sample_age_s": 0.9977587900066283,
+      "elapsed_s": 71.594,
+      "frame": 1360
+    },
+    {
+      "sample_age_s": 0.08627927899942733,
+      "battery_percent": 100,
+      "battery_c": 27.2,
+      "thermal_status": 0,
+      "power_save": false,
+      "plugged": true,
+      "charging": false,
+      "elapsed_s": 72.625,
+      "frame": 1380
+    },
+    {
+      "charging": false,
+      "battery_percent": 100,
+      "plugged": true,
+      "sample_age_s": 0.07518487799097784,
+      "thermal_status": 0,
+      "battery_c": 27.2,
+      "power_save": false,
+      "elapsed_s": 73.672,
+      "frame": 1400
+    },
+    {
+      "charging": false,
+      "battery_percent": 100,
+      "plugged": true,
+      "sample_age_s": 0.16489028399519157,
+      "thermal_status": 0,
+      "battery_c": 27.2,
+      "power_save": false,
+      "elapsed_s": 74.719,
+      "frame": 1420
+    },
+    {
+      "charging": false,
+      "battery_percent": 100,
+      "plugged": true,
+      "sample_age_s": 0.2254733040026622,
+      "thermal_status": 0,
+      "battery_c": 27.2,
+      "power_save": false,
+      "elapsed_s": 75.781,
+      "frame": 1440
+    },
+    {
+      "charging": false,
+      "battery_percent": 100,
+      "plugged": true,
+      "sample_age_s": 0.24835362599696964,
+      "thermal_status": 0,
+      "battery_c": 27.2,
+      "power_save": false,
+      "elapsed_s": 76.859,
+      "frame": 1460
+    },
+    {
+      "charging": false,
+      "battery_percent": 100,
+      "plugged": true,
+      "sample_age_s": 0.3282828750088811,
+      "thermal_status": 0,
+      "battery_c": 27.2,
+      "power_save": false,
+      "elapsed_s": 77.891,
+      "frame": 1480
+    },
+    {
+      "charging": false,
+      "battery_percent": 100,
+      "plugged": true,
+      "sample_age_s": 0.35881379699276295,
+      "thermal_status": 0,
+      "battery_c": 27.2,
+      "power_save": false,
+      "elapsed_s": 78.922,
+      "frame": 1500
+    },
+    {
+      "charging": false,
+      "battery_percent": 100,
+      "plugged": true,
+      "sample_age_s": 0.4045549069996923,
+      "thermal_status": 0,
+      "battery_c": 27.2,
+      "power_save": false,
+      "elapsed_s": 79.969,
+      "frame": 1520
+    },
+    {
+      "charging": false,
+      "battery_percent": 100,
+      "plugged": true,
+      "sample_age_s": 0.4832190649904078,
+      "thermal_status": 0,
+      "battery_c": 27.2,
+      "power_save": false,
+      "elapsed_s": 81.062,
+      "frame": 1540
+    },
+    {
+      "charging": false,
+      "battery_percent": 100,
+      "plugged": true,
+      "sample_age_s": 0.4267236769956071,
+      "thermal_status": 0,
+      "battery_c": 27.2,
+      "power_save": false,
+      "elapsed_s": 82.109,
+      "frame": 1560
+    },
+    {
+      "sample_age_s": 0.546846529992763,
+      "plugged": true,
+      "battery_c": 27.2,
+      "power_save": false,
+      "thermal_status": 0,
+      "battery_percent": 100,
+      "charging": false,
+      "elapsed_s": 83.141,
+      "frame": 1580
+    },
+    {
+      "sample_age_s": 0.5714340809936402,
+      "thermal_status": 0,
+      "plugged": true,
+      "power_save": false,
+      "battery_c": 27.2,
+      "battery_percent": 100,
+      "charging": false,
+      "elapsed_s": 84.156,
+      "frame": 1600
+    },
+    {
+      "sample_age_s": 0.585699082002975,
+      "plugged": true,
+      "thermal_status": 0,
+      "battery_c": 27.2,
+      "power_save": false,
+      "battery_percent": 100,
+      "charging": false,
+      "elapsed_s": 85.172,
+      "frame": 1620
+    },
+    {
+      "sample_age_s": 0.6053811749879969,
+      "plugged": true,
+      "battery_c": 27.2,
+      "power_save": false,
+      "thermal_status": 0,
+      "battery_percent": 100,
+      "charging": false,
+      "elapsed_s": 86.203,
+      "frame": 1640
+    },
+    {
+      "sample_age_s": 0.6353685439971741,
+      "plugged": true,
+      "battery_c": 27.2,
+      "power_save": false,
+      "thermal_status": 0,
+      "battery_percent": 100,
+      "charging": false,
+      "elapsed_s": 87.234,
+      "frame": 1660
+    },
+    {
+      "sample_age_s": 0.5730687000032049,
+      "plugged": true,
+      "thermal_status": 0,
+      "battery_c": 27.2,
+      "power_save": false,
+      "battery_percent": 100,
+      "charging": false,
+      "elapsed_s": 88.281,
+      "frame": 1680
+    },
+    {
+      "sample_age_s": 0.6423060340021038,
+      "thermal_status": 0,
+      "plugged": true,
+      "power_save": false,
+      "battery_c": 27.2,
+      "battery_percent": 100,
+      "charging": false,
+      "elapsed_s": 89.312,
+      "frame": 1700
+    },
+    {
+      "sample_age_s": 0.675149168993812,
+      "thermal_status": 0,
+      "battery_c": 27.2,
+      "power_save": false,
+      "plugged": true,
+      "battery_percent": 100,
+      "charging": false,
+      "elapsed_s": 90.344,
+      "frame": 1720
+    },
+    {
+      "sample_age_s": 0.7490272300055949,
+      "plugged": true,
+      "battery_c": 27.2,
+      "power_save": false,
+      "thermal_status": 0,
+      "battery_percent": 100,
+      "charging": false,
+      "elapsed_s": 91.375,
+      "frame": 1740
+    },
+    {
+      "sample_age_s": 0.7900425839907257,
+      "thermal_status": 0,
+      "plugged": true,
+      "power_save": false,
+      "battery_c": 27.2,
+      "battery_percent": 100,
+      "charging": false,
+      "elapsed_s": 92.422,
+      "frame": 1760
+    },
+    {
+      "sample_age_s": 0.7951887650124263,
+      "thermal_status": 0,
+      "battery_c": 27.2,
+      "power_save": false,
+      "plugged": true,
+      "battery_percent": 100,
+      "charging": false,
+      "elapsed_s": 93.469,
+      "frame": 1780
+    },
+    {
+      "sample_age_s": 0.8103302250092383,
+      "plugged": true,
+      "battery_c": 27.2,
+      "power_save": false,
+      "thermal_status": 0,
+      "battery_percent": 100,
+      "charging": false,
+      "elapsed_s": 94.5,
+      "frame": 1800
+    },
+    {
+      "sample_age_s": 0.8791873580048559,
+      "thermal_status": 0,
+      "plugged": true,
+      "power_save": false,
+      "battery_c": 27.2,
+      "battery_percent": 100,
+      "charging": false,
+      "elapsed_s": 95.531,
+      "frame": 1820
+    },
+    {
+      "sample_age_s": 0.8930022539861966,
+      "thermal_status": 0,
+      "battery_c": 27.2,
+      "power_save": false,
+      "plugged": true,
+      "battery_percent": 100,
+      "charging": false,
+      "elapsed_s": 96.547,
+      "frame": 1840
+    },
+    {
+      "sample_age_s": 0.9090427759947488,
+      "plugged": true,
+      "thermal_status": 0,
+      "battery_c": 27.2,
+      "power_save": false,
+      "battery_percent": 100,
+      "charging": false,
+      "elapsed_s": 97.578,
+      "frame": 1860
+    },
+    {
+      "sample_age_s": 0.8276250149938278,
+      "thermal_status": 0,
+      "battery_c": 27.2,
+      "power_save": false,
+      "plugged": true,
+      "battery_percent": 100,
+      "charging": false,
+      "elapsed_s": 98.594,
+      "frame": 1880
+    },
+    {
+      "sample_age_s": 0.9076215859968215,
+      "thermal_status": 0,
+      "battery_c": 27.2,
+      "power_save": false,
+      "plugged": true,
+      "battery_percent": 100,
+      "charging": false,
+      "elapsed_s": 99.625,
+      "frame": 1900
+    },
+    {
+      "sample_age_s": 0.935207556001842,
+      "plugged": true,
+      "thermal_status": 0,
+      "battery_c": 27.2,
+      "power_save": false,
+      "battery_percent": 100,
+      "charging": false,
+      "elapsed_s": 100.703,
+      "frame": 1920
+    },
+    {
+      "sample_age_s": 0.9556635909975739,
+      "thermal_status": 0,
+      "plugged": true,
+      "power_save": false,
+      "battery_c": 27.2,
+      "battery_percent": 100,
+      "charging": false,
+      "elapsed_s": 101.734,
+      "frame": 1940
+    },
+    {
+      "sample_age_s": 0.03238921800220851,
+      "plugged": true,
+      "thermal_status": 0,
+      "battery_c": 27.2,
+      "power_save": false,
+      "battery_percent": 100,
+      "charging": false,
+      "elapsed_s": 102.781,
+      "frame": 1960
+    },
+    {
+      "power_save": false,
+      "battery_c": 27.2,
+      "thermal_status": 0,
+      "sample_age_s": 0.04386039100063499,
+      "plugged": true,
+      "charging": false,
+      "battery_percent": 100,
+      "elapsed_s": 103.797,
+      "frame": 1980
+    },
+    {
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "battery_c": 27.2,
+      "sample_age_s": 0.1287431749951793,
+      "plugged": true,
+      "charging": false,
+      "power_save": false,
+      "elapsed_s": 104.828,
+      "frame": 2000
+    },
+    {
+      "power_save": false,
+      "battery_c": 27.2,
+      "sample_age_s": 0.0358044900058303,
+      "thermal_status": 0,
+      "battery_percent": 100,
+      "charging": false,
+      "plugged": true,
+      "elapsed_s": 105.859,
+      "frame": 2020
+    },
+    {
+      "battery_c": 27.2,
+      "battery_percent": 100,
+      "sample_age_s": 0.2711930169898551,
+      "plugged": true,
+      "charging": false,
+      "thermal_status": 0,
+      "power_save": false,
+      "elapsed_s": 106.984,
+      "frame": 2040
+    },
+    {
+      "thermal_status": 0,
+      "sample_age_s": 0.30214937099663075,
+      "plugged": true,
+      "battery_percent": 100,
+      "power_save": false,
+      "charging": false,
+      "battery_c": 27.2,
+      "elapsed_s": 108.016,
+      "frame": 2060
+    },
+    {
+      "thermal_status": 0,
+      "sample_age_s": 0.3200332510023145,
+      "plugged": true,
+      "battery_percent": 100,
+      "power_save": false,
+      "charging": false,
+      "battery_c": 27.2,
+      "elapsed_s": 109.047,
+      "frame": 2080
+    },
+    {
+      "thermal_status": 0,
+      "sample_age_s": 0.3050779750046786,
+      "plugged": true,
+      "battery_percent": 100,
+      "power_save": false,
+      "charging": false,
+      "battery_c": 27.2,
+      "elapsed_s": 110.078,
+      "frame": 2100
+    },
+    {
+      "thermal_status": 0,
+      "battery_c": 27.2,
+      "power_save": false,
+      "battery_percent": 100,
+      "plugged": true,
+      "sample_age_s": 0.41331587999593467,
+      "charging": false,
+      "elapsed_s": 111.141,
+      "frame": 2120
+    },
+    {
+      "charging": false,
+      "battery_percent": 100,
+      "power_save": false,
+      "thermal_status": 0,
+      "plugged": true,
+      "sample_age_s": 0.44018801499623805,
+      "battery_c": 27.2,
+      "elapsed_s": 112.172,
+      "frame": 2140
+    },
+    {
+      "charging": false,
+      "power_save": false,
+      "battery_percent": 100,
+      "sample_age_s": 0.458585802000016,
+      "battery_c": 27.2,
+      "thermal_status": 0,
+      "plugged": true,
+      "elapsed_s": 113.25,
+      "frame": 2160
+    },
+    {
+      "sample_age_s": 0.5647245129948715,
+      "charging": false,
+      "battery_percent": 100,
+      "power_save": false,
+      "battery_c": 27.2,
+      "plugged": true,
+      "thermal_status": 0,
+      "elapsed_s": 114.312,
+      "frame": 2180
+    },
+    {
+      "battery_percent": 100,
+      "plugged": true,
+      "sample_age_s": 0.5946828570013167,
+      "battery_c": 27.2,
+      "power_save": false,
+      "thermal_status": 0,
+      "charging": false,
+      "elapsed_s": 115.344,
+      "frame": 2200
+    },
+    {
+      "plugged": true,
+      "battery_c": 27.2,
+      "power_save": false,
+      "battery_percent": 100,
+      "sample_age_s": 0.5978442620107671,
+      "charging": false,
+      "thermal_status": 0,
+      "elapsed_s": 116.406,
+      "frame": 2220
+    },
+    {
+      "plugged": true,
+      "charging": false,
+      "battery_percent": 100,
+      "sample_age_s": 0.6918519180035219,
+      "battery_c": 27.2,
+      "power_save": false,
+      "thermal_status": 0,
+      "elapsed_s": 117.453,
+      "frame": 2240
+    },
+    {
+      "plugged": true,
+      "battery_c": 27.2,
+      "power_save": false,
+      "battery_percent": 100,
+      "sample_age_s": 0.7470119960053125,
+      "charging": false,
+      "thermal_status": 0,
+      "elapsed_s": 118.516,
+      "frame": 2260
+    },
+    {
+      "battery_percent": 100,
+      "plugged": true,
+      "sample_age_s": 0.8322915250028018,
+      "battery_c": 27.2,
+      "power_save": false,
+      "thermal_status": 0,
+      "charging": false,
+      "elapsed_s": 119.594,
+      "frame": 2280
+    },
+    {
+      "sample_age_s": 0.7952250939997612,
+      "charging": false,
+      "battery_percent": 100,
+      "power_save": false,
+      "battery_c": 27.2,
+      "plugged": true,
+      "thermal_status": 0,
+      "elapsed_s": 120.625,
+      "frame": 2300
+    },
+    {
+      "plugged": true,
+      "charging": false,
+      "battery_percent": 100,
+      "sample_age_s": 0.8815313429950038,
+      "battery_c": 27.2,
+      "power_save": false,
+      "thermal_status": 0,
+      "elapsed_s": 121.656,
+      "frame": 2320
+    },
+    {
+      "thermal_status": 0,
+      "battery_c": 27.2,
+      "plugged": true,
+      "sample_age_s": 0.8418568019988015,
+      "charging": false,
+      "power_save": false,
+      "battery_percent": 100,
+      "elapsed_s": 122.719,
+      "frame": 2340
+    },
+    {
+      "power_save": false,
+      "charging": false,
+      "sample_age_s": 0.9558094149979297,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "battery_c": 27.2,
+      "plugged": true,
+      "elapsed_s": 123.797,
+      "frame": 2360
+    },
+    {
+      "charging": true,
+      "power_save": false,
+      "sample_age_s": 0.06324515500455163,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "battery_c": 28.4,
+      "plugged": true,
+      "elapsed_s": 124.906,
+      "frame": 2380
+    },
+    {
+      "battery_c": 28.4,
+      "plugged": true,
+      "power_save": false,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "sample_age_s": 0.1166144620074192,
+      "charging": true,
+      "elapsed_s": 125.953,
+      "frame": 2400
+    },
+    {
+      "plugged": true,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "power_save": false,
+      "charging": true,
+      "sample_age_s": 0.1671904929971788,
+      "battery_c": 28.4,
+      "elapsed_s": 127.016,
+      "frame": 2420
+    },
+    {
+      "battery_percent": 100,
+      "plugged": true,
+      "thermal_status": 0,
+      "charging": true,
+      "power_save": false,
+      "battery_c": 28.4,
+      "sample_age_s": 0.13146570100798272,
+      "elapsed_s": 128.031,
+      "frame": 2440
+    },
+    {
+      "battery_c": 28.4,
+      "plugged": true,
+      "sample_age_s": 0.16261744500661734,
+      "thermal_status": 0,
+      "power_save": false,
+      "battery_percent": 100,
+      "charging": true,
+      "elapsed_s": 129.062,
+      "frame": 2460
+    },
+    {
+      "charging": true,
+      "power_save": false,
+      "sample_age_s": 0.22281886100245174,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "battery_c": 28.4,
+      "plugged": true,
+      "elapsed_s": 130.125,
+      "frame": 2480
+    },
+    {
+      "plugged": true,
+      "battery_c": 28.4,
+      "battery_percent": 100,
+      "sample_age_s": 0.2672290070040617,
+      "power_save": false,
+      "thermal_status": 0,
+      "charging": true,
+      "elapsed_s": 131.172,
+      "frame": 2500
+    },
+    {
+      "battery_percent": 100,
+      "battery_c": 28.4,
+      "thermal_status": 0,
+      "charging": true,
+      "power_save": false,
+      "sample_age_s": 0.3415219580056146,
+      "plugged": true,
+      "elapsed_s": 132.203,
+      "frame": 2520
+    },
+    {
+      "battery_percent": 100,
+      "battery_c": 28.4,
+      "thermal_status": 0,
+      "charging": true,
+      "power_save": false,
+      "plugged": true,
+      "sample_age_s": 0.3703772610024316,
+      "elapsed_s": 133.25,
+      "frame": 2540
+    },
+    {
+      "battery_percent": 100,
+      "battery_c": 28.4,
+      "thermal_status": 0,
+      "charging": true,
+      "power_save": false,
+      "sample_age_s": 0.4283968429954257,
+      "plugged": true,
+      "elapsed_s": 134.312,
+      "frame": 2560
+    },
+    {
+      "battery_percent": 100,
+      "battery_c": 28.4,
+      "thermal_status": 0,
+      "charging": true,
+      "power_save": false,
+      "plugged": true,
+      "sample_age_s": 0.5007107490091585,
+      "elapsed_s": 135.375,
+      "frame": 2580
+    },
+    {
+      "battery_percent": 100,
+      "battery_c": 28.4,
+      "thermal_status": 0,
+      "charging": true,
+      "power_save": false,
+      "plugged": true,
+      "sample_age_s": 0.5594136909930967,
+      "elapsed_s": 136.453,
+      "frame": 2600
+    },
+    {
+      "battery_percent": 100,
+      "battery_c": 28.4,
+      "thermal_status": 0,
+      "charging": true,
+      "power_save": false,
+      "sample_age_s": 0.5540782489988487,
+      "plugged": true,
+      "elapsed_s": 137.484,
+      "frame": 2620
+    },
+    {
+      "battery_percent": 100,
+      "battery_c": 28.4,
+      "thermal_status": 0,
+      "charging": true,
+      "power_save": false,
+      "sample_age_s": 0.5596075719950022,
+      "plugged": true,
+      "elapsed_s": 138.5,
+      "frame": 2640
+    },
+    {
+      "battery_percent": 100,
+      "battery_c": 28.4,
+      "thermal_status": 0,
+      "charging": true,
+      "power_save": false,
+      "plugged": true,
+      "sample_age_s": 0.6585654340015026,
+      "elapsed_s": 139.547,
+      "frame": 2660
+    },
+    {
+      "battery_percent": 100,
+      "battery_c": 28.4,
+      "thermal_status": 0,
+      "charging": true,
+      "power_save": false,
+      "sample_age_s": 0.6961972989956848,
+      "plugged": true,
+      "elapsed_s": 140.594,
+      "frame": 2680
+    },
+    {
+      "battery_percent": 100,
+      "battery_c": 28.4,
+      "thermal_status": 0,
+      "charging": true,
+      "power_save": false,
+      "plugged": true,
+      "sample_age_s": 0.748434406996239,
+      "elapsed_s": 141.641,
+      "frame": 2700
+    },
+    {
+      "battery_percent": 100,
+      "battery_c": 28.4,
+      "thermal_status": 0,
+      "charging": true,
+      "power_save": false,
+      "sample_age_s": 0.6808896269940306,
+      "plugged": true,
+      "elapsed_s": 142.687,
+      "frame": 2720
+    },
+    {
+      "battery_percent": 100,
+      "battery_c": 28.4,
+      "thermal_status": 0,
+      "charging": true,
+      "power_save": false,
+      "sample_age_s": 0.7345510160084814,
+      "plugged": true,
+      "elapsed_s": 143.734,
+      "frame": 2740
+    },
+    {
+      "battery_percent": 100,
+      "battery_c": 28.4,
+      "thermal_status": 0,
+      "charging": true,
+      "power_save": false,
+      "plugged": true,
+      "sample_age_s": 0.8094675940083107,
+      "elapsed_s": 144.781,
+      "frame": 2760
+    },
+    {
+      "battery_percent": 100,
+      "battery_c": 28.4,
+      "thermal_status": 0,
+      "charging": true,
+      "power_save": false,
+      "sample_age_s": 0.879612791002728,
+      "plugged": true,
+      "elapsed_s": 145.797,
+      "frame": 2780
+    },
+    {
+      "battery_percent": 100,
+      "battery_c": 28.4,
+      "thermal_status": 0,
+      "charging": true,
+      "power_save": false,
+      "sample_age_s": 0.8942024889984168,
+      "plugged": true,
+      "elapsed_s": 146.812,
+      "frame": 2800
+    },
+    {
+      "battery_percent": 100,
+      "battery_c": 28.4,
+      "thermal_status": 0,
+      "charging": true,
+      "power_save": false,
+      "plugged": true,
+      "sample_age_s": 0.954060884003411,
+      "elapsed_s": 147.875,
+      "frame": 2820
+    },
+    {
+      "battery_percent": 100,
+      "battery_c": 28.4,
+      "thermal_status": 0,
+      "charging": true,
+      "power_save": false,
+      "sample_age_s": 0.9339802230097121,
+      "plugged": true,
+      "elapsed_s": 148.922,
+      "frame": 2840
+    },
+    {
+      "battery_percent": 100,
+      "battery_c": 28.4,
+      "thermal_status": 0,
+      "charging": true,
+      "power_save": false,
+      "sample_age_s": 0.9279173579998314,
+      "plugged": true,
+      "elapsed_s": 149.953,
+      "frame": 2860
+    },
+    {
+      "battery_percent": 100,
+      "battery_c": 28.4,
+      "thermal_status": 0,
+      "charging": true,
+      "power_save": false,
+      "sample_age_s": 0.06290767100290395,
+      "plugged": true,
+      "elapsed_s": 151.016,
+      "frame": 2880
+    },
+    {
+      "battery_percent": 100,
+      "battery_c": 28.4,
+      "thermal_status": 0,
+      "charging": true,
+      "power_save": false,
+      "plugged": true,
+      "sample_age_s": 0.09783344599418342,
+      "elapsed_s": 152.094,
+      "frame": 2900
+    },
+    {
+      "battery_percent": 100,
+      "battery_c": 28.4,
+      "thermal_status": 0,
+      "charging": true,
+      "power_save": false,
+      "plugged": true,
+      "sample_age_s": 0.12305874800949823,
+      "elapsed_s": 153.125,
+      "frame": 2920
+    },
+    {
+      "sample_age_s": 0.20781202899524942,
+      "plugged": true,
+      "charging": true,
+      "battery_c": 28.4,
+      "thermal_status": 0,
+      "power_save": false,
+      "battery_percent": 100,
+      "elapsed_s": 154.219,
+      "frame": 2940
+    },
+    {
+      "power_save": false,
+      "battery_c": 28.4,
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 0.29442477200063877,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 155.25,
+      "frame": 2960
+    },
+    {
+      "power_save": false,
+      "battery_c": 28.4,
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 0.29249944900220726,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 156.312,
+      "frame": 2980
+    },
+    {
+      "power_save": false,
+      "battery_c": 28.4,
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 0.3758639899897389,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 157.344,
+      "frame": 3000
+    },
+    {
+      "power_save": false,
+      "battery_c": 28.4,
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 0.3021888340008445,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 158.375,
+      "frame": 3020
+    },
+    {
+      "power_save": false,
+      "battery_c": 28.4,
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 0.3946428439958254,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 159.437,
+      "frame": 3040
+    },
+    {
+      "power_save": false,
+      "battery_c": 28.4,
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 0.4412328059988795,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 160.469,
+      "frame": 3060
+    },
+    {
+      "power_save": false,
+      "battery_c": 28.4,
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 0.5279772329959087,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 161.516,
+      "frame": 3080
+    },
+    {
+      "power_save": false,
+      "battery_c": 28.4,
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 0.5212826079950901,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 162.562,
+      "frame": 3100
+    },
+    {
+      "power_save": false,
+      "battery_c": 28.4,
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 0.6195804860035423,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 163.609,
+      "frame": 3120
+    },
+    {
+      "power_save": false,
+      "battery_c": 28.4,
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 0.6079014510032721,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 164.656,
+      "frame": 3140
+    },
+    {
+      "power_save": false,
+      "battery_c": 28.4,
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 0.6587197310000192,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 165.719,
+      "frame": 3160
+    },
+    {
+      "power_save": false,
+      "battery_c": 28.4,
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 0.6766729750088416,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 166.781,
+      "frame": 3180
+    },
+    {
+      "power_save": false,
+      "battery_c": 28.4,
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 0.8007611609937157,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 167.859,
+      "frame": 3200
+    },
+    {
+      "power_save": false,
+      "battery_c": 28.4,
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 0.924133566004457,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 168.937,
+      "frame": 3220
+    },
+    {
+      "power_save": false,
+      "battery_c": 28.4,
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 0.9979365129984217,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 170.016,
+      "frame": 3240
+    },
+    {
+      "power_save": false,
+      "battery_c": 28.4,
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 0.013980286006699316,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 171.094,
+      "frame": 3260
+    },
+    {
+      "power_save": false,
+      "battery_c": 28.4,
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 0.21825314899615478,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 172.312,
+      "frame": 3280
+    },
+    {
+      "power_save": false,
+      "battery_c": 28.4,
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 0.21869416399567854,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 173.344,
+      "frame": 3300
+    },
+    {
+      "power_save": false,
+      "battery_c": 28.4,
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 0.33705601100518834,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 174.375,
+      "frame": 3320
+    },
+    {
+      "power_save": false,
+      "battery_c": 28.4,
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 0.3653439640038414,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 175.406,
+      "frame": 3340
+    },
+    {
+      "power_save": false,
+      "battery_c": 28.4,
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 0.3731313140015118,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 176.469,
+      "frame": 3360
+    },
+    {
+      "power_save": false,
+      "battery_c": 28.4,
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 0.4981615299911937,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 177.531,
+      "frame": 3380
+    },
+    {
+      "power_save": false,
+      "battery_c": 28.4,
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 0.49337526499584783,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 178.594,
+      "frame": 3400
+    },
+    {
+      "power_save": false,
+      "battery_c": 28.4,
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 0.5327341340016574,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 179.625,
+      "frame": 3420
+    },
+    {
+      "power_save": false,
+      "battery_c": 28.4,
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 0.546024524999666,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 180.656,
+      "frame": 3440
+    },
+    {
+      "power_save": false,
+      "battery_c": 28.4,
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 0.6361472040007357,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 181.703,
+      "frame": 3460
+    },
+    {
+      "power_save": false,
+      "battery_c": 28.4,
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 0.6781664489972172,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 182.75,
+      "frame": 3480
+    },
+    {
+      "battery_c": 28.4,
+      "plugged": true,
+      "thermal_status": 0,
+      "battery_percent": 100,
+      "sample_age_s": 0.6748095999937505,
+      "charging": true,
+      "power_save": false,
+      "elapsed_s": 183.875,
+      "frame": 3500
+    },
+    {
+      "power_save": false,
+      "battery_c": 29.1,
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 0.8217137659958098,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 184.953,
+      "frame": 3520
+    },
+    {
+      "power_save": false,
+      "battery_c": 29.1,
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 0.8316267860063817,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 185.969,
+      "frame": 3540
+    },
+    {
+      "power_save": false,
+      "battery_c": 29.1,
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 0.8960956130031263,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 187.031,
+      "frame": 3560
+    },
+    {
+      "power_save": false,
+      "battery_c": 29.1,
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 0.9749466799985385,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 188.109,
+      "frame": 3580
+    },
+    {
+      "power_save": false,
+      "battery_c": 29.1,
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 0.995128790003946,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 189.141,
+      "frame": 3600
+    },
+    {
+      "power_save": false,
+      "battery_c": 29.1,
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 0.04020598001079634,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 190.203,
+      "frame": 3620
+    },
+    {
+      "power_save": false,
+      "battery_c": 29.1,
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 0.12173319200519472,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 191.234,
+      "frame": 3640
+    },
+    {
+      "power_save": false,
+      "battery_c": 29.1,
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 0.1608318210055586,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 192.266,
+      "frame": 3660
+    },
+    {
+      "power_save": false,
+      "battery_c": 29.1,
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 0.22063835599692538,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 193.328,
+      "frame": 3680
+    },
+    {
+      "power_save": false,
+      "battery_c": 29.1,
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 0.26941218398860656,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 194.391,
+      "frame": 3700
+    },
+    {
+      "power_save": false,
+      "battery_c": 29.1,
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 0.2445213940081885,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 195.437,
+      "frame": 3720
+    },
+    {
+      "power_save": false,
+      "battery_c": 29.1,
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 0.3126573400077177,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 196.5,
+      "frame": 3740
+    },
+    {
+      "power_save": false,
+      "battery_c": 29.1,
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 0.30218792900268454,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 197.531,
+      "frame": 3760
+    },
+    {
+      "power_save": false,
+      "battery_c": 29.1,
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 0.43779132299823686,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 198.578,
+      "frame": 3780
+    },
+    {
+      "power_save": false,
+      "battery_c": 29.1,
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 0.3704593959992053,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 199.609,
+      "frame": 3800
+    },
+    {
+      "power_save": false,
+      "battery_c": 29.1,
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 0.4625563119916478,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 200.656,
+      "frame": 3820
+    },
+    {
+      "power_save": false,
+      "battery_c": 29.1,
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 0.4917983019986423,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 201.703,
+      "frame": 3840
+    },
+    {
+      "power_save": false,
+      "battery_c": 29.1,
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 0.5266907640034333,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 202.75,
+      "frame": 3860
+    },
+    {
+      "power_save": false,
+      "battery_c": 29.1,
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 0.5575762950029457,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 203.766,
+      "frame": 3880
+    },
+    {
+      "power_save": false,
+      "battery_c": 29.1,
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 0.6387726639950415,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 204.797,
+      "frame": 3900
+    },
+    {
+      "power_save": false,
+      "battery_c": 29.1,
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 0.681339183007367,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 205.844,
+      "frame": 3920
+    },
+    {
+      "power_save": false,
+      "battery_c": 29.1,
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 0.7053619180078385,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 206.875,
+      "frame": 3940
+    },
+    {
+      "power_save": false,
+      "battery_c": 29.1,
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 0.7381667099980405,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 207.922,
+      "frame": 3960
+    },
+    {
+      "power_save": false,
+      "battery_c": 29.1,
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 0.7276034690003144,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 208.969,
+      "frame": 3980
+    },
+    {
+      "power_save": false,
+      "battery_c": 29.1,
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 0.8089177349902457,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 210.047,
+      "frame": 4000
+    },
+    {
+      "power_save": false,
+      "battery_c": 29.1,
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 0.8268013960041571,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 211.062,
+      "frame": 4020
+    },
+    {
+      "power_save": false,
+      "battery_c": 29.1,
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 0.8629650579969166,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 212.109,
+      "frame": 4040
+    },
+    {
+      "power_save": false,
+      "battery_c": 29.1,
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 0.9568443879979895,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 213.156,
+      "frame": 4060
+    },
+    {
+      "power_save": false,
+      "battery_c": 29.1,
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 0.9472358469938627,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 214.203,
+      "frame": 4080
+    },
+    {
+      "power_save": false,
+      "battery_c": 29.1,
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 0.989237966001383,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 215.25,
+      "frame": 4100
+    },
+    {
+      "power_save": false,
+      "battery_c": 29.1,
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 1.001951199999894,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 216.266,
+      "frame": 4120
+    },
+    {
+      "power_save": false,
+      "battery_c": 29.1,
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 0.962632045004284,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 217.281,
+      "frame": 4140
+    },
+    {
+      "power_save": false,
+      "battery_c": 29.1,
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 0.04879718700249214,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 218.328,
+      "frame": 4160
+    },
+    {
+      "power_save": false,
+      "battery_c": 29.1,
+      "plugged": true,
+      "charging": true,
+      "sample_age_s": 0.13722963399777655,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "elapsed_s": 219.375,
+      "frame": 4180
+    },
+    {
+      "battery_percent": 100,
+      "battery_c": 29.1,
+      "thermal_status": 0,
+      "charging": true,
+      "power_save": false,
+      "plugged": true,
+      "sample_age_s": 0.15844618700793944,
+      "elapsed_s": 220.391,
+      "frame": 4200
+    },
+    {
+      "battery_percent": 100,
+      "battery_c": 29.1,
+      "thermal_status": 0,
+      "charging": true,
+      "power_save": false,
+      "sample_age_s": 0.17780148099700455,
+      "plugged": true,
+      "elapsed_s": 221.422,
+      "frame": 4220
+    },
+    {
+      "battery_percent": 100,
+      "battery_c": 29.1,
+      "thermal_status": 0,
+      "charging": true,
+      "power_save": false,
+      "plugged": true,
+      "sample_age_s": 0.15495975299563725,
+      "elapsed_s": 222.453,
+      "frame": 4240
+    },
+    {
+      "battery_percent": 100,
+      "battery_c": 29.1,
+      "thermal_status": 0,
+      "charging": true,
+      "power_save": false,
+      "plugged": true,
+      "sample_age_s": 0.22795381500327494,
+      "elapsed_s": 223.484,
+      "frame": 4260
+    },
+    {
+      "battery_percent": 100,
+      "battery_c": 29.1,
+      "thermal_status": 0,
+      "charging": true,
+      "power_save": false,
+      "sample_age_s": 0.22697822499321774,
+      "plugged": true,
+      "elapsed_s": 224.531,
+      "frame": 4280
+    },
+    {
+      "battery_percent": 100,
+      "battery_c": 29.1,
+      "thermal_status": 0,
+      "charging": true,
+      "power_save": false,
+      "plugged": true,
+      "sample_age_s": 0.3437233019940322,
+      "elapsed_s": 225.609,
+      "frame": 4300
+    },
+    {
+      "battery_percent": 100,
+      "battery_c": 29.1,
+      "thermal_status": 0,
+      "charging": true,
+      "power_save": false,
+      "plugged": true,
+      "sample_age_s": 0.2530392420012504,
+      "elapsed_s": 226.625,
+      "frame": 4320
+    },
+    {
+      "battery_percent": 100,
+      "battery_c": 29.1,
+      "thermal_status": 0,
+      "charging": true,
+      "power_save": false,
+      "sample_age_s": 0.3143256469920743,
+      "plugged": true,
+      "elapsed_s": 227.687,
+      "frame": 4340
+    },
+    {
+      "battery_percent": 100,
+      "battery_c": 29.1,
+      "thermal_status": 0,
+      "charging": true,
+      "power_save": false,
+      "plugged": true,
+      "sample_age_s": 0.39801103599893395,
+      "elapsed_s": 228.734,
+      "frame": 4360
+    },
+    {
+      "battery_percent": 100,
+      "battery_c": 29.1,
+      "thermal_status": 0,
+      "charging": true,
+      "power_save": false,
+      "plugged": true,
+      "sample_age_s": 0.45072830200660974,
+      "elapsed_s": 229.781,
+      "frame": 4380
+    },
+    {
+      "battery_percent": 100,
+      "battery_c": 29.1,
+      "thermal_status": 0,
+      "charging": true,
+      "power_save": false,
+      "sample_age_s": 0.5306346279976424,
+      "plugged": true,
+      "elapsed_s": 230.812,
+      "frame": 4400
+    },
+    {
+      "charging": true,
+      "thermal_status": 0,
+      "sample_age_s": 0.5002763380034594,
+      "power_save": false,
+      "battery_c": 29.1,
+      "battery_percent": 100,
+      "plugged": true,
+      "elapsed_s": 231.844,
+      "frame": 4420
+    },
+    {
+      "charging": true,
+      "thermal_status": 0,
+      "sample_age_s": 0.5283642639988102,
+      "power_save": false,
+      "battery_c": 29.1,
+      "battery_percent": 100,
+      "plugged": true,
+      "elapsed_s": 232.875,
+      "frame": 4440
+    },
+    {
+      "charging": true,
+      "thermal_status": 0,
+      "sample_age_s": 0.602787804993568,
+      "power_save": false,
+      "battery_c": 29.1,
+      "battery_percent": 100,
+      "plugged": true,
+      "elapsed_s": 233.906,
+      "frame": 4460
+    },
+    {
+      "charging": true,
+      "thermal_status": 0,
+      "sample_age_s": 0.6067632740014233,
+      "power_save": false,
+      "battery_c": 29.1,
+      "battery_percent": 100,
+      "plugged": true,
+      "elapsed_s": 234.969,
+      "frame": 4480
+    },
+    {
+      "charging": true,
+      "thermal_status": 0,
+      "sample_age_s": 0.6280976640118752,
+      "power_save": false,
+      "battery_c": 29.1,
+      "battery_percent": 100,
+      "plugged": true,
+      "elapsed_s": 236.0,
+      "frame": 4500
+    },
+    {
+      "charging": true,
+      "thermal_status": 0,
+      "sample_age_s": 0.7270041059964569,
+      "power_save": false,
+      "battery_c": 29.1,
+      "battery_percent": 100,
+      "plugged": true,
+      "elapsed_s": 237.047,
+      "frame": 4520
+    },
+    {
+      "charging": true,
+      "thermal_status": 0,
+      "sample_age_s": 0.7478126729984069,
+      "power_save": false,
+      "battery_c": 29.1,
+      "battery_percent": 100,
+      "plugged": true,
+      "elapsed_s": 238.062,
+      "frame": 4540
+    },
+    {
+      "charging": true,
+      "thermal_status": 0,
+      "sample_age_s": 0.7886951460095588,
+      "power_save": false,
+      "battery_c": 29.1,
+      "battery_percent": 100,
+      "plugged": true,
+      "elapsed_s": 239.109,
+      "frame": 4560
+    },
+    {
+      "charging": true,
+      "thermal_status": 0,
+      "sample_age_s": 0.7187005020095967,
+      "power_save": false,
+      "battery_c": 29.1,
+      "battery_percent": 100,
+      "plugged": true,
+      "elapsed_s": 240.141,
+      "frame": 4580
+    },
+    {
+      "charging": true,
+      "thermal_status": 0,
+      "sample_age_s": 0.8245491300040158,
+      "power_save": false,
+      "battery_c": 29.1,
+      "battery_percent": 100,
+      "plugged": true,
+      "elapsed_s": 241.203,
+      "frame": 4600
+    },
+    {
+      "charging": true,
+      "thermal_status": 0,
+      "sample_age_s": 0.8949848060001386,
+      "power_save": false,
+      "battery_c": 29.1,
+      "battery_percent": 100,
+      "plugged": true,
+      "elapsed_s": 242.219,
+      "frame": 4620
+    },
+    {
+      "charging": true,
+      "thermal_status": 0,
+      "sample_age_s": 0.8933430359902559,
+      "power_save": false,
+      "battery_c": 29.1,
+      "battery_percent": 100,
+      "plugged": true,
+      "elapsed_s": 243.281,
+      "frame": 4640
+    },
+    {
+      "charging": true,
+      "thermal_status": 0,
+      "sample_age_s": 0.9598570719972486,
+      "power_save": false,
+      "battery_c": 29.1,
+      "battery_percent": 100,
+      "plugged": true,
+      "elapsed_s": 244.297,
+      "frame": 4660
+    },
+    {
+      "charging": true,
+      "thermal_status": 0,
+      "sample_age_s": 0.9060832179966383,
+      "power_save": false,
+      "battery_c": 29.1,
+      "battery_percent": 100,
+      "plugged": true,
+      "elapsed_s": 245.344,
+      "frame": 4680
+    },
+    {
+      "charging": true,
+      "thermal_status": 0,
+      "sample_age_s": 0.9224639210005989,
+      "power_save": false,
+      "battery_c": 29.1,
+      "battery_percent": 100,
+      "plugged": true,
+      "elapsed_s": 246.375,
+      "frame": 4700
+    },
+    {
+      "charging": true,
+      "thermal_status": 0,
+      "sample_age_s": 1.0021435289963847,
+      "power_save": false,
+      "battery_c": 29.1,
+      "battery_percent": 100,
+      "plugged": true,
+      "elapsed_s": 247.406,
+      "frame": 4720
+    },
+    {
+      "charging": true,
+      "thermal_status": 0,
+      "sample_age_s": 0.03809361900493968,
+      "power_save": false,
+      "battery_c": 29.1,
+      "battery_percent": 100,
+      "plugged": true,
+      "elapsed_s": 248.453,
+      "frame": 4740
+    },
+    {
+      "charging": true,
+      "thermal_status": 0,
+      "sample_age_s": 0.1404720809950959,
+      "power_save": false,
+      "battery_c": 29.1,
+      "battery_percent": 100,
+      "plugged": true,
+      "elapsed_s": 249.516,
+      "frame": 4760
+    },
+    {
+      "charging": true,
+      "thermal_status": 0,
+      "sample_age_s": 0.09151479099818971,
+      "power_save": false,
+      "battery_c": 29.1,
+      "battery_percent": 100,
+      "plugged": true,
+      "elapsed_s": 250.562,
+      "frame": 4780
+    },
+    {
+      "charging": true,
+      "thermal_status": 0,
+      "sample_age_s": 0.16967321099946275,
+      "power_save": false,
+      "battery_c": 29.1,
+      "battery_percent": 100,
+      "plugged": true,
+      "elapsed_s": 251.594,
+      "frame": 4800
+    },
+    {
+      "charging": true,
+      "thermal_status": 0,
+      "sample_age_s": 0.18715901800896972,
+      "power_save": false,
+      "battery_c": 29.1,
+      "battery_percent": 100,
+      "plugged": true,
+      "elapsed_s": 252.625,
+      "frame": 4820
+    },
+    {
+      "battery_c": 29.1,
+      "plugged": true,
+      "thermal_status": 0,
+      "battery_percent": 100,
+      "sample_age_s": 0.2346713680017274,
+      "charging": true,
+      "power_save": false,
+      "elapsed_s": 253.687,
+      "frame": 4840
+    },
+    {
+      "battery_c": 29.1,
+      "plugged": true,
+      "thermal_status": 0,
+      "battery_percent": 100,
+      "sample_age_s": 0.2404820270021446,
+      "charging": true,
+      "power_save": false,
+      "elapsed_s": 254.703,
+      "frame": 4860
+    },
+    {
+      "plugged": true,
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "sample_age_s": 0.284067185013555,
+      "power_save": false,
+      "battery_c": 29.1,
+      "charging": true,
+      "elapsed_s": 255.734,
+      "frame": 4880
+    },
+    {
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "battery_c": 29.1,
+      "charging": true,
+      "sample_age_s": 0.3269224069954362,
+      "power_save": false,
+      "plugged": true,
+      "elapsed_s": 256.797,
+      "frame": 4900
+    },
+    {
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "battery_c": 29.1,
+      "charging": true,
+      "sample_age_s": 0.3101750380010344,
+      "power_save": false,
+      "plugged": true,
+      "elapsed_s": 257.828,
+      "frame": 4920
+    },
+    {
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "battery_c": 29.1,
+      "charging": true,
+      "sample_age_s": 0.37100244300381746,
+      "power_save": false,
+      "plugged": true,
+      "elapsed_s": 258.844,
+      "frame": 4940
+    },
+    {
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "battery_c": 29.1,
+      "charging": true,
+      "sample_age_s": 0.38796923898917157,
+      "power_save": false,
+      "plugged": true,
+      "elapsed_s": 259.859,
+      "frame": 4960
+    },
+    {
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "battery_c": 29.1,
+      "charging": true,
+      "sample_age_s": 0.4135560890135821,
+      "power_save": false,
+      "plugged": true,
+      "elapsed_s": 260.891,
+      "frame": 4980
+    },
+    {
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "battery_c": 29.1,
+      "charging": true,
+      "sample_age_s": 0.5161676650022855,
+      "power_save": false,
+      "plugged": true,
+      "elapsed_s": 261.953,
+      "frame": 5000
+    },
+    {
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "battery_c": 29.1,
+      "charging": true,
+      "sample_age_s": 0.4984075730026234,
+      "power_save": false,
+      "plugged": true,
+      "elapsed_s": 263.0,
+      "frame": 5020
+    },
+    {
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "battery_c": 29.1,
+      "charging": true,
+      "sample_age_s": 0.5406556550005917,
+      "power_save": false,
+      "plugged": true,
+      "elapsed_s": 264.031,
+      "frame": 5040
+    },
+    {
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "battery_c": 29.1,
+      "charging": true,
+      "sample_age_s": 0.6261312690039631,
+      "power_save": false,
+      "plugged": true,
+      "elapsed_s": 265.094,
+      "frame": 5060
+    },
+    {
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "battery_c": 29.1,
+      "charging": true,
+      "sample_age_s": 0.6849663709872402,
+      "power_save": false,
+      "plugged": true,
+      "elapsed_s": 266.156,
+      "frame": 5080
+    },
+    {
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "battery_c": 29.1,
+      "charging": true,
+      "sample_age_s": 0.738779469000292,
+      "power_save": false,
+      "plugged": true,
+      "elapsed_s": 267.219,
+      "frame": 5100
+    },
+    {
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "battery_c": 29.1,
+      "charging": true,
+      "sample_age_s": 0.7168027770094341,
+      "power_save": false,
+      "plugged": true,
+      "elapsed_s": 268.25,
+      "frame": 5120
+    },
+    {
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "battery_c": 29.1,
+      "charging": true,
+      "sample_age_s": 0.7644149270054186,
+      "power_save": false,
+      "plugged": true,
+      "elapsed_s": 269.297,
+      "frame": 5140
+    },
+    {
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "battery_c": 29.1,
+      "charging": true,
+      "sample_age_s": 0.889851265004836,
+      "power_save": false,
+      "plugged": true,
+      "elapsed_s": 270.437,
+      "frame": 5160
+    },
+    {
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "battery_c": 29.1,
+      "charging": true,
+      "sample_age_s": 0.965186105997418,
+      "power_save": false,
+      "plugged": true,
+      "elapsed_s": 271.547,
+      "frame": 5180
+    },
+    {
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "battery_c": 29.1,
+      "charging": true,
+      "sample_age_s": 0.07172929598891642,
+      "power_save": false,
+      "plugged": true,
+      "elapsed_s": 272.578,
+      "frame": 5200
+    },
+    {
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "battery_c": 29.1,
+      "charging": true,
+      "sample_age_s": 0.10624157800339162,
+      "power_save": false,
+      "plugged": true,
+      "elapsed_s": 273.609,
+      "frame": 5220
+    },
+    {
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "battery_c": 29.1,
+      "charging": true,
+      "sample_age_s": 0.12998748300014995,
+      "power_save": false,
+      "plugged": true,
+      "elapsed_s": 274.656,
+      "frame": 5240
+    },
+    {
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "battery_c": 29.1,
+      "charging": true,
+      "sample_age_s": 0.14074782100215089,
+      "power_save": false,
+      "plugged": true,
+      "elapsed_s": 275.703,
+      "frame": 5260
+    },
+    {
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "battery_c": 29.1,
+      "charging": true,
+      "sample_age_s": 0.2195606739987852,
+      "power_save": false,
+      "plugged": true,
+      "elapsed_s": 276.797,
+      "frame": 5280
+    },
+    {
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "battery_c": 29.1,
+      "charging": true,
+      "sample_age_s": 0.27060293800604995,
+      "power_save": false,
+      "plugged": true,
+      "elapsed_s": 277.859,
+      "frame": 5300
+    },
+    {
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "battery_c": 29.1,
+      "charging": true,
+      "sample_age_s": 0.3625677039963193,
+      "power_save": false,
+      "plugged": true,
+      "elapsed_s": 278.906,
+      "frame": 5320
+    },
+    {
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "battery_c": 29.1,
+      "charging": true,
+      "sample_age_s": 0.38407267699949443,
+      "power_save": false,
+      "plugged": true,
+      "elapsed_s": 279.922,
+      "frame": 5340
+    },
+    {
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "battery_c": 29.1,
+      "charging": true,
+      "sample_age_s": 0.4293644220015267,
+      "power_save": false,
+      "plugged": true,
+      "elapsed_s": 280.984,
+      "frame": 5360
+    },
+    {
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "battery_c": 29.1,
+      "charging": true,
+      "sample_age_s": 0.4786519469926134,
+      "power_save": false,
+      "plugged": true,
+      "elapsed_s": 282.031,
+      "frame": 5380
+    },
+    {
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "battery_c": 29.1,
+      "charging": true,
+      "sample_age_s": 0.5251152540004114,
+      "power_save": false,
+      "plugged": true,
+      "elapsed_s": 283.078,
+      "frame": 5400
+    },
+    {
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "battery_c": 29.1,
+      "charging": true,
+      "sample_age_s": 0.45936374500161037,
+      "power_save": false,
+      "plugged": true,
+      "elapsed_s": 284.125,
+      "frame": 5420
+    },
+    {
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "battery_c": 29.1,
+      "charging": true,
+      "sample_age_s": 0.5470383530046092,
+      "power_save": false,
+      "plugged": true,
+      "elapsed_s": 285.172,
+      "frame": 5440
+    },
+    {
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "battery_c": 29.1,
+      "charging": true,
+      "sample_age_s": 0.6535590189887444,
+      "power_save": false,
+      "plugged": true,
+      "elapsed_s": 286.219,
+      "frame": 5460
+    },
+    {
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "battery_c": 29.1,
+      "charging": true,
+      "sample_age_s": 0.6973452509992057,
+      "power_save": false,
+      "plugged": true,
+      "elapsed_s": 287.266,
+      "frame": 5480
+    },
+    {
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "battery_c": 29.1,
+      "charging": true,
+      "sample_age_s": 0.6792538199952105,
+      "power_save": false,
+      "plugged": true,
+      "elapsed_s": 288.312,
+      "frame": 5500
+    },
+    {
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "battery_c": 29.1,
+      "charging": true,
+      "sample_age_s": 0.7186811630090233,
+      "power_save": false,
+      "plugged": true,
+      "elapsed_s": 289.359,
+      "frame": 5520
+    },
+    {
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "battery_c": 29.1,
+      "charging": true,
+      "sample_age_s": 0.7953793899941957,
+      "power_save": false,
+      "plugged": true,
+      "elapsed_s": 290.437,
+      "frame": 5540
+    },
+    {
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "battery_c": 29.1,
+      "charging": true,
+      "sample_age_s": 0.8354642069898546,
+      "power_save": false,
+      "plugged": true,
+      "elapsed_s": 291.484,
+      "frame": 5560
+    },
+    {
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "battery_c": 29.1,
+      "charging": true,
+      "sample_age_s": 0.8651670469989767,
+      "power_save": false,
+      "plugged": true,
+      "elapsed_s": 292.516,
+      "frame": 5580
+    },
+    {
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "battery_c": 29.1,
+      "charging": true,
+      "sample_age_s": 0.9591825920069823,
+      "power_save": false,
+      "plugged": true,
+      "elapsed_s": 293.609,
+      "frame": 5600
+    },
+    {
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "battery_c": 29.1,
+      "charging": true,
+      "sample_age_s": 0.0564887750078924,
+      "power_save": false,
+      "plugged": true,
+      "elapsed_s": 294.672,
+      "frame": 5620
+    },
+    {
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "battery_c": 29.1,
+      "charging": true,
+      "sample_age_s": 0.1361170559976017,
+      "power_save": false,
+      "plugged": true,
+      "elapsed_s": 295.75,
+      "frame": 5640
+    },
+    {
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "battery_c": 29.1,
+      "charging": true,
+      "sample_age_s": 0.18471090799721424,
+      "power_save": false,
+      "plugged": true,
+      "elapsed_s": 296.812,
+      "frame": 5660
+    },
+    {
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "battery_c": 29.1,
+      "charging": true,
+      "sample_age_s": 0.1802257270028349,
+      "power_save": false,
+      "plugged": true,
+      "elapsed_s": 297.875,
+      "frame": 5680
+    },
+    {
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "battery_c": 29.1,
+      "charging": true,
+      "sample_age_s": 0.22316939900338184,
+      "power_save": false,
+      "plugged": true,
+      "elapsed_s": 298.906,
+      "frame": 5700
+    },
+    {
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "battery_c": 29.1,
+      "charging": true,
+      "sample_age_s": 0.33291738100524526,
+      "power_save": false,
+      "plugged": true,
+      "elapsed_s": 299.969,
+      "frame": 5720
+    },
+    {
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "battery_c": 29.1,
+      "charging": true,
+      "sample_age_s": 0.40152390200819355,
+      "power_save": false,
+      "plugged": true,
+      "elapsed_s": 301.031,
+      "frame": 5740
+    },
+    {
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "battery_c": 29.1,
+      "charging": true,
+      "sample_age_s": 0.41001074999803677,
+      "power_save": false,
+      "plugged": true,
+      "elapsed_s": 302.094,
+      "frame": 5760
+    },
+    {
+      "battery_percent": 100,
+      "thermal_status": 0,
+      "battery_c": 29.1,
+      "charging": true,
+      "sample_age_s": 0.5888915449904744,
+      "power_save": false,
+      "plugged": true,
+      "elapsed_s": 303.234,
+      "frame": 5780
+    },
+    {
+      "plugged": true,
+      "thermal_status": 0,
+      "sample_age_s": 0.5919689500005916,
+      "battery_c": 30.5,
+      "battery_percent": 100,
+      "charging": true,
+      "power_save": false,
+      "elapsed_s": 304.312,
+      "frame": 5800
+    },
+    {
+      "plugged": true,
+      "thermal_status": 0,
+      "sample_age_s": 0.6307029599993257,
+      "battery_c": 30.5,
+      "battery_percent": 100,
+      "charging": true,
+      "power_save": false,
+      "elapsed_s": 305.344,
+      "frame": 5820
+    },
+    {
+      "plugged": true,
+      "thermal_status": 0,
+      "sample_age_s": 0.7132170489931013,
+      "battery_c": 30.5,
+      "battery_percent": 100,
+      "charging": true,
+      "power_save": false,
+      "elapsed_s": 306.375,
+      "frame": 5840
+    },
+    {
+      "plugged": true,
+      "thermal_status": 0,
+      "sample_age_s": 0.701725147999241,
+      "battery_c": 30.5,
+      "battery_percent": 100,
+      "charging": true,
+      "power_save": false,
+      "elapsed_s": 307.422,
+      "frame": 5860
+    },
+    {
+      "plugged": true,
+      "thermal_status": 0,
+      "sample_age_s": 0.7392358509969199,
+      "battery_c": 30.5,
+      "battery_percent": 100,
+      "charging": true,
+      "power_save": false,
+      "elapsed_s": 308.469,
+      "frame": 5880
+    },
+    {
+      "plugged": true,
+      "thermal_status": 0,
+      "sample_age_s": 0.7686705630039796,
+      "battery_c": 30.5,
+      "battery_percent": 100,
+      "charging": true,
+      "power_save": false,
+      "elapsed_s": 309.5,
+      "frame": 5900
+    },
+    {
+      "plugged": true,
+      "thermal_status": 0,
+      "sample_age_s": 0.803156317997491,
+      "battery_c": 30.5,
+      "battery_percent": 100,
+      "charging": true,
+      "power_save": false,
+      "elapsed_s": 310.547,
+      "frame": 5920
+    },
+    {
+      "plugged": true,
+      "thermal_status": 0,
+      "sample_age_s": 0.9019080879952526,
+      "battery_c": 30.5,
+      "battery_percent": 100,
+      "charging": true,
+      "power_save": false,
+      "elapsed_s": 311.578,
+      "frame": 5940
+    },
+    {
+      "plugged": true,
+      "thermal_status": 0,
+      "sample_age_s": 0.8857890520012006,
+      "battery_c": 30.5,
+      "battery_percent": 100,
+      "charging": true,
+      "power_save": false,
+      "elapsed_s": 312.625,
+      "frame": 5960
+    },
+    {
+      "plugged": true,
+      "thermal_status": 0,
+      "sample_age_s": 0.9909043459920213,
+      "battery_c": 30.5,
+      "battery_percent": 100,
+      "charging": true,
+      "power_save": false,
+      "elapsed_s": 313.687,
+      "frame": 5980
+    },
+    {
+      "plugged": true,
+      "thermal_status": 0,
+      "sample_age_s": 0.9674211339879548,
+      "battery_c": 30.5,
+      "battery_percent": 100,
+      "charging": true,
+      "power_save": false,
+      "elapsed_s": 314.719,
+      "frame": 6000
+    }
+  ],
+  "blocks_100": [
+    {
+      "end_frame": 100,
+      "elapsed_s": 6.422,
+      "round_trip": {
+        "mean_ms": 51.11087300465442,
+        "p95_ms": 55.66163491457701,
+        "p99_ms": 59.81480594258756,
+        "max_ms": 61.12219998613,
+        "over_50ms": 69
+      },
+      "inference": {
+        "mean_ms": 34.406569999999995,
+        "p95_ms": 36.275650000000006,
+        "p99_ms": 36.746140000000004,
+        "max_ms": 38.047,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 35.47945,
+        "p95_ms": 37.4518,
+        "p99_ms": 37.86654000000001,
+        "max_ms": 39.108,
+        "over_50ms": 0
+      }
+    },
+    {
+      "end_frame": 200,
+      "elapsed_s": 11.625,
+      "round_trip": {
+        "mean_ms": 51.524560005636886,
+        "p95_ms": 58.16999503294936,
+        "p99_ms": 63.94384802901186,
+        "max_ms": 64.23570006154478,
+        "over_50ms": 73
+      },
+      "inference": {
+        "mean_ms": 34.68958,
+        "p95_ms": 36.33865,
+        "p99_ms": 36.63761,
+        "max_ms": 36.797,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 35.868179999999995,
+        "p95_ms": 37.4025,
+        "p99_ms": 37.866929999999996,
+        "max_ms": 38.157,
+        "over_50ms": 0
+      }
+    },
+    {
+      "end_frame": 300,
+      "elapsed_s": 16.828,
+      "round_trip": {
+        "mean_ms": 51.63940200465731,
+        "p95_ms": 57.35348499729298,
+        "p99_ms": 64.84792798757555,
+        "max_ms": 68.9196001039818,
+        "over_50ms": 70
+      },
+      "inference": {
+        "mean_ms": 34.610040000000005,
+        "p95_ms": 36.195499999999996,
+        "p99_ms": 37.65650000000001,
+        "max_ms": 38.399,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 35.698499999999996,
+        "p95_ms": 37.82765,
+        "p99_ms": 38.838730000000005,
+        "max_ms": 39.604,
+        "over_50ms": 0
+      }
+    },
+    {
+      "end_frame": 400,
+      "elapsed_s": 22.062,
+      "round_trip": {
+        "mean_ms": 52.14604900102131,
+        "p95_ms": 58.14831500756552,
+        "p99_ms": 69.49771502637304,
+        "max_ms": 70.22190000861883,
+        "over_50ms": 78
+      },
+      "inference": {
+        "mean_ms": 34.82407,
+        "p95_ms": 36.6085,
+        "p99_ms": 37.01429,
+        "max_ms": 37.34,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 35.96494,
+        "p95_ms": 37.7828,
+        "p99_ms": 38.292880000000004,
+        "max_ms": 38.38,
+        "over_50ms": 0
+      }
+    },
+    {
+      "end_frame": 500,
+      "elapsed_s": 27.266,
+      "round_trip": {
+        "mean_ms": 51.551603003172204,
+        "p95_ms": 57.41764999693259,
+        "p99_ms": 63.61007200088355,
+        "max_ms": 69.05229995027184,
+        "over_50ms": 72
+      },
+      "inference": {
+        "mean_ms": 34.58854,
+        "p95_ms": 36.0086,
+        "p99_ms": 36.86038,
+        "max_ms": 36.898,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 35.72377,
+        "p95_ms": 37.23605,
+        "p99_ms": 38.25925,
+        "max_ms": 38.284,
+        "over_50ms": 0
+      }
+    },
+    {
+      "end_frame": 600,
+      "elapsed_s": 32.484,
+      "round_trip": {
+        "mean_ms": 51.91411200794391,
+        "p95_ms": 59.14593006600626,
+        "p99_ms": 63.35678405361252,
+        "max_ms": 67.25580000784248,
+        "over_50ms": 73
+      },
+      "inference": {
+        "mean_ms": 34.52447,
+        "p95_ms": 36.1345,
+        "p99_ms": 37.87669,
+        "max_ms": 38.539,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 35.6271,
+        "p95_ms": 37.381150000000005,
+        "p99_ms": 38.96732000000001,
+        "max_ms": 40.385,
+        "over_50ms": 0
+      }
+    },
+    {
+      "end_frame": 700,
+      "elapsed_s": 37.719,
+      "round_trip": {
+        "mean_ms": 51.57981099910103,
+        "p95_ms": 58.05955496034585,
+        "p99_ms": 64.44338793633506,
+        "max_ms": 65.45200000982732,
+        "over_50ms": 60
+      },
+      "inference": {
+        "mean_ms": 34.41623,
+        "p95_ms": 36.9164,
+        "p99_ms": 39.10838000000001,
+        "max_ms": 41.918,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 35.445479999999996,
+        "p95_ms": 38.264700000000005,
+        "p99_ms": 40.39055000000001,
+        "max_ms": 43.415,
+        "over_50ms": 0
+      }
+    },
+    {
+      "end_frame": 800,
+      "elapsed_s": 43.141,
+      "round_trip": {
+        "mean_ms": 53.953883005306125,
+        "p95_ms": 63.27023009653203,
+        "p99_ms": 68.49553400301396,
+        "max_ms": 109.55419996753335,
+        "over_50ms": 86
+      },
+      "inference": {
+        "mean_ms": 35.46761,
+        "p95_ms": 37.47355,
+        "p99_ms": 41.54735000000021,
+        "max_ms": 82.667,
+        "over_50ms": 1
+      },
+      "server_total": {
+        "mean_ms": 36.85388,
+        "p95_ms": 38.8672,
+        "p99_ms": 42.76645000000021,
+        "max_ms": 83.896,
+        "over_50ms": 1
+      }
+    },
+    {
+      "end_frame": 900,
+      "elapsed_s": 48.422,
+      "round_trip": {
+        "mean_ms": 52.47475699870847,
+        "p95_ms": 59.6298100426793,
+        "p99_ms": 66.94993898738177,
+        "max_ms": 70.24060003459454,
+        "over_50ms": 86
+      },
+      "inference": {
+        "mean_ms": 34.739090000000004,
+        "p95_ms": 36.37085,
+        "p99_ms": 37.45376,
+        "max_ms": 37.529,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 35.98901,
+        "p95_ms": 37.552949999999996,
+        "p99_ms": 38.69946,
+        "max_ms": 38.844,
+        "over_50ms": 0
+      }
+    },
+    {
+      "end_frame": 1000,
+      "elapsed_s": 53.625,
+      "round_trip": {
+        "mean_ms": 51.81853899732232,
+        "p95_ms": 57.22207992221229,
+        "p99_ms": 60.71176894009114,
+        "max_ms": 61.55019998550415,
+        "over_50ms": 78
+      },
+      "inference": {
+        "mean_ms": 34.73377000000001,
+        "p95_ms": 36.1739,
+        "p99_ms": 37.51176,
+        "max_ms": 38.082,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 35.94804,
+        "p95_ms": 37.71975,
+        "p99_ms": 38.6039,
+        "max_ms": 39.287,
+        "over_50ms": 0
+      }
+    },
+    {
+      "end_frame": 1100,
+      "elapsed_s": 58.828,
+      "round_trip": {
+        "mean_ms": 51.51824700064026,
+        "p95_ms": 60.806900094030425,
+        "p99_ms": 68.02509695058691,
+        "max_ms": 72.29170005302876,
+        "over_50ms": 55
+      },
+      "inference": {
+        "mean_ms": 34.54775,
+        "p95_ms": 36.5531,
+        "p99_ms": 37.52590000000001,
+        "max_ms": 37.813,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 35.76804,
+        "p95_ms": 37.92825,
+        "p99_ms": 40.4737,
+        "max_ms": 41.434,
+        "over_50ms": 0
+      }
+    },
+    {
+      "end_frame": 1200,
+      "elapsed_s": 64.125,
+      "round_trip": {
+        "mean_ms": 52.56128598935902,
+        "p95_ms": 61.69278995366767,
+        "p99_ms": 72.61659803101794,
+        "max_ms": 74.78449994232506,
+        "over_50ms": 73
+      },
+      "inference": {
+        "mean_ms": 34.78092000000001,
+        "p95_ms": 36.964999999999996,
+        "p99_ms": 40.81299000000003,
+        "max_ms": 47.247,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 36.15811,
+        "p95_ms": 39.1946,
+        "p99_ms": 44.27274000000002,
+        "max_ms": 48.108,
+        "over_50ms": 0
+      }
+    },
+    {
+      "end_frame": 1300,
+      "elapsed_s": 69.391,
+      "round_trip": {
+        "mean_ms": 52.1278319938574,
+        "p95_ms": 60.367175017017864,
+        "p99_ms": 64.79176998953336,
+        "max_ms": 67.81820009928197,
+        "over_50ms": 73
+      },
+      "inference": {
+        "mean_ms": 34.61888999999999,
+        "p95_ms": 37.630050000000004,
+        "p99_ms": 39.17339000000001,
+        "max_ms": 41.885,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 35.86693,
+        "p95_ms": 38.9524,
+        "p99_ms": 41.23443000000001,
+        "max_ms": 43.059,
+        "over_50ms": 0
+      }
+    },
+    {
+      "end_frame": 1400,
+      "elapsed_s": 74.656,
+      "round_trip": {
+        "mean_ms": 52.05942200496793,
+        "p95_ms": 61.194500053534284,
+        "p99_ms": 64.97313302010312,
+        "max_ms": 91.5975000243634,
+        "over_50ms": 68
+      },
+      "inference": {
+        "mean_ms": 34.92994,
+        "p95_ms": 38.053,
+        "p99_ms": 43.56060000000003,
+        "max_ms": 48.174,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 36.153980000000004,
+        "p95_ms": 39.253899999999994,
+        "p99_ms": 44.75703000000003,
+        "max_ms": 49.512,
+        "over_50ms": 0
+      }
+    },
+    {
+      "end_frame": 1500,
+      "elapsed_s": 79.922,
+      "round_trip": {
+        "mean_ms": 52.19283299869858,
+        "p95_ms": 61.53102500829845,
+        "p99_ms": 69.64085100218654,
+        "max_ms": 69.71519999206066,
+        "over_50ms": 73
+      },
+      "inference": {
+        "mean_ms": 34.63713,
+        "p95_ms": 36.0643,
+        "p99_ms": 37.35085000000001,
+        "max_ms": 38.623,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 35.90131,
+        "p95_ms": 37.5181,
+        "p99_ms": 38.63637000000001,
+        "max_ms": 39.762,
+        "over_50ms": 0
+      }
+    },
+    {
+      "end_frame": 1600,
+      "elapsed_s": 85.125,
+      "round_trip": {
+        "mean_ms": 51.422947999089956,
+        "p95_ms": 59.116119996178895,
+        "p99_ms": 67.80889900983313,
+        "max_ms": 69.56109998282045,
+        "over_50ms": 57
+      },
+      "inference": {
+        "mean_ms": 34.636799999999994,
+        "p95_ms": 36.8396,
+        "p99_ms": 38.543800000000005,
+        "max_ms": 38.722,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 35.740469999999995,
+        "p95_ms": 38.1838,
+        "p99_ms": 39.37763,
+        "max_ms": 39.935,
+        "over_50ms": 0
+      }
+    },
+    {
+      "end_frame": 1700,
+      "elapsed_s": 90.297,
+      "round_trip": {
+        "mean_ms": 51.075004988815635,
+        "p95_ms": 57.807990006404,
+        "p99_ms": 64.68584304093388,
+        "max_ms": 73.19420005660504,
+        "over_50ms": 55
+      },
+      "inference": {
+        "mean_ms": 34.57834,
+        "p95_ms": 36.2633,
+        "p99_ms": 38.409220000000005,
+        "max_ms": 39.025,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 35.71088999999999,
+        "p95_ms": 37.5657,
+        "p99_ms": 39.48519,
+        "max_ms": 40.098,
+        "over_50ms": 0
+      }
+    },
+    {
+      "end_frame": 1800,
+      "elapsed_s": 95.469,
+      "round_trip": {
+        "mean_ms": 50.74753800872713,
+        "p95_ms": 58.00374508835375,
+        "p99_ms": 68.07225008378744,
+        "max_ms": 82.81829999759793,
+        "over_50ms": 49
+      },
+      "inference": {
+        "mean_ms": 34.28397999999999,
+        "p95_ms": 36.5176,
+        "p99_ms": 37.20958000000002,
+        "max_ms": 39.346,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 35.406760000000006,
+        "p95_ms": 37.93044999999999,
+        "p99_ms": 39.266560000000005,
+        "max_ms": 40.411,
+        "over_50ms": 0
+      }
+    },
+    {
+      "end_frame": 1900,
+      "elapsed_s": 100.656,
+      "round_trip": {
+        "mean_ms": 51.350286001106724,
+        "p95_ms": 55.85296505014412,
+        "p99_ms": 67.63876098557382,
+        "max_ms": 81.6235999809578,
+        "over_50ms": 68
+      },
+      "inference": {
+        "mean_ms": 34.54551,
+        "p95_ms": 35.5563,
+        "p99_ms": 35.993410000000004,
+        "max_ms": 36.034,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 35.7253,
+        "p95_ms": 36.8501,
+        "p99_ms": 37.31225000000001,
+        "max_ms": 39.02,
+        "over_50ms": 0
+      }
+    },
+    {
+      "end_frame": 2000,
+      "elapsed_s": 105.797,
+      "round_trip": {
+        "mean_ms": 50.85364799830131,
+        "p95_ms": 54.62047001346946,
+        "p99_ms": 62.34610407846052,
+        "max_ms": 68.79140005912632,
+        "over_50ms": 62
+      },
+      "inference": {
+        "mean_ms": 34.563230000000004,
+        "p95_ms": 35.95535,
+        "p99_ms": 37.09695,
+        "max_ms": 37.389,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 35.74870000000001,
+        "p95_ms": 37.1633,
+        "p99_ms": 38.402820000000006,
+        "max_ms": 38.781,
+        "over_50ms": 0
+      }
+    },
+    {
+      "end_frame": 2100,
+      "elapsed_s": 111.094,
+      "round_trip": {
+        "mean_ms": 52.41308599943295,
+        "p95_ms": 61.06017996207811,
+        "p99_ms": 70.1318120234647,
+        "max_ms": 92.80400001443923,
+        "over_50ms": 69
+      },
+      "inference": {
+        "mean_ms": 34.84809,
+        "p95_ms": 37.62815,
+        "p99_ms": 40.97319,
+        "max_ms": 40.992,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 36.08664,
+        "p95_ms": 38.836949999999995,
+        "p99_ms": 42.06965,
+        "max_ms": 42.431,
+        "over_50ms": 0
+      }
+    },
+    {
+      "end_frame": 2200,
+      "elapsed_s": 116.359,
+      "round_trip": {
+        "mean_ms": 52.10997801157646,
+        "p95_ms": 61.0220100148581,
+        "p99_ms": 66.01756499498153,
+        "max_ms": 67.71690002642572,
+        "over_50ms": 70
+      },
+      "inference": {
+        "mean_ms": 34.733059999999995,
+        "p95_ms": 36.76645,
+        "p99_ms": 37.58471,
+        "max_ms": 37.655,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 35.94128,
+        "p95_ms": 38.3633,
+        "p99_ms": 38.861230000000006,
+        "max_ms": 39.676,
+        "over_50ms": 0
+      }
+    },
+    {
+      "end_frame": 2300,
+      "elapsed_s": 121.609,
+      "round_trip": {
+        "mean_ms": 52.01678000856191,
+        "p95_ms": 61.06984501238912,
+        "p99_ms": 69.12365101161414,
+        "max_ms": 72.36600003670901,
+        "over_50ms": 67
+      },
+      "inference": {
+        "mean_ms": 34.57909,
+        "p95_ms": 35.88495,
+        "p99_ms": 36.60679000000001,
+        "max_ms": 38.764,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 35.76387,
+        "p95_ms": 37.21965,
+        "p99_ms": 37.619410000000016,
+        "max_ms": 39.838,
+        "over_50ms": 0
+      }
+    },
+    {
+      "end_frame": 2400,
+      "elapsed_s": 126.953,
+      "round_trip": {
+        "mean_ms": 53.09105799882673,
+        "p95_ms": 64.1627500357572,
+        "p99_ms": 77.2127240535338,
+        "max_ms": 87.61010004673153,
+        "over_50ms": 72
+      },
+      "inference": {
+        "mean_ms": 35.12173,
+        "p95_ms": 38.38629999999999,
+        "p99_ms": 47.20111000000013,
+        "max_ms": 72.457,
+        "over_50ms": 1
+      },
+      "server_total": {
+        "mean_ms": 36.368860000000005,
+        "p95_ms": 39.58919999999999,
+        "p99_ms": 52.48939000000011,
+        "max_ms": 73.516,
+        "over_50ms": 2
+      }
+    },
+    {
+      "end_frame": 2500,
+      "elapsed_s": 132.156,
+      "round_trip": {
+        "mean_ms": 51.48073599440977,
+        "p95_ms": 55.85836499230936,
+        "p99_ms": 60.41010597022251,
+        "max_ms": 61.25219992827624,
+        "over_50ms": 72
+      },
+      "inference": {
+        "mean_ms": 34.653059999999996,
+        "p95_ms": 36.185449999999996,
+        "p99_ms": 36.582330000000006,
+        "max_ms": 37.209,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 35.914339999999996,
+        "p95_ms": 37.4312,
+        "p99_ms": 38.32464,
+        "max_ms": 38.883,
+        "over_50ms": 0
+      }
+    },
+    {
+      "end_frame": 2600,
+      "elapsed_s": 137.437,
+      "round_trip": {
+        "mean_ms": 52.40421099355444,
+        "p95_ms": 59.924494987353675,
+        "p99_ms": 64.47489099926318,
+        "max_ms": 70.80009998753667,
+        "over_50ms": 78
+      },
+      "inference": {
+        "mean_ms": 34.76559,
+        "p95_ms": 36.84965,
+        "p99_ms": 38.71899,
+        "max_ms": 38.916,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 35.909060000000004,
+        "p95_ms": 38.56115,
+        "p99_ms": 40.02024,
+        "max_ms": 40.341,
+        "over_50ms": 0
+      }
+    },
+    {
+      "end_frame": 2700,
+      "elapsed_s": 142.625,
+      "round_trip": {
+        "mean_ms": 51.058173996862024,
+        "p95_ms": 56.30367495468817,
+        "p99_ms": 65.36255504586737,
+        "max_ms": 71.15949993021786,
+        "over_50ms": 63
+      },
+      "inference": {
+        "mean_ms": 34.341989999999996,
+        "p95_ms": 35.9214,
+        "p99_ms": 36.85894,
+        "max_ms": 37.051,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 35.376270000000005,
+        "p95_ms": 37.13175,
+        "p99_ms": 38.02239,
+        "max_ms": 38.358,
+        "over_50ms": 0
+      }
+    },
+    {
+      "end_frame": 2800,
+      "elapsed_s": 147.828,
+      "round_trip": {
+        "mean_ms": 51.375508999917656,
+        "p95_ms": 56.5405449771788,
+        "p99_ms": 65.30725295422602,
+        "max_ms": 69.86649997998029,
+        "over_50ms": 70
+      },
+      "inference": {
+        "mean_ms": 34.43745,
+        "p95_ms": 36.0603,
+        "p99_ms": 36.45390000000001,
+        "max_ms": 38.028,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 35.71344,
+        "p95_ms": 37.7204,
+        "p99_ms": 38.84507,
+        "max_ms": 39.149,
+        "over_50ms": 0
+      }
+    },
+    {
+      "end_frame": 2900,
+      "elapsed_s": 153.078,
+      "round_trip": {
+        "mean_ms": 51.956304997438565,
+        "p95_ms": 63.0041450902354,
+        "p99_ms": 70.9970589238219,
+        "max_ms": 71.65629998780787,
+        "over_50ms": 72
+      },
+      "inference": {
+        "mean_ms": 34.52971,
+        "p95_ms": 36.1494,
+        "p99_ms": 37.69398,
+        "max_ms": 38.583,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 35.77047,
+        "p95_ms": 37.7509,
+        "p99_ms": 38.81608000000001,
+        "max_ms": 40.012,
+        "over_50ms": 0
+      }
+    },
+    {
+      "end_frame": 3000,
+      "elapsed_s": 158.328,
+      "round_trip": {
+        "mean_ms": 52.09718200494535,
+        "p95_ms": 59.578734973911196,
+        "p99_ms": 69.47390602552333,
+        "max_ms": 70.89020009152591,
+        "over_50ms": 70
+      },
+      "inference": {
+        "mean_ms": 34.532779999999995,
+        "p95_ms": 35.722950000000004,
+        "p99_ms": 37.12279,
+        "max_ms": 37.597,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 35.790929999999996,
+        "p95_ms": 37.07555,
+        "p99_ms": 39.26127000000001,
+        "max_ms": 40.179,
+        "over_50ms": 0
+      }
+    },
+    {
+      "end_frame": 3100,
+      "elapsed_s": 163.562,
+      "round_trip": {
+        "mean_ms": 52.01269399840385,
+        "p95_ms": 56.722564931260415,
+        "p99_ms": 70.85834306664766,
+        "max_ms": 72.55549996625632,
+        "over_50ms": 79
+      },
+      "inference": {
+        "mean_ms": 34.77368,
+        "p95_ms": 36.31545,
+        "p99_ms": 38.212950000000006,
+        "max_ms": 38.901,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 36.033970000000004,
+        "p95_ms": 37.846599999999995,
+        "p99_ms": 39.510780000000004,
+        "max_ms": 40.083,
+        "over_50ms": 0
+      }
+    },
+    {
+      "end_frame": 3200,
+      "elapsed_s": 168.891,
+      "round_trip": {
+        "mean_ms": 52.930941010126844,
+        "p95_ms": 64.51880003442056,
+        "p99_ms": 67.83244497142749,
+        "max_ms": 101.1701999232173,
+        "over_50ms": 78
+      },
+      "inference": {
+        "mean_ms": 34.713119999999996,
+        "p95_ms": 37.71435,
+        "p99_ms": 40.311060000000005,
+        "max_ms": 41.208,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 36.05776,
+        "p95_ms": 39.01075,
+        "p99_ms": 42.439910000000005,
+        "max_ms": 43.124,
+        "over_50ms": 0
+      }
+    },
+    {
+      "end_frame": 3300,
+      "elapsed_s": 174.312,
+      "round_trip": {
+        "mean_ms": 53.91923799761571,
+        "p95_ms": 59.952105034608394,
+        "p99_ms": 75.51421202020761,
+        "max_ms": 155.81429994199425,
+        "over_50ms": 73
+      },
+      "inference": {
+        "mean_ms": 34.52311,
+        "p95_ms": 37.6526,
+        "p99_ms": 38.18473,
+        "max_ms": 39.742,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 35.893,
+        "p95_ms": 38.8717,
+        "p99_ms": 39.69568000000001,
+        "max_ms": 41.545,
+        "over_50ms": 0
+      }
+    },
+    {
+      "end_frame": 3400,
+      "elapsed_s": 179.578,
+      "round_trip": {
+        "mean_ms": 52.12901800055988,
+        "p95_ms": 62.07572505809367,
+        "p99_ms": 68.73332401039079,
+        "max_ms": 69.65639989357442,
+        "over_50ms": 62
+      },
+      "inference": {
+        "mean_ms": 34.81335,
+        "p95_ms": 37.0457,
+        "p99_ms": 39.59432,
+        "max_ms": 39.725,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 36.0331,
+        "p95_ms": 38.35655,
+        "p99_ms": 40.713860000000004,
+        "max_ms": 40.898,
+        "over_50ms": 0
+      }
+    },
+    {
+      "end_frame": 3500,
+      "elapsed_s": 184.891,
+      "round_trip": {
+        "mean_ms": 52.53487700712867,
+        "p95_ms": 61.465330014470965,
+        "p99_ms": 77.92594698723414,
+        "max_ms": 94.7110999841243,
+        "over_50ms": 72
+      },
+      "inference": {
+        "mean_ms": 34.92332,
+        "p95_ms": 37.4047,
+        "p99_ms": 40.90612000000002,
+        "max_ms": 44.977,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 36.16179,
+        "p95_ms": 38.9806,
+        "p99_ms": 43.87921000000001,
+        "max_ms": 45.781,
+        "over_50ms": 0
+      }
+    },
+    {
+      "end_frame": 3600,
+      "elapsed_s": 190.141,
+      "round_trip": {
+        "mean_ms": 51.90954598831013,
+        "p95_ms": 62.32416505226865,
+        "p99_ms": 67.43793297675441,
+        "max_ms": 72.25259998813272,
+        "over_50ms": 61
+      },
+      "inference": {
+        "mean_ms": 34.53319,
+        "p95_ms": 36.18925,
+        "p99_ms": 37.429550000000006,
+        "max_ms": 39.068,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 35.70074,
+        "p95_ms": 37.8514,
+        "p99_ms": 40.14828,
+        "max_ms": 40.275,
+        "over_50ms": 0
+      }
+    },
+    {
+      "end_frame": 3700,
+      "elapsed_s": 195.375,
+      "round_trip": {
+        "mean_ms": 51.71822099597193,
+        "p95_ms": 59.12883000564761,
+        "p99_ms": 65.90878497343512,
+        "max_ms": 67.71900004241616,
+        "over_50ms": 65
+      },
+      "inference": {
+        "mean_ms": 34.592290000000006,
+        "p95_ms": 36.0235,
+        "p99_ms": 38.97619000000001,
+        "max_ms": 40.282,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 35.81415000000001,
+        "p95_ms": 37.99315,
+        "p99_ms": 40.20080000000001,
+        "max_ms": 41.369,
+        "over_50ms": 0
+      }
+    },
+    {
+      "end_frame": 3800,
+      "elapsed_s": 200.609,
+      "round_trip": {
+        "mean_ms": 52.029770995723084,
+        "p95_ms": 62.13632496073842,
+        "p99_ms": 69.0281609853264,
+        "max_ms": 69.21240000519902,
+        "over_50ms": 77
+      },
+      "inference": {
+        "mean_ms": 34.62664,
+        "p95_ms": 36.158100000000005,
+        "p99_ms": 37.54385,
+        "max_ms": 37.826,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 35.82873,
+        "p95_ms": 37.41,
+        "p99_ms": 38.75189,
+        "max_ms": 38.939,
+        "over_50ms": 0
+      }
+    },
+    {
+      "end_frame": 3900,
+      "elapsed_s": 205.797,
+      "round_trip": {
+        "mean_ms": 51.14873499376699,
+        "p95_ms": 56.71671005547977,
+        "p99_ms": 61.84280700166711,
+        "max_ms": 64.86299994867295,
+        "over_50ms": 59
+      },
+      "inference": {
+        "mean_ms": 34.44624,
+        "p95_ms": 36.47275,
+        "p99_ms": 37.312670000000004,
+        "max_ms": 38.27,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 35.67042,
+        "p95_ms": 37.67295,
+        "p99_ms": 39.67075000000002,
+        "max_ms": 44.101,
+        "over_50ms": 0
+      }
+    },
+    {
+      "end_frame": 4000,
+      "elapsed_s": 211.016,
+      "round_trip": {
+        "mean_ms": 51.65239000925794,
+        "p95_ms": 58.77605504356324,
+        "p99_ms": 66.39888293459082,
+        "max_ms": 70.31760003883392,
+        "over_50ms": 69
+      },
+      "inference": {
+        "mean_ms": 34.7563,
+        "p95_ms": 37.3659,
+        "p99_ms": 38.45948000000001,
+        "max_ms": 41.576,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 36.02111,
+        "p95_ms": 38.44125,
+        "p99_ms": 39.747950000000024,
+        "max_ms": 43.307,
+        "over_50ms": 0
+      }
+    },
+    {
+      "end_frame": 4100,
+      "elapsed_s": 216.219,
+      "round_trip": {
+        "mean_ms": 51.49291199981235,
+        "p95_ms": 57.751614990411326,
+        "p99_ms": 60.68000705214223,
+        "max_ms": 72.04590004403144,
+        "over_50ms": 59
+      },
+      "inference": {
+        "mean_ms": 34.601079999999996,
+        "p95_ms": 36.57295,
+        "p99_ms": 37.25612,
+        "max_ms": 37.862,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 35.78385,
+        "p95_ms": 37.94195,
+        "p99_ms": 38.377390000000005,
+        "max_ms": 39.01,
+        "over_50ms": 0
+      }
+    },
+    {
+      "end_frame": 4200,
+      "elapsed_s": 221.375,
+      "round_trip": {
+        "mean_ms": 50.84882799303159,
+        "p95_ms": 56.598934991052374,
+        "p99_ms": 65.91866303933784,
+        "max_ms": 66.32089999038726,
+        "over_50ms": 53
+      },
+      "inference": {
+        "mean_ms": 34.52557999999999,
+        "p95_ms": 35.76775,
+        "p99_ms": 36.78866000000002,
+        "max_ms": 41.111,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 35.64927000000001,
+        "p95_ms": 36.88565,
+        "p99_ms": 38.009790000000024,
+        "max_ms": 42.246,
+        "over_50ms": 0
+      }
+    },
+    {
+      "end_frame": 4300,
+      "elapsed_s": 226.562,
+      "round_trip": {
+        "mean_ms": 51.51437799795531,
+        "p95_ms": 57.122340035857626,
+        "p99_ms": 66.1001429997851,
+        "max_ms": 81.96420001331717,
+        "over_50ms": 67
+      },
+      "inference": {
+        "mean_ms": 34.667590000000004,
+        "p95_ms": 36.502050000000004,
+        "p99_ms": 36.775850000000005,
+        "max_ms": 37.058,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 35.86982,
+        "p95_ms": 37.703649999999996,
+        "p99_ms": 38.14865000000001,
+        "max_ms": 40.094,
+        "over_50ms": 0
+      }
+    },
+    {
+      "end_frame": 4400,
+      "elapsed_s": 231.797,
+      "round_trip": {
+        "mean_ms": 51.64388000033796,
+        "p95_ms": 59.77864497690461,
+        "p99_ms": 65.39090099278843,
+        "max_ms": 77.72639999166131,
+        "over_50ms": 63
+      },
+      "inference": {
+        "mean_ms": 34.707930000000005,
+        "p95_ms": 36.36875,
+        "p99_ms": 37.61554,
+        "max_ms": 38.659,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 35.87837,
+        "p95_ms": 37.7378,
+        "p99_ms": 38.75254,
+        "max_ms": 39.796,
+        "over_50ms": 0
+      }
+    },
+    {
+      "end_frame": 4500,
+      "elapsed_s": 236.984,
+      "round_trip": {
+        "mean_ms": 51.386401002528146,
+        "p95_ms": 58.969624963356175,
+        "p99_ms": 64.66669006505981,
+        "max_ms": 64.8933999473229,
+        "over_50ms": 58
+      },
+      "inference": {
+        "mean_ms": 34.54321,
+        "p95_ms": 35.903400000000005,
+        "p99_ms": 36.721779999999995,
+        "max_ms": 36.799,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 35.74879,
+        "p95_ms": 37.3474,
+        "p99_ms": 38.33113,
+        "max_ms": 38.74,
+        "over_50ms": 0
+      }
+    },
+    {
+      "end_frame": 4600,
+      "elapsed_s": 242.172,
+      "round_trip": {
+        "mean_ms": 51.05566800106317,
+        "p95_ms": 57.93238002224825,
+        "p99_ms": 62.20601999550131,
+        "max_ms": 71.0091000655666,
+        "over_50ms": 65
+      },
+      "inference": {
+        "mean_ms": 34.470549999999996,
+        "p95_ms": 36.405049999999996,
+        "p99_ms": 38.01903,
+        "max_ms": 38.22,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 35.57501,
+        "p95_ms": 37.856700000000004,
+        "p99_ms": 39.351,
+        "max_ms": 39.45,
+        "over_50ms": 0
+      }
+    },
+    {
+      "end_frame": 4700,
+      "elapsed_s": 247.359,
+      "round_trip": {
+        "mean_ms": 51.14740600110963,
+        "p95_ms": 58.08519000420347,
+        "p99_ms": 60.48378900624814,
+        "max_ms": 65.13570004608482,
+        "over_50ms": 59
+      },
+      "inference": {
+        "mean_ms": 34.6047,
+        "p95_ms": 36.39315,
+        "p99_ms": 39.32694,
+        "max_ms": 39.618,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 35.76862000000001,
+        "p95_ms": 37.5903,
+        "p99_ms": 40.452510000000004,
+        "max_ms": 40.899,
+        "over_50ms": 0
+      }
+    },
+    {
+      "end_frame": 4800,
+      "elapsed_s": 252.578,
+      "round_trip": {
+        "mean_ms": 51.64789600297809,
+        "p95_ms": 58.87455496704205,
+        "p99_ms": 69.67129506403583,
+        "max_ms": 74.97720001265407,
+        "over_50ms": 64
+      },
+      "inference": {
+        "mean_ms": 34.68402,
+        "p95_ms": 37.37445,
+        "p99_ms": 38.02865000000001,
+        "max_ms": 39.974,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 35.973240000000004,
+        "p95_ms": 38.552299999999995,
+        "p99_ms": 41.472210000000025,
+        "max_ms": 45.948,
+        "over_50ms": 0
+      }
+    },
+    {
+      "end_frame": 4900,
+      "elapsed_s": 257.781,
+      "round_trip": {
+        "mean_ms": 51.65601700427942,
+        "p95_ms": 59.22033994575031,
+        "p99_ms": 61.60671902005562,
+        "max_ms": 63.72720003128052,
+        "over_50ms": 76
+      },
+      "inference": {
+        "mean_ms": 34.74347,
+        "p95_ms": 36.702149999999996,
+        "p99_ms": 39.234559999999995,
+        "max_ms": 39.389,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 35.90832,
+        "p95_ms": 37.7816,
+        "p99_ms": 40.65754000000001,
+        "max_ms": 41.602,
+        "over_50ms": 0
+      }
+    },
+    {
+      "end_frame": 5000,
+      "elapsed_s": 262.937,
+      "round_trip": {
+        "mean_ms": 50.987697002710775,
+        "p95_ms": 56.43838003161363,
+        "p99_ms": 57.863436035113445,
+        "max_ms": 64.56930004060268,
+        "over_50ms": 62
+      },
+      "inference": {
+        "mean_ms": 34.47712,
+        "p95_ms": 36.270500000000006,
+        "p99_ms": 37.29679,
+        "max_ms": 37.87,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 35.623650000000005,
+        "p95_ms": 37.5325,
+        "p99_ms": 38.427980000000005,
+        "max_ms": 39.119,
+        "over_50ms": 0
+      }
+    },
+    {
+      "end_frame": 5100,
+      "elapsed_s": 268.187,
+      "round_trip": {
+        "mean_ms": 52.18590000178665,
+        "p95_ms": 57.05333997611888,
+        "p99_ms": 74.58813300007026,
+        "max_ms": 80.13540005777031,
+        "over_50ms": 73
+      },
+      "inference": {
+        "mean_ms": 34.70965,
+        "p95_ms": 37.0158,
+        "p99_ms": 39.32555000000001,
+        "max_ms": 41.855,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 35.94323,
+        "p95_ms": 38.7889,
+        "p99_ms": 40.31728000000001,
+        "max_ms": 43.216,
+        "over_50ms": 0
+      }
+    },
+    {
+      "end_frame": 5200,
+      "elapsed_s": 273.562,
+      "round_trip": {
+        "mean_ms": 53.06316300528124,
+        "p95_ms": 64.4405749742873,
+        "p99_ms": 69.61068600998266,
+        "max_ms": 81.72689995262772,
+        "over_50ms": 69
+      },
+      "inference": {
+        "mean_ms": 34.40666,
+        "p95_ms": 36.157999999999994,
+        "p99_ms": 38.589430000000036,
+        "max_ms": 44.572,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 35.58927,
+        "p95_ms": 38.859750000000005,
+        "p99_ms": 39.78220000000003,
+        "max_ms": 45.94,
+        "over_50ms": 0
+      }
+    },
+    {
+      "end_frame": 5300,
+      "elapsed_s": 278.844,
+      "round_trip": {
+        "mean_ms": 52.441188000375405,
+        "p95_ms": 63.306244980776675,
+        "p99_ms": 69.53172608045861,
+        "max_ms": 69.87089989706874,
+        "over_50ms": 64
+      },
+      "inference": {
+        "mean_ms": 34.63921,
+        "p95_ms": 36.27355,
+        "p99_ms": 39.07857,
+        "max_ms": 39.234,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 35.86972,
+        "p95_ms": 38.003550000000004,
+        "p99_ms": 40.40115,
+        "max_ms": 40.911,
+        "over_50ms": 0
+      }
+    },
+    {
+      "end_frame": 5400,
+      "elapsed_s": 284.062,
+      "round_trip": {
+        "mean_ms": 51.710766011383384,
+        "p95_ms": 59.1136900417041,
+        "p99_ms": 66.52403702028096,
+        "max_ms": 66.56730000395328,
+        "over_50ms": 69
+      },
+      "inference": {
+        "mean_ms": 34.505739999999996,
+        "p95_ms": 36.497499999999995,
+        "p99_ms": 36.97403,
+        "max_ms": 37.175,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 35.69705,
+        "p95_ms": 37.62315,
+        "p99_ms": 38.22308000000001,
+        "max_ms": 40.706,
+        "over_50ms": 0
+      }
+    },
+    {
+      "end_frame": 5500,
+      "elapsed_s": 289.297,
+      "round_trip": {
+        "mean_ms": 51.90487500745803,
+        "p95_ms": 59.30148997576907,
+        "p99_ms": 61.12089995527641,
+        "max_ms": 62.912800000049174,
+        "over_50ms": 75
+      },
+      "inference": {
+        "mean_ms": 34.66266,
+        "p95_ms": 36.0693,
+        "p99_ms": 37.105940000000004,
+        "max_ms": 37.892,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 35.91248,
+        "p95_ms": 37.44135,
+        "p99_ms": 39.25121,
+        "max_ms": 39.272,
+        "over_50ms": 0
+      }
+    },
+    {
+      "end_frame": 5600,
+      "elapsed_s": 294.625,
+      "round_trip": {
+        "mean_ms": 52.832436001626775,
+        "p95_ms": 65.67193495575339,
+        "p99_ms": 69.9164969578851,
+        "max_ms": 70.61910000629723,
+        "over_50ms": 78
+      },
+      "inference": {
+        "mean_ms": 34.673759999999994,
+        "p95_ms": 36.4477,
+        "p99_ms": 38.15524000000001,
+        "max_ms": 41.149,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 35.77295000000001,
+        "p95_ms": 37.59415,
+        "p99_ms": 39.24914000000002,
+        "max_ms": 42.332,
+        "over_50ms": 0
+      }
+    },
+    {
+      "end_frame": 5700,
+      "elapsed_s": 299.922,
+      "round_trip": {
+        "mean_ms": 52.53349100239575,
+        "p95_ms": 63.24133999296463,
+        "p99_ms": 69.59779900265859,
+        "max_ms": 71.45889999810606,
+        "over_50ms": 73
+      },
+      "inference": {
+        "mean_ms": 34.681850000000004,
+        "p95_ms": 36.704950000000004,
+        "p99_ms": 38.58904,
+        "max_ms": 38.593,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 35.81874,
+        "p95_ms": 37.7574,
+        "p99_ms": 39.607350000000004,
+        "max_ms": 39.741,
+        "over_50ms": 0
+      }
+    },
+    {
+      "end_frame": 5800,
+      "elapsed_s": 305.297,
+      "round_trip": {
+        "mean_ms": 53.33911799592897,
+        "p95_ms": 65.96553999115712,
+        "p99_ms": 84.32638990925646,
+        "max_ms": 124.30160003714263,
+        "over_50ms": 72
+      },
+      "inference": {
+        "mean_ms": 34.71239,
+        "p95_ms": 37.3347,
+        "p99_ms": 38.566600000000044,
+        "max_ms": 46.15,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 35.85506,
+        "p95_ms": 38.5257,
+        "p99_ms": 39.574210000000036,
+        "max_ms": 46.624,
+        "over_50ms": 0
+      }
+    },
+    {
+      "end_frame": 5900,
+      "elapsed_s": 310.484,
+      "round_trip": {
+        "mean_ms": 51.46479300223291,
+        "p95_ms": 56.11009004060179,
+        "p99_ms": 61.02711694664323,
+        "max_ms": 64.24630002584308,
+        "over_50ms": 74
+      },
+      "inference": {
+        "mean_ms": 34.63045,
+        "p95_ms": 36.36405,
+        "p99_ms": 37.884800000000006,
+        "max_ms": 39.944,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 35.90789000000001,
+        "p95_ms": 38.136199999999995,
+        "p99_ms": 39.08774000000001,
+        "max_ms": 41.042,
+        "over_50ms": 0
+      }
+    },
+    {
+      "end_frame": 6000,
+      "elapsed_s": 315.703,
+      "round_trip": {
+        "mean_ms": 51.75754899973981,
+        "p95_ms": 57.11903509218246,
+        "p99_ms": 65.06642502383333,
+        "max_ms": 72.11770000867546,
+        "over_50ms": 75
+      },
+      "inference": {
+        "mean_ms": 34.61136,
+        "p95_ms": 35.8172,
+        "p99_ms": 36.90674,
+        "max_ms": 37.574,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 35.79373999999999,
+        "p95_ms": 36.9754,
+        "p99_ms": 38.01091,
+        "max_ms": 38.695,
+        "over_50ms": 0
+      }
+    }
+  ],
+  "driving_ready": false,
+  "server_guard": "100-frame server p95 <50 ms and each server time <100 ms",
+  "round_trip": {
+    "mean_ms": 51.903757434124906,
+    "p50_ms": 50.966499955393374,
+    "p95_ms": 60.29335994971917,
+    "p99_ms": 69.14141704095529,
+    "max_ms": 155.81429994199425,
+    "over_50ms": 4124
+  },
+  "inference": {
+    "mean_ms": 34.64375383333333,
+    "p50_ms": 34.543499999999995,
+    "p95_ms": 36.58215,
+    "p99_ms": 38.59330000000001,
+    "max_ms": 82.667,
+    "over_50ms": 2
+  },
+  "queues": {
+    "mean_ms": 1.121122,
+    "p50_ms": 1.0525,
+    "p95_ms": 1.7572500000000009,
+    "p99_ms": 3.3140700000000014,
+    "max_ms": 11.309,
+    "over_50ms": 0
+  },
+  "server_total": {
+    "mean_ms": 35.84279733333333,
+    "p50_ms": 35.7705,
+    "p95_ms": 38.00815,
+    "p99_ms": 40.189650000000015,
+    "max_ms": 83.896,
+    "over_50ms": 3
+  },
+  "blocks_1200": [
+    {
+      "start_frame": 0,
+      "frames": 1200,
+      "round_trip_p95_ms": 59.137310064397745,
+      "server_p95_ms": 37.918749999999996
+    },
+    {
+      "start_frame": 1200,
+      "frames": 1200,
+      "round_trip_p95_ms": 60.77754501020536,
+      "server_p95_ms": 38.139050000000005
+    },
+    {
+      "start_frame": 2400,
+      "frames": 1200,
+      "round_trip_p95_ms": 60.87249498814344,
+      "server_p95_ms": 38.2584
+    },
+    {
+      "start_frame": 3600,
+      "frames": 1200,
+      "round_trip_p95_ms": 58.87657496496103,
+      "server_p95_ms": 37.847
+    },
+    {
+      "start_frame": 4800,
+      "frames": 1200,
+      "round_trip_p95_ms": 60.99696995224804,
+      "server_p95_ms": 37.9634
+    }
+  ],
+  "protocol_pass": true,
+  "server_timing_pass": true,
+  "round_trip_timing_pass": false
+}

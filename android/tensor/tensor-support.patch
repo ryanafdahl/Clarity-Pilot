@@ -1,16 +1,5 @@
-diff --git a/.gitignore b/.gitignore
-index 4b1e1b7..879dc74 100644
---- a/.gitignore
-+++ b/.gitignore
-@@ -30,3 +30,6 @@ dist/
- *.certSigningRequest
- *.mobileprovision
- *.provisionprofile
-+
-+# Downloaded, hash-verified by android/scripts/fetch-tensor-runtime.py
-+/android/app/src/main/jniLibs/arm64-v8a/libLiteRtDispatch_GoogleTensor.so
 diff --git a/JetlinkKit/Package.swift b/JetlinkKit/Package.swift
-index dd507ff..1fd48fb 100644
+index 0e01a44..17ff15c 100644
 --- a/JetlinkKit/Package.swift
 +++ b/JetlinkKit/Package.swift
 @@ -48,6 +48,7 @@ let package = Package(
@@ -30,18 +19,10 @@ index dd507ff..1fd48fb 100644
      // onnxruntime's own iOS/macOS build, the archive its CocoaPods pod and Swift
      // package ship: a static xcframework with device, simulator and macOS
 diff --git a/JetlinkKit/Sources/CLiteRt/include/jl_litert.h b/JetlinkKit/Sources/CLiteRt/include/jl_litert.h
-index 892e8b6..83b49f6 100644
+index 0651c52..5b5605c 100644
 --- a/JetlinkKit/Sources/CLiteRt/include/jl_litert.h
 +++ b/JetlinkKit/Sources/CLiteRt/include/jl_litert.h
-@@ -27,6 +27,7 @@ extern "C" {
- enum {
-   JL_LITERT_CPU = 1,
-   JL_LITERT_GPU = 2,
-+  JL_LITERT_NPU = 4,
- };
- 
- typedef struct jl_litert_model jl_litert_model;
-@@ -36,6 +37,8 @@ typedef struct {
+@@ -39,6 +39,8 @@ typedef struct {
    // The GPU alone, in fp16 (1), so an op it cannot run fails the compile
    // rather than run on the CPU; or the CPU alone (0).
    int gpu;
@@ -51,7 +32,7 @@ index 892e8b6..83b49f6 100644
    int cpu_threads;
    // Where the GPU keeps the programs it compiled between runs, under a key
 diff --git a/JetlinkKit/Sources/CLiteRt/jl_litert.c b/JetlinkKit/Sources/CLiteRt/jl_litert.c
-index d51ae07..5cd063e 100644
+index e14a474..467af84 100644
 --- a/JetlinkKit/Sources/CLiteRt/jl_litert.c
 +++ b/JetlinkKit/Sources/CLiteRt/jl_litert.c
 @@ -16,6 +16,7 @@
@@ -62,15 +43,14 @@ index d51ae07..5cd063e 100644
  #include "litert/c/litert_tensor_buffer.h"
  #include "litert/c/litert_tensor_buffer_requirements.h"
  
-@@ -181,14 +182,13 @@ char *jl_litert_open(const char *directory) {
+@@ -190,13 +191,12 @@ char *jl_litert_open(const char *directory) {
    lrt.LiteRtSetMinLoggerSeverity(lrt.LiteRtGetDefaultLogger(), kLiteRtLogSeverityWarning);
  
    // The GPU accelerator is a library of its own, which LiteRT opens from the
--  // runtime library directory. The CPU and the GPU only: an NPU's dispatch
--  // libraries are looked for otherwise, and none ship with jetlink yet.
-+  // runtime directory also holds the optional Google Tensor dispatch library.
-   static char *runtime_dir;
+-  // runtime library directory. The CPU and the GPU only: a model for an NPU
+-  // gets an environment of its own (npu_environment).
 -  LiteRtEnvOption options[2];
++  // runtime directory holds the optional Tensor AOT dispatch library.
 +  LiteRtEnvOption options[3];
    int n_options = 0;
    options[n_options].tag = kLiteRtEnvOptionTagAutoRegisterAccelerators;
@@ -79,8 +59,8 @@ index d51ae07..5cd063e 100644
 +  options[n_options].value.int_value = kLiteRtHwAcceleratorCpu | kLiteRtHwAcceleratorGpu | kLiteRtHwAcceleratorNpu;
    n_options++;
    if (named) {
-     // kept for the life of the process, as the environment is
-@@ -197,6 +197,10 @@ char *jl_litert_open(const char *directory) {
+     runtime_dir = copy(directory);
+@@ -204,6 +204,10 @@ char *jl_litert_open(const char *directory) {
      options[n_options].value.type = kLiteRtAnyTypeString;
      options[n_options].value.str_value = runtime_dir;
      n_options++;
@@ -91,13 +71,17 @@ index d51ae07..5cd063e 100644
    }
    char *error = take(lrt.LiteRtCreateEnvironment(n_options, options, &environment), "LiteRtCreateEnvironment");
    if (error != NULL) {
-@@ -391,8 +395,13 @@ static char *compile(jl_litert_model *m, const char *path, const jl_litert_optio
+@@ -444,12 +448,17 @@ static char *compile(jl_litert_model *m, const char *path, const jl_litert_optio
      return error;
    }
    TRY(LiteRtCreateOptions, &m->options);
--  TRY(LiteRtSetOptionsHardwareAccelerators, m->options, o->gpu ? kLiteRtHwAcceleratorGpu : kLiteRtHwAcceleratorCpu);
+-  LiteRtHwAcceleratorSet hardware = o->gpu ? kLiteRtHwAcceleratorGpu : kLiteRtHwAcceleratorCpu;
++  LiteRtHwAcceleratorSet hardware = o->npu ? kLiteRtHwAcceleratorNpu : (o->gpu ? kLiteRtHwAcceleratorGpu : kLiteRtHwAcceleratorCpu);
+   if (o->npu_cache_dir != NULL) {
+     hardware |= kLiteRtHwAcceleratorNpu;
+   }
+   TRY(LiteRtSetOptionsHardwareAccelerators, m->options, hardware);
 -  if (o->gpu) {
-+  TRY(LiteRtSetOptionsHardwareAccelerators, m->options, o->npu ? kLiteRtHwAcceleratorNpu : (o->gpu ? kLiteRtHwAcceleratorGpu : kLiteRtHwAcceleratorCpu));
 +  if (o->npu) {
 +    // LiteRT 2.2.0 GoogleTensorOptions: burst scheduling for a bounded
 +    // frame stream. This changes runtime scheduling, never model precision.
@@ -108,10 +92,10 @@ index d51ae07..5cd063e 100644
      error = add_toml(m->options, "gpu_options", gpu_toml(o));
    } else if (o->cpu_threads > 0) {
 diff --git a/JetlinkKit/Sources/JetlinkAndroid/Bridge.swift b/JetlinkKit/Sources/JetlinkAndroid/Bridge.swift
-index 9b65a90..663b819 100644
+index cd8bf8e..c94f221 100644
 --- a/JetlinkKit/Sources/JetlinkAndroid/Bridge.swift
 +++ b/JetlinkKit/Sources/JetlinkAndroid/Bridge.swift
-@@ -135,6 +135,11 @@
+@@ -136,6 +136,11 @@
      Host.shared.thermal = string(env, label)
    }
  
@@ -123,7 +107,7 @@ index 9b65a90..663b819 100644
    /// The onnxruntime version, for Settings before the server has said it.
    @_cdecl("Java_io_zoompilot_jetlink_server_Native_runtimeVersion")
    public func nativeRuntimeVersion(_ env: Env, _ cls: jclass?) -> jstring? {
-@@ -148,6 +153,7 @@
+@@ -149,6 +154,7 @@
      static let shared = Host()
  
      let state = AppSnapshot()
@@ -131,29 +115,30 @@ index 9b65a90..663b819 100644
      /// The comma's descriptor, from the app's USB permission flow.
      let gadget = UsbfsGadget()
      private let lock = NSLock()
-@@ -189,7 +195,9 @@
+@@ -190,7 +196,9 @@
        let server: EmbeddedServer
        do {
          server = try EmbeddedServer(
 -          configuration: configuration, backend: backend, gadget: gadget, hooks: ServerHooks(thermal: { Host.shared.thermal }))
 +          configuration: configuration, backend: backend, gadget: gadget, hooks: ServerHooks(
 +            telemetry: { Host.shared.health.snapshot() }, thermal: { Host.shared.thermal },
-+            validationRefusal: { Host.shared.health.refusal() }))
++            phoneHealthRefusal: { Host.shared.health.refusal() }))
          state.reset()
          let events = server.events
          let state = self.state
-@@ -218,7 +226,8 @@
+@@ -219,8 +227,9 @@
            throw HostFailure("LiteRT has no device \(device ?? "")")
          }
          let libraries = (config["native_library_dir"] as? String).flatMap { $0.isEmpty ? nil : URL(fileURLWithPath: $0, isDirectory: true) }
--        let backend = LiteRtBackend(profile: profile, preparer: ONNXPreparer(), libraries: libraries, chip: chip)
 +        let tensorModels = (config["tensor_models_dir"] as? String).map { URL(fileURLWithPath: $0, isDirectory: true) }
-+        let backend = LiteRtBackend(profile: profile, preparer: ONNXPreparer(), libraries: libraries, chip: chip, tensorModels: tensorModels)
-         // libLiteRt.so and its GPU accelerator, from the app's own libraries:
-         // a phone LiteRT cannot run on says so now, not at the first build.
-         try backend.open()
+         let backend = LiteRtBackend(
+-          profile: profile, preparer: ONNXPreparer(), libraries: libraries, chip: chip, firmware: config["firmware"] as? String)
++          profile: profile, preparer: ONNXPreparer(), libraries: libraries, chip: chip, firmware: config["firmware"] as? String, tensorModels: tensorModels)
+         // libLiteRt.so, its GPU accelerator and for the NPU Google Tensor's
+         // libraries, from the app's own and the system's: a phone LiteRT
+         // cannot run on says so now, not at the first build.
 diff --git a/JetlinkKit/Sources/JetlinkLiteRT/LiteRt.swift b/JetlinkKit/Sources/JetlinkLiteRT/LiteRt.swift
-index 524022b..6538a27 100644
+index e4e37f2..0246871 100644
 --- a/JetlinkKit/Sources/JetlinkLiteRT/LiteRt.swift
 +++ b/JetlinkKit/Sources/JetlinkLiteRT/LiteRt.swift
 @@ -39,6 +39,13 @@ public enum LiteRtRuntime {
@@ -170,82 +155,99 @@ index 524022b..6538a27 100644
    #if os(Android)
      /// The names LiteRT's GPU accelerator looks for the vendor's OpenCL
      /// under, which the app's manifest declares.
-@@ -78,6 +85,7 @@ enum LiteRtCompileOptions: Sendable {
-   case gpu(cache: (directory: URL, key: String)?)
+@@ -148,6 +155,7 @@ enum LiteRtCompileOptions: Sendable {
+   case npu(compiled: URL, gpu: (directory: URL, key: String)?)
    /// XNNPACK on the CPU, with a pool of `threads`.
    case cpu(threads: Int)
 +  case tensor
  }
  
  /// One compiled model: a .tflite, compiled for an accelerator, and the
-@@ -95,6 +103,8 @@ final class LiteRtModel: @unchecked Sendable {
-     case .gpu(let programs):
+@@ -170,6 +178,8 @@ final class LiteRtModel: @unchecked Sendable {
        shim.gpu = 1
        cache = programs
+       npuCache = directory
 +    case .tensor:
 +      shim.npu = 1
      case .cpu(let threads):
        shim.cpu_threads = Int32(threads)
      }
 diff --git a/JetlinkKit/Sources/JetlinkLiteRT/LiteRtBackend.swift b/JetlinkKit/Sources/JetlinkLiteRT/LiteRtBackend.swift
-index 7c17f79..e38df0a 100644
+index 5ebd613..d13ccfe 100644
 --- a/JetlinkKit/Sources/JetlinkLiteRT/LiteRtBackend.swift
 +++ b/JetlinkKit/Sources/JetlinkLiteRT/LiteRtBackend.swift
-@@ -15,10 +15,13 @@ public enum LiteRtProfile: String, CaseIterable, Sendable {
-   /// XNNPACK on the CPU: for tests, the emulator, and phones LiteRT drives no
-   /// GPU on. Nowhere near the frame budget with a real model.
-   case cpu
-+  /// Google Tensor TPU, using a workstation-compiled model.
+@@ -27,6 +27,8 @@ public enum LiteRtProfile: String, CaseIterable, Sendable {
+   /// compiles with the artifact. A model the NPU's compiler cannot take runs
+   /// on the GPU instead, as the gpu profile runs it. Android only.
+   case npu
++  /// Precompiled Google Tensor model, using an imported compiled model.
 +  case tensor
  
-   /// What the log and the benchmark's report call it.
-   var label: String {
+   /// The accelerator, as messages name it.
+   var name: String { rawValue.uppercased() }
+@@ -34,6 +36,7 @@ public enum LiteRtProfile: String, CaseIterable, Sendable {
+   /// What the log and the benchmark's report call it on `chip`.
+   func label(chip: String) -> String {
      switch self {
-+    case .tensor: "Tensor TPU (AOT burst, parked test)"
++    case .tensor: "Tensor TPU (precompiled, burst)"
      case .gpu: "GPU(fp16)"
      case .cpu: "CPU(\(HostChip.cpuThreads) threads)"
+     case .npu: "NPU(\(chip))"
+@@ -48,6 +51,7 @@ public enum LiteRtProfile: String, CaseIterable, Sendable {
+     switch self {
+     case .gpu: 60
+     case .cpu: 0
++    case .tensor: 0
+     case .npu: 300
      }
-@@ -28,6 +31,7 @@ public enum LiteRtProfile: String, CaseIterable, Sendable {
-   /// `cache` when there is one.
-   func options(cache: (directory: URL, key: String)? = nil) -> LiteRtCompileOptions {
+   }
+@@ -57,6 +61,7 @@ public enum LiteRtProfile: String, CaseIterable, Sendable {
+   /// it compiled in `compiled`, an existing directory.
+   func options(cache: (directory: URL, key: String)? = nil, compiled: URL) -> LiteRtCompileOptions {
      switch self {
 +    case .tensor: .tensor
      case .gpu: .gpu(cache: cache)
      case .cpu: .cpu(threads: HostChip.cpuThreads)
-     }
-@@ -38,8 +42,8 @@ public enum LiteRtProfile: String, CaseIterable, Sendable {
- /// onnxruntime's QNN does not drive. The artifact is a directory holding the
- /// converted model and the GPU's compile cache (LiteRtArtifact).
+     case .npu: .npu(compiled: compiled, gpu: cache)
+@@ -69,12 +74,8 @@ public enum LiteRtProfile: String, CaseIterable, Sendable {
+ /// directory holding the converted model, the GPU's compile cache and the
+ /// model compiled for the NPU (LiteRtArtifact).
  ///
 -/// Nothing here has run on a phone yet: the GPU path is Metal's on a Mac,
--/// and Android's OpenCL one follows LiteRT 2.2.0's documentation and source.
+-/// Android's OpenCL one follows LiteRT 2.2.0's documentation and source, and
+-/// the NPU's follows LiteRT's source, the Pixel system library it calls
+-/// (seen in Pixel 8, 9 and 10 Pro Fold factory images), and Google's
+-/// compiler for Tensor, which compiles every op of Cinque Terre V3 as the
+-/// conversion writes it for a G5.
 +/// Tensor AOT execution is desk-tested on Pixel 11 Pro XL; numerical and
 +/// timing qualification must be recorded separately for each compiled model.
  public final class LiteRtBackend: EngineBackend {
-   /// A first GPU compile with no earlier build to go by: 7 to 12 s for
-   /// Cinque Terre V3 on an M1 Pro's Metal; a phone's OpenCL compile is
-@@ -58,6 +62,7 @@ public final class LiteRtBackend: EngineBackend {
-   public let libraries: URL?
-   private let preparer: any ModelPreparer
-   private let chip: String
+   /// What JetlinkONNX's LiteRTPreparation writes now: an artifact converted
+   /// under another version rebuilds.
+@@ -92,6 +93,7 @@ public final class LiteRtBackend: EngineBackend {
+   /// The phone's build fingerprint, which a model compiled for the NPU is
+   /// good for; "" where the app names none.
+   private let firmware: String
 +  private let tensorModels: URL?
    private let log = ServerLog(category: "litert")
  
    /// `libraries` is the directory holding libLiteRt and its GPU
-@@ -65,7 +70,8 @@ public final class LiteRtBackend: EngineBackend {
-   /// $JETLINK_LITERT_DIR. `chip` names what the artifacts are valid for: on
-   /// Android the SoC's model, "Tensor G5" (Build.SOC_MODEL), which a GPU's
+@@ -101,7 +103,8 @@ public final class LiteRtBackend: EngineBackend {
    /// compiled programs are for; nil is HostChip's name for this machine.
--  public init(profile: LiteRtProfile, preparer: any ModelPreparer, libraries: URL? = nil, chip: String? = nil) {
-+  public init(profile: LiteRtProfile, preparer: any ModelPreparer, libraries: URL? = nil, chip: String? = nil, tensorModels: URL? = nil) {
+   /// `firmware` is Android's Build.FINGERPRINT: the NPU's compiler is part
+   /// of the system, so the NPU's artifacts are for one system build.
+-  public init(profile: LiteRtProfile, preparer: any ModelPreparer, libraries: URL? = nil, chip: String? = nil, firmware: String? = nil) {
++  public init(profile: LiteRtProfile, preparer: any ModelPreparer, libraries: URL? = nil, chip: String? = nil, firmware: String? = nil, tensorModels: URL? = nil) {
 +    self.tensorModels = tensorModels
      self.profile = profile
      self.preparer = preparer
      self.libraries = libraries
-@@ -88,6 +94,14 @@ public final class LiteRtBackend: EngineBackend {
-   /// after converting a model.
-   public func open() throws {
+@@ -128,8 +131,15 @@ public final class LiteRtBackend: EngineBackend {
+       try LiteRtBackend.checkNPU(libraries: libraries)
+     }
      try LiteRtRuntime.load(directory: libraries)
+-    // the NPU's profile runs on the GPU what the NPU cannot take
+-    if profile != .cpu {
 +    if profile == .tensor {
 +      guard ["Tensor G5", "Tensor G6"].contains(chip) else {
 +        throw LiteRtError("Tensor TPU requires a supported Google Tensor G5 or G6 device")
@@ -254,34 +256,35 @@ index 7c17f79..e38df0a 100644
 +        throw LiteRtError("Google Tensor dispatch did not load; Tensor TPU is unavailable")
 +      }
 +    }
-     if profile == .gpu {
++    if profile == .gpu || profile == .npu {
        let (gpu, names) = try LiteRtRuntime.accelerators()
        guard gpu else {
-@@ -100,6 +114,12 @@ public final class LiteRtBackend: EngineBackend {
+         throw LiteRtError(
+@@ -160,6 +170,12 @@ public final class LiteRtBackend: EngineBackend {
  
    public var runtimeVersion: String { LiteRtRuntime.version }
  
 +  public func describe() -> [String: String] {
 +    var fields = ["backend": name, "runtime_version": runtimeVersion, "device": deviceTag()]
-+    if profile == .tensor { fields["validation"] = "parked_only" }
++    if profile == .tensor || profile == .npu { fields["phone_health"] = "required" }
 +    return fields
 +  }
 +
+   /// The NPU's names the system build too: a system update brings another
+   /// compiler, so the model is prepared again.
    public func deviceTag() -> String {
-     sanitize("\(profile.rawValue)-\(chip)")
-   }
-@@ -131,6 +151,10 @@ public final class LiteRtBackend: EngineBackend {
+@@ -198,6 +214,10 @@ public final class LiteRtBackend: EngineBackend {
          "LiteRT could not compile the model for the GPU on \(chip) (\(error.description)); LiteRT's log names any op the GPU cannot run, "
            + "and the CPU profile runs every op")
      }
-+    if profile == .tensor && !engine.fullyAccelerated {
++    if target == .tensor && engine.hardware != .npu {
 +      engine.close()
-+      throw LiteRtError("Tensor TPU did not accelerate the whole model; CPU fallback is not accepted")
++      throw LiteRtError("The compiled Tensor model did not run on the NPU")
 +    }
-     if profile == .gpu && !engine.fullyAccelerated {
+     if target != .cpu && !engine.fullyAccelerated {
+       let what = engine.hardware.name
        engine.close()
-       throw LiteRtError("LiteRT's GPU on \(chip) cannot run every op of this model; LiteRT's log names them, and the CPU profile runs every op")
-@@ -141,6 +165,10 @@ public final class LiteRtBackend: EngineBackend {
+@@ -209,6 +229,10 @@ public final class LiteRtBackend: EngineBackend {
    // MARK: build
  
    public func build(model: URL, artifact: URL, report: @escaping ProgressFn, metaExtra: [String: Any]) throws {
@@ -292,7 +295,7 @@ index 7c17f79..e38df0a 100644
      let started = Date()
      let expect = Artifact.sidecar(artifact)
      try Artifact.build(artifact, metaExtra: metaExtra, report: report) { staged in
-@@ -182,10 +210,52 @@ public final class LiteRtBackend: EngineBackend {
+@@ -280,10 +304,52 @@ public final class LiteRtBackend: EngineBackend {
      }
    }
  
@@ -315,7 +318,7 @@ index 7c17f79..e38df0a 100644
 +        throw LiteRtError("Compiled Tensor model checksum mismatch")
 +      }
 +      report("compile", 0, "loading the compiled Tensor TPU model")
-+      try self.engine(staged, cacheKey: LiteRtArtifact.cacheKey(artifact)).close()
++      try self.engine(staged, cacheKey: LiteRtArtifact.cacheKey(artifact), on: .tensor).close()
 +      var result = LiteRtArtifact.meta(self, model: model, started: started)
 +      result["tensor_source_sha256"] = sourceHash
 +      result["tensor_compiled_sha256"] = compiledHash
@@ -342,22 +345,18 @@ index 7c17f79..e38df0a 100644
 +        }
 +      }
 +    }
-     let (engine, seconds) = try Artifact.load(artifact, meta: meta, what: "the model", report: report) {
-       try self.engine(artifact, cacheKey: LiteRtArtifact.cacheKey(artifact))
+     // What the build found runs the model: the NPU, or for the NPU's profile
+     // the GPU when it could not take it, which a load does not ask again.
+     let target = profile == .npu && meta["hardware"] as? String != LiteRtProfile.npu.rawValue ? .gpu : profile
+@@ -310,7 +376,7 @@ public final class LiteRtBackend: EngineBackend {
+       if target == .npu { copyLiteRtLog(since: loadStarted) }
+       throw error
      }
-diff --git a/JetlinkKit/Sources/JetlinkLiteRT/LiteRtEngine.swift b/JetlinkKit/Sources/JetlinkLiteRT/LiteRtEngine.swift
-index a15a1d8..dc27fff 100644
---- a/JetlinkKit/Sources/JetlinkLiteRT/LiteRtEngine.swift
-+++ b/JetlinkKit/Sources/JetlinkLiteRT/LiteRtEngine.swift
-@@ -25,7 +25,7 @@ public final class LiteRtEngine: EngineCore, @unchecked Sendable {
-   public let fullyAccelerated: Bool
-   /// Whether the looped state stays in the accelerator's memory.
-   public var stateOnDevice: Bool { !deviceState.isEmpty }
--  public override var notes: String { stateOnDevice ? "state on the GPU" : "" }
-+  public override var notes: String { stateOnDevice ? "state on the accelerator" : "" }
- 
-   private var model: LiteRtModel?
-   /// Every buffer a run reads or writes, alive as long as the sets below.
+-    if engine.hardware != target {
++    if target == .npu && engine.hardware != target {
+       log.warning("\(artifact.lastPathComponent) was compiled for the NPU but loaded on the GPU; LiteRT's lines below say why")
+       copyLiteRtLog(since: loadStarted)
+     }
 diff --git a/JetlinkKit/Sources/JetlinkLiteRT/TensorManifest.swift b/JetlinkKit/Sources/JetlinkLiteRT/TensorManifest.swift
 new file mode 100644
 index 0000000..7205dd0
@@ -509,15 +508,15 @@ index 1e42eae..db9b037 100644
      for scalar in scalars {
        Stage.store(f32: packed + scalar.offset, count: scalar.count, into: scalar.target.pointer, as: scalar.target.type)
 diff --git a/JetlinkKit/Sources/JetlinkServer/ServerHooks.swift b/JetlinkKit/Sources/JetlinkServer/ServerHooks.swift
-index 1833863..b4bbd54 100644
+index 1833863..a9c15ed 100644
 --- a/JetlinkKit/Sources/JetlinkServer/ServerHooks.swift
 +++ b/JetlinkKit/Sources/JetlinkServer/ServerHooks.swift
 @@ -19,6 +19,8 @@ public struct ServerHooks: Sendable {
    public var telemetry: @Sendable () -> [String: Any]
    /// "nominal", "fair", "serious" or "critical", for the benchmark's reports.
    public var thermal: @Sendable () -> String
-+  /// Non-blocking refusal reason for an experimental parked-only session.
-+  public var validationRefusal: (@Sendable () -> String?)?
++  /// Non-blocking refusal reason for an Tensor session with thermal monitoring.
++  public var phoneHealthRefusal: (@Sendable () -> String?)?
    /// HELLO_RESP's `sleep_after`, the seconds without a gadget before this host
    /// suspends; 0, it never does, and the comma holds the gadget all park.
    public var sleepAfter: Double
@@ -525,7 +524,7 @@ index 1833863..b4bbd54 100644
    public init(
      telemetry: @escaping @Sendable () -> [String: Any] = { [:] },
      thermal: @escaping @Sendable () -> String = { platformThermal() },
-+    validationRefusal: (@Sendable () -> String?)? = nil,
++    phoneHealthRefusal: (@Sendable () -> String?)? = nil,
      sleepAfter: Double = 0,
      gadgetIdle: (@Sendable (GadgetIdleEvent) -> Bool)? = nil,
      shutdown: (@Sendable (_ reason: String) -> (@Sendable () -> Void)?)? = nil,
@@ -533,64 +532,62 @@ index 1833863..b4bbd54 100644
    ) {
      self.telemetry = telemetry
      self.thermal = thermal
-+    self.validationRefusal = validationRefusal
++    self.phoneHealthRefusal = phoneHealthRefusal
      self.sleepAfter = sleepAfter
      self.gadgetIdle = gadgetIdle
      self.shutdown = shutdown
 diff --git a/JetlinkKit/Sources/JetlinkServer/Session.swift b/JetlinkKit/Sources/JetlinkServer/Session.swift
-index d0376d2..2db9954 100644
+index d8d8715..fb3d742 100644
 --- a/JetlinkKit/Sources/JetlinkServer/Session.swift
 +++ b/JetlinkKit/Sources/JetlinkServer/Session.swift
-@@ -9,6 +9,7 @@ import JetlinkRegistry
+@@ -9,6 +9,8 @@ import JetlinkRegistry
  final class Session: @unchecked Sendable {
    private let transport: any MessageLink
    private let host: EngineHost
-+  private let parkedOnly: Bool
++  private let phoneHealthRequired: Bool
++  private var healthStopped = false
    private let log = ServerLog(category: "session")
    private var client = ""
    /// Has a client said hello on this connection? A comma pinging a session
-@@ -45,6 +46,7 @@ final class Session: @unchecked Sendable {
+@@ -49,6 +51,7 @@ final class Session: @unchecked Sendable {
      self.transport = transport
      medium = transport.medium
      self.host = host
-+    parkedOnly = host.backend.describe()["validation"] == "parked_only"
++    phoneHealthRequired = host.backend.describe()["phone_health"] == "required"
      outputCapacity = 18_452
      outputBuffer = .allocate(capacity: outputCapacity)
      responseHead = .allocate(byteCount: Wire.inferRespSize, alignment: 8)
-@@ -269,6 +271,14 @@ final class Session: @unchecked Sendable {
+@@ -302,13 +305,19 @@ final class Session: @unchecked Sendable {
        try error(message.seq, "bad_request", "ENGINE_REQ needs sha256 and nbytes")
        return
      }
-+    // Experimental Tensor engines can only be acquired by the explicit
-+    // synthetic parked-test client. A normal modeld request must fail closed.
-+    if parkedOnly && d["validation_mode"] as? String != "parked" {
-+      self.request = nil
-+      try error(message.seq, "parked_only", "Tensor requires the supervised parked-test client")
-+      return
-+    }
-+    if try refuseValidation(message.seq) { return }
++    if try refuseUnhealthyPhone(message.seq) { return }
      let skip = (d["frame_skip"] as? NSNumber)?.intValue ?? ModelConstants.defaultFrameSkip
      let request = try Request(sha256: sha, nbytes: nbytes, frameSkip: skip)
++    healthStopped = false
      self.request = request
-@@ -276,6 +286,10 @@ final class Session: @unchecked Sendable {
+     try sendJSON(.engineResp, seq: message.seq, host.request(request, session: self))
    }
  
    private func respondEngine(_ seq: UInt32) throws {
-+    guard !parkedOnly || request != nil else {
-+      try error(seq, "parked_only", "send an explicit parked ENGINE_REQ first")
++    guard !healthStopped else {
++      try error(seq, "phone_health", "request the engine again after phone health recovers")
 +      return
 +    }
      let (sha, skip) = wanted()
      try sendJSON(.engineResp, seq: seq, host.status(sha, frameSkip: skip))
    }
-@@ -331,10 +345,22 @@ final class Session: @unchecked Sendable {
+@@ -364,10 +373,25 @@ final class Session: @unchecked Sendable {
  
    // MARK: the hot path
  
-+  private func refuseValidation(_ seq: UInt32) throws -> Bool {
-+    guard parkedOnly, let reason = host.hooks.validationRefusal?() else { return false }
++  private func refuseUnhealthyPhone(_ seq: UInt32) throws -> Bool {
++    guard phoneHealthRequired else { return false }
++    let reason = host.hooks.phoneHealthRefusal.map { $0() } ?? "Phone health monitor is unavailable"
++    guard let reason else { return false }
 +    request = nil
-+    try error(seq, "validation_health", reason)
++    healthStopped = true
++    try error(seq, "phone_health", reason)
 +    return true
 +  }
 +
@@ -598,8 +595,8 @@ index d0376d2..2db9954 100644
    /// the write waits for the comma to read, and nothing else that needs the
    /// host (status, a build's progress, the control channel) should wait with it.
    private func onInfer(_ message: Message) throws {
-+    if try refuseValidation(message.seq) { return }
-+    guard !parkedOnly || request != nil else {
++    if try refuseUnhealthyPhone(message.seq) { return }
++    guard !healthStopped else {
 +      try respond(message.seq, InferReply(status: .notReady))
 +      return
 +    }
@@ -707,41 +704,19 @@ index 0000000..194ff22
 +  }
 +}
 \ No newline at end of file
-diff --git a/JetlinkKit/Tests/JetlinkServerTests/ParkedGateTests.swift b/JetlinkKit/Tests/JetlinkServerTests/ParkedGateTests.swift
-new file mode 100644
-index 0000000..f6d1ad6
---- /dev/null
-+++ b/JetlinkKit/Tests/JetlinkServerTests/ParkedGateTests.swift
-@@ -0,0 +1,28 @@
-+import Foundation
-+import Testing
-+@testable import JetlinkServer
-+
-+@Suite("Parked Tensor protocol")
-+struct ParkedGateTests {
-+  @Test("Normal clients cannot acquire an experimental engine or bypass a new hello")
-+  func requiresParkedRequest() throws {
-+    let backend = FlakyBackend(describing: ["validation": "parked_only"])
-+    try serve(backend: backend) { _, client in
-+      let hello = try client.hello()
-+      #expect(hello["validation"] as? String == "parked_only")
-+      let ask: [String: Any] = ["sha256": String(repeating: "a", count: 64), "nbytes": 1, "frame_skip": 4]
-+      try client.sendJSON(.engineReq, ask)
-+      #expect(try client.recv(.error).json["error"] as? String == "parked_only")
-+      try client.sendJSON(.engineReq, ask.merging(["validation_mode": "parked"]) { $1 })
-+      #expect(try client.recv(.engineResp).json["state"] as? String == "need_upload")
-+      // A subsequent ordinary request revokes the test client's request.
-+      try client.sendJSON(.engineReq, ask)
-+      #expect(try client.recv(.error).json["error"] as? String == "parked_only")
-+      try client.send(.inferReq, Data(count: Wire.inferReqSize))
-+      #expect(try client.recv(.inferResp).status == Wire.Status.notReady.rawValue)
-+      _ = try client.hello()
-+      try client.send(.inferReq, Data(count: Wire.inferReqSize))
-+      #expect(try client.recv(.inferResp).status == Wire.Status.notReady.rawValue)
-+    }
-+  }
-+}
-\ No newline at end of file
+diff --git a/JetlinkKit/Tests/JetlinkServerTests/LiteRtBackendTests.swift b/JetlinkKit/Tests/JetlinkServerTests/LiteRtBackendTests.swift
+index 84382d0..3bb835b 100644
+--- a/JetlinkKit/Tests/JetlinkServerTests/LiteRtBackendTests.swift
++++ b/JetlinkKit/Tests/JetlinkServerTests/LiteRtBackendTests.swift
+@@ -201,7 +201,7 @@ struct LiteRtBackendTests {
+ struct LiteRtProfileTests {
+   @Test("The profiles are the apps' device names, and the tag names the chip")
+   func profiles() {
+-    #expect(LiteRtProfile.allCases.map(\.rawValue) == ["gpu", "cpu", "npu"])
++    #expect(LiteRtProfile.allCases.map(\.rawValue) == ["gpu", "cpu", "npu", "tensor"])
+     let backend = LiteRtBackend(profile: .gpu, preparer: ONNXPreparer(), chip: "Tensor G5")
+     #expect(backend.name == "litert" && backend.suffix == ".litertcache")
+     #expect(backend.deviceTag() == "gpu-Tensor_G5")
 diff --git a/JetlinkKit/Tests/JetlinkServerTests/TensorManifestTests.swift b/JetlinkKit/Tests/JetlinkServerTests/TensorManifestTests.swift
 new file mode 100644
 index 0000000..455c12e
@@ -772,9 +747,54 @@ index 0000000..455c12e
 +    #expect(throws: (any Error).self) { try TensorManifest.read(Data("{}".utf8), source: source, chip: "Tensor G6") }
 +  }
 +}
+diff --git a/JetlinkKit/Tests/JetlinkServerTests/TensorProtocolTests.swift b/JetlinkKit/Tests/JetlinkServerTests/TensorProtocolTests.swift
+new file mode 100644
+index 0000000..b5ca847
+--- /dev/null
++++ b/JetlinkKit/Tests/JetlinkServerTests/TensorProtocolTests.swift
+@@ -0,0 +1,39 @@
++import Foundation
++import Testing
++@testable import JetlinkServer
++@testable import JetlinkLiteRT
++import JetlinkONNX
++
++@Suite("Tensor protocol and health")
++struct TensorProtocolTests {
++  @Test("Normal clients request Tensor engines without a test handshake")
++  func normalRequest() throws {
++    let backend = FlakyBackend(describing: ["phone_health": "required"])
++    let hooks = ServerHooks(phoneHealthRefusal: { nil })
++    try serve(hooks: hooks, backend: backend) { _, client in
++      let hello = try client.hello()
++      #expect(hello["validation"] == nil)
++      try client.sendJSON(.engineReq, ["sha256": String(repeating: "a", count: 64), "nbytes": 1, "frame_skip": 4])
++      #expect(try client.recv(.engineResp).json["state"] as? String == "need_upload")
++    }
++  }
++
++  @Test("Both Tensor profiles keep thermal monitoring without a parked-only marker")
++  func tensorMetadata() {
++    for profile in [LiteRtProfile.tensor, .npu] {
++      let backend = LiteRtBackend(profile: profile, preparer: ONNXPreparer(), chip: "Tensor G6")
++      #expect(backend.describe()["validation"] == nil)
++      #expect(backend.describe()["phone_health"] == "required")
++    }
++  }
++
++  @Test("A Tensor session refuses missing health monitoring")
++  func missingMonitor() throws {
++    let backend = FlakyBackend(describing: ["phone_health": "required"])
++    try serve(backend: backend) { _, client in
++      _ = try client.hello()
++      try client.sendJSON(.engineReq, ["sha256": String(repeating: "a", count: 64), "nbytes": 1, "frame_skip": 4])
++      #expect(try client.recv(.error).json["error"] as? String == "phone_health")
++    }
++  }
++}
 diff --git a/JetlinkKit/Tests/JetlinkServerTests/ValidationHealthTests.swift b/JetlinkKit/Tests/JetlinkServerTests/ValidationHealthTests.swift
 new file mode 100644
-index 0000000..d8f65b7
+index 0000000..c3b70b9
 --- /dev/null
 +++ b/JetlinkKit/Tests/JetlinkServerTests/ValidationHealthTests.swift
 @@ -0,0 +1,79 @@
@@ -827,30 +847,30 @@ index 0000000..d8f65b7
 +    #expect(health.refusal()?.contains("43 C") == true)
 +  }
 +
-+  @Test func thermalStopRevokesParkedRequest() throws {
++  @Test func thermalStopRequiresFreshEngineRequest() throws {
 +    let health = ValidationHealth()
-+    let hooks = ServerHooks(validationRefusal: { health.refusal() })
-+    let backend = FlakyBackend(describing: ["validation": "parked_only"])
++    let hooks = ServerHooks(phoneHealthRefusal: { health.refusal() })
++    let backend = FlakyBackend(describing: ["phone_health": "required"])
 +    try serve(hooks: hooks, backend: backend) { _, client in
 +      _ = try client.hello()
 +      let ask: [String: Any] = ["sha256": String(repeating: "a", count: 64), "nbytes": 1,
-+                                "frame_skip": 4, "validation_mode": "parked"]
++                                "frame_skip": 4]
 +      try client.sendJSON(.engineReq, ask)
-+      #expect(try client.recv(.error).json["error"] as? String == "validation_health")
++      #expect(try client.recv(.error).json["error"] as? String == "phone_health")
 +      health.update(["thermal_status": 0, "battery_c": 25.0])
 +      try client.sendJSON(.engineReq, ask)
 +      #expect(try client.recv(.engineResp).json["state"] as? String == "need_upload")
 +      health.update(["thermal_status": 3, "battery_c": 35.0])
 +      try client.send(.inferReq, Data(count: Wire.inferReqSize))
-+      #expect(try client.recv(.error).json["error"] as? String == "validation_health")
++      #expect(try client.recv(.error).json["error"] as? String == "phone_health")
 +      health.update(["thermal_status": 0, "battery_c": 25.0])
 +      try client.send(.inferReq, Data(count: Wire.inferReqSize))
 +      #expect(try client.recv(.inferResp).status == Wire.Status.notReady.rawValue)
 +    }
 +  }
 +
-+  @Test func normalBackendsDoNotUseExperimentalHealthGuard() throws {
-+    try serve(hooks: ServerHooks(validationRefusal: { "missing phone telemetry" })) { _, client in
++  @Test func otherBackendsDoNotUsePhoneHealthGuard() throws {
++    try serve(hooks: ServerHooks(phoneHealthRefusal: { "missing phone telemetry" })) { _, client in
 +      _ = try client.hello()
 +      try client.sendJSON(.engineReq, ["sha256": String(repeating: "a", count: 64), "nbytes": 1, "frame_skip": 4])
 +      #expect(try client.recv(.engineResp).json["state"] as? String == "need_upload")
@@ -858,35 +878,22 @@ index 0000000..d8f65b7
 +  }
 +}
 diff --git a/android/app/build.gradle.kts b/android/app/build.gradle.kts
-index 7ce555e..1721960 100644
+index 058b1c9..898d317 100644
 --- a/android/app/build.gradle.kts
 +++ b/android/app/build.gradle.kts
-@@ -30,8 +30,8 @@ android {
+@@ -34,8 +34,8 @@ android {
          // Android 12: Build.SOC_MODEL and the performance hint API.
          minSdk = 31
          targetSdk = 36
 -        versionCode = jetlinkVersionCode
 -        versionName = jetlinkVersion
-+        versionCode = jetlinkVersionCode + 4
-+        versionName = jetlinkVersion + "-clarity-tensor.4"
++        versionCode = jetlinkVersionCode * 100 + 5
++        versionName = jetlinkVersion + "-clarity-tensor.5"
          // The QNN runtime is arm64 only, and so is every Snapdragon with an NPU
          // worth driving on. The emulator on an Apple silicon Mac is arm64 too.
          ndk { abiFilters += "arm64-v8a" }
-@@ -187,3 +187,12 @@ androidComponents {
-         variant.sources.jniLibs?.addGeneratedSourceDirectory(liteRtLibraries, LiteRtLibraries::outputDir)
-     }
- }
-+
-+// The SDK compiler stays on the workstation. Only the pinned open-source
-+// Tensor dispatch library ships in the app.
-+val tensorDispatch = tasks.register<Exec>("tensorDispatch") {
-+    commandLine("python3", rootDir.resolve("scripts/fetch-tensor-runtime.py"))
-+    inputs.file(rootDir.resolve("scripts/fetch-tensor-runtime.py"))
-+    outputs.file(project.file("src/main/jniLibs/arm64-v8a/libLiteRtDispatch_GoogleTensor.so"))
-+}
-+tasks.named("preBuild") { dependsOn(tensorDispatch) }
 diff --git a/android/app/src/main/AndroidManifest.xml b/android/app/src/main/AndroidManifest.xml
-index 31bd65a..4c06831 100644
+index 076c0e2..f3b7af5 100644
 --- a/android/app/src/main/AndroidManifest.xml
 +++ b/android/app/src/main/AndroidManifest.xml
 @@ -28,6 +28,7 @@
@@ -981,188 +988,136 @@ index 95c5621..a7a0390 100644
      external fun runtimeVersion(): String
  }
 diff --git a/android/app/src/main/java/io/zoompilot/jetlink/server/ServerController.kt b/android/app/src/main/java/io/zoompilot/jetlink/server/ServerController.kt
-index 4329e68..eb3a5e2 100644
+index c14ae1c..fd77e4e 100644
 --- a/android/app/src/main/java/io/zoompilot/jetlink/server/ServerController.kt
 +++ b/android/app/src/main/java/io/zoompilot/jetlink/server/ServerController.kt
-@@ -90,10 +90,11 @@ class ServerController(private val context: Context, private val scope: Coroutin
-         put("port", settings.port)
-         // bench tools reach the server over Wi-Fi or `adb forward`
-         put("listen", true)
--        put("usb", true)
-+        put("usb", settings.processor.allowsUsb || settings.tensorParkedUsb)
-         put("preload", true)
-         put("chip", Chip.model)
+@@ -99,6 +99,7 @@ class ServerController(private val context: Context, private val scope: Coroutin
+         // a model compiled for the NPU is good for this system build alone
+         put("firmware", Build.FINGERPRINT)
          put("native_library_dir", context.applicationInfo.nativeLibraryDir)
 +        context.getExternalFilesDir("tensor-models")?.let { put("tensor_models_dir", it.absolutePath) }
      }
  
      /** Follows the snapshot and the log for as long as the app runs. */
-diff --git a/android/app/src/main/java/io/zoompilot/jetlink/server/ServerService.kt b/android/app/src/main/java/io/zoompilot/jetlink/server/ServerService.kt
-index 86e11b7..50bdd47 100644
---- a/android/app/src/main/java/io/zoompilot/jetlink/server/ServerService.kt
-+++ b/android/app/src/main/java/io/zoompilot/jetlink/server/ServerService.kt
-@@ -76,6 +76,10 @@ class ServerService : LifecycleService() {
-             graph.settings.values.map(::serverSettings).distinctUntilChanged().collectLatest {
-                 graph.server.start(graph.settings.values.value)
-                 withContext(Dispatchers.IO) { graph.usb.connect() }
-+                if (graph.settings.values.value.tensorParkedUsb) {
-+                    kotlinx.coroutines.delay(10 * 60 * 1000L)
-+                    graph.settings.update { it.copy(tensorParkedUsb = false) }
-+                }
-             }
-         }
-         lifecycleScope.launch {
 diff --git a/android/app/src/main/java/io/zoompilot/jetlink/settings/Chip.kt b/android/app/src/main/java/io/zoompilot/jetlink/settings/Chip.kt
-index a3fac56..ebc03f7 100644
+index 1addc86..924f6e6 100644
 --- a/android/app/src/main/java/io/zoompilot/jetlink/settings/Chip.kt
 +++ b/android/app/src/main/java/io/zoompilot/jetlink/settings/Chip.kt
-@@ -18,7 +18,10 @@ object Chip {
-         get() = manufacturer.equals("QTI", ignoreCase = true) || manufacturer.equals("Qualcomm", ignoreCase = true)
+@@ -28,10 +28,12 @@ object Chip {
+     fun tensorGeneration(model: String): Int? = tensorModel.find(model.trim())?.groupValues?.get(1)?.toIntOrNull()
  
      /** What this phone's Settings offer. */
--    fun processors(current: Processor): List<Processor> = Processor.choices(isQualcomm, isEmulator, current)
-+    fun processors(current: Processor): List<Processor> = Processor.choices(isQualcomm, isEmulator, current, isTensor)
-+
+-    fun processors(current: Processor): List<Processor> = Processor.choices(isQualcomm, hasTensorNpu, isEmulator, current)
++    fun processors(current: Processor): List<Processor> = Processor.choices(isQualcomm, hasTensorNpu, isEmulator, current, tensorAot = isTensor)
+ 
+     /** What Automatic runs on here. */
+     val automatic: Processor by lazy { Processor.automatic(hasTensorNpu, isEmulator) }
 +    val isTensor: Boolean
 +        get() = manufacturer.equals("Google", ignoreCase = true) && model in setOf("Tensor G5", "Tensor G6")
  
      val isEmulator: Boolean
          get() = Build.HARDWARE.contains("ranchu") || Build.HARDWARE.contains("goldfish") || Build.PRODUCT.contains("sdk")
 diff --git a/android/app/src/main/java/io/zoompilot/jetlink/settings/Settings.kt b/android/app/src/main/java/io/zoompilot/jetlink/settings/Settings.kt
-index 9ddb197..30c5004 100644
+index 1b09ead..ea08a8f 100644
 --- a/android/app/src/main/java/io/zoompilot/jetlink/settings/Settings.kt
 +++ b/android/app/src/main/java/io/zoompilot/jetlink/settings/Settings.kt
-@@ -27,10 +27,15 @@ enum class Processor(val backend: Backend, val device: String, val title: String
+@@ -33,7 +33,7 @@ enum class Processor(val backend: Backend, val device: String, val title: String
+      * through the compiler in its system; the GPU runs a model that compiler
+      * cannot take.
+      */
+-    TensorNpu(Backend.LiteRt, "npu", "NPU"),
++    TensorNpu(Backend.LiteRt, "npu", "Tensor NPU (on-device)"),
+ 
      /** The whole model on the GPU through LiteRT, which drives any phone's: Adreno, Mali, PowerVR. */
      Gpu(Backend.LiteRt, "gpu", "GPU"),
+@@ -43,11 +43,12 @@ enum class Processor(val backend: Backend, val device: String, val title: String
+      * Listed after the GPU: on the first phone measured it was the slowest of the three.
+      */
+     NpuGpu(Backend.Ort, "htp", "NPU + GPU"),
++    Tensor(Backend.LiteRt, "tensor", "Tensor TPU (precompiled)"),
  
-+    Tensor(Backend.LiteRt, "tensor", "Tensor TPU (parked test)"),
-+
      /** The CPU: the emulator and tests. Seconds a frame with a real model. */
      Cpu(Backend.Ort, "cpu", "CPU");
  
 -    /** Runs on QNN, which needs a Snapdragon: onnxruntime anywhere but its CPU. */
-+    /** Tensor USB requires an explicit, non-persistent parked-test switch. */
-+    val allowsUsb: Boolean get() = this != Tensor
-+
 +    /** Runs on QNN, which needs a Snapdragon. */
      val usesQnn: Boolean get() = backend == Backend.Ort && device != Cpu.device
  
-     companion object {
-@@ -48,9 +53,10 @@ enum class Processor(val backend: Backend, val device: String, val title: String
-          * offered on a Snapdragon only once chosen; the emulator offers
+     /** The choice the server runs: Automatic's pick for this phone, or this one. */
+@@ -89,10 +90,10 @@ enum class Processor(val backend: Backend, val device: String, val title: String
+          * CPU is offered on a Snapdragon only once chosen; the emulator offers
           * everything, for testing.
           */
--        fun choices(qualcomm: Boolean, emulator: Boolean, current: Processor): List<Processor> = when {
-+        fun choices(qualcomm: Boolean, emulator: Boolean, current: Processor, tensor: Boolean = false): List<Processor> = when {
+-        fun choices(qualcomm: Boolean, tensorNpu: Boolean, emulator: Boolean, current: Processor): List<Processor> = when {
++        fun choices(qualcomm: Boolean, tensorNpu: Boolean, emulator: Boolean, current: Processor, tensorAot: Boolean = false): List<Processor> = when {
              emulator -> entries
--            qualcomm -> entries.filter { it != Cpu || current == Cpu }
-+            qualcomm -> entries.filter { it != Tensor && (it != Cpu || current == Cpu) }
-+            tensor -> listOf(Tensor, Gpu, Cpu)
-             else -> listOf(Gpu, Cpu)
+-            qualcomm -> entries.filter { it != TensorNpu && (it != Cpu || current == Cpu) }
+-            tensorNpu -> listOf(Auto, TensorNpu, Gpu, Cpu)
++            qualcomm -> entries.filter { it != TensorNpu && it != Tensor && (it != Cpu || current == Cpu) }
++            tensorNpu -> listOf(Auto) + (if (tensorAot) listOf(Tensor) else emptyList()) + listOf(TensorNpu, Gpu, Cpu)
+             else -> listOf(Auto, Gpu, Cpu)
          }
-     }
-@@ -67,6 +73,9 @@ data class SettingsValues(
-     val keepCpuAwake: Boolean = false,
-     /** The screen stays on while Jetlink is on screen. */
-     val keepScreenOn: Boolean = true,
-+    /** Never saved: app process restart closes the Tensor attachment window. */
-+    val tensorParkedUsb: Boolean = false,
-+
- )
  
- class Settings(context: Context) {
-@@ -75,7 +84,8 @@ class Settings(context: Context) {
-     val values: StateFlow<SettingsValues> = state.asStateFlow()
- 
-     fun update(change: (SettingsValues) -> SettingsValues) {
--        val next = change(state.value)
-+        val changed = change(state.value)
-+        val next = if (changed.processor != state.value.processor) changed.copy(tensorParkedUsb = false) else changed
-         prefs.edit()
-             .putInt(PORT, next.port)
-             .putString(PROCESSOR, next.processor.device)
-@@ -93,7 +103,7 @@ class Settings(context: Context) {
-             port = if (port in 1..65535) port else defaults.port,
-             // a QNN choice from before a phone without a Snapdragon was told apart
-             processor = Processor.of(prefs.getString(PROCESSOR, null))
--                ?.takeIf { it in Processor.choices(Chip.isQualcomm, Chip.isEmulator, it) }
-+                ?.takeIf { it in Processor.choices(Chip.isQualcomm, Chip.isEmulator, it, Chip.isTensor) }
-                 ?: defaults.processor,
-             keepNpuAwake = prefs.getBoolean(KEEP_NPU_AWAKE, defaults.keepNpuAwake),
-             keepCpuAwake = prefs.getBoolean(KEEP_CPU_AWAKE, defaults.keepCpuAwake),
 diff --git a/android/app/src/main/java/io/zoompilot/jetlink/ui/settings/SettingsScreen.kt b/android/app/src/main/java/io/zoompilot/jetlink/ui/settings/SettingsScreen.kt
-index f065256..1372d0e 100644
+index e92e718..c8a62c9 100644
 --- a/android/app/src/main/java/io/zoompilot/jetlink/ui/settings/SettingsScreen.kt
 +++ b/android/app/src/main/java/io/zoompilot/jetlink/ui/settings/SettingsScreen.kt
-@@ -241,7 +241,9 @@ private fun Performance(values: SettingsValues, info: SettingsInfo, actions: Set
-     val colors = JetlinkTheme.colors
+@@ -263,6 +263,8 @@ private fun Performance(values: SettingsValues, info: SettingsInfo, actions: Set
      var choosing by remember { mutableStateOf(false) }
      val choices = info.processors
--    val footer = if (info.snapdragon) {
-+    val footer = if (Processor.Tensor in choices) {
-+        "Tensor TPU is for supervised stationary tests. Follow the guarded script, stay in Park, and set the parking brake. The switch closes after 10 minutes or an app restart."
-+    } else if (info.snapdragon) {
-         "Changing the processor prepares models again."
-     } else {
-         "This phone has no Snapdragon NPU, so the model runs on its GPU. Run Benchmark to see whether it keeps up."
-@@ -272,6 +274,14 @@ private fun Performance(values: SettingsValues, info: SettingsInfo, actions: Set
-                 }
-             }
-         }
-+        if (values.processor == Processor.Tensor) {
-+            RowDivider()
-+            SwitchRow(
-+                "Parked USB Test", values.tensorParkedUsb,
-+                { on -> actions.update { it.copy(tensorParkedUsb = on) } },
-+                supporting = "For ignition-on/A/C testing, arm the script with the car off and wait for its instruction to start the car. Keep controls disengaged. Normal driving clients are blocked.",
-+            )
-+        }
-         if (values.processor.usesQnn) {
-             RowDivider()
-             SwitchRow(
+     val footer = when {
++        values.processor == Processor.Tensor ->
++            "Uses the imported model compiled for this Tensor processor. Phone thermal protections remain active."
+         values.processor.fellBack(info.accelerator, info.automatic) ->
+             "The NPU did not take this model, so it runs on the GPU. Logs (in Help) say why. " +
+                 "Changing the processor prepares models again."
 diff --git a/android/app/src/test/java/io/zoompilot/jetlink/settings/ProcessorTest.kt b/android/app/src/test/java/io/zoompilot/jetlink/settings/ProcessorTest.kt
-index 6fcd24f..b7caf42 100644
+index 55ff577..dbcbf05 100644
 --- a/android/app/src/test/java/io/zoompilot/jetlink/settings/ProcessorTest.kt
 +++ b/android/app/src/test/java/io/zoompilot/jetlink/settings/ProcessorTest.kt
-@@ -9,7 +9,7 @@ class ProcessorTest {
-     fun aSnapdragonOffersQnn() {
-         assertEquals(listOf(Processor.NpuGpu, Processor.Npu, Processor.Gpu), Processor.choices(qualcomm = true, emulator = false, current = Processor.NpuGpu))
-         // the CPU once chosen, so it can be chosen away from
--        assertEquals(Processor.entries, Processor.choices(qualcomm = true, emulator = false, current = Processor.Cpu))
-+        assertEquals(Processor.entries.filter { it != Processor.Tensor }, Processor.choices(qualcomm = true, emulator = false, current = Processor.Cpu))
+@@ -71,7 +71,7 @@ class ProcessorTest {
+     fun onlyOnnxruntimesNpuAndGpuChoicesNeedQnn() {
+         assertEquals(listOf(Processor.Npu, Processor.NpuGpu), Processor.entries.filter { it.usesQnn })
+         assertEquals(
+-            listOf(Backend.Ort, Backend.LiteRt, Backend.LiteRt, Backend.Ort, Backend.Ort),
++            listOf(Backend.Ort, Backend.LiteRt, Backend.LiteRt, Backend.Ort, Backend.LiteRt, Backend.Ort),
+             Processor.entries.filter { it != Processor.Auto }.map { it.backend },
+         )
      }
+@@ -83,8 +83,8 @@ class ProcessorTest {
  
      @Test
-@@ -29,7 +29,27 @@ class ProcessorTest {
-     @Test
-     fun onlyOnnxruntimesNpuAndGpuChoicesNeedQnn() {
-         assertEquals(listOf(Processor.NpuGpu, Processor.Npu), Processor.entries.filter { it.usesQnn })
--        assertEquals(listOf(Backend.Ort, Backend.Ort, Backend.LiteRt, Backend.Ort), Processor.entries.map { it.backend })
-+        assertEquals(listOf(Backend.Ort, Backend.Ort, Backend.LiteRt, Backend.LiteRt, Backend.Ort), Processor.entries.map { it.backend })
-+    }
+     fun theProcessorRowSaysWhatRuns() {
+-        assertEquals("Automatic (NPU)", Processor.Auto.summary("NPU(Tensor G5)", automatic = Processor.TensorNpu))
+-        assertEquals("Automatic (NPU)", Processor.Auto.summary(null, automatic = Processor.TensorNpu))
++        assertEquals("Automatic (Tensor NPU (on-device))", Processor.Auto.summary("NPU(Tensor G5)", automatic = Processor.TensorNpu))
++        assertEquals("Automatic (Tensor NPU (on-device))", Processor.Auto.summary(null, automatic = Processor.TensorNpu))
+         assertEquals("Automatic (GPU)", Processor.Auto.summary(null, automatic = Processor.Gpu))
+         assertEquals("GPU", Processor.Gpu.summary(null, automatic = Processor.TensorNpu))
+     }
+@@ -94,7 +94,7 @@ class ProcessorTest {
+         // what a Pixel 10 Pro Fold off Google's EdgeTPU allowlist reported (2026-10-03)
+         assertTrue(Processor.Auto.fellBack("GPU(fp16)", automatic = Processor.TensorNpu))
+         assertEquals("Automatic (GPU)", Processor.Auto.summary("GPU(fp16)", automatic = Processor.TensorNpu))
+-        assertEquals("NPU (GPU)", Processor.TensorNpu.summary("GPU(fp16)", automatic = Processor.TensorNpu))
++        assertEquals("Tensor NPU (on-device) (GPU)", Processor.TensorNpu.summary("GPU(fp16)", automatic = Processor.TensorNpu))
+         assertFalse(Processor.Auto.fellBack("NPU(Tensor G5)", automatic = Processor.TensorNpu))
+         // only a Tensor NPU falls back; nothing loaded says nothing
+         assertFalse(Processor.Gpu.fellBack("GPU(fp16)", automatic = Processor.TensorNpu))
+@@ -110,4 +110,13 @@ class ProcessorTest {
+         assertEquals(null, Chip.tensorGeneration("SM8650"))
+         assertEquals(null, Chip.tensorGeneration("Tensor"))
+     }
 +
 +    @Test
-+    fun tensorOffersItsOwnTpuWithoutQnn() {
-+        assertEquals(listOf(Processor.Tensor, Processor.Gpu, Processor.Cpu),
-+            Processor.choices(false, false, Processor.Gpu, tensor = true))
++    fun precompiledTensorIsOfferedOnlyWhenTheDeviceSupportsIt() {
++        assertEquals(listOf(Processor.Auto, Processor.Tensor, Processor.TensorNpu, Processor.Gpu, Processor.Cpu),
++            Processor.choices(false, true, false, Processor.Tensor, tensorAot = true))
 +        assertEquals(Processor.Tensor, Processor.of("tensor"))
 +        assertEquals(false, Processor.Tensor.usesQnn)
 +    }
 +
-+    @Test
-+    fun onlyExperimentalTensorDisablesUsb() {
-+        assertEquals(false, Processor.Tensor.allowsUsb)
-+        assertEquals(true, Processor.entries.filter { it != Processor.Tensor }.all { it.allowsUsb })
-+    }
-+
-+    @Test
-+    fun tensorUsbNeedsAnExplicitTestWindow() {
-+        assertEquals(false, SettingsValues(processor = Processor.Tensor).tensorParkedUsb)
-+        assertEquals(false, Processor.Tensor.allowsUsb)
-     }
- 
-     @Test
+ }
 diff --git a/android/scripts/compile-tensor.py b/android/scripts/compile-tensor.py
 new file mode 100644
 index 0000000..e9cac49
@@ -1205,33 +1160,11 @@ index 0000000..e9cac49
 +manifest = {'source_sha256': source_hash, 'compiled_sha256': sha(compiled), 'soc': a.soc, 'litert': '2.2.0', 'sdk_sha256': sha(a.sdk / 'liblitert_plugin_compiler.so'), 'precision': a.precision, 'sharding': a.sharding}
 +(out / 'manifest.json').write_text(json.dumps(manifest, indent=2) + '\n')
 +print(out, flush=True)
-diff --git a/android/scripts/fetch-tensor-runtime.py b/android/scripts/fetch-tensor-runtime.py
-new file mode 100644
-index 0000000..0d438f7
---- /dev/null
-+++ b/android/scripts/fetch-tensor-runtime.py
-@@ -0,0 +1,16 @@
-+#!/usr/bin/env python3
-+"""Fetch the official LiteRT 2.2.0 Tensor dispatch library, verifying its hash."""
-+import hashlib, io, pathlib, urllib.request, zipfile
-+url = 'https://github.com/google-ai-edge/LiteRT/releases/download/v2.2.0/litert_npu_runtime_libraries.zip'
-+member = 'google_tensor_runtime/src/main/jni/arm64-v8a/libLiteRtDispatch_GoogleTensor.so'
-+expected = '35b59265eb8595a1d28c2f69693b1cad39d1fa4a38c2c18d5d54550d079264ac'
-+out = pathlib.Path(__file__).resolve().parents[1] / 'app/src/main/jniLibs/arm64-v8a/libLiteRtDispatch_GoogleTensor.so'
-+if not out.exists() or hashlib.sha256(out.read_bytes()).hexdigest() != expected:
-+    with urllib.request.urlopen(url, timeout=120) as response:
-+        archive = zipfile.ZipFile(io.BytesIO(response.read()))
-+    data = archive.read(member)
-+    if hashlib.sha256(data).hexdigest() != expected:
-+        raise RuntimeError('Tensor runtime checksum mismatch')
-+    out.parent.mkdir(parents=True, exist_ok=True)
-+    out.write_bytes(data)
-+print(out)
 diff --git a/jetlink/transport/tcp.py b/jetlink/transport/tcp.py
-index 43580da..72011e5 100644
+index 5fbc4ed..d74521f 100644
 --- a/jetlink/transport/tcp.py
 +++ b/jetlink/transport/tcp.py
-@@ -90,7 +90,11 @@ class TcpTransport(StreamTransport):
+@@ -142,7 +142,11 @@ class TcpTransport(StreamTransport):
      # they go out as one segment train.
      self._set_timeout(self._write_timeout())
      try:
@@ -1244,35 +1177,6 @@ index 43580da..72011e5 100644
      except OSError as e:
        raise LinkError(f"send failed: {e}") from e
  
-diff --git a/scripts/verify_parity.py b/scripts/verify_parity.py
-index 4a5e8c1..441b6da 100644
---- a/scripts/verify_parity.py
-+++ b/scripts/verify_parity.py
-@@ -163,6 +163,16 @@ def capture(args) -> int:
-     hello = client.hello(timeout=60.0)  # the jetson may still be re-enumerating
-     print(f"server: {hello.get('backend', 'trt')} {hello.get('runtime_version', hello.get('trt_version'))} "
-           f"on {hello['device']}")
-+    if args.parked:
-+      from jetlink import protocol as P
-+      if hello.get('validation') != 'parked_only':
-+        raise SystemExit('--parked requires a parked-only server')
-+      send_json = client.t.send_json
-+      def parked_request(kind, seq, data, flags=0):
-+        if kind == P.Msg.ENGINE_REQ:
-+          data = dict(data, validation_mode='parked')
-+        return send_json(kind, seq, data, flags)
-+      client.t.send_json = parked_request
-     # a model the server does not have is a build job, not a parity check
-     spec = client.ensure_engine(sha256, nbytes, build_timeout=300.0)
-     # reference and compare need the slices this capture was made with
-@@ -435,6 +445,7 @@ def main() -> int:
-   p.add_argument('--n', type=int, default=32,
-                  help='capture mode: frames; more frames give the correlations more to go on')
-   p.add_argument('--seed', type=int, default=0)
-+  p.add_argument('--parked', action='store_true', help='explicit synthetic capture from the parked-only Tensor server')
-   p.add_argument('--onnx', help='reference mode: the ONNX the engine was built from')
-   p.add_argument('--ffs', action='store_true', help='capture mode: this end is the gadget')
-   p.add_argument('--ffs-mount', default='/dev/ffs-jetlink')
 diff --git a/tests/test_tcp_windows.py b/tests/test_tcp_windows.py
 new file mode 100644
 index 0000000..af1a66e
