@@ -5,7 +5,7 @@ import re
 from core import MAX_SAMPLE_GAP, CONTROL_FRESHNESS, METERS_PER_MILE
 
 VERSION = 1
-ATTRIBUTION_REVISION = 2
+ATTRIBUTION_REVISION = 3
 MODEL_FRESHNESS = .25
 BUCKETS = ('pixel', 'jetson', 'large_unknown', 'small', 'unknown')
 
@@ -120,3 +120,28 @@ def summarize(records):
   return {'schema_version': VERSION, 'buckets': totals, 'segments': len(records),
           'method': 'Full-rate logged modelV2.big plus JetLink HELLO device identity; active lateral or longitudinal control counted once.',
           'coverage': 'Only retained logs analyzed. Unknown identities remain unknown. Model/control samples expire after 0.25 seconds. Separate from Connect lifetime totals.'}
+
+
+def forward_summary(records, tracking, updated_date):
+  """Count only recordings started after the explicit activation timestamp.
+
+  Use logged wall time, not file mtime or when a backfill was processed. Missing
+  clocks and recordings already underway at activation cannot enter this total.
+  """
+  start = tracking['started_at_ns']
+  if type(start) is not int or start < 1767225600000000000:
+    raise ValueError('Invalid tracking activation timestamp')
+  meters = 0.
+  for row in records:
+    wall = row.get('wall_time_ns')
+    if type(wall) is not int or wall < start:
+      continue
+    for peer in ('pixel', 'jetson'):
+      value = row['buckets'][peer]['assisted_meters']
+      if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value) or value < 0:
+        raise ValueError('Invalid model distance')
+      meters += value
+  return {'schema_version': 1, 'assisted_miles': round(meters / METERS_PER_MILE, 4),
+          'started_date': tracking['started_date'], 'updated_date': updated_date,
+          'method': 'Combined Pixel and Jetson big-model miles with active lateral or longitudinal assistance, counted once.',
+          'coverage': 'Recordings started after tracking activation only; logged model and HELLO identity required. Missing logs or unknown identities excluded.'}

@@ -930,15 +930,42 @@ index 1e42eae..db9b037 100644
      for scalar in scalars {
        Stage.store(f32: packed + scalar.offset, count: scalar.count, into: scalar.target.pointer, as: scalar.target.type)
 diff --git a/JetlinkKit/Sources/JetlinkServer/ReadRing.swift b/JetlinkKit/Sources/JetlinkServer/ReadRing.swift
-index debe537..5ddf050 100644
+index debe537..1a3cb01 100644
 --- a/JetlinkKit/Sources/JetlinkServer/ReadRing.swift
 +++ b/JetlinkKit/Sources/JetlinkServer/ReadRing.swift
-@@ -81,10 +81,14 @@ final class ReadRing: @unchecked Sendable {
+@@ -21,9 +21,9 @@ protocol ReadRingPipe: AnyObject {
+ /// them.
+ ///
+ /// Why reading ahead is safe. The comma pads every message to
+-/// `Wire.gadgetTxAlign` (16 KB) and writes it in whole multiples of 16 KB
++/// `Wire.gadgetTxAlign` (16 KB) and writes it in whole multiples of 8 KB
+ /// (`StreamTransport.send`, `FfsTransport.write_chunk`), so it never sends a
+-/// short packet and every message ends on the stream's 16 KB grid. A 16 KB
++/// short packet and every message ends on the stream's 8 KB grid. An 8 KB
+ /// read posted on that grid ends at a message's end or inside the message,
+ /// never past it: it cannot sit holding the end of one message while it waits
+ /// for bytes of the next. Bytes go to the reader in the order the reads were
+@@ -47,10 +47,12 @@ final class ReadRing: @unchecked Sendable {
+     case idle, posted, done
+   }
+ 
+-  static let slotSize = Wire.gadgetTxAlign
++  // Keep usbfs bounce buffers within the 8 KiB allocation class. This
++  // divides the unchanged 16 KiB wire padding, so no protocol change is needed.
++  static let slotSize = Wire.gadgetTxAlign / 2
+   /// 512 KB: a whole 400 KB inference request streams without the reader
+   /// posting anything, with slots to spare.
+-  static let depth = 32
++  static let depth = 64
+ 
+   let lock: NSCondition
+   private unowned let pipe: any ReadRingPipe
+@@ -81,10 +83,14 @@ final class ReadRing: @unchecked Sendable {
      while true {
        let copied = try take(into: buffer, count: count)
        if copied > 0 {
 +        // Keep the full receive reserve posted before inference starts.
-+        // A 400 KB request consumes 25 of our 32 slots; leaving only seven
++        // A 400 KB request consumes 50 of our 64 slots; leaving only fourteen
 +        // posted stalls the next request if the server is still computing.
 +        // A submit failure must not discard bytes already copied: the next
 +        // read retries refill and reports failure if no slots can be posted.
@@ -950,6 +977,15 @@ index debe537..5ddf050 100644
        try refill()
        if let deadline, deadline.passed() {
          return 0
+@@ -103,7 +109,7 @@ final class ReadRing: @unchecked Sendable {
+     case .failed(let error):
+       failures[slot] = error
+     case .data where count > 0 && count < ReadRing.slotSize:
+-      failures[slot] = .desynced("a short packet from the comma: the stream is off the 16 KB grid")
++      failures[slot] = .desynced("a short packet from the comma: the stream is off the receive grid")
+     case .data:
+       actual[slot] = min(max(count, 0), ReadRing.slotSize)
+     }
 diff --git a/JetlinkKit/Sources/JetlinkServer/ServerHooks.swift b/JetlinkKit/Sources/JetlinkServer/ServerHooks.swift
 index 1833863..a9c15ed 100644
 --- a/JetlinkKit/Sources/JetlinkServer/ServerHooks.swift
@@ -1075,9 +1111,27 @@ index d8d8715..fb975be 100644
  
    private func onShutdown(_ message: Message) throws {
 diff --git a/JetlinkKit/Sources/JetlinkServer/UsbfsPipes.swift b/JetlinkKit/Sources/JetlinkServer/UsbfsPipes.swift
-index c67e34b..b359c12 100644
+index c67e34b..e2050bf 100644
 --- a/JetlinkKit/Sources/JetlinkServer/UsbfsPipes.swift
 +++ b/JetlinkKit/Sources/JetlinkServer/UsbfsPipes.swift
+@@ -10,7 +10,7 @@ import JetlinkKit
+ /// app's, through UsbDeviceConnection. The Android and Linux counterpart of
+ /// `IOUSBHostPipes`.
+ ///
+-/// Reads come from a `ReadRing` of 16 KB URBs kept posted on the IN endpoint;
++/// Reads come from a `ReadRing` of 8 KB URBs kept posted on the IN endpoint;
+ /// a write is one URB, sent and reaped before it returns. The URBs and their
+ /// memory are made once per descriptor and handed from one session's pipes to
+ /// the next (`UsbfsDevice.take`), so neither the steady state nor a reopen
+@@ -108,7 +108,7 @@ final class UsbfsPipes: BulkPipes, ReadRingPipe, @unchecked Sendable {
+   }
+ }
+ 
+-/// A ring's URBs over 16 KB each of `memory`, and the write URB. Freed only
++/// A ring's URBs over 8 KB each of `memory`, and the write URB. Freed only
+ /// once the kernel has given every one back.
+ final class UsbfsURBs: @unchecked Sendable {
+   let memory: UnsafeMutableRawPointer
 @@ -312,7 +312,7 @@ final class UsbfsDevice: @unchecked Sendable {
    }
  
@@ -1421,7 +1475,7 @@ index 0000000..c3b70b9
 +  }
 +}
 diff --git a/android/app/build.gradle.kts b/android/app/build.gradle.kts
-index 058b1c9..cadf86a 100644
+index 058b1c9..3e99a36 100644
 --- a/android/app/build.gradle.kts
 +++ b/android/app/build.gradle.kts
 @@ -34,8 +34,8 @@ android {
@@ -1430,8 +1484,8 @@ index 058b1c9..cadf86a 100644
          targetSdk = 36
 -        versionCode = jetlinkVersionCode
 -        versionName = jetlinkVersion
-+        versionCode = jetlinkVersionCode * 100 + 8
-+        versionName = jetlinkVersion + "-clarity-tensor.8"
++        versionCode = jetlinkVersionCode * 100 + 9
++        versionName = jetlinkVersion + "-clarity-tensor.9"
          // The QNN runtime is arm64 only, and so is every Snapdragon with an NPU
          // worth driving on. The emulator on an Apple silicon Mac is arm64 too.
          ndk { abiFilters += "arm64-v8a" }

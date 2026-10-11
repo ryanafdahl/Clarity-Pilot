@@ -22,7 +22,7 @@ samples expire after 0.25 seconds; missing or invalid speed intervals are exclud
 The collector is incremental, runs only offroad, and has a three-minute work budget
 per updater run. Existing assistance and engagement ledgers are preserved. Historical
 coverage is limited to retained logs; this does not reconstruct lifetime model use.
-These model-use totals remain private and are never added to Connect totals.
+The historical per-device model-use ledger stays private. A separate, authorized combined forward counter is published as `data/model-miles.json`; it is never added to Connect lifetime totals.
 
 ## Cloud totals handoff
 
@@ -69,3 +69,11 @@ PYTHONPATH=/data/openpilot /usr/local/venv/bin/python publish.py --force-publish
 ```
 
 Verify the remote commit and public JSON after publication. The publisher never force-pushes. A concurrent site update is retried from the latest remote branch. The original private ledger is preserved; no historical reclassification is implied by changing the public data source.
+
+## Forward combined big-model miles
+
+Activated on October 10, 2026 with an explicit durable `model-tracking.json` on the comma. `started_at_ns` is the activation wall clock and `started_date` is its Pacific date. Never silently recreate this configuration if lost: preserve it with the private ledgers. Only recordings whose logged `initData.wallTimeNanos` is at or after activation enter this counter. Existing or backfilled recordings and logs without usable clocks are excluded. It starts at zero; it is not lifetime big-model mileage.
+
+`publish_model_miles.py` publishes combined Pixel + Jetson **assisted** miles to `data/model-miles.json`, using valid big-model outputs, HELLO hardware identity and active lateral or longitudinal control. Unknown hardware and small-model miles are excluded. No per-device values, route IDs, timestamps or locations are published. The separate model checkout is locked by the parent publisher; only this one JSON path may be staged. It uses normal non-forced pushes and retains the ledger through log cleanup.
+
+Deploy `publish_model_miles.py` and `test_forward_model_miles.py` with the other updater files. The active 30-minute offroad timer refreshes this aggregate independently of the nightly engagement publication and hourly cloud Connect totals. The comma must be powered, offroad and online to publish new model miles. A failed refresh retains the previously published date; this counter does not update directly from Connect, which cannot identify the accelerator.

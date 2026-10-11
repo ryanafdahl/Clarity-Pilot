@@ -1,0 +1,66 @@
+{
+  "date": "2026-10-10",
+  "apk": {
+    "version": "0.8.5-clarity-tensor.9",
+    "version_code": 80509,
+    "bytes": 104209968,
+    "sha256": "b3b69287a6bb2a9209a604003937435c2ce1715329881eb66154afbef8a0f07d",
+    "signer_sha256": "50e670489a4ba19aec5e9fbad6f06074556d4d07be629ba012b3ca78f1eabb4e",
+    "android_tests": 59,
+    "android_skipped": 0,
+    "installed_readback_match": true,
+    "temporary_tcp_listener_disabled": true,
+    "adb_forward_removed": true,
+    "numerical_fixtures": 32,
+    "finite_benchmark_frames": 1200
+  },
+  "android_source_base": "b079496816e617ffd891ea12e5bee5d116db1383",
+  "tests": {
+    "android": 59,
+    "native": 53,
+    "mileage": 26
+  },
+  "host_receive_bytes": 8192,
+  "host_receive_slots": 64,
+  "wire_padding_bytes": 16384,
+  "physical_usb_verified_after_update": false,
+  "driving_ready": false,
+  "desk": {
+    "transport": "desk ADB/TCP; not direct comma USB",
+    "measured_frames": 1200,
+    "finite_frames": 1200,
+    "failures": [],
+    "inference": {
+      "mean_ms": 34.084469166666665,
+      "p50_ms": 34.048500000000004,
+      "p95_ms": 35.8635,
+      "p99_ms": 36.5054,
+      "max_ms": 37.77,
+      "over_50ms": 0
+    },
+    "server_total": {
+      "mean_ms": 35.078314166666665,
+      "p50_ms": 35.111,
+      "p95_ms": 37.0452,
+      "p99_ms": 37.718360000000004,
+      "max_ms": 38.967,
+      "over_50ms": 0
+    },
+    "round_trip": {
+      "mean_ms": 50.06380708247889,
+      "p50_ms": 49.420349998399615,
+      "p95_ms": 56.25600492348894,
+      "p99_ms": 65.73826696258038,
+      "max_ms": 124.01070003397763,
+      "over_50ms": 479
+    },
+    "server_timing_pass": true,
+    "round_trip_timing_pass": false,
+    "protocol_pass": true
+  },
+  "parity": {
+    "frames": 32,
+    "passed_slices": 15,
+    "criteria_unchanged": true
+  }
+}

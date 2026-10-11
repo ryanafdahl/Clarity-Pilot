@@ -56,8 +56,11 @@ def main():
       with source.open('rb') as compressed, zstandard.ZstdDecompressor().stream_reader(compressed) as stream:
         raw = stream.read()
       samples = []
+      wall_time_ns = None
       for event in log.Event.read_multiple_bytes(raw):
         kind, t = event.which(), event.logMonoTime / 1e9
+        if kind == 'initData' and wall_time_ns is None:
+          wall_time_ns = event.initData.wallTimeNanos
         if kind == 'carState':
           car = event.carState
           samples.append((t, 3, car.vEgo, event.valid and car.canValid, car.standstill))
@@ -92,6 +95,7 @@ def main():
       if (stat.st_size, stat.st_mtime_ns) != (after.st_size, after.st_mtime_ns):
         raise RuntimeError('Log changed while being analyzed')
       record = dict(counter.result(), fingerprint=fingerprint, attribution_revision=ATTRIBUTION_REVISION,
+                    wall_time_ns=wall_time_ns,
                     first_monotonic=samples[0][0], last_monotonic=samples[-1][0],
                     route_key=hashlib.sha256(route.encode()).hexdigest())
       ledger['segments'][key] = record

@@ -12,6 +12,7 @@ from zoneinfo import ZoneInfo
 
 from collect import atomic_json, require_offroad
 from engagement import refresh
+from publish_model_miles import publish as publish_model_miles
 
 REPOSITORY = 'git@github.com:ryanafdahl/t3st.site.git'
 BRANCH = 'master'
@@ -103,6 +104,9 @@ def main():
                     '--summary', str(base / 'summary.json')], check=True, timeout=1800)
     subprocess.run([sys.executable, str(base / 'collect_model_usage.py'), '--base', str(base)],
                    check=True, timeout=240)
+    # Independent of Connect and its nightly schedule: publish the combined
+    # device-log aggregate on every successful offroad collection.
+    publish_model_miles(base)
     require_offroad()
     now = datetime.now(ZONE)
     if now.year < 2026:
