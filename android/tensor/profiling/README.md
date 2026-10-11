@@ -10,8 +10,9 @@ installed app or select a driving model.
 
 [Real-app tracing and repeated small-gain experiment](APP_EXPERIMENT.md):
 experimental patches, eight paired controls, per-frame output fingerprints and
-paired uncertainty analysis. Builds and offline tests passed; phone measurements
-are pending reconnection. The installation release remains `.9`.
+paired uncertainty analysis. [Completed follow-up](../../../docs/TPU_RUNTIME_SCHEDULING_2026-10-11.md):
+a 0.132 ms mean advantage remained uncertain, and a controlled screen wake
+reproduced a runtime stall on the control build. The installation release remains `.9`.
 
 ## Boundaries
 

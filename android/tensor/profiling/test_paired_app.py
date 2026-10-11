@@ -14,7 +14,7 @@ import paired_app
 
 
 class PairedAppTests(unittest.TestCase):
-    def run_case(self, conflict=False, rollback_failure=False):
+    def run_case(self, conflict=False, rollback_failure=False, order=None):
         with tempfile.TemporaryDirectory() as tmp:
             root=Path(tmp)
             apks=[]
@@ -37,6 +37,7 @@ class PairedAppTests(unittest.TestCase):
                 '--rollback-sha256',hashlib.sha256(apks[2].read_bytes()).hexdigest(),
                 '--client-path',str(root),'--source-sha256','0'*64,'--source-bytes','1',
                 '--output',str(root/'results')]
+            if order is not None: argv += ['--order',order]
             with patch.object(sys,'argv',argv), patch.object(paired_app.subprocess,'run',side_effect=run), \
                  patch.object(paired_app.subprocess,'Popen',side_effect=RuntimeError('fixture benchmark failure')), \
                  contextlib.redirect_stdout(io.StringIO()), self.assertRaises(RuntimeError) as error:
@@ -60,6 +61,22 @@ class PairedAppTests(unittest.TestCase):
         _,manifest,error=self.run_case(rollback_failure=True)
         self.assertTrue(manifest['rollback'].startswith('FAILED:'))
         self.assertIn('FAILED:',error)
+
+    def test_explicit_tail_order_starts_with_candidate(self):
+        calls,manifest,_=self.run_case(order='BA')
+        first=next(c for c in calls if c[:2]==['install','-r'])
+        self.assertEqual(Path(first[2]).name,'candidate.apk')
+        self.assertEqual(manifest['order'],'BA')
+        self.assertEqual(manifest['pairs'],1)
+
+    def test_invalid_pair_order_is_rejected_before_device_access(self):
+        argv=['paired_app','--serial','fixture','--control-apk','absent','--candidate-apk','absent',
+              '--rollback-apk','absent','--rollback-sha256','0'*64,'--client-path','absent',
+              '--source-sha256','0'*64,'--source-bytes','1','--output','absent','--order','AA']
+        with patch.object(sys,'argv',argv),patch.object(paired_app.subprocess,'run') as device, \
+             contextlib.redirect_stderr(io.StringIO()),self.assertRaises(SystemExit):
+            paired_app.main()
+        device.assert_not_called()
 
 
 if __name__=='__main__': unittest.main()

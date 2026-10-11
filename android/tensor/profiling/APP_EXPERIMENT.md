@@ -1,8 +1,9 @@
 # Real-app runtime and scheduling experiment
 
-Status, October 11: **prepared and build-tested; device measurements pending**.
-The Pixel disconnected from ADB during preparation, before either diagnostic
-APK was installed. The installation APK remains `.9`. No new speedup is claimed.
+Status, October 11: **device measurements completed, including a retained
+interrupted trial and a controlled screen-wake reproduction**. The candidate's
+0.132 ms mean advantage was inconsistent across pairs. The installation APK
+remains `.9`. [Results and limitations](../../../docs/TPU_RUNTIME_SCHEDULING_2026-10-11.md).
 
 The earlier priority experiment had too few repeated controls to resolve very
 small effects. A gain of a tenth of a millisecond is worth measuring. This
@@ -45,8 +46,8 @@ Local builds prepared October 11:
 These experimental APKs are retained locally, not offered as installation
 releases. Both release builds and 59 Android tests passed. The candidate also
 passed 53 native regressions. The source used for the installed release was
-verified unchanged. On-phone parity, trace-marker capture and latency testing
-are still required.
+verified unchanged. Both builds passed on-phone recurrent parity; trace-marker
+capture and the repeated latency experiment are now recorded in the results.
 
 ## First capture, then compare
 
@@ -78,8 +79,9 @@ Check trace loss/overrun statistics and each stage's `covered_ms` against
 time; `runnable_ms` is time ready but not scheduled. `blocked_ms` includes
 runtime/hardware waits and other sleeping states. It is **not** pure TPU time.
 Frame IDs are matched to the containing request, including lock waits that
-occur before the frame counter is written. The SQL parsed against the existing
-trace; actual new stage rows still need validation on the phone.
+occur before the frame counter is written. On-phone captures validated the new
+stage rows in both quiet traces and the controlled-wake trace, with complete
+scheduling coverage and zero reported trace loss/errors.
 
 ## Repeated small-gain comparison
 
@@ -114,6 +116,12 @@ python paired_app.py --adb /path/to/adb --serial SERIAL \
 python paired_analysis.py /path/to/new-results --output /path/to/new-comparison.json
 ```
 
+`--order BA` runs an explicitly declared final pair in a **new** result
+directory. Preserve interrupted trials and explain any derived analysis set;
+do not silently overwrite a failed run or label it a pass. The October 11
+comparison repeated its final B/A pair after Android recorded a power-button
+wake during the original B run. The interrupted trial remains in the report.
+
 The primary measure is paired **mean phone-processing latency**. Report every
 pair's control-minus-candidate difference, the number of pairs favoring the
 candidate, and a paired bootstrap interval. p95, p99, maximum and full exchange
@@ -124,11 +132,11 @@ resolution of every small gain. An interval spanning zero is inconclusive,
 not proof that the effect is zero. Inspect thermal/order trends before attributing
 a difference to scheduling. Desk TCP results do not qualify direct USB or driving.
 
-Offline tool validation: three paired-statistics tests, three runner failure/
-rollback tests and two per-frame metadata tests pass. The tests cover a known
+Offline tool validation: three paired-statistics tests, five runner failure/
+rollback/order tests and two per-frame metadata tests pass. The tests cover a known
 0.1 ms gain, mixed noise, incomplete replication, rollback after failure,
 preservation of existing forwards, failed rollback, frame IDs/warmup boundaries,
-output fingerprints and output-path collisions.
+output fingerprints, output-path collisions and validation of explicit pair order.
 
 References: [Android custom trace events](https://developer.android.com/topic/performance/tracing/custom-events),
 [profileable release builds](https://developer.android.com/guide/topics/manifest/profileable-element),

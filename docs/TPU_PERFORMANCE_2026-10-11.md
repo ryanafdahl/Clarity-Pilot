@@ -148,11 +148,11 @@ performance improvement or driving qualification.
 ## Retained changes and next optimization targets
 
 Follow-up: [real-app runtime and scheduling experiment](../android/tensor/profiling/APP_EXPERIMENT.md).
-Eight paired comparisons are prepared to resolve smaller effects than the
-initial checks could distinguish. Diagnostic builds and offline tests pass;
-the Pixel disconnected before installation, so there are no follow-up timing
-results yet. The earlier return control does not establish that the true
-priority effect is exactly zero.
+The [completed follow-up](TPU_RUNTIME_SCHEDULING_2026-10-11.md) measured a
+0.132 ms mean advantage across eight eligible paired comparisons, but the
+interval spanned both a slowdown and an improvement. A controlled screen wake
+reproduced a large runtime stall on the control build. The earlier return
+control does not establish that the true priority effect is exactly zero.
 
 Retained: the profiler, aggregate evidence, and corrected Developer-listener
 instructions. The installed .9 APK, compiled model, and production source

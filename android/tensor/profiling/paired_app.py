@@ -34,8 +34,10 @@ def main():
     p.add_argument('--client-path',type=pathlib.Path,required=True,help='Compatible JetLink Python source checkout')
     p.add_argument('--source-sha256',required=True)
     p.add_argument('--source-bytes',type=int,required=True)
+    p.add_argument('--order',default=ORDER,help='Predeclared AB/BA pairs; default is the eight-pair sequence')
     p.add_argument('--output',type=pathlib.Path,required=True)
     a=p.parse_args()
+    if not re.fullmatch(r'(?:AB|BA){1,16}',a.order): p.error('Order must contain 1..16 complete AB or BA pairs')
     if sha(a.rollback_apk)!=a.rollback_sha256.lower(): p.error('Rollback APK hash mismatch')
     if not re.fullmatch('[0-9a-f]{64}',a.source_sha256) or a.source_bytes<=0: p.error('Invalid source identity')
     apks={'A':a.control_apk,'B':a.candidate_apk}
@@ -45,8 +47,9 @@ def main():
         return subprocess.run([a.adb,'-s',a.serial,*args],capture_output=True,text=True,
             check=True,timeout=timeout).stdout.strip()
     manifest={'created_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),
-        'order':ORDER,'pairs':8,'frames_per_run':600,'warmup_frames':100,
-        'order_design':'four AB and four BA pairs, shuffled once before testing with seed 20261011',
+        'order':a.order,'pairs':len(a.order)//2,'frames_per_run':600,'warmup_frames':100,
+        'order_design':('four AB and four BA pairs, shuffled once before testing with seed 20261011'
+                        if a.order==ORDER else 'explicit pair order declared before this run'),
         'variant_A':'trace-only nice 0 control','variant_B':'same trace points, session nice -4',
         'comparison':'paired run means and quantiles; frames are not independent replicates',
         'apk_sha256':hashes,'rollback_sha256':a.rollback_sha256,
@@ -65,7 +68,7 @@ def main():
             raise RuntimeError('Local port 5599 already forwarded; preserve it and choose a clean test setup')
         adb('forward','tcp:5599','tcp:5599')
         forwarded=True
-        for index,variant in enumerate(ORDER):
+        for index,variant in enumerate(a.order):
             before=health(adb)
             # Every run reinstalls/restarts, including repeated same-variant runs.
             changed=True
