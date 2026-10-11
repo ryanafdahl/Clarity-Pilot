@@ -1,0 +1,169 @@
+--- /dev/null
++++ b/JetlinkKit/Sources/JetlinkServer/InferenceTrace.swift
+@@ -0,0 +1,54 @@
++import Foundation
++
++#if os(Android)
++  import Android
++#endif
++
++/// Desk diagnostic sections. Static names and no formatting on the frame path.
++/// ATrace is enabled only while an authorized system trace selects this app.
++public enum InferenceTrace {
++  #if os(Android)
++    private final class API: @unchecked Sendable {
++      typealias Enabled = @convention(c) () -> Bool
++      typealias Begin = @convention(c) (UnsafePointer<CChar>?) -> Void
++      typealias End = @convention(c) () -> Void
++      typealias Counter = @convention(c) (UnsafePointer<CChar>?, Int64) -> Void
++      let enabled: Enabled
++      let begin: Begin
++      let end: End
++      let counter: Counter
++      init?() {
++        guard let library = dlopen("libandroid.so", RTLD_NOW),
++          let enabled = dlsym(library, "ATrace_isEnabled"),
++          let begin = dlsym(library, "ATrace_beginSection"),
++          let end = dlsym(library, "ATrace_endSection"),
++          let counter = dlsym(library, "ATrace_setCounter")
++        else { return nil }
++        self.enabled = unsafeBitCast(enabled, to: Enabled.self)
++        self.begin = unsafeBitCast(begin, to: Begin.self)
++        self.end = unsafeBitCast(end, to: End.self)
++        self.counter = unsafeBitCast(counter, to: Counter.self)
++      }
++    }
++    private static let api = API()
++  #endif
++
++  public static func measure<T>(_ name: StaticString, _ work: () throws -> T) rethrows -> T {
++    #if os(Android)
++      if let api, api.enabled() {
++        api.begin(UnsafeRawPointer(name.utf8Start).assumingMemoryBound(to: CChar.self))
++        defer { api.end() }
++        return try work()
++      }
++    #endif
++    return try work()
++  }
++
++  public static func frame(_ id: UInt32) {
++    #if os(Android)
++      if let api, api.enabled() {
++        api.counter("jl.frame_id", Int64(id))
++      }
++    #endif
++  }
++}
+--- a/JetlinkKit/Sources/JetlinkServer/Session.swift
++++ b/JetlinkKit/Sources/JetlinkServer/Session.swift
+@@ -387,22 +387,26 @@
+   /// the write waits for the comma to read, and nothing else that needs the
+   /// host (status, a build's progress, the control channel) should wait with it.
+   private func onInfer(_ message: Message) throws {
++    try InferenceTrace.measure("jl.request") { try onInferTraced(message) }
++  }
++
++  private func onInferTraced(_ message: Message) throws {
+     if try refuseUnhealthyPhone(message.seq) { return }
+     guard !healthStopped else {
+       try respond(message.seq, InferReply(status: .notReady))
+       return
+     }
+     let (sha, skip) = wanted()
+-    host.lock.lock()
++    InferenceTrace.measure("jl.host_lock") { host.lock.lock() }
+     guard let loaded = host.loaded, loaded.sha256 == sha, loaded.spec.frameSkip == skip, !host.benchmarking else {
+       host.lock.unlock()
+       try respond(message.seq, InferReply(status: .notReady))
+       return
+     }
+-    let reply = infer(loaded, message)
++    let reply = InferenceTrace.measure("jl.infer") { infer(loaded, message) }
+     host.lock.unlock()
+
+-    let state: Data? = reply.wantsState ? host.telemetry.json() : nil
++    let state: Data? = InferenceTrace.measure("jl.telemetry") { reply.wantsState ? host.telemetry.json() : nil }
+     let sendStarted = DispatchTime.now().uptimeNanoseconds
+     do {
+       // After the reply, so the comma hears INFER_FAILED rather than a
+@@ -414,7 +418,7 @@
+           host.hooks.fatal?(failure)
+         }
+       }
+-      try respond(message.seq, reply, state: state)
++      try InferenceTrace.measure("jl.send") { try respond(message.seq, reply, state: state) }
+     }
+     guard reply.ran else { return }
+     let sendUs = microseconds(since: sendStarted)
+@@ -489,6 +493,7 @@
+     }
+     let base = message.payload.baseAddress!
+     let frameID = UInt32(littleEndian: base.loadUnaligned(as: UInt32.self))
++    InferenceTrace.frame(frameID)
+     let flags = Wire.Flag(rawValue: UInt32(littleEndian: base.loadUnaligned(fromByteOffset: 4, as: UInt32.self)))
+     if flags.contains(.resetQueues) {
+       loaded.staging.reset()
+@@ -501,7 +506,7 @@
+     do {
+       // The packed floats stay where they arrived: every cast and copy of
+       // them reads unaligned, so they need no aligned copy first.
+-      try loaded.staging.stage(warped: warped, packed: warped + layout.warpedBytes)
++      try InferenceTrace.measure("jl.queue") { try loaded.staging.stage(warped: warped, packed: warped + layout.warpedBytes) }
+       queueUs = microseconds(since: started)
+       try loaded.engine.run()
+     } catch {
+--- a/JetlinkKit/Sources/JetlinkLiteRT/LiteRtEngine.swift
++++ b/JetlinkKit/Sources/JetlinkLiteRT/LiteRtEngine.swift
+@@ -180,7 +180,7 @@
+
+   public override func run() throws {
+     try super.run()
+-    hint?.report(lastRunNanoseconds)
++    InferenceTrace.measure("jl.hint") { hint?.report(lastRunNanoseconds) }
+   }
+
+   public override func execute() throws {
+@@ -189,14 +189,14 @@
+     let binding = sets[stateOnDevice ? phase : parity]
+     let started = DispatchTime.now().uptimeNanoseconds
+     let cpuStarted = jl_litert_thread_cpu_ns()
+-    for copy in binding.copiesIn {
+-      try copy.buffer.write(from: copy.host, bytes: copy.bytes)
++    try InferenceTrace.measure("jl.input") {
++      for copy in binding.copiesIn { try copy.buffer.write(from: copy.host, bytes: copy.bytes) }
+     }
+     let invoking = DispatchTime.now().uptimeNanoseconds
+-    try model.run(inputs: binding.inputs, outputs: binding.outputs)
++    try InferenceTrace.measure("jl.invoke") { try model.run(inputs: binding.inputs, outputs: binding.outputs) }
+     let invoked = DispatchTime.now().uptimeNanoseconds
+-    for copy in binding.copiesOut {
+-      try copy.buffer.read(into: copy.host, bytes: copy.bytes)
++    try InferenceTrace.measure("jl.output") {
++      for copy in binding.copiesOut { try copy.buffer.read(into: copy.host, bytes: copy.bytes) }
+     }
+     let finished = DispatchTime.now().uptimeNanoseconds
+     let cpuFinished = jl_litert_thread_cpu_ns()
+--- a/android/app/src/main/AndroidManifest.xml
++++ b/android/app/src/main/AndroidManifest.xml
+@@ -25,6 +25,9 @@
+         android:roundIcon="@mipmap/ic_launcher"
+         android:supportsRtl="true"
+         android:theme="@style/Theme.Jetlink">
++
++        <!-- Desk profiling candidate only; this is not the installation APK. -->
++        <profileable android:shell="true" />
+
+         <!-- The FastRPC library the QNN provider reaches the NPU through. -->
+         <uses-native-library android:name="libcdsprpc.so" android:required="false" />
+--- a/android/app/build.gradle.kts
++++ b/android/app/build.gradle.kts
+@@ -35,7 +35,7 @@
+         minSdk = 31
+         targetSdk = 36
+         versionCode = jetlinkVersionCode * 100 + 9
+-        versionName = jetlinkVersion + "-clarity-tensor.9"
++        versionName = jetlinkVersion + "-clarity-tensor.9-trace1"
+         // The QNN runtime is arm64 only, and so is every Snapdragon with an NPU
+         // worth driving on. The emulator on an Apple silicon Mac is arm64 too.
+         ndk { abiFilters += "arm64-v8a" }

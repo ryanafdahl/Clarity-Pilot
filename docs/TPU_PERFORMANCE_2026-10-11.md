@@ -147,6 +147,13 @@ performance improvement or driving qualification.
 
 ## Retained changes and next optimization targets
 
+Follow-up: [real-app runtime and scheduling experiment](../android/tensor/profiling/APP_EXPERIMENT.md).
+Eight paired comparisons are prepared to resolve smaller effects than the
+initial checks could distinguish. Diagnostic builds and offline tests pass;
+the Pixel disconnected before installation, so there are no follow-up timing
+results yet. The earlier return control does not establish that the true
+priority effect is exactly zero.
+
 Retained: the profiler, aggregate evidence, and corrected Developer-listener
 instructions. The installed .9 APK, compiled model, and production source
 patch remain unchanged. The original working source checkout was preserved.

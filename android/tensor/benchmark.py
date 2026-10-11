@@ -5,6 +5,7 @@ The optional ADB thermal monitor stops at Android severe or battery 43 C.
 """
 import argparse
 import datetime
+import hashlib
 import json
 from pathlib import Path
 import re
@@ -28,12 +29,18 @@ def main():
     p.add_argument('--period-ms', type=float, default=50)
     p.add_argument('--transport', required=True)
     p.add_argument('--adb', help='ADB executable for bounded thermal sampling')
+    p.add_argument('--serial', help='Explicit ADB device serial')
+    p.add_argument('--frame-output', type=Path, help='Optional synthetic per-frame timing JSON for trace correlation')
     p.add_argument('--output', type=Path, required=True)
     a = p.parse_args()
     if a.output.exists(): p.error('output already exists; choose a new filename')
+    if a.frame_output and (a.frame_output.exists() or a.frame_output.resolve() == a.output.resolve()):
+        p.error('frame output must be a new, separate filename')
+    if a.serial and not a.adb: p.error('--serial requires --adb')
     if not 10 <= a.frames <= 36000 or not 0 <= a.warmup <= 100 or not 0 <= a.period_ms <= 1000:
         p.error('frames 10..36000, warmup 0..100, period 0..1000 ms required')
     samples, rows = [], []
+    frame_rows = []
     phone_samples = []
     guard = TimingGuard()
     stop = threading.Event()
@@ -44,7 +51,7 @@ def main():
         while not stop.is_set():
             try:
                 def dump(service):
-                    return subprocess.run([a.adb, 'shell', 'dumpsys', service], check=True,
+                    return subprocess.run([a.adb] + (['-s', a.serial] if a.serial else []) + ['shell', 'dumpsys', service], check=True,
                         capture_output=True, text=True, timeout=5).stdout
                 t = re.search(r'Thermal Status: (\d+)', dump('thermalservice'))
                 b = re.search(r'temperature:\s*(\d+)', dump('battery'))
@@ -80,6 +87,12 @@ def main():
             begin = time.perf_counter()
             output = c.infer(*frames[i % len(frames)], frame_id=i, reset=(i == 0), want_state=True)
             elapsed = (time.perf_counter()-begin)*1000
+            if a.frame_output:
+                frame_rows.append({'frame_id': i, 'warmup': i < a.warmup,
+                    'host_start_monotonic_s': begin, 'round_trip_ms': elapsed,
+                    'inference_ms': c.last_timings[0]/1000, 'queues_ms': c.last_timings[1]/1000,
+                    'server_total_ms': c.last_timings[2]/1000,
+                    'output_sha256': hashlib.sha256(output.tobytes()).hexdigest()})
             if not np.isfinite(output).all(): raise RuntimeError(f'Non-finite frame {i}')
             health = device_health(c.last_state)
             if i % 20 == 0: phone_samples.append(dict(health, elapsed_s=round(time.monotonic()-started,3), frame=i))
@@ -119,6 +132,10 @@ def main():
         result['round_trip_timing_pass']=result['protocol_pass'] and result.get('round_trip',{}).get('p95_ms',float('inf'))<50 and result.get('round_trip',{}).get('max_ms',float('inf'))<100
         a.output.parent.mkdir(parents=True, exist_ok=True)
         a.output.write_text(json.dumps(result,indent=2)+'\n', encoding='utf-8')
+        if a.frame_output:
+            a.frame_output.parent.mkdir(parents=True, exist_ok=True)
+            a.frame_output.write_text(json.dumps({'source_sha256': a.source_sha256,
+                'transport': a.transport, 'frames': frame_rows}, indent=2)+'\n', encoding='utf-8')
         print(json.dumps(result,indent=2), flush=True)
     return 0 if result['server_timing_pass'] else 1
 

@@ -1,0 +1,82 @@
+diff --git a/JetlinkKit/Sources/JetlinkServer/Server.swift b/JetlinkKit/Sources/JetlinkServer/Server.swift
+index 9b34a91..58ef2b5 100644
+--- a/JetlinkKit/Sources/JetlinkServer/Server.swift
++++ b/JetlinkKit/Sources/JetlinkServer/Server.swift
+@@ -336,8 +336,13 @@ public final class Server: @unchecked Sendable {
+     current = (session, done)
+     lock.unlock()
+     let thread = Thread { [self] in
++      let priority = SessionThreadPriority()
++      if let detail = priority.detail { log.info(detail) }
++      defer {
++        priority.restore()
++        done.release()
++      }
+       serve(session)
+-      done.release()
+     }
+     thread.name = "jetlink-session"
+     thread.qualityOfService = .userInteractive
+diff --git a/JetlinkKit/Sources/JetlinkServer/SessionThreadPriority.swift b/JetlinkKit/Sources/JetlinkServer/SessionThreadPriority.swift
+new file mode 100755
+index 0000000..9575d39
+--- /dev/null
++++ b/JetlinkKit/Sources/JetlinkServer/SessionThreadPriority.swift
+@@ -0,0 +1,44 @@
++#if os(Android)
++  import Android
++#endif
++
++/// A bounded Android scheduling experiment for the dedicated session thread.
++/// Ordinary fair scheduling, below UI/render priority; no affinity, clocks,
++/// real-time scheduling, or thermal changes. Restore before the thread exits.
++struct SessionThreadPriority {
++  private let previous: Int32?
++  let detail: String?
++
++  init() {
++    #if os(Android)
++      errno = 0
++      let before = getpriority(PRIO_PROCESS, 0)
++      guard errno == 0 else {
++        previous = nil
++        detail = "Android session priority unavailable: errno \(errno)"
++        return
++      }
++      if before > -4 {
++        if setpriority(PRIO_PROCESS, 0, -4) == 0 {
++          previous = before
++          detail = "Android session thread \(gettid()) nice \(before) -> -4"
++        } else {
++          previous = nil
++          detail = "Android session priority unchanged: errno \(errno)"
++        }
++      } else {
++        previous = nil
++        detail = "Android session thread \(gettid()) already nice \(before)"
++      }
++    #else
++      previous = nil
++      detail = nil
++    #endif
++  }
++
++  func restore() {
++    #if os(Android)
++      if let previous { _ = setpriority(PRIO_PROCESS, 0, previous) }
++    #endif
++  }
++}
+diff --git a/android/app/build.gradle.kts b/android/app/build.gradle.kts
+index 9c7fa86..91e4b16 100644
+--- a/android/app/build.gradle.kts
++++ b/android/app/build.gradle.kts
+@@ -35,7 +35,7 @@ android {
+         minSdk = 31
+         targetSdk = 36
+         versionCode = jetlinkVersionCode * 100 + 9
+-        versionName = jetlinkVersion + "-clarity-tensor.9-trace1"
++        versionName = jetlinkVersion + "-clarity-tensor.9-trace-priority1"
+         // The QNN runtime is arm64 only, and so is every Snapdragon with an NPU
+         // worth driving on. The emulator on an Apple silicon Mac is arm64 too.
+         ndk { abiFilters += "arm64-v8a" }

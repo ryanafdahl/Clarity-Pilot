@@ -8,6 +8,11 @@ installed app or select a driving model.
 [October 11 findings](../../../docs/TPU_PERFORMANCE_2026-10-11.md) and
 [aggregate measurements](results-2026-10-11.json).
 
+[Real-app tracing and repeated small-gain experiment](APP_EXPERIMENT.md):
+experimental patches, eight paired controls, per-frame output fingerprints and
+paired uncertainty analysis. Builds and offline tests passed; phone measurements
+are pending reconnection. The installation release remains `.9`.
+
 ## Boundaries
 
 - Desk use only. Disconnect the phone from the comma before running this tool.
