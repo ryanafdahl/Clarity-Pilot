@@ -1,12 +1,14 @@
 # Google Tensor support on the Pixel
 
-The installed **0.8.5-clarity-tensor.8** app uses pinned upstream source plus precompiled Tensor support and the October 10 USB stability repairs, optional Android CPU hints and the matched LiteRT 2.3.0 runtime. **The parked-only handshake and Parked USB Test switch are removed.** Ordinary protocol-v3 engine requests and USB service are enabled. The selected processor is **Tensor TPU (precompiled)**, and the selected model remains **Cinque Terre V2**. [APK, installation and build provenance](../README.md).
+The installed **0.8.5-clarity-tensor.9** app uses pinned upstream source plus precompiled Tensor support and the October 10 USB stability repairs, optional Android CPU hints and the matched LiteRT 2.3.0 runtime. **The parked-only handshake and Parked USB Test switch are removed.** Ordinary protocol-v3 engine requests and USB service are enabled. The selected processor is **Tensor TPU (precompiled)**, and the selected model remains **Cinque Terre V2**. [APK, installation and build provenance](../README.md).
 
 The app retains phone health monitoring in its foreground service, including when its screen is hidden. Tensor engine requests and inference stop if telemetry is missing, malformed or five seconds old, Android thermal status is severe (3+), or battery temperature reaches 43°C. After a thermal refusal, a fresh engine request is needed once health recovers. These app thresholds do not alter Android's thermal or charging limits.
 
 The separate **Tensor NPU (on-device)** choice uses upstream's runtime compiler and its reported execution backend. The selected precompiled path checks the imported model and requires full NPU execution; it refuses GPU fallback. Logs on the installed Pixel confirm `NPU(Tensor G6)`.
 
 ## Current results and remaining checks
+
+[October 11 TPU profiling](../../docs/TPU_PERFORMANCE_2026-10-11.md) separates hardware execution from runtime and scheduling delays. Alternate sharding and an Android priority candidate did not establish a repeatable app speedup; the original `.9` APK and model remain installed. The [isolated profiler](profiling/README.md) retains the hardware-counter and timing workflow.
 
 [October 10 stability and LiteRT report](../../docs/PIXEL_USB_STABILITY_LITERT23_2026-10-10.md) records the installed APK identity, normal handshake, numerical comparison, sustained desk timing and test counts. Removal of the parked restriction is a functional change, not driving qualification. The subsequent [direct-USB drive](../../docs/PIXEL_DRIVE_SCREEN_OFF_2026-10-10.md) recorded 8.67 assisted miles on the Pixel large-model path and a clean 11 min 45.7 s finish, but also three early USB resets. Screen/charging/Android Auto effects remain unisolated, detailed phone stage logs are unavailable, and repeated failure recovery and sustained reliability remain open. The comma retains its existing warmup, deadlines and fallback limits and now bounds optional USB inference to one outstanding request.
 
@@ -56,7 +58,7 @@ Do not create a shell-owned nested directory. Restart the app after replacing a 
 
 For normal comma USB use, follow [the connection instructions](../README.md#connect-to-the-comma). There is no test flag to enable. The app's Developer setting is unnecessary for direct USB.
 
-For a desk benchmark, tap **Settings → About → Version** seven times to expose Developer settings and enable the TCP listener. Put the patched upstream checkout on `PYTHONPATH` and forward its port:
+For a desk benchmark, open **JetLink's Settings**, scroll to **About**, and tap **Version** seven times. This shows the **Developer** section and automatically enables its listener. The control is labeled **Port**, normally **5599**; there is no separate TCP-listener switch. This is separate from Android's Developer options. Put the patched upstream checkout on `PYTHONPATH` and forward its port:
 
 ```sh
 adb forward tcp:5599 tcp:5599

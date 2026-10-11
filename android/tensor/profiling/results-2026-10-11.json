@@ -1,0 +1,506 @@
+{
+  "native": [
+    {
+      "name": "baseline-repeat-0-mode5",
+      "frames": 1200,
+      "mode": 5,
+      "mean_ms": 33.516368926666665,
+      "p95_ms": 35.2689835,
+      "p99_ms": 36.4815695,
+      "max_ms": 44.881629,
+      "over_50": 0,
+      "input_mean_ms": 0.9346475558333334,
+      "invoke_mean_ms": 32.266707546666666,
+      "output_mean_ms": 0.3150138241666667,
+      "hardware_mean_ms": 29.362585,
+      "max_battery_c": 30.3,
+      "max_thermal_status": 0,
+      "output_sha256": {
+        "output-0.bin": "4953ad8d2dabca6b7bc2a415cfca377f6ff7c757d029e86ea3e1653993c612b1"
+      }
+    },
+    {
+      "name": "counters-0-mode5",
+      "frames": 120,
+      "mode": 5,
+      "mean_ms": 35.246870941666664,
+      "p95_ms": 36.6812527,
+      "p99_ms": 37.271126609999996,
+      "max_ms": 37.560209,
+      "over_50": 0,
+      "input_mean_ms": 0.83402445,
+      "invoke_mean_ms": 34.09265324166667,
+      "output_mean_ms": 0.32019325,
+      "hardware_mean_ms": 30.892591666666668,
+      "max_battery_c": 27.6,
+      "max_thermal_status": 0,
+      "output_sha256": {
+        "output-0.bin": "4953ad8d2dabca6b7bc2a415cfca377f6ff7c757d029e86ea3e1653993c612b1"
+      }
+    },
+    {
+      "name": "extensive-0-mode5",
+      "frames": 600,
+      "mode": 5,
+      "mean_ms": 37.44603411333333,
+      "p95_ms": 39.4110052,
+      "p99_ms": 40.88700107999999,
+      "max_ms": 53.48341,
+      "over_50": 1,
+      "input_mean_ms": 0.9761089216666666,
+      "invoke_mean_ms": 36.167819565,
+      "output_mean_ms": 0.3021056266666667,
+      "hardware_mean_ms": 33.33474833333334,
+      "max_battery_c": 28.2,
+      "max_thermal_status": 0,
+      "output_sha256": {
+        "output-0.bin": "4953ad8d2dabca6b7bc2a415cfca377f6ff7c757d029e86ea3e1653993c612b1"
+      }
+    },
+    {
+      "name": "maximum-0-mode5",
+      "frames": 600,
+      "mode": 5,
+      "mean_ms": 41.195212688333335,
+      "p95_ms": 42.6795226,
+      "p99_ms": 43.825011229999994,
+      "max_ms": 61.950181,
+      "over_50": 1,
+      "input_mean_ms": 0.8979444833333333,
+      "invoke_mean_ms": 39.965786298333335,
+      "output_mean_ms": 0.33148190666666666,
+      "hardware_mean_ms": null,
+      "max_battery_c": 26.9,
+      "max_thermal_status": 0,
+      "output_sha256": {
+        "output-0.bin": "4953ad8d2dabca6b7bc2a415cfca377f6ff7c757d029e86ea3e1653993c612b1"
+      }
+    },
+    {
+      "name": "maximum-1-mode5",
+      "frames": 600,
+      "mode": 5,
+      "mean_ms": 41.00855054666667,
+      "p95_ms": 42.6454999,
+      "p99_ms": 43.61210774,
+      "max_ms": 45.643864,
+      "over_50": 0,
+      "input_mean_ms": 0.8442053833333333,
+      "invoke_mean_ms": 39.849333808333334,
+      "output_mean_ms": 0.315011355,
+      "hardware_mean_ms": null,
+      "max_battery_c": 26.9,
+      "max_thermal_status": 0,
+      "output_sha256": {
+        "output-0.bin": "4953ad8d2dabca6b7bc2a415cfca377f6ff7c757d029e86ea3e1653993c612b1"
+      }
+    },
+    {
+      "name": "mode-sweep-0-mode5",
+      "frames": 600,
+      "mode": 5,
+      "mean_ms": 35.400015405,
+      "p95_ms": 37.28148015,
+      "p99_ms": 40.18583035,
+      "max_ms": 64.617499,
+      "over_50": 1,
+      "input_mean_ms": 0.9405887116666667,
+      "invoke_mean_ms": 34.13334059666666,
+      "output_mean_ms": 0.32608609666666666,
+      "hardware_mean_ms": null,
+      "max_battery_c": 25.1,
+      "max_thermal_status": 0,
+      "output_sha256": {
+        "output-0.bin": "4953ad8d2dabca6b7bc2a415cfca377f6ff7c757d029e86ea3e1653993c612b1"
+      }
+    },
+    {
+      "name": "mode-sweep-1-mode3",
+      "frames": 600,
+      "mode": 3,
+      "mean_ms": 35.13515604333333,
+      "p95_ms": 36.908741,
+      "p99_ms": 37.62835674,
+      "max_ms": 42.648072,
+      "over_50": 0,
+      "input_mean_ms": 0.8587724583333334,
+      "invoke_mean_ms": 33.97501239166667,
+      "output_mean_ms": 0.30137119333333334,
+      "hardware_mean_ms": null,
+      "max_battery_c": 25.1,
+      "max_thermal_status": 0,
+      "output_sha256": {
+        "output-0.bin": "4953ad8d2dabca6b7bc2a415cfca377f6ff7c757d029e86ea3e1653993c612b1"
+      }
+    },
+    {
+      "name": "mode-sweep-2-mode4",
+      "frames": 600,
+      "mode": 4,
+      "mean_ms": 47.70296776666667,
+      "p95_ms": 49.3724756,
+      "p99_ms": 50.50795634,
+      "max_ms": 67.52763,
+      "over_50": 12,
+      "input_mean_ms": 0.8783589933333333,
+      "invoke_mean_ms": 46.47279013166666,
+      "output_mean_ms": 0.35181864166666665,
+      "hardware_mean_ms": null,
+      "max_battery_c": 25.8,
+      "max_thermal_status": 0,
+      "output_sha256": {
+        "output-0.bin": "4953ad8d2dabca6b7bc2a415cfca377f6ff7c757d029e86ea3e1653993c612b1"
+      }
+    },
+    {
+      "name": "mode-sweep-3-mode5",
+      "frames": 600,
+      "mode": 5,
+      "mean_ms": 35.46023198166667,
+      "p95_ms": 37.409121199999994,
+      "p99_ms": 39.77951271,
+      "max_ms": 43.987369,
+      "over_50": 0,
+      "input_mean_ms": 0.989163645,
+      "invoke_mean_ms": 34.133912558333336,
+      "output_mean_ms": 0.3371557783333333,
+      "hardware_mean_ms": null,
+      "max_battery_c": 25.8,
+      "max_thermal_status": 0,
+      "output_sha256": {
+        "output-0.bin": "4953ad8d2dabca6b7bc2a415cfca377f6ff7c757d029e86ea3e1653993c612b1"
+      }
+    },
+    {
+      "name": "moderate-0-mode5",
+      "frames": 600,
+      "mode": 5,
+      "mean_ms": 35.523380188333334,
+      "p95_ms": 38.3093936,
+      "p99_ms": 40.56256685,
+      "max_ms": 59.977083,
+      "over_50": 1,
+      "input_mean_ms": 0.962541275,
+      "invoke_mean_ms": 34.25711508333333,
+      "output_mean_ms": 0.30372383,
+      "hardware_mean_ms": 32.09639833333333,
+      "max_battery_c": 27.4,
+      "max_thermal_status": 0,
+      "output_sha256": {
+        "output-0.bin": "4953ad8d2dabca6b7bc2a415cfca377f6ff7c757d029e86ea3e1653993c612b1"
+      }
+    },
+    {
+      "name": "priority-0-0",
+      "frames": 600,
+      "mode": 5,
+      "mean_ms": 34.78586576666667,
+      "p95_ms": 36.3533634,
+      "p99_ms": 37.303863989999996,
+      "max_ms": 53.743713,
+      "over_50": 1,
+      "input_mean_ms": 0.9919597616666667,
+      "invoke_mean_ms": 33.46090555666667,
+      "output_mean_ms": 0.3330004483333333,
+      "hardware_mean_ms": 30.31253,
+      "max_battery_c": 29.8,
+      "max_thermal_status": 0,
+      "output_sha256": {
+        "output-0.bin": "4953ad8d2dabca6b7bc2a415cfca377f6ff7c757d029e86ea3e1653993c612b1"
+      }
+    },
+    {
+      "name": "priority-1--4",
+      "frames": 600,
+      "mode": 5,
+      "mean_ms": 34.663304626666665,
+      "p95_ms": 36.2076734,
+      "p99_ms": 37.28126053,
+      "max_ms": 40.207614,
+      "over_50": 0,
+      "input_mean_ms": 0.9652250683333333,
+      "invoke_mean_ms": 33.36157181833333,
+      "output_mean_ms": 0.33650774,
+      "hardware_mean_ms": 30.352766666666668,
+      "max_battery_c": 29.8,
+      "max_thermal_status": 0,
+      "output_sha256": {
+        "output-0.bin": "4953ad8d2dabca6b7bc2a415cfca377f6ff7c757d029e86ea3e1653993c612b1"
+      }
+    },
+    {
+      "name": "priority-2--4",
+      "frames": 600,
+      "mode": 5,
+      "mean_ms": 34.66718258833333,
+      "p95_ms": 36.41134185,
+      "p99_ms": 36.923129089999996,
+      "max_ms": 38.51104,
+      "over_50": 0,
+      "input_mean_ms": 0.9149341016666667,
+      "invoke_mean_ms": 33.423057655,
+      "output_mean_ms": 0.3291908316666667,
+      "hardware_mean_ms": 30.298998333333333,
+      "max_battery_c": 29.8,
+      "max_thermal_status": 0,
+      "output_sha256": {
+        "output-0.bin": "4953ad8d2dabca6b7bc2a415cfca377f6ff7c757d029e86ea3e1653993c612b1"
+      }
+    },
+    {
+      "name": "priority-3-0",
+      "frames": 600,
+      "mode": 5,
+      "mean_ms": 34.70623284166667,
+      "p95_ms": 36.35065665,
+      "p99_ms": 37.164886880000005,
+      "max_ms": 41.038255,
+      "over_50": 0,
+      "input_mean_ms": 0.9114987866666666,
+      "invoke_mean_ms": 33.47344733833334,
+      "output_mean_ms": 0.32128671666666664,
+      "hardware_mean_ms": 30.345641666666666,
+      "max_battery_c": 30.6,
+      "max_thermal_status": 0,
+      "output_sha256": {
+        "output-0.bin": "4953ad8d2dabca6b7bc2a415cfca377f6ff7c757d029e86ea3e1653993c612b1"
+      }
+    },
+    {
+      "name": "resident-inputs-0-mode5",
+      "frames": 1200,
+      "mode": 5,
+      "mean_ms": 34.2241252425,
+      "p95_ms": 36.0302741,
+      "p99_ms": 38.64379063,
+      "max_ms": 72.505363,
+      "over_50": 3,
+      "input_mean_ms": 0.0095501825,
+      "invoke_mean_ms": 33.90115656583333,
+      "output_mean_ms": 0.3134184941666667,
+      "hardware_mean_ms": 31.035610000000002,
+      "max_battery_c": 29.5,
+      "max_thermal_status": 0,
+      "output_sha256": {
+        "output-0.bin": "4953ad8d2dabca6b7bc2a415cfca377f6ff7c757d029e86ea3e1653993c612b1"
+      }
+    },
+    {
+      "name": "traced-fixed-0-mode5",
+      "frames": 600,
+      "mode": 5,
+      "mean_ms": 35.284343605,
+      "p95_ms": 36.79125825,
+      "p99_ms": 37.79673672,
+      "max_ms": 55.160245,
+      "over_50": 1,
+      "input_mean_ms": 0.8529238766666667,
+      "invoke_mean_ms": 34.107957631666665,
+      "output_mean_ms": 0.32346209666666664,
+      "hardware_mean_ms": null,
+      "max_battery_c": 27.8,
+      "max_thermal_status": 0,
+      "output_sha256": {
+        "output-0.bin": "4953ad8d2dabca6b7bc2a415cfca377f6ff7c757d029e86ea3e1653993c612b1"
+      }
+    }
+  ],
+  "app": [
+    {
+      "name": "app-baseline",
+      "frames": 1200,
+      "phone": {
+        "mean_ms": 35.209406666666666,
+        "p50_ms": 35.2345,
+        "p95_ms": 37.16139999999999,
+        "p99_ms": 37.81212,
+        "max_ms": 38.77,
+        "over_50ms": 0
+      },
+      "inference": {
+        "mean_ms": 34.1143425,
+        "p50_ms": 34.067,
+        "p95_ms": 35.89745,
+        "p99_ms": 36.58205,
+        "max_ms": 37.651,
+        "over_50ms": 0
+      },
+      "queues": {
+        "mean_ms": 0.9676133333333333,
+        "p50_ms": 1.027,
+        "p95_ms": 1.28605,
+        "p99_ms": 1.55015,
+        "max_ms": 2.59,
+        "over_50ms": 0
+      },
+      "round_trip": {
+        "mean_ms": 50.62250750216966,
+        "p50_ms": 50.00560003099963,
+        "p95_ms": 56.499655009247356,
+        "p99_ms": 68.4611679869704,
+        "max_ms": 87.71809993777424,
+        "over_50ms": 601
+      },
+      "failures": [],
+      "max_battery_c": 30.7,
+      "max_thermal_status": 0
+    },
+    {
+      "name": "app-traced",
+      "frames": 600,
+      "phone": {
+        "mean_ms": 35.29405166666667,
+        "p50_ms": 35.387,
+        "p95_ms": 37.11545,
+        "p99_ms": 38.000280000000004,
+        "max_ms": 39.214,
+        "over_50ms": 0
+      },
+      "inference": {
+        "mean_ms": 34.169738333333335,
+        "p50_ms": 34.1795,
+        "p95_ms": 35.7825,
+        "p99_ms": 36.55185,
+        "max_ms": 37.981,
+        "over_50ms": 0
+      },
+      "queues": {
+        "mean_ms": 0.9938916666666667,
+        "p50_ms": 1.03,
+        "p95_ms": 1.28215,
+        "p99_ms": 1.42704,
+        "max_ms": 1.715,
+        "over_50ms": 0
+      },
+      "round_trip": {
+        "mean_ms": 50.88120350012711,
+        "p50_ms": 50.38909998256713,
+        "p95_ms": 56.2058099778369,
+        "p99_ms": 65.56571400375105,
+        "max_ms": 89.9698999710381,
+        "over_50ms": 340
+      },
+      "failures": [],
+      "max_battery_c": 30.1,
+      "max_thermal_status": 0
+    },
+    {
+      "name": "app-priority-traced",
+      "frames": 600,
+      "phone": {
+        "mean_ms": 33.91149333333333,
+        "p50_ms": 33.841,
+        "p95_ms": 36.1691,
+        "p99_ms": 37.19278,
+        "max_ms": 38.572,
+        "over_50ms": 0
+      },
+      "inference": {
+        "mean_ms": 32.81176,
+        "p50_ms": 32.701499999999996,
+        "p95_ms": 34.6962,
+        "p99_ms": 35.68633,
+        "max_ms": 36.573,
+        "over_50ms": 0
+      },
+      "queues": {
+        "mean_ms": 0.9457749999999998,
+        "p50_ms": 0.959,
+        "p95_ms": 1.416,
+        "p99_ms": 1.85016,
+        "max_ms": 2.702,
+        "over_50ms": 0
+      },
+      "round_trip": {
+        "mean_ms": 49.52654766830771,
+        "p50_ms": 48.507849976886064,
+        "p95_ms": 57.48091496061532,
+        "p99_ms": 66.6739449952729,
+        "max_ms": 117.1915999148041,
+        "over_50ms": 184
+      },
+      "failures": [],
+      "max_battery_c": 29.0,
+      "max_thermal_status": 0
+    },
+    {
+      "name": "app-priority-repeat",
+      "frames": 1200,
+      "phone": {
+        "mean_ms": 34.358939166666666,
+        "p50_ms": 34.367000000000004,
+        "p95_ms": 36.37265,
+        "p99_ms": 37.355549999999994,
+        "max_ms": 38.338,
+        "over_50ms": 0
+      },
+      "inference": {
+        "mean_ms": 33.16424583333333,
+        "p50_ms": 33.0995,
+        "p95_ms": 34.87225,
+        "p99_ms": 35.50043,
+        "max_ms": 36.361,
+        "over_50ms": 0
+      },
+      "queues": {
+        "mean_ms": 1.0274483333333335,
+        "p50_ms": 1.052,
+        "p95_ms": 1.4501499999999998,
+        "p99_ms": 1.96322,
+        "max_ms": 2.801,
+        "over_50ms": 0
+      },
+      "round_trip": {
+        "mean_ms": 49.96135458466597,
+        "p50_ms": 49.35065004974604,
+        "p95_ms": 55.532790010329336,
+        "p99_ms": 67.42536400794052,
+        "max_ms": 76.19659998454154,
+        "over_50ms": 465
+      },
+      "failures": [],
+      "max_battery_c": 29.4,
+      "max_thermal_status": 0
+    },
+    {
+      "name": "app-baseline-return",
+      "frames": 1200,
+      "phone": {
+        "mean_ms": 34.28135833333334,
+        "p50_ms": 34.2885,
+        "p95_ms": 36.437549999999995,
+        "p99_ms": 37.27019,
+        "max_ms": 39.363,
+        "over_50ms": 0
+      },
+      "inference": {
+        "mean_ms": 33.0515225,
+        "p50_ms": 32.9825,
+        "p95_ms": 34.996399999999994,
+        "p99_ms": 35.63522,
+        "max_ms": 37.037,
+        "over_50ms": 0
+      },
+      "queues": {
+        "mean_ms": 1.0505574999999998,
+        "p50_ms": 1.088,
+        "p95_ms": 1.5011999999999996,
+        "p99_ms": 1.9076499999999994,
+        "max_ms": 3.904,
+        "over_50ms": 0
+      },
+      "round_trip": {
+        "mean_ms": 49.751679748781804,
+        "p50_ms": 49.25054998602718,
+        "p95_ms": 54.76737999124452,
+        "p99_ms": 64.7389320214279,
+        "max_ms": 73.08530004229397,
+        "over_50ms": 434
+      },
+      "failures": [],
+      "max_battery_c": 30.3,
+      "max_thermal_status": 0
+    }
+  ],
+  "decision": "Keep the original .9 app, minimal sharding, burst mode 5. No repeatable production speed improvement established."
+}

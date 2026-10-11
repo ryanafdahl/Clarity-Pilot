@@ -42,6 +42,8 @@ The comma needs the [previous recovery patch](../patches/jetlink-usb-recovery/re
 
 ## Validation and rebuilding
 
+The [October 11 TPU investigation](../docs/TPU_PERFORMANCE_2026-10-11.md) tested compiler settings, hardware counters and an Android scheduling candidate. Return controls did not establish a repeatable speedup, so `.9` remains the installation APK. [Reusable native profiler](tensor/profiling/README.md).
+
 The `.9` release build, **59 Android tests** and **53 native tests** passed. Existing native regressions cover framed multi-slot messages, ordered completion, EPROTO failure propagation, cancel/reopen and resident buffer reuse. All 15 output slices passed a fresh 32-frame recurrent reference comparison. A 1,200-frame ADB/TCP run had no failures: phone processing p95 **37.045 ms**, maximum **38.967 ms**; round-trip p95 **56.256 ms**, maximum **124.011 ms**. The round-trip timing check failed. ADB/TCP does not exercise the host USB receive ring and does not qualify driving. [Current mitigation and limitations](../docs/PIXEL_USB_HOST_BUFFER_2026-10-10.md).
 
 ```sh
