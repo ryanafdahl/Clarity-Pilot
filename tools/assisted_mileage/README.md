@@ -44,7 +44,7 @@ The [official API](https://api.comma.ai/) defines these as total driving distanc
 
 ## Deployment and schedule
 
-The files live under `/data/maintenance/ai-mileage`. Deploy `publish.py`, `engagement.py`, `collect.py`, `core.py`, `connect-devices.json` and tests there. Keep the existing dedicated website deploy key and known-hosts configuration. The publisher only modifies `data/assisted-miles.json` and `data/engagement.json`; the legacy mileage filename remains for existing links, but schema 2 uses `driving_miles` and contains no manual baseline.
+The files live under `/data/maintenance/ai-mileage`. Deploy `publish.py`, `engagement.py`, `collect.py`, `core.py`, `collect_model_usage.py`, `model_usage.py`, `connect-devices.json` and tests there. Keep the existing dedicated website deploy key and known-hosts configuration. The publisher only modifies `data/assisted-miles.json` and `data/engagement.json`; the legacy mileage filename remains for existing links, but schema 2 uses `driving_miles` and contains no manual baseline.
 
 The private `connect-private-devices.json` lists the current device as `{"name":"comma 4","current":true}` and an authorized older device as `{"name":"comma 3","id":"<private device identity>"}`. Never commit this file or `engagement-ledger.json`. Preserve the ledger on upgrades. Back up existing files and deploy only offroad with no publisher running.
 
@@ -64,7 +64,7 @@ The API currently returns fewer recent routes than the browser. The private ledg
 
 ```sh
 cd /data/maintenance/ai-mileage
-PYTHONPATH=/data/openpilot /usr/local/venv/bin/python -m unittest test_core test_publish test_engagement
+PYTHONPATH=/data/openpilot /usr/local/venv/bin/python -m unittest test_core test_publish test_engagement test_model_usage
 PYTHONPATH=/data/openpilot /usr/local/venv/bin/python publish.py --force-publish
 ```
 
