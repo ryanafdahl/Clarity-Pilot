@@ -167,6 +167,7 @@ def sampled_model_events(rows, maximum_gap=.75):
 def history_summary(records, updated_date):
   """All available deduplicated model evidence, including unidentified peers."""
   rows = list(records)
+  device_meters = {'pixel': 0., 'jetson': 0.}
   identified = unattributed = sampled = full = 0.
   wall_times = []
   for row in rows:
@@ -177,7 +178,9 @@ def history_summary(records, updated_date):
         raise ValueError('Invalid model distance')
       meters += value
       if peer == 'large_unknown': unattributed += value
-      else: identified += value
+      else:
+        identified += value
+        device_meters[peer] += value
     if row.get('source_kind') == 'qlog': sampled += meters
     else: full += meters
     wall = row.get('wall_time_ns')
@@ -185,7 +188,8 @@ def history_summary(records, updated_date):
       wall_times.append(wall)
   from datetime import datetime, timezone
   from zoneinfo import ZoneInfo
-  return {'schema_version': 2, 'assisted_miles': round((identified+unattributed)/METERS_PER_MILE, 4),
+  return {'schema_version': 3, 'assisted_miles': round((identified+unattributed)/METERS_PER_MILE, 4),
+          'device_assisted_miles': {name: round(meters/METERS_PER_MILE, 4) for name, meters in device_meters.items()},
           'identified_assisted_miles': round(identified/METERS_PER_MILE, 4),
           'unattributed_assisted_miles': round(unattributed/METERS_PER_MILE, 4),
           'full_rate_assisted_miles': round(full/METERS_PER_MILE, 4),
