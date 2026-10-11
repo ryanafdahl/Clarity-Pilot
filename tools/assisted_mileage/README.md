@@ -1,5 +1,37 @@
 # Connect driving history and private assistance ledger
 
+## Model and accelerator usage
+
+The offroad updater also runs `collect_model_usage.py`. It records a separate,
+durable private `model-usage-ledger.json` and `model-usage-summary.json`, with
+Pixel large-model, Jetson large-model, unknown large-model hardware, small-model,
+and unknown-output categories. Each category separates observed model time/distance
+from assisted time/distance. Assistance requires valid active lateral or longitudinal
+control, counted as a union; merely running the model is not assisted driving.
+
+Attribution combines valid `modelV2.big` output with the device identity logged
+by the JetLink HELLO handshake. Tensor device identities identify the Pixel backend;
+explicit Orin/Jetson identities identify Jetson. Generic “jetson attached” text,
+`bigModelAvailable`, or the current plugged-in device are not evidence of historical
+hardware use. Link loss clears the peer. Identity may continue only across adjacent
+segments of the same route with a gap no greater than one second. Missing identities
+remain unknown, including old logs without usable handshakes.
+
+Speed, controls and model outputs are aligned by monotonic timestamps. Model/control
+samples expire after 0.25 seconds; missing or invalid speed intervals are excluded.
+The collector is incremental, runs only offroad, and has a three-minute work budget
+per updater run. Existing assistance and engagement ledgers are preserved. Historical
+coverage is limited to retained logs; this does not reconstruct lifetime model use.
+These model-use totals remain private and are never added to Connect totals.
+
+## Cloud totals handoff
+
+The website repository now contains an hourly Connect statistics workflow. Its
+account token stays in GitHub Actions secrets. After its first successful refresh,
+the published JSON declares `publisher: github-actions`; this comma publisher
+preserves that snapshot and continues its separate engagement and private-log work.
+Before that first success, the current comma-based nightly totals remain active.
+
 The public tracker uses only verified comma Connect device statistics. Manual additions and the owner-reported baseline were removed on October 10, 2026. `baseline.json` is no longer read. Local log mileage is never added to Connect totals, avoiding overlap and incompatible engagement definitions.
 
 The current comma 4 retrieves both authorized devices' `v1.1/devices/:dongle_id/stats` using its existing device identity. Credentials are used only for normal authentication with comma's service. `connect-devices.json` retains the older device's last verified observation when its refresh fails. Each device keeps its own source and verification date.

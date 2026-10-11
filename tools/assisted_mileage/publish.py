@@ -77,6 +77,15 @@ def connect_client():
   return Api(identity), identity
 
 
+def preserve_cloud_totals(target, candidate):
+  """The cloud updater owns totals after its first successful publication."""
+  if target.exists():
+    existing = json.loads(target.read_text())
+    if existing.get('publisher') == 'github-actions':
+      return existing
+  return candidate
+
+
 def main():
   parser = argparse.ArgumentParser(description=__doc__)
   parser.add_argument('--base', type=Path, default=Path(__file__).resolve().parent)
@@ -92,6 +101,8 @@ def main():
     fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
     subprocess.run([sys.executable, str(base / 'collect.py'), '--state', str(base / 'ledger.json'),
                     '--summary', str(base / 'summary.json')], check=True, timeout=1800)
+    subprocess.run([sys.executable, str(base / 'collect_model_usage.py'), '--base', str(base)],
+                   check=True, timeout=240)
     require_offroad()
     now = datetime.now(ZONE)
     if now.year < 2026:
@@ -134,6 +145,7 @@ def main():
         verified_devices[index] = dict(validated, name=device['name'])
     public = public_summary(device_stats.get('comma 4') or connect_statistics(), today, verified_devices)
     target = checkout / PUBLIC_FILE
+    public = preserve_cloud_totals(target, public)
     require_offroad()
     atomic_json(target, public)
     atomic_json(checkout / 'data/engagement.json', engagement)

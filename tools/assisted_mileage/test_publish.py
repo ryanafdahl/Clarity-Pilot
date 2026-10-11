@@ -1,8 +1,22 @@
 from datetime import datetime
 import unittest
-from publish import nightly_bucket, public_summary, ZONE
+from publish import nightly_bucket, public_summary, preserve_cloud_totals, ZONE
+from pathlib import Path
+import json
+import tempfile
 
 class PublicationTests(unittest.TestCase):
+  def test_cloud_owned_totals_survive_nightly_publication(self):
+    with tempfile.TemporaryDirectory() as directory:
+      target = Path(directory) / 'totals.json'
+      candidate = {'driving_miles': 10}
+      self.assertEqual(preserve_cloud_totals(target, candidate), candidate)
+      cloud = {'publisher': 'github-actions', 'driving_miles': 20}
+      target.write_text(json.dumps(cloud))
+      self.assertEqual(preserve_cloud_totals(target, candidate), cloud)
+      target.write_text(json.dumps({'driving_miles': 5}))
+      self.assertEqual(preserve_cloud_totals(target, candidate), candidate)
+
   DEVICES = [{'name': 'comma 3', 'miles': 49220, 'drives': 2673, 'hours': 1313,
               'verified_date': '2026-10-10', 'source': 'comma Connect display'}]
   STATS = {'all': {'distance': 11584.522297826737, 'minutes': 20912, 'routes': 726}}
