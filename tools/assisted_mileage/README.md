@@ -17,12 +17,12 @@ hardware use. Link loss clears the peer. Identity may continue only across adjac
 segments of the same route with a gap no greater than one second. Missing identities
 remain unknown, including old logs without usable handshakes.
 
-Speed, controls and model outputs are aligned by monotonic timestamps. Model/control
+Speed, controls and model outputs are aligned by monotonic timestamps. Full-rate model/control
 samples expire after 0.25 seconds; missing or invalid speed intervals are excluded.
 The collector is incremental, runs only offroad, and has a three-minute work budget
 per updater run. Existing assistance and engagement ledgers are preserved. Historical
 coverage is limited to retained logs; this does not reconstruct lifetime model use.
-The historical per-device model-use ledger stays private. A separate, authorized combined forward counter is published as `data/model-miles.json`; it is never added to Connect lifetime totals.
+The historical per-device model-use ledger stays private. A separate, authorized combined recovered-log counter is published as `data/model-miles.json`; it is never added to Connect lifetime totals.
 
 ## Cloud totals handoff
 
@@ -70,10 +70,14 @@ PYTHONPATH=/data/openpilot /usr/local/venv/bin/python publish.py --force-publish
 
 Verify the remote commit and public JSON after publication. The publisher never force-pushes. A concurrent site update is retried from the latest remote branch. The original private ledger is preserved; no historical reclassification is implied by changing the public data source.
 
-## Forward combined big-model miles
+## Recovered combined big-model miles
 
-Activated on October 10, 2026 with an explicit durable `model-tracking.json` on the comma. `started_at_ns` is the activation wall clock and `started_date` is its Pacific date. Never silently recreate this configuration if lost: preserve it with the private ledgers. Only recordings whose logged `initData.wallTimeNanos` is at or after activation enter this counter. Existing or backfilled recordings and logs without usable clocks are excluded. It starts at zero; it is not lifetime big-model mileage.
+The October 10 update backfills all available retained and archived logs. The earlier forward-only activation filter has been removed from public totals; `model-tracking.json` remains a private audit artifact and does not exclude older miles. This count is recovered log coverage, not lifetime big-model driving. It stays separate from Connect lifetime driving totals.
 
-`publish_model_miles.py` publishes combined Pixel + Jetson **assisted** miles to `data/model-miles.json`, using valid big-model outputs, HELLO hardware identity and active lateral or longitudinal control. Unknown hardware and small-model miles are excluded. No per-device values, route IDs, timestamps or locations are published. The separate model checkout is locked by the parent publisher; only this one JSON path may be staged. It uses normal non-forced pushes and retains the ledger through log cleanup.
+`publish_model_miles.py` publishes `data/model-miles.json` schema 2. It adds Pixel, Jetson and explicitly **unattributed large-model** assisted distance. A positive logged execution flag is required; merely selecting or making a large model available does not count. Lateral or longitudinal control must be active; their union is counted once. Unknown accelerator identities are never silently credited to Pixel or Jetson. The public summary distinguishes full-rate miles, sampled miles and unrecorded hardware identity without exposing route IDs or device identifiers.
 
-Deploy `publish_model_miles.py` and `test_forward_model_miles.py` with the other updater files. The active 30-minute offroad timer refreshes this aggregate independently of the nightly engagement publication and hourly cloud Connect totals. The comma must be powered, offroad and online to publish new model miles. A failed refresh retains the previously published date; this counter does not update directly from Connect, which cannot identify the accelerator.
+`collect_model_usage.py` prefers full-rate `rlog.zst` over `qlog.zst` for each segment. Full-rate evidence uses `modelV2.big`, 0.25-second model/control freshness and adjacent valid speed samples. Compact logs preserve the copied execution flag in `drivingModelData.big` at approximately 2 Hz. For compact logs, a model interval is counted only between two matching valid model samples no more than 0.75 seconds apart; the last sample is never extrapolated. Controls retain 0.25-second freshness and speed gaps remain limited to 0.25 seconds. Compact recovery is a sampled estimate: brief changes between model samples remain unknowable.
+
+The private segment ledger deduplicates archived/device copies. A later full-rate record replaces a compact record for the same segment; a compact copy cannot overwrite full-rate evidence after raw-log cleanup. Historical backfill is idempotent. Existing private assistance and engagement ledgers are preserved.
+
+Deploy `publish_model_miles.py`, `test_model_history.py` and `test_model_collection.py` with the other updater files. The parent publisher lock protects the durable ledger and the dedicated model-site checkout. Only `data/model-miles.json` may be staged by this publisher. The existing 30-minute offroad timer refreshes this aggregate independently of nightly engagement publication and hourly cloud Connect totals. The comma must be powered, offroad and online to publish; failures leave dated public data intact. No manually reported miles are added.

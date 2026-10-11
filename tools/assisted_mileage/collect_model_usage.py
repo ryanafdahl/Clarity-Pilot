@@ -8,7 +8,7 @@ import sys
 import time
 
 from collect import atomic_json, require_offroad
-from model_usage import ModelUsageCounter, VERSION, ATTRIBUTION_REVISION, carried_peer, peer_from_message, summarize
+from model_usage import ModelUsageCounter, VERSION, ATTRIBUTION_REVISION, carried_peer, peer_from_message, summarize, sampled_model_events
 
 
 def segment_order(path):
@@ -36,7 +36,11 @@ def main():
     deadline = time.monotonic() + args.budget_seconds
     scanned = reused = 0
     last_route = last_index = last_record = None
-    for source in sorted(args.root.glob('*/rlog.zst'), key=segment_order):
+    # One record per segment, preferring full-rate evidence. Never replace a
+    # previously analyzed full-rate record with a compact copy after cleanup.
+    sources = {p.parent.name: p for p in args.root.glob('*/qlog.zst')}
+    sources.update({p.parent.name: p for p in args.root.glob('*/rlog.zst')})
+    for source in sorted(sources.values(), key=segment_order):
       require_offroad()
       if time.monotonic() >= deadline:
         break
@@ -49,13 +53,22 @@ def main():
       key = hashlib.sha256(source.parent.name.encode()).hexdigest()
       fingerprint = {'size': stat.st_size, 'mtime_ns': stat.st_mtime_ns}
       cached = ledger['segments'].get(key)
-      if cached and cached['fingerprint'] == fingerprint and cached.get('attribution_revision') == ATTRIBUTION_REVISION:
+      compact = source.name == 'qlog.zst'
+      if compact and cached and cached.get('source_kind', 'rlog') == 'rlog':
+        last_route, last_index, last_record = route, index, cached
+        reused += 1
+        continue
+      # Revision 4 changes compact-log support, not the revision-3 full-rate
+      # integral. Retain those already verified records without a second pass.
+      required_revision = ATTRIBUTION_REVISION if compact else 3
+      if cached and cached['fingerprint'] == fingerprint and cached.get('attribution_revision', 0) >= required_revision:
         last_route, last_index, last_record = route, index, cached
         reused += 1
         continue
       with source.open('rb') as compressed, zstandard.ZstdDecompressor().stream_reader(compressed) as stream:
         raw = stream.read()
       samples = []
+      models = []
       wall_time_ns = None
       for event in log.Event.read_multiple_bytes(raw):
         kind, t = event.which(), event.logMonoTime / 1e9
@@ -67,8 +80,10 @@ def main():
         elif kind == 'carControl':
           control = event.carControl
           samples.append((t, 1, bool(control.latActive or control.longActive), event.valid))
-        elif kind == 'modelV2':
-          samples.append((t, 2, bool(event.modelV2.big), event.valid))
+        elif kind == ('drivingModelData' if compact else 'modelV2'):
+          big = bool(getattr(event, kind).big)
+          if compact: models.append((t, big, event.valid))
+          else: samples.append((t, 2, big, event.valid))
         elif kind in ('logMessage', 'errorLogMessage'):
           raw_message = str(getattr(event, kind))
           try:
@@ -79,11 +94,15 @@ def main():
           peer = peer_from_message(message)
           if peer is not None:
             samples.append((t, 0, peer, True))
+      if compact:
+        samples += sampled_model_events(sorted(models))
       samples.sort(key=lambda row: (row[0], row[1]))
       if not samples:
         continue
-      peer, peer_since = carried_peer(last_record, last_route == route and last_index == index - 1, samples[0][0])
-      counter = ModelUsageCounter(peer, peer_since)
+      adjacent = last_route == route and last_index == index - 1
+      previous = last_record if adjacent else ledger['segments'].get(hashlib.sha256(f'{route}--{index-1}'.encode()).hexdigest())
+      peer, peer_since = carried_peer(previous, previous is not None, samples[0][0])
+      counter = ModelUsageCounter(peer, peer_since, model_freshness=.75 if compact else .25)
       for row in samples:
         t, kind = row[:2]
         if kind == 3:
@@ -95,6 +114,7 @@ def main():
       if (stat.st_size, stat.st_mtime_ns) != (after.st_size, after.st_mtime_ns):
         raise RuntimeError('Log changed while being analyzed')
       record = dict(counter.result(), fingerprint=fingerprint, attribution_revision=ATTRIBUTION_REVISION,
+                    source_kind='qlog' if compact else 'rlog',
                     wall_time_ns=wall_time_ns,
                     first_monotonic=samples[0][0], last_monotonic=samples[-1][0],
                     route_key=hashlib.sha256(route.encode()).hexdigest())

@@ -5,7 +5,7 @@ import re
 from core import MAX_SAMPLE_GAP, CONTROL_FRESHNESS, METERS_PER_MILE
 
 VERSION = 1
-ATTRIBUTION_REVISION = 3
+ATTRIBUTION_REVISION = 4
 MODEL_FRESHNESS = .25
 BUCKETS = ('pixel', 'jetson', 'large_unknown', 'small', 'unknown')
 
@@ -44,7 +44,8 @@ def carried_peer(previous, same_adjacent_route, first):
 
 
 class ModelUsageCounter:
-  def __init__(self, peer='unknown', peer_since=None):
+  def __init__(self, peer='unknown', peer_since=None, model_freshness=MODEL_FRESHNESS):
+    self.model_freshness = model_freshness
     self.peer = peer
     self.peer_since = peer_since
     self.events = {'control': [], 'model': [], 'peer': [(-math.inf, peer, True)]}
@@ -64,7 +65,7 @@ class ModelUsageCounter:
 
   def _state(self, kind, timestamp):
     state = next((e for e in reversed(self.events[kind]) if e[0] <= timestamp), None)
-    freshness = {'control': CONTROL_FRESHNESS, 'model': MODEL_FRESHNESS}.get(kind, math.inf)
+    freshness = {'control': CONTROL_FRESHNESS, 'model': self.model_freshness}.get(kind, math.inf)
     if not state or not state[2] or (kind != 'peer' and timestamp - state[0] > freshness):
       return None
     return state[1]
@@ -83,7 +84,7 @@ class ModelUsageCounter:
             if start < t < timestamp:
               cuts.add(t)
             if kind in ('control', 'model'):
-              expiry = t + (CONTROL_FRESHNESS if kind == 'control' else MODEL_FRESHNESS)
+              expiry = t + (CONTROL_FRESHNESS if kind == 'control' else self.model_freshness)
               if start < expiry < timestamp:
                 cuts.add(expiry)
         cuts = sorted(cuts)
@@ -145,3 +146,54 @@ def forward_summary(records, tracking, updated_date):
           'started_date': tracking['started_date'], 'updated_date': updated_date,
           'method': 'Combined Pixel and Jetson big-model miles with active lateral or longitudinal assistance, counted once.',
           'coverage': 'Recordings started after tracking activation only; logged model and HELLO identity required. Missing logs or unknown identities excluded.'}
+
+
+def sampled_model_events(rows, maximum_gap=.75):
+  """Confirm a state only between two matching valid compact-log samples.
+
+  Do not extrapolate a final sample, bridge a missing model sample, or assume
+  that a transition occurred at the later timestamp. These remain estimates:
+  brief transitions between the logged samples cannot be recovered.
+  """
+  result = []
+  for index, (t, big, valid) in enumerate(rows):
+    next_row = rows[index+1] if index+1 < len(rows) else None
+    confirmed = bool(valid and next_row and next_row[2] and
+                     0 < next_row[0]-t <= maximum_gap and big == next_row[1])
+    result.append((t, 2, big, confirmed))
+  return result
+
+
+def history_summary(records, updated_date):
+  """All available deduplicated model evidence, including unidentified peers."""
+  rows = list(records)
+  identified = unattributed = sampled = full = 0.
+  wall_times = []
+  for row in rows:
+    meters = 0.
+    for peer in ('pixel', 'jetson', 'large_unknown'):
+      value = row['buckets'][peer]['assisted_meters']
+      if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value) or value < 0:
+        raise ValueError('Invalid model distance')
+      meters += value
+      if peer == 'large_unknown': unattributed += value
+      else: identified += value
+    if row.get('source_kind') == 'qlog': sampled += meters
+    else: full += meters
+    wall = row.get('wall_time_ns')
+    if type(wall) is int and wall >= 946684800000000000 and meters > 0:
+      wall_times.append(wall)
+  from datetime import datetime, timezone
+  from zoneinfo import ZoneInfo
+  return {'schema_version': 2, 'assisted_miles': round((identified+unattributed)/METERS_PER_MILE, 4),
+          'identified_assisted_miles': round(identified/METERS_PER_MILE, 4),
+          'unattributed_assisted_miles': round(unattributed/METERS_PER_MILE, 4),
+          'full_rate_assisted_miles': round(full/METERS_PER_MILE, 4),
+          'sampled_assisted_miles': round(sampled/METERS_PER_MILE, 4),
+          'earliest_date': datetime.fromtimestamp(min(wall_times)/1e9, timezone.utc).astimezone(ZoneInfo('America/Los_Angeles')).date().isoformat() if wall_times else None,
+          'updated_date': updated_date, 'segments': len(rows),
+          'recordings': len({row['route_key'] for row in rows}),
+          'full_rate_segments': sum(row.get('source_kind') != 'qlog' for row in rows),
+          'sampled_segments': sum(row.get('source_kind') == 'qlog' for row in rows),
+          'method': 'Logged big-model execution plus active lateral or longitudinal control, counted once. Full-rate logs preferred over compact logs for each segment.',
+          'coverage': 'Recovered available logs, not lifetime mileage. Compact-log miles are sampled estimates between matching valid model samples at most 0.75 seconds apart; brief hidden transitions cannot be recovered. Unidentified accelerator miles remain unattributed.'}

@@ -1,4 +1,4 @@
-"""Publish only the authorized forward-looking combined model-mile aggregate."""
+"""Publish the authorized recovered combined big-model mileage aggregate."""
 from datetime import datetime
 import json
 import os
@@ -6,25 +6,21 @@ import subprocess
 from zoneinfo import ZoneInfo
 
 from collect import atomic_json, require_offroad
-from model_usage import forward_summary
+from model_usage import history_summary
 
 REPOSITORY = 'git@github.com:ryanafdahl/t3st.site.git'
 PUBLIC_FILE = 'data/model-miles.json'
 
 
 def publish(base):
-  # Called while publish.py holds publisher.lock. Fail closed until activation
-  # has explicitly been configured; no implicit reset after state loss.
-  tracking_path = base / 'model-tracking.json'
-  if not tracking_path.exists():
-    print('Forward model-mile publication has not been activated.')
-    return
+  # Called while publish.py holds publisher.lock. Preserve the historical
+  # deduplicated ledger; the old activation timestamp no longer filters miles.
   require_offroad()
   now = datetime.now(ZoneInfo('America/Los_Angeles'))
   if now.year < 2026:
     raise RuntimeError('Unsynchronized clock')
   ledger = json.loads((base / 'model-usage-ledger.json').read_text())
-  public = forward_summary(ledger['segments'].values(), json.loads(tracking_path.read_text()), now.date().isoformat())
+  public = history_summary(ledger['segments'].values(), now.date().isoformat())
   checkout = base / 'model-site'
   env = dict(os.environ, GIT_TERMINAL_PROMPT='0',
              GIT_SSH_COMMAND=f'ssh -i {base}/site_ed25519 -o IdentitiesOnly=yes -o BatchMode=yes '
