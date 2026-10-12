@@ -1,0 +1,167 @@
+diff --git a/JetlinkKit/Sources/CLiteRt/jl_litert.c b/JetlinkKit/Sources/CLiteRt/jl_litert.c
+index c897186..44bf1f8 100644
+--- a/JetlinkKit/Sources/CLiteRt/jl_litert.c
++++ b/JetlinkKit/Sources/CLiteRt/jl_litert.c
+@@ -674,9 +674,12 @@ void jl_litert_buffer_release(jl_litert_buffer *buffer) {
+   }
+ }
+ 
++#include "wake_metrics.inc"
+ char *jl_litert_run(jl_litert_model *model, jl_litert_buffer *const *inputs, size_t n_inputs,
+                     jl_litert_buffer *const *outputs, size_t n_outputs) {
+-  TRY(LiteRtRunCompiledModel, model->compiled, 0, n_inputs, (LiteRtTensorBuffer *)inputs, n_outputs,
+-                                 (LiteRtTensorBuffer *)outputs);
+-  return NULL;
++  bool measured = wake_start(model);
++  LiteRtStatus status = lrt.LiteRtRunCompiledModel(model->compiled, 0, n_inputs,
++      (LiteRtTensorBuffer *)inputs, n_outputs, (LiteRtTensorBuffer *)outputs);
++  if (measured) wake_stop(model);
++  return take(status, "LiteRtRunCompiledModel");
+ }
+diff --git a/JetlinkKit/Sources/CLiteRt/vendor/litert/c/litert_metrics.h b/JetlinkKit/Sources/CLiteRt/vendor/litert/c/litert_metrics.h
+new file mode 100644
+index 0000000..aad6f20
+--- /dev/null
++++ b/JetlinkKit/Sources/CLiteRt/vendor/litert/c/litert_metrics.h
+@@ -0,0 +1,54 @@
++// Copyright 2025 Google LLC.
++//
++// Licensed under the Apache License, Version 2.0 (the "License");
++// you may not use this file except in compliance with the License.
++// You may obtain a copy of the License at
++//
++//      http://www.apache.org/licenses/LICENSE-2.0
++//
++// Unless required by applicable law or agreed to in writing, software
++// distributed under the License is distributed on an "AS IS" BASIS,
++// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++// See the License for the specific language governing permissions and
++// limitations under the License.
++
++#ifndef ODML_LITERT_LITERT_C_LITERT_METRICS_H_
++#define ODML_LITERT_LITERT_C_LITERT_METRICS_H_
++
++#include "litert/c/litert_any.h"
++#include "litert/c/litert_common.h"
++
++#ifdef __cplusplus
++extern "C" {
++#endif  // __cplusplus
++
++typedef struct LiteRtMetric {
++  const char* name;
++  LiteRtAny value;
++} LiteRtMetric;
++
++// Create a metrics object. The caller is responsible for deallocating the
++// returned metrics by calling `LiteRtDestroyMetrics`.
++LiteRtStatus LiteRtCreateMetrics(LiteRtMetrics* metrics);
++
++// Get the number of metrics collected.
++LiteRtStatus LiteRtGetNumMetrics(LiteRtMetrics metrics, int* num_metrics);
++
++// Fetch a specific metric.
++// NOTE The output object fields are owned by the `metrics` object and should
++// not be used after the `metrics` object has been destroyed.
++LiteRtStatus LiteRtGetMetric(LiteRtMetrics metrics, int metric_index,
++                             LiteRtMetric* metric);
++
++// Destroy the metrics object.
++void LiteRtDestroyMetrics(LiteRtMetrics metrics);
++
++// Append a new metric to the metrics object.
++LiteRtStatus LiteRtAppendMetric(LiteRtMetrics metrics,
++                                const LiteRtMetric* metric);
++
++#ifdef __cplusplus
++}
++#endif  // __cplusplus
++
++#endif  // ODML_LITERT_LITERT_C_LITERT_METRICS_H_
+diff --git a/JetlinkKit/Sources/CLiteRt/wake_metrics.inc b/JetlinkKit/Sources/CLiteRt/wake_metrics.inc
+new file mode 100644
+index 0000000..0a61a74
+--- /dev/null
++++ b/JetlinkKit/Sources/CLiteRt/wake_metrics.inc
+@@ -0,0 +1,68 @@
++// Diagnostic builds only. Collect per-invocation vendor counters only while
++// an authorized system trace selects this app. Missing data stays unavailable.
++#ifdef __ANDROID__
++#include "litert/c/litert_metrics.h"
++static struct {
++  bool (*enabled)(void);
++  void (*counter)(const char *, int64_t);
++  __typeof__(&LiteRtCompiledModelStartMetricsCollection) start;
++  __typeof__(&LiteRtCompiledModelStopMetricsCollection) stop;
++  __typeof__(&LiteRtCreateMetrics) create;
++  __typeof__(&LiteRtGetNumMetrics) count;
++  __typeof__(&LiteRtGetMetric) get;
++  __typeof__(&LiteRtDestroyMetrics) destroy;
++} wake_api;
++static pthread_once_t wake_once = PTHREAD_ONCE_INIT;
++static void wake_init(void) {
++  void *android = dlopen("libandroid.so", RTLD_NOW | RTLD_LOCAL);
++  char *path = runtime_dir ? format("%s/libLiteRt.so", runtime_dir) : copy("libLiteRt.so");
++  void *lib = path ? dlopen(path, RTLD_NOW | RTLD_LOCAL) : NULL;
++  free(path);
++  if (android) {
++    wake_api.enabled = dlsym(android, "ATrace_isEnabled");
++    wake_api.counter = dlsym(android, "ATrace_setCounter");
++  }
++  if (!lib) return;
++  wake_api.start = dlsym(lib, "LiteRtCompiledModelStartMetricsCollection");
++  wake_api.stop = dlsym(lib, "LiteRtCompiledModelStopMetricsCollection");
++  wake_api.create = dlsym(lib, "LiteRtCreateMetrics");
++  wake_api.count = dlsym(lib, "LiteRtGetNumMetrics");
++  wake_api.get = dlsym(lib, "LiteRtGetMetric");
++  wake_api.destroy = dlsym(lib, "LiteRtDestroyMetrics");
++}
++static bool wake_start(jl_litert_model *model) {
++  pthread_once(&wake_once, wake_init);
++  if (!wake_api.enabled || !wake_api.counter || !wake_api.enabled()) return false;
++  if (!wake_api.start || !wake_api.stop || !wake_api.create || !wake_api.count || !wake_api.get || !wake_api.destroy) {
++    wake_api.counter("jl.metrics_status", -1); return false;
++  }
++  LiteRtStatus status = wake_api.start(model->compiled, 0);
++  wake_api.counter("jl.metrics_status", status);
++  return status == kLiteRtStatusOk;
++}
++static void wake_stop(jl_litert_model *model) {
++  LiteRtMetrics metrics = NULL;
++  LiteRtStatus status = wake_api.create(&metrics);
++  if (status != kLiteRtStatusOk) {
++    wake_api.counter("jl.metrics_status", status); return;
++  }
++  status = wake_api.stop(model->compiled, metrics);
++  wake_api.counter("jl.metrics_status", status);
++  int count = 0;
++  if (status == kLiteRtStatusOk && wake_api.count(metrics, &count) == kLiteRtStatusOk) {
++    for (int i = 0; i < count; ++i) {
++      LiteRtMetric metric = {0};
++      if (wake_api.get(metrics, i, &metric) != kLiteRtStatusOk || !metric.name) continue;
++      const char *name = NULL;
++      if (!strcmp(metric.name, "hardware_execution_time_us")) name = "jl.hw_us";
++      if (!strcmp(metric.name, "number_of_graph_executions")) name = "jl.hw_executions";
++      if (name && metric.value.type == kLiteRtAnyTypeInt) wake_api.counter(name, metric.value.int_value);
++      else if (name && metric.value.type == kLiteRtAnyTypeReal) wake_api.counter(name, (int64_t)metric.value.real_value);
++    }
++  }
++  wake_api.destroy(metrics);
++}
++#else
++static bool wake_start(jl_litert_model *model) { (void)model; return false; }
++static void wake_stop(jl_litert_model *model) { (void)model; }
++#endif
+diff --git a/android/app/build.gradle.kts b/android/app/build.gradle.kts
+index 9c7fa86..56fa449 100644
+--- a/android/app/build.gradle.kts
++++ b/android/app/build.gradle.kts
+@@ -35,7 +35,7 @@ android {
+         minSdk = 31
+         targetSdk = 36
+         versionCode = jetlinkVersionCode * 100 + 9
+-        versionName = jetlinkVersion + "-clarity-tensor.9-trace1"
++        versionName = jetlinkVersion + "-clarity-tensor.9-wake-burst1"
+         // The QNN runtime is arm64 only, and so is every Snapdragon with an NPU
+         // worth driving on. The emulator on an Apple silicon Mac is arm64 too.
+         ndk { abiFilters += "arm64-v8a" }

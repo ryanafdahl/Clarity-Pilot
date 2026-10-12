@@ -57,5 +57,35 @@ class BenchmarkTests(unittest.TestCase):
                 self.benchmark.main()
             connect.assert_not_called()
 
+    def test_wake_requires_explicit_device_before_connecting(self):
+        argv=['benchmark','--source-sha256','fixture','--source-bytes','1',
+              '--transport','fixture','--output','absent.json','--wake-frame','20']
+        with patch.object(sys,'argv',argv),patch.object(Client,'open_tcp') as connect, \
+             contextlib.redirect_stderr(io.StringIO()),self.assertRaises(SystemExit):
+            self.benchmark.main()
+        connect.assert_not_called()
+
+    def test_single_wake_is_recorded_and_failure_is_not_a_pass(self):
+        for fail in (False,True):
+            with self.subTest(fail=fail), tempfile.TemporaryDirectory() as tmp:
+                result=Path(tmp)/'run.json'
+                calls=[]
+                def run(command,**kwargs):
+                    calls.append(command)
+                    if command[-3:]==['input','keyevent','224'] and fail:
+                        raise RuntimeError('fixture wake failure')
+                    return types.SimpleNamespace(stdout='Thermal Status: 0\ntemperature: 290')
+                argv=['benchmark','--source-sha256','fixture','--source-bytes','1','--frames','10',
+                      '--warmup','2','--period-ms','0','--transport','fixture','--adb','fixture-adb',
+                      '--serial','fixture-device','--wake-frame','2','--output',str(result)]
+                with patch.object(sys,'argv',argv),patch.object(self.benchmark.subprocess,'run',side_effect=run), \
+                     patch.object(self.benchmark,'first_health',return_value={}), \
+                     patch.object(self.benchmark,'device_health',return_value={}),contextlib.redirect_stdout(io.StringIO()):
+                    self.assertEqual(self.benchmark.main(),1 if fail else 0)
+                data=json.loads(result.read_text())
+                self.assertEqual(sum(c[-3:]==['input','keyevent','224'] for c in calls),1)
+                self.assertEqual(data['wake_stimulus']['frame_id'],2)
+                self.assertEqual(data['protocol_pass'],not fail)
+
 
 if __name__=='__main__': unittest.main()

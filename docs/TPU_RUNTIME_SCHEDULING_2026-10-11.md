@@ -9,6 +9,8 @@ runtime stall on the control build, giving us a better target for investigation.
 and [reproducible experiment](../android/tensor/profiling/APP_EXPERIMENT.md).
 Raw system traces and app logs remain local.
 
+Follow-up: [repeated wake-mode controls and per-invocation hardware counters](TPU_WAKE_RUNTIME_2026-10-11.md).
+
 ## Small-gain comparison
 
 Pixel 11 Pro XL / Tensor G6, Cinque Terre V2, matched LiteRT 2.3.0 and compiled

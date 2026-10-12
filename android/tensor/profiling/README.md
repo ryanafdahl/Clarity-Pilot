@@ -14,6 +14,11 @@ paired uncertainty analysis. [Completed follow-up](../../../docs/TPU_RUNTIME_SCH
 a 0.132 ms mean advantage remained uncertain, and a controlled screen wake
 reproduced a runtime stall on the control build. The installation release remains `.9`.
 
+[Repeated wake-mode controls](../../../docs/TPU_WAKE_RUNTIME_2026-10-11.md):
+all 16 trials hit a wake-related timing limit. Per-invocation hardware counters
+separate TPU execution from the much longer runtime wait.
+[Reproduction instructions](WAKE_EXPERIMENT.md).
+
 ## Boundaries
 
 - Desk use only. Disconnect the phone from the comma before running this tool.

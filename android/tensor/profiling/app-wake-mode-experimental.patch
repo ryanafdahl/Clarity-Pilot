@@ -1,0 +1,26 @@
+diff --git a/JetlinkKit/Sources/CLiteRt/jl_litert.c b/JetlinkKit/Sources/CLiteRt/jl_litert.c
+index 44bf1f8..ec4fd3c 100644
+--- a/JetlinkKit/Sources/CLiteRt/jl_litert.c
++++ b/JetlinkKit/Sources/CLiteRt/jl_litert.c
+@@ -464,7 +464,7 @@ static char *compile(jl_litert_model *m, const char *path, const jl_litert_optio
+     // LiteRT 2.2.0 GoogleTensorOptions: burst scheduling for a bounded
+     // frame stream. This changes runtime scheduling, never model precision.
+     error = add_toml(m->options, "google_tensor",
+-                     format("performance_mode = %d\n", 5 /* Burst in LiteRT 2.2.0 */));
++                     format("performance_mode = %d\n", 3 /* High performance; wake experiment only */));
+   } else if (o->gpu) {
+     // LrtGetGpuOptionsIdentifier()
+     error = add_toml(m->options, "gpu_options", gpu_toml(o));
+diff --git a/android/app/build.gradle.kts b/android/app/build.gradle.kts
+index 56fa449..7c2098e 100644
+--- a/android/app/build.gradle.kts
++++ b/android/app/build.gradle.kts
+@@ -35,7 +35,7 @@ android {
+         minSdk = 31
+         targetSdk = 36
+         versionCode = jetlinkVersionCode * 100 + 9
+-        versionName = jetlinkVersion + "-clarity-tensor.9-wake-burst1"
++        versionName = jetlinkVersion + "-clarity-tensor.9-wake-high1"
+         // The QNN runtime is arm64 only, and so is every Snapdragon with an NPU
+         // worth driving on. The emulator on an Apple silicon Mac is arm64 too.
+         ndk { abiFilters += "arm64-v8a" }

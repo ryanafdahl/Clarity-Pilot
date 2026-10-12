@@ -30,6 +30,7 @@ def main():
     p.add_argument('--transport', required=True)
     p.add_argument('--adb', help='ADB executable for bounded thermal sampling')
     p.add_argument('--serial', help='Explicit ADB device serial')
+    p.add_argument('--wake-frame', type=int, help='Desk diagnostic only: send one screen wake concurrently with this frame ID')
     p.add_argument('--frame-output', type=Path, help='Optional synthetic per-frame timing JSON for trace correlation')
     p.add_argument('--output', type=Path, required=True)
     a = p.parse_args()
@@ -37,6 +38,8 @@ def main():
     if a.frame_output and (a.frame_output.exists() or a.frame_output.resolve() == a.output.resolve()):
         p.error('frame output must be a new, separate filename')
     if a.serial and not a.adb: p.error('--serial requires --adb')
+    if a.wake_frame is not None and (not a.adb or not a.serial or not a.warmup <= a.wake_frame < a.frames+a.warmup):
+        p.error('--wake-frame requires explicit ADB/serial and a measured frame ID')
     if not 10 <= a.frames <= 36000 or not 0 <= a.warmup <= 100 or not 0 <= a.period_ms <= 1000:
         p.error('frames 10..36000, warmup 0..100, period 0..1000 ms required')
     samples, rows = [], []
@@ -46,6 +49,20 @@ def main():
     stop = threading.Event()
     unsafe = threading.Event()
     failures = []
+    wake_stimulus = {}
+    wake_thread = None
+
+    def wake():
+        wake_stimulus['command_start_monotonic_s'] = time.perf_counter()
+        wake_stimulus['frame_id'] = a.wake_frame
+        try:
+            subprocess.run([a.adb, '-s', a.serial, 'shell', 'input', 'keyevent', '224'],
+                           check=True, capture_output=True, text=True, timeout=5)
+            wake_stimulus['command_completed'] = True
+        except Exception as e:
+            failures.append(f'Wake stimulus: {e}'); unsafe.set()
+        finally:
+            wake_stimulus['command_end_monotonic_s'] = time.perf_counter()
 
     def thermal():
         while not stop.is_set():
@@ -84,6 +101,9 @@ def main():
         for i in range(a.frames+a.warmup):
             if unsafe.is_set(): break
             time.sleep(max(0, due-time.perf_counter()))
+            if i == a.wake_frame:
+                wake_thread = threading.Thread(target=wake, daemon=True)
+                wake_thread.start()
             begin = time.perf_counter()
             output = c.infer(*frames[i % len(frames)], frame_id=i, reset=(i == 0), want_state=True)
             elapsed = (time.perf_counter()-begin)*1000
@@ -113,6 +133,8 @@ def main():
             except Exception as e: failures.append(f'Cleanup: {e}')
         stop.set()
         if monitor and monitor.is_alive(): monitor.join(12)
+        if wake_thread: wake_thread.join(6)
+        if a.wake_frame is not None: result['wake_stimulus'] = wake_stimulus
         result.update(measured_frames=len(rows), finite_frames=len(rows), failures=failures,
                       elapsed_s=time.monotonic()-started, thermal_samples=samples, phone_thermal_samples=phone_samples,
                       blocks_100=guard.blocks, driving_ready=False,
