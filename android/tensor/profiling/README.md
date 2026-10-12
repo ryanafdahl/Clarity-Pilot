@@ -24,6 +24,13 @@ separate TPU execution from the much longer runtime wait.
 Nine candidates stopped before wake. The report retains both interruptions and
 the sensitivity check; the original `.9` installation release is unchanged.
 
+[Async-completion follow-up](../../../docs/TPU_WAKE_ASYNC_2026-10-11.md):
+12 pairs found a 0.226 ms screen-off baseline advantage, with a 95% interval of
+0.095–0.358 ms. All 24 wake trials still failed timing limits. Separate traces
+locate the long delay in the output-completion wait. The report retains three
+censored windows, the interrupted pair, and the upstream allowlist distinction.
+The experimental path is not promoted to the `.9` installation release.
+
 ## Boundaries
 
 - Desk use only. Disconnect the phone from the comma before running this tool.

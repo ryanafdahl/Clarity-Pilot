@@ -1,0 +1,162 @@
+diff --git a/JetlinkKit/Sources/CLiteRt/jl_litert.c b/JetlinkKit/Sources/CLiteRt/jl_litert.c
+--- a/JetlinkKit/Sources/CLiteRt/jl_litert.c
++++ b/JetlinkKit/Sources/CLiteRt/jl_litert.c
+@@ -464,7 +464,7 @@
+     // LiteRT 2.2.0 GoogleTensorOptions: burst scheduling for a bounded
+     // frame stream. This changes runtime scheduling, never model precision.
+     error = add_toml(m->options, "google_tensor",
+-                     format("performance_mode = %d\n", 5 /* Burst in LiteRT 2.2.0 */));
++                     format("performance_mode = %d\n", 5 /* Burst; identical in both wake variants */));
+   } else if (o->gpu) {
+     // LrtGetGpuOptionsIdentifier()
+     error = add_toml(m->options, "gpu_options", gpu_toml(o));
+@@ -675,11 +675,5 @@
+ }
+ 
+ #include "wake_metrics.inc"
+-char *jl_litert_run(jl_litert_model *model, jl_litert_buffer *const *inputs, size_t n_inputs,
+-                    jl_litert_buffer *const *outputs, size_t n_outputs) {
+-  bool measured = wake_start(model);
+-  LiteRtStatus status = lrt.LiteRtRunCompiledModel(model->compiled, 0, n_inputs,
+-      (LiteRtTensorBuffer *)inputs, n_outputs, (LiteRtTensorBuffer *)outputs);
+-  if (measured) wake_stop(model);
+-  return take(status, "LiteRtRunCompiledModel");
+-}
++#define JL_WAKE_ASYNC 0
++#include "wake_async.inc"
+diff --git a/android/app/build.gradle.kts b/android/app/build.gradle.kts
+--- a/android/app/build.gradle.kts
++++ b/android/app/build.gradle.kts
+@@ -35,7 +35,7 @@
+         minSdk = 31
+         targetSdk = 36
+         versionCode = jetlinkVersionCode * 100 + 9
+-        versionName = jetlinkVersion + "-clarity-tensor.9-wake-burst1"
++        versionName = jetlinkVersion + "-clarity-tensor.9-wake-sync1"
+         // The QNN runtime is arm64 only, and so is every Snapdragon with an NPU
+         // worth driving on. The emulator on an Apple silicon Mac is arm64 too.
+         ndk { abiFilters += "arm64-v8a" }
+diff --git a/JetlinkKit/Sources/CLiteRt/wake_metrics.inc b/JetlinkKit/Sources/CLiteRt/wake_metrics.inc
+--- a/JetlinkKit/Sources/CLiteRt/wake_metrics.inc
++++ b/JetlinkKit/Sources/CLiteRt/wake_metrics.inc
+@@ -5,6 +5,8 @@
+ static struct {
+   bool (*enabled)(void);
+   void (*counter)(const char *, int64_t);
++  void (*begin)(const char *);
++  void (*end)(void);
+   __typeof__(&LiteRtCompiledModelStartMetricsCollection) start;
+   __typeof__(&LiteRtCompiledModelStopMetricsCollection) stop;
+   __typeof__(&LiteRtCreateMetrics) create;
+@@ -21,6 +23,8 @@
+   if (android) {
+     wake_api.enabled = dlsym(android, "ATrace_isEnabled");
+     wake_api.counter = dlsym(android, "ATrace_setCounter");
++    wake_api.begin = dlsym(android, "ATrace_beginSection");
++    wake_api.end = dlsym(android, "ATrace_endSection");
+   }
+   if (!lib) return;
+   wake_api.start = dlsym(lib, "LiteRtCompiledModelStartMetricsCollection");
+diff --git a/JetlinkKit/Sources/CLiteRt/wake_async.inc b/JetlinkKit/Sources/CLiteRt/wake_async.inc
+new file mode 100644
+--- /dev/null
++++ b/JetlinkKit/Sources/CLiteRt/wake_async.inc
+@@ -0,0 +1,98 @@
++// Desk experiment only: retain a synchronous bridge contract in both variants.
++// Public C ABI from google-ai-edge/LiteRT litert/c/litert_event.h:
++// LiteRtStatus LiteRtWaitEvent(LiteRtEvent event, int64_t timeout_in_ms);
++// -1 waits indefinitely, matching the existing synchronous run contract.
++// The bundled libLiteRt.so 2.3.0 exports all three symbols below.
++static struct {
++  __typeof__(&LiteRtRunCompiledModelAsync) run;
++  __typeof__(&LiteRtGetTensorBufferEvent) event;
++  __typeof__(&LiteRtClearTensorBufferEvent) clear;
++  LiteRtStatus (*wait)(LiteRtEvent, int64_t);
++} wake_async_api;
++static pthread_once_t wake_async_once = PTHREAD_ONCE_INIT;
++static void wake_async_init(void) {
++  char *path = runtime_dir ? format("%s/libLiteRt.so", runtime_dir) : copy("libLiteRt.so");
++  void *lib = path ? dlopen(path, RTLD_NOW | RTLD_LOCAL) : NULL;
++  free(path);
++  if (!lib) return;
++  wake_async_api.run = dlsym(lib, "LiteRtRunCompiledModelAsync");
++  wake_async_api.event = dlsym(lib, "LiteRtGetTensorBufferEvent");
++  wake_async_api.clear = dlsym(lib, "LiteRtClearTensorBufferEvent");
++  wake_async_api.wait = dlsym(lib, "LiteRtWaitEvent");
++}
++static bool wake_section(const char *name) {
++#ifdef __ANDROID__
++  if (wake_api.enabled && wake_api.begin && wake_api.end && wake_api.enabled()) {
++    wake_api.begin(name); return true;
++  }
++#endif
++  return false;
++}
++static void wake_end(bool active) {
++#ifdef __ANDROID__
++  if (active) wake_api.end();
++#else
++  (void)active;
++#endif
++}
++static void wake_counter(const char *name, int64_t value) {
++#ifdef __ANDROID__
++  if (wake_api.enabled && wake_api.counter && wake_api.enabled()) wake_api.counter(name,value);
++#else
++  (void)name; (void)value;
++#endif
++}
++char *jl_litert_run(jl_litert_model *model, jl_litert_buffer *const *inputs, size_t n_inputs,
++                    jl_litert_buffer *const *outputs, size_t n_outputs) {
++  pthread_once(&wake_async_once,wake_async_init);
++  bool measured=wake_start(model);
++  LiteRtStatus status;
++  const char *call="LiteRtRunCompiledModel";
++  if (!JL_WAKE_ASYNC) {
++    bool section=wake_section("jl.sync_run");
++    status=lrt.LiteRtRunCompiledModel(model->compiled,0,n_inputs,
++        (LiteRtTensorBuffer *)inputs,n_outputs,(LiteRtTensorBuffer *)outputs);
++    wake_end(section);
++    wake_counter("jl.async_actual",0);
++  } else if (!wake_async_api.run || !wake_async_api.event || !wake_async_api.clear || !wake_async_api.wait) {
++    status=kLiteRtStatusErrorUnsupported;
++    call="missing async experiment API";
++  } else {
++    bool async=false;
++    bool section=wake_section("jl.async_submit");
++    status=wake_async_api.run(model->compiled,0,n_inputs,
++        (LiteRtTensorBuffer *)inputs,n_outputs,(LiteRtTensorBuffer *)outputs,&async);
++    wake_end(section);
++    wake_counter("jl.async_actual",async ? 1 : 0);
++    call="LiteRtRunCompiledModelAsync";
++    if (status==kLiteRtStatusOk) {
++      // Never reuse inputs, update recurrence, read outputs or stop timing
++      // until all attached output events have completed. Events are borrowed.
++      section=wake_section("jl.output_wait");
++      int64_t events=0;
++      LiteRtStatus first_error=kLiteRtStatusOk;
++      for (size_t i=0;i<n_outputs;++i) {
++        LiteRtEvent event=NULL;
++        LiteRtStatus s=wake_async_api.event((LiteRtTensorBuffer)outputs[i],&event);
++        if (s==kLiteRtStatusOk && event) {
++          ++events;
++          s=wake_async_api.wait(event,-1);
++          if (s==kLiteRtStatusOk) s=wake_async_api.clear((LiteRtTensorBuffer)outputs[i]);
++        }
++        // Drain every available output even if another output failed.
++        if (first_error==kLiteRtStatusOk && s!=kLiteRtStatusOk) first_error=s;
++      }
++      wake_end(section);
++      wake_counter("jl.output_events",events);
++      status=first_error;
++      call="async output completion";
++      // A silent synchronous fallback is not evidence for this experiment.
++      if (status==kLiteRtStatusOk && (!async || events==0)) {
++        status=kLiteRtStatusErrorUnsupported;
++        call="async path did not provide completion events";
++      }
++    }
++  }
++  if (measured) wake_stop(model);
++  return take(status,call);
++}

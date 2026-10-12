@@ -19,6 +19,33 @@ For the sustained-performance follow-up, substitute
 mode 3. Pass `--candidate-label 'sustained performance 4'` to the runner and an
 explicit predeclared `--order`; the APK hashes identify the actual builds.
 
+For the async-completion follow-up, apply `app-wake-async-control-experimental.patch`
+after the tracing and metrics patches, then build the synchronous control.
+Apply `app-wake-async-experimental.patch` and build the candidate. Both request
+burst mode 5. The second patch changes only `JL_WAKE_ASYNC` from 0 to 1 and the
+diagnostic version label. These patches do not stack on either mode-3 or mode-4
+patch. Pass explicit labels and the predeclared order
+`BABABAABABBABAABABABABBA` (12 pairs, seed 202610113).
+
+The candidate uses the public async invocation API, waits on every attached
+output event, then clears completed events. It retains the synchronous bridge
+contract: outputs and recurrent state are unavailable until completion. The
+existing `jl.invoke`, inference and phone-processing timers include submission
+and the entire completion wait. No frames are pipelined and no wait is excluded
+from the timing guard. Missing APIs or a silent synchronous fallback fail this
+experiment. It does not use the internal first-party scheduling-info API.
+
+In a separate traced pair, require `jl.async_actual=1` and a positive
+`jl.output_events` count on every candidate frame, in addition to the existing
+hardware-counter and trace-coverage checks. `jl.async_submit` and `jl.output_wait`
+divide the candidate invocation; `jl.sync_run` identifies the control's blocking
+call. These stages nest inside `jl.invoke`; do not sum them with their parent.
+All counters and extra trace sections are inactive during untraced controls.
+The event-wait declaration follows the public
+[LiteRT event C API](https://github.com/google-ai-edge/LiteRT/blob/main/litert/c/litert_event.h).
+Borrowed events must not be destroyed separately. A `-1` event timeout preserves
+the existing blocking runtime contract; it is not a relaxed frame deadline.
+
 Both releases use code 80509 and the original signer for in-place restoration.
 The mode patch changes only the requested mode and version label. It does not
 change system allowlists, privileges, clocks, precision or thermal policy.

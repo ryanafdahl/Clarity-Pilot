@@ -1,0 +1,1102 @@
+{
+  "order": "BABABAABABBABAABABABABBA",
+  "runs": [
+    {
+      "run": 1,
+      "variant": "B",
+      "baseline": {
+        "frames": 100,
+        "mean_ms": 34.50875,
+        "p95_ms": 36.5073,
+        "max_ms": 38.127,
+        "over_50ms": 0
+      },
+      "wake": {
+        "frames": 10,
+        "mean_ms": 63.431200000000004,
+        "p95_ms": 115.74794999999996,
+        "max_ms": 131.808,
+        "over_50ms": 5
+      },
+      "censored": true,
+      "stopped_before_wake": false,
+      "failures": [
+        "100 ms timing limit reached; test stopped"
+      ],
+      "before": {
+        "battery_c": 31.0,
+        "thermal_status": 0
+      },
+      "after": {
+        "battery_c": 31.0,
+        "thermal_status": 0
+      },
+      "wake_command_duration_ms": 174.72050001379102
+    },
+    {
+      "run": 2,
+      "variant": "A",
+      "baseline": {
+        "frames": 100,
+        "mean_ms": 34.56471,
+        "p95_ms": 36.487,
+        "max_ms": 37.16,
+        "over_50ms": 0
+      },
+      "wake": {
+        "frames": 26,
+        "mean_ms": 70.74246153846154,
+        "p95_ms": 93.643,
+        "max_ms": 135.682,
+        "over_50ms": 21
+      },
+      "censored": true,
+      "stopped_before_wake": false,
+      "failures": [
+        "100 ms timing limit reached; test stopped"
+      ],
+      "before": {
+        "battery_c": 31.0,
+        "thermal_status": 0
+      },
+      "after": {
+        "battery_c": 31.1,
+        "thermal_status": 0
+      },
+      "wake_command_duration_ms": 192.31279997620732
+    },
+    {
+      "run": 3,
+      "variant": "B",
+      "baseline": {
+        "frames": 100,
+        "mean_ms": 34.35386999999999,
+        "p95_ms": 36.04315,
+        "max_ms": 36.932,
+        "over_50ms": 0
+      },
+      "wake": {
+        "frames": 100,
+        "mean_ms": 42.908199999999994,
+        "p95_ms": 83.84769999999999,
+        "max_ms": 95.492,
+        "over_50ms": 23
+      },
+      "censored": false,
+      "stopped_before_wake": false,
+      "failures": [
+        "100-frame p95 timing limit reached; test stopped"
+      ],
+      "before": {
+        "battery_c": 31.1,
+        "thermal_status": 0
+      },
+      "after": {
+        "battery_c": 31.1,
+        "thermal_status": 0
+      },
+      "wake_command_duration_ms": 115.86550006177276
+    },
+    {
+      "run": 4,
+      "variant": "A",
+      "baseline": {
+        "frames": 100,
+        "mean_ms": 34.93482,
+        "p95_ms": 36.839600000000004,
+        "max_ms": 56.031,
+        "over_50ms": 1
+      },
+      "wake": {
+        "frames": 100,
+        "mean_ms": 41.65520999999999,
+        "p95_ms": 80.89605,
+        "max_ms": 91.337,
+        "over_50ms": 22
+      },
+      "censored": false,
+      "stopped_before_wake": false,
+      "failures": [
+        "100-frame p95 timing limit reached; test stopped"
+      ],
+      "before": {
+        "battery_c": 31.1,
+        "thermal_status": 0
+      },
+      "after": {
+        "battery_c": 31.3,
+        "thermal_status": 0
+      },
+      "wake_command_duration_ms": 171.10080004204065
+    },
+    {
+      "run": 5,
+      "variant": "B",
+      "baseline": {
+        "frames": 100,
+        "mean_ms": 34.63629,
+        "p95_ms": 36.59155,
+        "max_ms": 58.071,
+        "over_50ms": 2
+      },
+      "wake": {
+        "frames": 100,
+        "mean_ms": 40.76175,
+        "p95_ms": 80.50805000000001,
+        "max_ms": 93.259,
+        "over_50ms": 18
+      },
+      "censored": false,
+      "stopped_before_wake": false,
+      "failures": [
+        "100-frame p95 timing limit reached; test stopped"
+      ],
+      "before": {
+        "battery_c": 31.3,
+        "thermal_status": 0
+      },
+      "after": {
+        "battery_c": 31.6,
+        "thermal_status": 0
+      },
+      "wake_command_duration_ms": 174.93039998225868
+    },
+    {
+      "run": 6,
+      "variant": "A",
+      "baseline": {
+        "frames": 100,
+        "mean_ms": 34.68369,
+        "p95_ms": 36.5139,
+        "max_ms": 39.704,
+        "over_50ms": 0
+      },
+      "wake": {
+        "frames": 100,
+        "mean_ms": 40.791349999999994,
+        "p95_ms": 85.7665,
+        "max_ms": 92.548,
+        "over_50ms": 17
+      },
+      "censored": false,
+      "stopped_before_wake": false,
+      "failures": [
+        "100-frame p95 timing limit reached; test stopped"
+      ],
+      "before": {
+        "battery_c": 31.6,
+        "thermal_status": 0
+      },
+      "after": {
+        "battery_c": 31.7,
+        "thermal_status": 0
+      },
+      "wake_command_duration_ms": 200.5570000037551
+    },
+    {
+      "run": 7,
+      "variant": "A",
+      "baseline": {
+        "frames": 100,
+        "mean_ms": 34.76384,
+        "p95_ms": 36.7883,
+        "max_ms": 41.183,
+        "over_50ms": 0
+      },
+      "wake": {
+        "frames": 100,
+        "mean_ms": 40.776559999999996,
+        "p95_ms": 78.70854999999999,
+        "max_ms": 91.053,
+        "over_50ms": 18
+      },
+      "censored": false,
+      "stopped_before_wake": false,
+      "failures": [
+        "100-frame p95 timing limit reached; test stopped"
+      ],
+      "before": {
+        "battery_c": 31.7,
+        "thermal_status": 0
+      },
+      "after": {
+        "battery_c": 32.1,
+        "thermal_status": 0
+      },
+      "wake_command_duration_ms": 160.31720000319183
+    },
+    {
+      "run": 8,
+      "variant": "B",
+      "baseline": {
+        "frames": 100,
+        "mean_ms": 34.1976,
+        "p95_ms": 36.36725,
+        "max_ms": 37.891,
+        "over_50ms": 0
+      },
+      "wake": {
+        "frames": 100,
+        "mean_ms": 40.43415,
+        "p95_ms": 86.29039999999999,
+        "max_ms": 92.083,
+        "over_50ms": 17
+      },
+      "censored": false,
+      "stopped_before_wake": false,
+      "failures": [
+        "100-frame p95 timing limit reached; test stopped"
+      ],
+      "before": {
+        "battery_c": 32.1,
+        "thermal_status": 0
+      },
+      "after": {
+        "battery_c": 32.3,
+        "thermal_status": 0
+      },
+      "wake_command_duration_ms": 81.6441000206396
+    },
+    {
+      "run": 9,
+      "variant": "A",
+      "baseline": {
+        "frames": 100,
+        "mean_ms": 34.93926,
+        "p95_ms": 36.57555,
+        "max_ms": 43.777,
+        "over_50ms": 0
+      },
+      "wake": {
+        "frames": 100,
+        "mean_ms": 41.73049000000001,
+        "p95_ms": 81.93315,
+        "max_ms": 92.246,
+        "over_50ms": 21
+      },
+      "censored": false,
+      "stopped_before_wake": false,
+      "failures": [
+        "100-frame p95 timing limit reached; test stopped"
+      ],
+      "before": {
+        "battery_c": 32.3,
+        "thermal_status": 0
+      },
+      "after": {
+        "battery_c": 32.6,
+        "thermal_status": 0
+      },
+      "wake_command_duration_ms": 169.85060006845742
+    },
+    {
+      "run": 10,
+      "variant": "B",
+      "baseline": {
+        "frames": 100,
+        "mean_ms": 34.49959,
+        "p95_ms": 36.0928,
+        "max_ms": 36.839,
+        "over_50ms": 0
+      },
+      "wake": {
+        "frames": 100,
+        "mean_ms": 40.53429,
+        "p95_ms": 80.57629999999999,
+        "max_ms": 92.681,
+        "over_50ms": 18
+      },
+      "censored": false,
+      "stopped_before_wake": false,
+      "failures": [
+        "100-frame p95 timing limit reached; test stopped"
+      ],
+      "before": {
+        "battery_c": 32.6,
+        "thermal_status": 0
+      },
+      "after": {
+        "battery_c": 32.6,
+        "thermal_status": 0
+      },
+      "wake_command_duration_ms": 136.89010008238256
+    },
+    {
+      "run": 11,
+      "variant": "B",
+      "baseline": {
+        "frames": 100,
+        "mean_ms": 34.5669,
+        "p95_ms": 36.22515,
+        "max_ms": 37.172,
+        "over_50ms": 0
+      },
+      "wake": {
+        "frames": 100,
+        "mean_ms": 40.43685000000001,
+        "p95_ms": 77.2235,
+        "max_ms": 84.749,
+        "over_50ms": 20
+      },
+      "censored": false,
+      "stopped_before_wake": false,
+      "failures": [
+        "100-frame p95 timing limit reached; test stopped"
+      ],
+      "before": {
+        "battery_c": 32.6,
+        "thermal_status": 0
+      },
+      "after": {
+        "battery_c": 32.8,
+        "thermal_status": 0
+      },
+      "wake_command_duration_ms": 95.90179997030646
+    },
+    {
+      "run": 12,
+      "variant": "A",
+      "baseline": {
+        "frames": 100,
+        "mean_ms": 34.77713,
+        "p95_ms": 36.4503,
+        "max_ms": 37.068,
+        "over_50ms": 0
+      },
+      "wake": {
+        "frames": 100,
+        "mean_ms": 43.39845999999999,
+        "p95_ms": 85.36984999999999,
+        "max_ms": 91.321,
+        "over_50ms": 25
+      },
+      "censored": false,
+      "stopped_before_wake": false,
+      "failures": [
+        "100-frame p95 timing limit reached; test stopped"
+      ],
+      "before": {
+        "battery_c": 32.9,
+        "thermal_status": 0
+      },
+      "after": {
+        "battery_c": 32.6,
+        "thermal_status": 0
+      },
+      "wake_command_duration_ms": 74.83139995019883
+    },
+    {
+      "run": 13,
+      "variant": "B",
+      "baseline": {
+        "frames": 100,
+        "mean_ms": 34.77406,
+        "p95_ms": 36.32015,
+        "max_ms": 56.558,
+        "over_50ms": 2
+      },
+      "wake": {
+        "frames": 100,
+        "mean_ms": 41.525749999999995,
+        "p95_ms": 82.02289999999999,
+        "max_ms": 89.784,
+        "over_50ms": 21
+      },
+      "censored": false,
+      "stopped_before_wake": false,
+      "failures": [
+        "100-frame p95 timing limit reached; test stopped"
+      ],
+      "before": {
+        "battery_c": 32.6,
+        "thermal_status": 0
+      },
+      "after": {
+        "battery_c": 32.7,
+        "thermal_status": 0
+      },
+      "wake_command_duration_ms": 179.58230001386255
+    },
+    {
+      "run": 14,
+      "variant": "A",
+      "baseline": {
+        "frames": 100,
+        "mean_ms": 34.66836,
+        "p95_ms": 36.6639,
+        "max_ms": 38.115,
+        "over_50ms": 0
+      },
+      "wake": {
+        "frames": 100,
+        "mean_ms": 40.794369999999994,
+        "p95_ms": 84.0196,
+        "max_ms": 92.796,
+        "over_50ms": 18
+      },
+      "censored": false,
+      "stopped_before_wake": false,
+      "failures": [
+        "100-frame p95 timing limit reached; test stopped"
+      ],
+      "before": {
+        "battery_c": 32.7,
+        "thermal_status": 0
+      },
+      "after": {
+        "battery_c": 32.7,
+        "thermal_status": 0
+      },
+      "wake_command_duration_ms": 103.29340002499521
+    },
+    {
+      "run": 15,
+      "variant": "A",
+      "baseline": {
+        "frames": 100,
+        "mean_ms": 34.59471,
+        "p95_ms": 36.621950000000005,
+        "max_ms": 39.065,
+        "over_50ms": 0
+      },
+      "wake": {
+        "frames": 100,
+        "mean_ms": 41.49500999999999,
+        "p95_ms": 80.0585,
+        "max_ms": 89.5,
+        "over_50ms": 22
+      },
+      "censored": false,
+      "stopped_before_wake": false,
+      "failures": [
+        "100-frame p95 timing limit reached; test stopped"
+      ],
+      "before": {
+        "battery_c": 32.7,
+        "thermal_status": 0
+      },
+      "after": {
+        "battery_c": 32.7,
+        "thermal_status": 0
+      },
+      "wake_command_duration_ms": 179.54069992993027
+    },
+    {
+      "run": 16,
+      "variant": "B",
+      "baseline": {
+        "frames": 100,
+        "mean_ms": 34.14338,
+        "p95_ms": 36.3773,
+        "max_ms": 37.394,
+        "over_50ms": 0
+      },
+      "wake": {
+        "frames": 100,
+        "mean_ms": 43.90056,
+        "p95_ms": 82.06975,
+        "max_ms": 89.305,
+        "over_50ms": 26
+      },
+      "censored": false,
+      "stopped_before_wake": false,
+      "failures": [
+        "100-frame p95 timing limit reached; test stopped"
+      ],
+      "before": {
+        "battery_c": 32.7,
+        "thermal_status": 0
+      },
+      "after": {
+        "battery_c": 32.7,
+        "thermal_status": 0
+      },
+      "wake_command_duration_ms": 209.02119996026158
+    },
+    {
+      "run": 17,
+      "variant": "A",
+      "baseline": {
+        "frames": 100,
+        "mean_ms": 34.50377,
+        "p95_ms": 36.33955,
+        "max_ms": 37.513,
+        "over_50ms": 0
+      },
+      "wake": {
+        "frames": 100,
+        "mean_ms": 43.25661999999999,
+        "p95_ms": 84.68365,
+        "max_ms": 89.746,
+        "over_50ms": 25
+      },
+      "censored": false,
+      "stopped_before_wake": false,
+      "failures": [
+        "100-frame p95 timing limit reached; test stopped"
+      ],
+      "before": {
+        "battery_c": 32.7,
+        "thermal_status": 0
+      },
+      "after": {
+        "battery_c": 33.1,
+        "thermal_status": 0
+      },
+      "wake_command_duration_ms": 170.54119997192174
+    },
+    {
+      "run": 18,
+      "variant": "B",
+      "baseline": {
+        "frames": 100,
+        "mean_ms": 34.24913,
+        "p95_ms": 36.12905,
+        "max_ms": 39.823,
+        "over_50ms": 0
+      },
+      "wake": {
+        "frames": 6,
+        "mean_ms": 49.865833333333335,
+        "p95_ms": 91.118,
+        "max_ms": 102.597,
+        "over_50ms": 2
+      },
+      "censored": true,
+      "stopped_before_wake": false,
+      "failures": [
+        "100 ms timing limit reached; test stopped"
+      ],
+      "before": {
+        "battery_c": 33.1,
+        "thermal_status": 0
+      },
+      "after": {
+        "battery_c": 33.4,
+        "thermal_status": 0
+      },
+      "wake_command_duration_ms": 104.1424999712035
+    },
+    {
+      "run": 19,
+      "variant": "A",
+      "baseline": {
+        "frames": 100,
+        "mean_ms": 34.42364,
+        "p95_ms": 36.0174,
+        "max_ms": 37.904,
+        "over_50ms": 0
+      },
+      "wake": {
+        "frames": 100,
+        "mean_ms": 40.01578,
+        "p95_ms": 80.8215,
+        "max_ms": 90.829,
+        "over_50ms": 18
+      },
+      "censored": false,
+      "stopped_before_wake": false,
+      "failures": [
+        "100-frame p95 timing limit reached; test stopped"
+      ],
+      "before": {
+        "battery_c": 33.4,
+        "thermal_status": 0
+      },
+      "after": {
+        "battery_c": 33.5,
+        "thermal_status": 0
+      },
+      "wake_command_duration_ms": 173.88550005853176
+    },
+    {
+      "run": 20,
+      "variant": "B",
+      "baseline": {
+        "frames": 100,
+        "mean_ms": 34.149229999999996,
+        "p95_ms": 36.2213,
+        "max_ms": 37.361,
+        "over_50ms": 0
+      },
+      "wake": {
+        "frames": 100,
+        "mean_ms": 40.406099999999995,
+        "p95_ms": 81.71130000000001,
+        "max_ms": 93.209,
+        "over_50ms": 18
+      },
+      "censored": false,
+      "stopped_before_wake": false,
+      "failures": [
+        "100-frame p95 timing limit reached; test stopped"
+      ],
+      "before": {
+        "battery_c": 33.6,
+        "thermal_status": 0
+      },
+      "after": {
+        "battery_c": 33.6,
+        "thermal_status": 0
+      },
+      "wake_command_duration_ms": 129.52419999055564
+    },
+    {
+      "run": 21,
+      "variant": "A",
+      "baseline": {
+        "frames": 100,
+        "mean_ms": 34.710499999999996,
+        "p95_ms": 36.67485,
+        "max_ms": 37.409,
+        "over_50ms": 0
+      },
+      "wake": {
+        "frames": 100,
+        "mean_ms": 41.21921999999999,
+        "p95_ms": 85.6422,
+        "max_ms": 89.921,
+        "over_50ms": 19
+      },
+      "censored": false,
+      "stopped_before_wake": false,
+      "failures": [
+        "100-frame p95 timing limit reached; test stopped"
+      ],
+      "before": {
+        "battery_c": 33.6,
+        "thermal_status": 0
+      },
+      "after": {
+        "battery_c": 33.6,
+        "thermal_status": 0
+      },
+      "wake_command_duration_ms": 72.40739988628775
+    },
+    {
+      "run": 22,
+      "variant": "B",
+      "baseline": {
+        "frames": 100,
+        "mean_ms": 34.65826,
+        "p95_ms": 36.82105,
+        "max_ms": 57.116,
+        "over_50ms": 1
+      },
+      "wake": {
+        "frames": 100,
+        "mean_ms": 42.08517,
+        "p95_ms": 79.9275,
+        "max_ms": 87.765,
+        "over_50ms": 23
+      },
+      "censored": false,
+      "stopped_before_wake": false,
+      "failures": [
+        "100-frame p95 timing limit reached; test stopped"
+      ],
+      "before": {
+        "battery_c": 33.6,
+        "thermal_status": 0
+      },
+      "after": {
+        "battery_c": 34.0,
+        "thermal_status": 0
+      },
+      "wake_command_duration_ms": 130.72999997530133
+    },
+    {
+      "run": 23,
+      "variant": "B",
+      "baseline": {
+        "frames": 100,
+        "mean_ms": 34.62321,
+        "p95_ms": 36.3229,
+        "max_ms": 57.534,
+        "over_50ms": 2
+      },
+      "wake": {
+        "frames": 100,
+        "mean_ms": 40.52088,
+        "p95_ms": 81.29755,
+        "max_ms": 90.473,
+        "over_50ms": 17
+      },
+      "censored": false,
+      "stopped_before_wake": false,
+      "failures": [
+        "100-frame p95 timing limit reached; test stopped"
+      ],
+      "before": {
+        "battery_c": 34.0,
+        "thermal_status": 0
+      },
+      "after": {
+        "battery_c": 34.1,
+        "thermal_status": 0
+      },
+      "wake_command_duration_ms": 196.9628999941051
+    },
+    {
+      "run": 24,
+      "variant": "A",
+      "baseline": {
+        "frames": 100,
+        "mean_ms": 34.513600000000004,
+        "p95_ms": 36.7986,
+        "max_ms": 38.237,
+        "over_50ms": 0
+      },
+      "wake": {
+        "frames": 100,
+        "mean_ms": 40.64775999999999,
+        "p95_ms": 80.59349999999999,
+        "max_ms": 95.547,
+        "over_50ms": 18
+      },
+      "censored": false,
+      "stopped_before_wake": false,
+      "failures": [
+        "100-frame p95 timing limit reached; test stopped"
+      ],
+      "before": {
+        "battery_c": 34.1,
+        "thermal_status": 0
+      },
+      "after": {
+        "battery_c": 34.3,
+        "thermal_status": 0
+      },
+      "wake_command_duration_ms": 165.35549995023757
+    }
+  ],
+  "all_common_output_bytes_match": true,
+  "apk_sha256": {
+    "A": "fd0f6e8109633c0489b3e030b0415797af3773b903c3731fb207836a27a14299",
+    "B": "5fd22d93d1ae42ac0c77aff6d5315606f6a652a89578062f0e90d7fa31adf7d9"
+  },
+  "rollback": "original APK reinstalled and launched",
+  "primary": "mean phone-processing latency in fixed frame IDs 200..299",
+  "unit_of_replication": "wake trial pair, not frames",
+  "traced": false,
+  "censored_trials": 3,
+  "paired": {},
+  "caveat": "Exploratory single-device desk ADB/TCP; not driving qualification. Secondary comparisons uncorrected.",
+  "A": {
+    "trials": 12,
+    "timing_stops": 12,
+    "censored": 1,
+    "each_frame_100ms_stops": 1,
+    "p95_stops": 11,
+    "observed_wake_max_ms": 135.682,
+    "wake_max_note": "Observed values; censored trials do not have a complete 100-frame maximum"
+  },
+  "B": {
+    "trials": 12,
+    "timing_stops": 12,
+    "censored": 2,
+    "each_frame_100ms_stops": 2,
+    "p95_stops": 10,
+    "observed_wake_max_ms": 131.808,
+    "wake_max_note": "Observed values; censored trials do not have a complete 100-frame maximum"
+  },
+  "baseline_only_mean": {
+    "pairs": 12,
+    "control_minus_candidate_ms": 0.22648000000000104,
+    "paired_differences_ms": [
+      0.0559599999999989,
+      0.5809500000000085,
+      0.04739999999999611,
+      0.5662400000000005,
+      0.43966999999999956,
+      0.2102300000000028,
+      -0.1056999999999988,
+      0.4513299999999987,
+      0.254640000000002,
+      0.27441000000000315,
+      0.05223999999999762,
+      -0.10960999999999643
+    ],
+    "candidate_faster_pairs": 10,
+    "bootstrap_95pct_interval_ms": [
+      0.09507627083333291,
+      0.35838970833333483
+    ],
+    "two_sided_sign_flip_p": 0.01123046875
+  },
+  "baseline_only_note": "Secondary screen-off baseline comparison; does not estimate wake-stall improvement",
+  "primary_unavailable": "At least one wake window is censored; do not report an uncensored overall gain",
+  "date": "2026-10-11",
+  "device": "Pixel 11 Pro XL / Tensor G6",
+  "runtime": "LiteRT 2.3.0",
+  "source_sha256": "09d080f36965bb2a0790500452bd328aa03c484d0222aa79d1ad9f021a522aec",
+  "variants": {
+    "A": "synchronous run, burst 5",
+    "B": "async submission plus explicit output-event waits, burst 5"
+  },
+  "order_seed": 202610113,
+  "trace_collection": false,
+  "orchestration_interruptions": [
+    {
+      "after_trial": 11,
+      "split_pair": 6,
+      "original_message": "Pre-trial ADB thermalservice query returned exit 1; no new trial installed or measured",
+      "resolution": "Original APK restored; live health recheck passed at battery 32.9 C and thermal status 0; only exact unrun 13-trial suffix resumed; retain sensitivity excluding pair 6",
+      "first_manifest_sha256": "310fa9592168a9c49f38b1dd8a99213e602a26eddfd274d592963e5049a93e18",
+      "remaining_manifest_sha256": "f02f090b32f330be6209c457939bdb27ccaec1a9df7e680985f18da43b00c747"
+    }
+  ],
+  "recurrent_reference_parity": {
+    "frames_per_variant": 32,
+    "output_slices": 15,
+    "both_passed": true
+  },
+  "build_verification": {
+    "apk_sha256": {
+      "A": "fd0f6e8109633c0489b3e030b0415797af3773b903c3731fb207836a27a14299",
+      "B": "5fd22d93d1ae42ac0c77aff6d5315606f6a652a89578062f0e90d7fa31adf7d9"
+    },
+    "android_tests": {
+      "tests": 59,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "both_build_logs_successful": true,
+    "patches_reproduce_tested_sources": true,
+    "original_production_source_unchanged": true,
+    "candidate_source_sha256": {
+      "JetlinkKit/Sources/CLiteRt/jl_litert.c": "6f023d7c480f75b41426ef4ab3d73eddf5dd176c5caae4181e1f14d1edfc7257",
+      "android/app/build.gradle.kts": "bdac3b2984e364e11c244b47714cd6446fa08e99e5d5f1af3e587f43767083ac",
+      "JetlinkKit/Sources/CLiteRt/wake_metrics.inc": "a63f9f81d35a7989f6754eb6f0acbb81d08318a72c824d74d8529b8867df5714",
+      "JetlinkKit/Sources/CLiteRt/wake_async.inc": "1a1e82d2bb69e4da22345418a02d3004e955e9d70dff50032f2858edece6015c"
+    }
+  },
+  "measured_frames_total": 4542,
+  "warmup_frames_total": 2400,
+  "wake_stimuli_delivered": 24,
+  "maximum_sampled_battery_c": 34.3,
+  "maximum_sampled_thermal_status": 0,
+  "baseline_summary_ms": {
+    "A": 34.67316916666667,
+    "B": 34.446689166666665
+  },
+  "baseline_sensitivity_excluding_split_pair_6": {
+    "pairs": 11,
+    "control_minus_candidate_ms": 0.22795727272727362,
+    "paired_differences_ms": [
+      0.0559599999999989,
+      0.5809500000000085,
+      0.04739999999999611,
+      0.5662400000000005,
+      0.43966999999999956,
+      -0.1056999999999988,
+      0.4513299999999987,
+      0.254640000000002,
+      0.27441000000000315,
+      0.05223999999999762,
+      -0.10960999999999643
+    ],
+    "candidate_faster_pairs": 9,
+    "bootstrap_95pct_interval_ms": [
+      0.08499890909090929,
+      0.37199070454545646
+    ],
+    "two_sided_sign_flip_p": 0.021484375
+  },
+  "diagnostic_output_bytes_match": true,
+  "separate_traced_diagnostic": {
+    "01-A": {
+      "frames_with_verified_counters": 300,
+      "measured_frames": 200,
+      "trace_errors": [],
+      "all_invoke_scheduler_coverage_complete": true,
+      "async_actual": false,
+      "all_submit_and_wait_scheduler_coverage_complete": true,
+      "output_events_per_frame": [],
+      "stage_means": {
+        "baseline": {
+          "jl.invoke": {
+            "wall_ms": 33.50700717,
+            "running_ms": 1.1407029,
+            "runnable_ms": 0.84449532,
+            "blocked_ms": 31.52180895
+          },
+          "jl.sync_run": {
+            "wall_ms": 32.98768154,
+            "running_ms": 0.93117954,
+            "runnable_ms": 0.8000318300000001,
+            "blocked_ms": 31.256470169999997
+          }
+        },
+        "wake": {
+          "jl.invoke": {
+            "wall_ms": 39.72019614,
+            "running_ms": 0.7709714200000001,
+            "runnable_ms": 0.18185044,
+            "blocked_ms": 38.76737428
+          },
+          "jl.sync_run": {
+            "wall_ms": 39.56269454,
+            "running_ms": 0.62829251,
+            "runnable_ms": 0.1752481,
+            "blocked_ms": 38.759153930000004
+          }
+        }
+      },
+      "slowest_invocation": {
+        "frame_id": 209,
+        "jl.metrics_status": [
+          0.0,
+          0.0
+        ],
+        "jl.async_actual": [
+          0.0
+        ],
+        "jl.hw_us": [
+          37469.0
+        ],
+        "jl.hw_executions": [
+          1.0
+        ],
+        "jl.invoke": {
+          "wall_ms": 97.585728,
+          "covered_ms": 97.585728,
+          "running_ms": 0.542213,
+          "runnable_ms": 0.703751,
+          "blocked_ms": 96.339764
+        },
+        "jl.sync_run": {
+          "wall_ms": 97.497082,
+          "covered_ms": 97.497082,
+          "running_ms": 0.453567,
+          "runnable_ms": 0.703751,
+          "blocked_ms": 96.339764
+        }
+      },
+      "raw_trace_sha256": "773e00d4bcaca3087642050c03ea05c292bfece0a318ab063a0c34e9ad3b665e",
+      "failures": [
+        "100-frame p95 timing limit reached; test stopped"
+      ]
+    },
+    "02-B": {
+      "frames_with_verified_counters": 300,
+      "measured_frames": 200,
+      "trace_errors": [],
+      "all_invoke_scheduler_coverage_complete": true,
+      "async_actual": true,
+      "all_submit_and_wait_scheduler_coverage_complete": true,
+      "output_events_per_frame": [
+        1
+      ],
+      "stage_means": {
+        "baseline": {
+          "jl.invoke": {
+            "wall_ms": 33.14504333,
+            "running_ms": 0.98336565,
+            "runnable_ms": 0.80389223,
+            "blocked_ms": 31.35778545
+          },
+          "jl.async_submit": {
+            "wall_ms": 0.55256078,
+            "running_ms": 0.5281817600000001,
+            "runnable_ms": 0.02437902,
+            "blocked_ms": 0.0
+          },
+          "jl.output_wait": {
+            "wall_ms": 31.905105279999997,
+            "running_ms": 0.1342598,
+            "runnable_ms": 0.7266308100000001,
+            "blocked_ms": 31.044214670000002
+          }
+        },
+        "wake": {
+          "jl.invoke": {
+            "wall_ms": 40.036997310000004,
+            "running_ms": 0.79116616,
+            "runnable_ms": 0.35945152,
+            "blocked_ms": 38.88637963
+          },
+          "jl.async_submit": {
+            "wall_ms": 0.50749672,
+            "running_ms": 0.43905651,
+            "runnable_ms": 0.06844021,
+            "blocked_ms": 0.0
+          },
+          "jl.output_wait": {
+            "wall_ms": 39.21837939,
+            "running_ms": 0.10956624,
+            "runnable_ms": 0.27576183,
+            "blocked_ms": 38.83305132
+          }
+        }
+      },
+      "slowest_invocation": {
+        "frame_id": 215,
+        "jl.metrics_status": [
+          0.0,
+          0.0
+        ],
+        "jl.async_actual": [
+          1.0
+        ],
+        "jl.output_events": [
+          1.0
+        ],
+        "jl.hw_us": [
+          33996.0
+        ],
+        "jl.hw_executions": [
+          1.0
+        ],
+        "jl.invoke": {
+          "wall_ms": 91.326172,
+          "covered_ms": 91.326172,
+          "running_ms": 0.375289,
+          "runnable_ms": 0.046067,
+          "blocked_ms": 90.904816
+        },
+        "jl.async_submit": {
+          "wall_ms": 0.180078,
+          "covered_ms": 0.180078,
+          "running_ms": 0.180078,
+          "runnable_ms": 0.0,
+          "blocked_ms": 0.0
+        },
+        "jl.output_wait": {
+          "wall_ms": 90.982733,
+          "covered_ms": 90.982733,
+          "running_ms": 0.052423,
+          "runnable_ms": 0.032109,
+          "blocked_ms": 90.898201
+        }
+      },
+      "raw_trace_sha256": "cf627ee14a014ef168cad24fa4951905865d7d7efd49a03c0501238d8b354dac",
+      "failures": [
+        "100-frame p95 timing limit reached; test stopped"
+      ]
+    }
+  },
+  "cleanup": {
+    "installed_version": "0.8.5-clarity-tensor.9",
+    "installed_version_code": 80509,
+    "installed_apk_sha256": "b3b69287a6bb2a9209a604003937435c2ce1715329881eb66154afbef8a0f07d",
+    "installed_hash_verified_on_phone": true,
+    "developer_listener_disabled": true,
+    "port_5599_closed": true,
+    "adb_forwards_empty": true,
+    "selected_model": "Cinque Terre Model V2",
+    "owned_remote_ui_dump_removed": true,
+    "face_unlock_settings_changed": false
+  },
+  "future_trace_access": {
+    "atrace_categories_observed": [
+      "sync",
+      "camera",
+      "nnapi",
+      "sched",
+      "freq"
+    ],
+    "shell_kernel_available_events": "permission denied; driver event availability remains unverified"
+  }
+}
