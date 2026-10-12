@@ -14,6 +14,11 @@ Start in a separate checkout with the pinned base and Tensor support patch from
 2. `app-wake-metrics-experimental.patch`; build and retain the control APK.
 3. `app-wake-mode-experimental.patch`; build and retain the candidate APK.
 
+For the sustained-performance follow-up, substitute
+`app-wake-sustained-experimental.patch` in step 3. It requests mode 4 instead of
+mode 3. Pass `--candidate-label 'sustained performance 4'` to the runner and an
+explicit predeclared `--order`; the APK hashes identify the actual builds.
+
 Both releases use code 80509 and the original signer for in-place restoration.
 The mode patch changes only the requested mode and version label. It does not
 change system allowlists, privileges, clocks, precision or thermal policy.
@@ -62,6 +67,20 @@ experiment. No timing threshold is relaxed. The runner restores `.9` in
 disable the temporary listener afterward. A disconnected device can prevent
 cleanup; failed restoration is recorded and raised.
 
+A timing guard may stop the baseline before frame 200. In that case no wake
+should be sent: retain the failed trial with a censored, unavailable wake window.
+An absent wake without a legitimate pre-wake timing stop remains an error.
+
+After diagnosing an interrupted experiment and verifying healthy device access,
+`--continuation-of /path/to/interrupted/manifest.json` permits only the exact
+unrun suffix in `--order`, with identical APK hashes, rollback, tracing and
+variant labels. It requires a new output directory and retains the parent
+manifest hash. It never retries a measured trial. Keep the original failure.
+Reconcile any saved result absent from the manifest before continuing; the
+runner refuses that case rather than replaying the measurement.
+Report the interruption, especially if it splits a pair; do not silently present
+separate batches as uninterrupted controls.
+
 Primary outcome: mean phone-processing latency in fixed frame IDs 200–299,
 paired by trial. Secondary measures: wake p95, maximum, over-50ms count,
 timing-stop rate and baseline-adjusted mean. Frames are not independent repeats.
@@ -75,8 +94,8 @@ they pass, or claim a speedup from the surviving windows. Equal output hashes
 are required on all common frames. Desk ADB/TCP is not direct-USB qualification.
 
 Offline coverage: four benchmark tests (including concurrent wake dispatch and
-its failure), three runner rollback/guard/forward tests, and three analysis
-tests covering a 0.1 ms gain, censored windows and changed output bytes.
+its failure), seven runner rollback/guard/forward/continuation tests, and five analysis tests
+covering a 0.1 ms gain, censored windows, changed output bytes and pre-wake stops.
 
 References: [LiteRT metrics API](https://github.com/google-ai-edge/LiteRT/blob/v2.3.0/litert/c/litert_metrics.h),
 [Tensor runtime options](https://github.com/google-ai-edge/LiteRT/blob/main/litert/c/options/litert_google_tensor_options.h).

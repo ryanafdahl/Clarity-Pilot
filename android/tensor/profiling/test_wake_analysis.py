@@ -37,4 +37,27 @@ class WakeAnalysisTests(unittest.TestCase):
             root=pathlib.Path(tmp);self.fixture(root,different=True)
             with self.assertRaisesRegex(ValueError,'Output hashes differ'):analyze(root)
 
+    def test_pre_wake_guard_is_censored_and_not_a_successful_wake(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=pathlib.Path(tmp);self.fixture(root)
+            path=root/'1-B-frames.json'
+            frames=json.loads(path.read_text());frames['frames']=frames['frames'][:200]
+            path.write_text(json.dumps(frames))
+            path=root/'1-B.json';row=json.loads(path.read_text())
+            row.update(measured_frames=100,wake_stimulus={})
+            path.write_text(json.dumps(row))
+            result=analyze(root)
+            self.assertTrue(result['runs'][1]['stopped_before_wake'])
+            self.assertIsNone(result['runs'][1]['wake'])
+            self.assertIsNone(result['runs'][1]['wake_command_duration_ms'])
+            self.assertEqual(result['paired'],{})
+            self.assertAlmostEqual(result['baseline_only_mean']['control_minus_candidate_ms'],.1)
+
+    def test_missing_stimulus_with_observed_wake_frames_is_rejected(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=pathlib.Path(tmp);self.fixture(root)
+            path=root/'1-B.json';row=json.loads(path.read_text());row['wake_stimulus']={}
+            path.write_text(json.dumps(row))
+            with self.assertRaisesRegex(ValueError,'Missing wake stimulus'):analyze(root)
+
 if __name__=='__main__':unittest.main()

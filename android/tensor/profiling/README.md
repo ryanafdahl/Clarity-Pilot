@@ -19,6 +19,11 @@ all 16 trials hit a wake-related timing limit. Per-invocation hardware counters
 separate TPU execution from the much longer runtime wait.
 [Reproduction instructions](WAKE_EXPERIMENT.md).
 
+[Sustained-mode follow-up](../../../docs/TPU_WAKE_SUSTAINED_2026-10-11.md):
+12 pairs showed a 12.40 ms baseline slowdown; all 24 trials hit timing limits.
+Nine candidates stopped before wake. The report retains both interruptions and
+the sensitivity check; the original `.9` installation release is unchanged.
+
 ## Boundaries
 
 - Desk use only. Disconnect the phone from the comma before running this tool.

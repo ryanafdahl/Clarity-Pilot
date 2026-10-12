@@ -9,6 +9,9 @@ change is promoted.
 [Reproduce the experiment](../android/tensor/profiling/WAKE_EXPERIMENT.md) ·
 [Earlier scheduling controls](TPU_RUNTIME_SCHEDULING_2026-10-11.md).
 
+[Later sustained-mode comparison](TPU_WAKE_SUSTAINED_2026-10-11.md): 12 additional
+pairs showed a baseline regression; no production mode change was promoted.
+
 ## Matched controls and small effects
 
 Pixel 11 Pro XL / Tensor G6, LiteRT 2.3.0, Cinque Terre V2. A requested Tensor

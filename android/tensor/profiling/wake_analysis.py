@@ -2,6 +2,7 @@
 import argparse,json,pathlib
 import numpy as np
 from paired_analysis import paired_stats
+from wake_app import stopped_before_wake
 
 def summary(frames):
     if not frames:return None
@@ -21,7 +22,9 @@ def analyze(path):
         frames=json.loads((path/(pathlib.Path(item['result']).stem+'-frames.json')).read_text())['frames']
         ids=[f['frame_id'] for f in frames]
         if ids!=list(range(len(frames))):raise ValueError('Missing or duplicated frame IDs')
-        if not result.get('wake_stimulus',{}).get('command_completed'):raise ValueError('Missing wake stimulus')
+        before_wake=stopped_before_wake(result)
+        if not result.get('wake_stimulus',{}).get('command_completed') and not before_wake:raise ValueError('Missing wake stimulus')
+        if before_wake and any(i>=200 for i in ids):raise ValueError('Pre-wake stop contains wake frames')
         if result['measured_frames']!=len([f for f in frames if not f['warmup']]):raise ValueError('Measured frame count mismatch')
         for frame in frames:
             old=reference.setdefault(frame['frame_id'],frame['output_sha256'])
@@ -30,8 +33,9 @@ def analyze(path):
         wake=summary([f for f in frames if 200<=f['frame_id']<300])
         runs.append({'run':item['run'],'variant':item['variant'],'baseline':baseline,'wake':wake,
                      'censored':wake is None or wake['frames']!=100,
+                     'stopped_before_wake':before_wake,
                      'failures':result['failures'],'before':item['before'],'after':item['after'],
-                     'wake_command_duration_ms':1000*(result['wake_stimulus']['command_end_monotonic_s']-result['wake_stimulus']['command_start_monotonic_s'])})
+                     'wake_command_duration_ms':None if before_wake else 1000*(result['wake_stimulus']['command_end_monotonic_s']-result['wake_stimulus']['command_start_monotonic_s'])})
     if not matches:raise ValueError('Output hashes differ; investigate before attributing timing gains')
     out={'order':manifest['order'],'runs':runs,'all_common_output_bytes_match':matches,
          'apk_sha256':manifest['apk_sha256'],'rollback':manifest.get('rollback'),
