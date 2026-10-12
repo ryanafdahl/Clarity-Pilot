@@ -31,6 +31,14 @@ locate the long delay in the output-completion wait. The report retains three
 censored windows, the interrupted pair, and the upstream allowlist distinction.
 The experimental path is not promoted to the `.9` installation release.
 
+[Fence-timestamp and deadline follow-up](../../../docs/TPU_WAKE_FENCE_2026-10-11.md):
+a 92.002 ms submission-to-signal interval ended just 0.026 ms before the app
+returned from its wait. A public fence-deadline hint showed no established
+gain: all 23 attempted wake windows failed timing limits, with one additional
+warmup infrastructure failure. The exploratory 11-pair baseline comparison
+averaged 0.162 ms slower; its interval includes zero. The original release was
+restored and the temporary listener disabled.
+
 ## Boundaries
 
 - Desk use only. Disconnect the phone from the comma before running this tool.

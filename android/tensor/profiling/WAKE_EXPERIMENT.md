@@ -27,6 +27,26 @@ diagnostic version label. These patches do not stack on either mode-3 or mode-4
 patch. Pass explicit labels and the predeclared order
 `BABABAABABBABAABABABABBA` (12 pairs, seed 202610113).
 
+For the fence/deadline follow-up, apply `app-wake-fence-control-experimental.patch`
+after **both** async patches and build the new matched control. Then apply
+`app-wake-deadline-experimental.patch` and build the candidate. This changes
+`JL_WAKE_DEADLINE` from 0 to 1 and the label. Both retain async mode and burst 5.
+Use labels `async deadline control` and `async 50 ms deadline`, with order
+`ABBAABBABABAABABABABBABA` (12 pairs, seed 202610114).
+
+The common code uses `LiteRtGetEventSyncFenceFd` on borrowed output events,
+without closing their descriptors. While tracing, `SYNC_IOC_FILE_INFO` records
+fence status/count and the kernel signal timestamp. Require exactly one fence,
+successful before/after info reads, and `jl.fence_clock_valid=1` on each frame.
+`jl.submit_to_signal_us` and `jl.signal_to_return_us` use `CLOCK_MONOTONIC`.
+Missing or compound timestamps are unavailable; do not treat them as zero.
+The candidate sends `SYNC_IOC_SET_DEADLINE` for submission-start plus 50 ms,
+then performs the same full wait. Require `jl.deadline_enabled=1` and
+`jl.deadline_rc=0` throughout its traced diagnostic. API acceptance does not
+establish that the optional driver hint is honored. Do not claim a performance
+comparison if requests fail. Untraced controls keep descriptor lookup and
+clock reads matched, with fence-info diagnostics and vendor metrics disabled.
+
 The candidate uses the public async invocation API, waits on every attached
 output event, then clears completed events. It retains the synchronous bridge
 contract: outputs and recurrent state are unavailable until completion. The
@@ -74,6 +94,13 @@ It never unlocks the phone or operates another application. The command's host
 start/end timestamps are recorded; stimulus dispatch is not instantaneous.
 
 Run one diagnostic A/B pair with `--trace`. Inspect coverage and counter errors.
+An explicit `--trace-config /path/to/config.pbtxt` permits diagnostic categories;
+the effective UTF-8 text with normalized newlines is hashed into new manifests. A traced continuation
+requires the same hash and refuses old manifests without it. Never mix traced
+runs into the primary latency comparison.
+`app-completion.pbtxt` is the fence investigation's 35-second configuration;
+it adds camera/sync/NNAPI tracing and requests vendor event categories. Their
+presence in the configuration does not mean the device emitted those events.
 Then run the untraced predeclared eight-pair order `AB BA BA AB BA AB AB BA`:
 
 ```sh
@@ -121,7 +148,7 @@ they pass, or claim a speedup from the surviving windows. Equal output hashes
 are required on all common frames. Desk ADB/TCP is not direct-USB qualification.
 
 Offline coverage: four benchmark tests (including concurrent wake dispatch and
-its failure), seven runner rollback/guard/forward/continuation tests, and five analysis tests
+its failure), eight runner rollback/guard/forward/continuation tests, and five analysis tests
 covering a 0.1 ms gain, censored windows, changed output bytes and pre-wake stops.
 
 References: [LiteRT metrics API](https://github.com/google-ai-edge/LiteRT/blob/v2.3.0/litert/c/litert_metrics.h),

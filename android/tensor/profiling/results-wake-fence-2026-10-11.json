@@ -1,0 +1,2012 @@
+{
+  "experiment": "public output-fence deadline hint",
+  "date": "2026-10-11",
+  "plan": {
+    "hypothesis": "An advisory deadline on this inference output fence may shorten pre-signal completion delay. Kernel acceptance does not prove the driver implements or honors this optional hint.",
+    "seed": 202610114,
+    "order": "ABBAABBABABAABABABABBABA",
+    "pairs": 12,
+    "control": "async + matched fence diagnostics, no deadline hint",
+    "candidate": "same source + SYNC_IOC_SET_DEADLINE at submit + 50 ms",
+    "primary": "paired mean of all 100 wake frames; withhold uncensored estimate if any window is censored",
+    "secondary": "paired mean of all 100 baseline frames, only if all baseline windows complete",
+    "limits": "Unchanged 100 ms individual, 50 ms p95 per 100 frames; thermal status < 3 and battery < 43 C; retain every timing failure; no trace in primary trials; no Face Unlock changes",
+    "validation": "32 recurrent reference frames per variant, Android unit tests, diagnostic pair verifying deadline ioctl results before untraced controls"
+  },
+  "model_sha256": "09d080f36965bb2a0790500452bd328aa03c484d0222aa79d1ad9f021a522aec",
+  "runtime": "LiteRT 2.3.0",
+  "device": "Pixel 11 Pro XL / Tensor G6 / Android 17",
+  "builds": {
+    "variants": {
+      "control": {
+        "apk_sha256": "04f30c1ab046d42412f68c1850b60151afde2673d397164145e608e1278afb4b",
+        "tests": 59,
+        "failures": 0,
+        "errors": 0
+      },
+      "candidate": {
+        "apk_sha256": "0cbc023d8173eba5f288e7167febbb37d87fb998931e12b9128710611e0fdf6c",
+        "tests": 59,
+        "failures": 0,
+        "errors": 0
+      }
+    },
+    "patch_reproduction": true
+  },
+  "reference_parity": {
+    "frames_each": 32,
+    "output_slices": 15,
+    "both_passed": true
+  },
+  "offline_runner_analysis_tests": 13,
+  "posthoc_matched_baseline_means_ms": {
+    "A": 34.398267272727274,
+    "B": 34.560497272727275
+  },
+  "measured_frames": 4505,
+  "warmup_frames": 2395,
+  "peak_battery_c": 33.9,
+  "thermal_statuses": [
+    0
+  ],
+  "timing_failures": {
+    "100-frame p95 timing limit reached; test stopped": 22,
+    "100 ms timing limit reached; test stopped": 1,
+    "Thermal-service query timed out after 5 seconds during warmup; zero measured frames and no wake": 1
+  },
+  "analysis": {
+    "order": "ABBAABBABABAABABABABBABA",
+    "runs": [
+      {
+        "run": 1,
+        "variant": "A",
+        "baseline": {
+          "frames": 100,
+          "mean_ms": 34.107060000000004,
+          "p95_ms": 36.069,
+          "max_ms": 37.656,
+          "over_50ms": 0
+        },
+        "wake": {
+          "frames": 100,
+          "mean_ms": 39.924060000000004,
+          "p95_ms": 77.0811,
+          "max_ms": 84.081,
+          "over_50ms": 18
+        },
+        "infrastructure_failure": false,
+        "censored": false,
+        "failures": [
+          "100-frame p95 timing limit reached; test stopped"
+        ],
+        "before": {
+          "battery_c": 31.4,
+          "thermal_status": 0
+        },
+        "after": {
+          "battery_c": 31.4,
+          "thermal_status": 0
+        },
+        "wake_command_duration_ms": 179.365299991332
+      },
+      {
+        "run": 2,
+        "variant": "B",
+        "baseline": {
+          "frames": 100,
+          "mean_ms": 34.43658,
+          "p95_ms": 36.3714,
+          "max_ms": 37.493,
+          "over_50ms": 0
+        },
+        "wake": {
+          "frames": 100,
+          "mean_ms": 40.479549999999996,
+          "p95_ms": 82.05235,
+          "max_ms": 89.832,
+          "over_50ms": 18
+        },
+        "infrastructure_failure": false,
+        "censored": false,
+        "failures": [
+          "100-frame p95 timing limit reached; test stopped"
+        ],
+        "before": {
+          "battery_c": 31.4,
+          "thermal_status": 0
+        },
+        "after": {
+          "battery_c": 31.6,
+          "thermal_status": 0
+        },
+        "wake_command_duration_ms": 165.9663999453187
+      },
+      {
+        "run": 3,
+        "variant": "B",
+        "baseline": {
+          "frames": 100,
+          "mean_ms": 34.43037,
+          "p95_ms": 36.254749999999994,
+          "max_ms": 38.798,
+          "over_50ms": 0
+        },
+        "wake": {
+          "frames": 100,
+          "mean_ms": 41.587030000000006,
+          "p95_ms": 73.822,
+          "max_ms": 80.461,
+          "over_50ms": 26
+        },
+        "infrastructure_failure": false,
+        "censored": false,
+        "failures": [
+          "100-frame p95 timing limit reached; test stopped"
+        ],
+        "before": {
+          "battery_c": 31.6,
+          "thermal_status": 0
+        },
+        "after": {
+          "battery_c": 31.8,
+          "thermal_status": 0
+        },
+        "wake_command_duration_ms": 147.28380006272346
+      },
+      {
+        "run": 4,
+        "variant": "A",
+        "baseline": {
+          "frames": 100,
+          "mean_ms": 34.40677,
+          "p95_ms": 36.255250000000004,
+          "max_ms": 38.134,
+          "over_50ms": 0
+        },
+        "wake": {
+          "frames": 5,
+          "mean_ms": 54.2882,
+          "p95_ms": 97.3004,
+          "max_ms": 106.238,
+          "over_50ms": 2
+        },
+        "infrastructure_failure": false,
+        "censored": true,
+        "failures": [
+          "100 ms timing limit reached; test stopped"
+        ],
+        "before": {
+          "battery_c": 31.8,
+          "thermal_status": 0
+        },
+        "after": {
+          "battery_c": 31.8,
+          "thermal_status": 0
+        },
+        "wake_command_duration_ms": 88.47140008583665
+      },
+      {
+        "run": 5,
+        "variant": "A",
+        "baseline": {
+          "frames": 100,
+          "mean_ms": 34.33363,
+          "p95_ms": 36.1953,
+          "max_ms": 37.707,
+          "over_50ms": 0
+        },
+        "wake": {
+          "frames": 100,
+          "mean_ms": 40.57556,
+          "p95_ms": 78.12535,
+          "max_ms": 86.578,
+          "over_50ms": 21
+        },
+        "infrastructure_failure": false,
+        "censored": false,
+        "failures": [
+          "100-frame p95 timing limit reached; test stopped"
+        ],
+        "before": {
+          "battery_c": 31.8,
+          "thermal_status": 0
+        },
+        "after": {
+          "battery_c": 32.1,
+          "thermal_status": 0
+        },
+        "wake_command_duration_ms": 158.7266999995336
+      },
+      {
+        "run": 6,
+        "variant": "B",
+        "baseline": {
+          "frames": 100,
+          "mean_ms": 34.83821,
+          "p95_ms": 36.4199,
+          "max_ms": 55.639,
+          "over_50ms": 2
+        },
+        "wake": {
+          "frames": 100,
+          "mean_ms": 42.897240000000004,
+          "p95_ms": 76.54845,
+          "max_ms": 88.978,
+          "over_50ms": 29
+        },
+        "infrastructure_failure": false,
+        "censored": false,
+        "failures": [
+          "100-frame p95 timing limit reached; test stopped"
+        ],
+        "before": {
+          "battery_c": 32.1,
+          "thermal_status": 0
+        },
+        "after": {
+          "battery_c": 32.1,
+          "thermal_status": 0
+        },
+        "wake_command_duration_ms": 143.2673999806866
+      },
+      {
+        "run": 7,
+        "variant": "B",
+        "baseline": {
+          "frames": 100,
+          "mean_ms": 34.76559,
+          "p95_ms": 36.7932,
+          "max_ms": 56.797,
+          "over_50ms": 2
+        },
+        "wake": {
+          "frames": 100,
+          "mean_ms": 40.482679999999995,
+          "p95_ms": 78.67734999999999,
+          "max_ms": 88.547,
+          "over_50ms": 20
+        },
+        "infrastructure_failure": false,
+        "censored": false,
+        "failures": [
+          "100-frame p95 timing limit reached; test stopped"
+        ],
+        "before": {
+          "battery_c": 32.1,
+          "thermal_status": 0
+        },
+        "after": {
+          "battery_c": 32.6,
+          "thermal_status": 0
+        },
+        "wake_command_duration_ms": 176.26110010314733
+      },
+      {
+        "run": 8,
+        "variant": "A",
+        "baseline": {
+          "frames": 100,
+          "mean_ms": 34.14054999999999,
+          "p95_ms": 36.03465,
+          "max_ms": 37.9,
+          "over_50ms": 0
+        },
+        "wake": {
+          "frames": 100,
+          "mean_ms": 39.62182,
+          "p95_ms": 77.13714999999999,
+          "max_ms": 85.039,
+          "over_50ms": 19
+        },
+        "infrastructure_failure": false,
+        "censored": false,
+        "failures": [
+          "100-frame p95 timing limit reached; test stopped"
+        ],
+        "before": {
+          "battery_c": 32.6,
+          "thermal_status": 0
+        },
+        "after": {
+          "battery_c": 32.6,
+          "thermal_status": 0
+        },
+        "wake_command_duration_ms": 84.04879993759096
+      },
+      {
+        "run": 9,
+        "variant": "B",
+        "baseline": {
+          "frames": 100,
+          "mean_ms": 34.405989999999996,
+          "p95_ms": 36.31245,
+          "max_ms": 38.281,
+          "over_50ms": 0
+        },
+        "wake": {
+          "frames": 100,
+          "mean_ms": 40.218999999999994,
+          "p95_ms": 77.26485,
+          "max_ms": 89.515,
+          "over_50ms": 17
+        },
+        "infrastructure_failure": false,
+        "censored": false,
+        "failures": [
+          "100-frame p95 timing limit reached; test stopped"
+        ],
+        "before": {
+          "battery_c": 32.6,
+          "thermal_status": 0
+        },
+        "after": {
+          "battery_c": 32.7,
+          "thermal_status": 0
+        },
+        "wake_command_duration_ms": 136.2867000279948
+      },
+      {
+        "run": 10,
+        "variant": "A",
+        "baseline": null,
+        "wake": null,
+        "infrastructure_failure": true,
+        "censored": true,
+        "failures": [
+          "Thermal-service query timed out after 5 seconds during warmup; zero measured frames and no wake"
+        ],
+        "before": {
+          "battery_c": 32.7,
+          "thermal_status": 0
+        },
+        "after": {
+          "battery_c": 32.7,
+          "thermal_status": 0
+        },
+        "wake_command_duration_ms": null
+      },
+      {
+        "run": 11,
+        "variant": "B",
+        "baseline": {
+          "frames": 100,
+          "mean_ms": 34.38973,
+          "p95_ms": 36.0982,
+          "max_ms": 38.797,
+          "over_50ms": 0
+        },
+        "wake": {
+          "frames": 100,
+          "mean_ms": 40.60257000000001,
+          "p95_ms": 77.00864999999999,
+          "max_ms": 90.342,
+          "over_50ms": 19
+        },
+        "infrastructure_failure": false,
+        "censored": false,
+        "failures": [
+          "100-frame p95 timing limit reached; test stopped"
+        ],
+        "before": {
+          "battery_c": 32.7,
+          "thermal_status": 0
+        },
+        "after": {
+          "battery_c": 32.2,
+          "thermal_status": 0
+        },
+        "wake_command_duration_ms": 121.27889995463192
+      },
+      {
+        "run": 12,
+        "variant": "A",
+        "baseline": {
+          "frames": 100,
+          "mean_ms": 34.647180000000006,
+          "p95_ms": 36.21595,
+          "max_ms": 38.779,
+          "over_50ms": 0
+        },
+        "wake": {
+          "frames": 100,
+          "mean_ms": 40.429390000000005,
+          "p95_ms": 78.91094999999999,
+          "max_ms": 90.179,
+          "over_50ms": 18
+        },
+        "infrastructure_failure": false,
+        "censored": false,
+        "failures": [
+          "100-frame p95 timing limit reached; test stopped"
+        ],
+        "before": {
+          "battery_c": 32.2,
+          "thermal_status": 0
+        },
+        "after": {
+          "battery_c": 32.4,
+          "thermal_status": 0
+        },
+        "wake_command_duration_ms": 150.9684999473393
+      },
+      {
+        "run": 13,
+        "variant": "A",
+        "baseline": {
+          "frames": 100,
+          "mean_ms": 34.18727,
+          "p95_ms": 36.2035,
+          "max_ms": 37.124,
+          "over_50ms": 0
+        },
+        "wake": {
+          "frames": 100,
+          "mean_ms": 41.13856,
+          "p95_ms": 80.91665,
+          "max_ms": 86.802,
+          "over_50ms": 21
+        },
+        "infrastructure_failure": false,
+        "censored": false,
+        "failures": [
+          "100-frame p95 timing limit reached; test stopped"
+        ],
+        "before": {
+          "battery_c": 32.4,
+          "thermal_status": 0
+        },
+        "after": {
+          "battery_c": 32.5,
+          "thermal_status": 0
+        },
+        "wake_command_duration_ms": 194.03130002319813
+      },
+      {
+        "run": 14,
+        "variant": "B",
+        "baseline": {
+          "frames": 100,
+          "mean_ms": 34.998940000000005,
+          "p95_ms": 37.3116,
+          "max_ms": 58.087,
+          "over_50ms": 2
+        },
+        "wake": {
+          "frames": 100,
+          "mean_ms": 40.40083,
+          "p95_ms": 80.54814999999999,
+          "max_ms": 89.028,
+          "over_50ms": 18
+        },
+        "infrastructure_failure": false,
+        "censored": false,
+        "failures": [
+          "100-frame p95 timing limit reached; test stopped"
+        ],
+        "before": {
+          "battery_c": 32.5,
+          "thermal_status": 0
+        },
+        "after": {
+          "battery_c": 32.7,
+          "thermal_status": 0
+        },
+        "wake_command_duration_ms": 161.03690001182258
+      },
+      {
+        "run": 15,
+        "variant": "A",
+        "baseline": {
+          "frames": 100,
+          "mean_ms": 34.56346999999999,
+          "p95_ms": 36.43095,
+          "max_ms": 37.402,
+          "over_50ms": 0
+        },
+        "wake": {
+          "frames": 100,
+          "mean_ms": 39.97183,
+          "p95_ms": 76.6578,
+          "max_ms": 92.054,
+          "over_50ms": 18
+        },
+        "infrastructure_failure": false,
+        "censored": false,
+        "failures": [
+          "100-frame p95 timing limit reached; test stopped"
+        ],
+        "before": {
+          "battery_c": 32.7,
+          "thermal_status": 0
+        },
+        "after": {
+          "battery_c": 32.8,
+          "thermal_status": 0
+        },
+        "wake_command_duration_ms": 113.66709996946156
+      },
+      {
+        "run": 16,
+        "variant": "B",
+        "baseline": {
+          "frames": 100,
+          "mean_ms": 34.63618,
+          "p95_ms": 36.59355,
+          "max_ms": 37.72,
+          "over_50ms": 0
+        },
+        "wake": {
+          "frames": 100,
+          "mean_ms": 43.418049999999994,
+          "p95_ms": 78.31049999999999,
+          "max_ms": 86.837,
+          "over_50ms": 28
+        },
+        "infrastructure_failure": false,
+        "censored": false,
+        "failures": [
+          "100-frame p95 timing limit reached; test stopped"
+        ],
+        "before": {
+          "battery_c": 32.8,
+          "thermal_status": 0
+        },
+        "after": {
+          "battery_c": 33.0,
+          "thermal_status": 0
+        },
+        "wake_command_duration_ms": 121.71490001492202
+      },
+      {
+        "run": 17,
+        "variant": "A",
+        "baseline": {
+          "frames": 100,
+          "mean_ms": 34.566790000000005,
+          "p95_ms": 36.3305,
+          "max_ms": 36.859,
+          "over_50ms": 0
+        },
+        "wake": {
+          "frames": 100,
+          "mean_ms": 41.57003999999999,
+          "p95_ms": 78.39884999999998,
+          "max_ms": 89.402,
+          "over_50ms": 25
+        },
+        "infrastructure_failure": false,
+        "censored": false,
+        "failures": [
+          "100-frame p95 timing limit reached; test stopped"
+        ],
+        "before": {
+          "battery_c": 33.0,
+          "thermal_status": 0
+        },
+        "after": {
+          "battery_c": 33.2,
+          "thermal_status": 0
+        },
+        "wake_command_duration_ms": 160.711899981834
+      },
+      {
+        "run": 18,
+        "variant": "B",
+        "baseline": {
+          "frames": 100,
+          "mean_ms": 33.835539999999995,
+          "p95_ms": 36.320699999999995,
+          "max_ms": 36.788,
+          "over_50ms": 0
+        },
+        "wake": {
+          "frames": 100,
+          "mean_ms": 40.50521999999999,
+          "p95_ms": 84.07014999999998,
+          "max_ms": 92.288,
+          "over_50ms": 18
+        },
+        "infrastructure_failure": false,
+        "censored": false,
+        "failures": [
+          "100-frame p95 timing limit reached; test stopped"
+        ],
+        "before": {
+          "battery_c": 33.2,
+          "thermal_status": 0
+        },
+        "after": {
+          "battery_c": 33.4,
+          "thermal_status": 0
+        },
+        "wake_command_duration_ms": 79.6276000328362
+      },
+      {
+        "run": 19,
+        "variant": "A",
+        "baseline": {
+          "frames": 100,
+          "mean_ms": 34.28464,
+          "p95_ms": 36.327650000000006,
+          "max_ms": 36.928,
+          "over_50ms": 0
+        },
+        "wake": {
+          "frames": 100,
+          "mean_ms": 42.97060999999999,
+          "p95_ms": 76.15355,
+          "max_ms": 88.304,
+          "over_50ms": 28
+        },
+        "infrastructure_failure": false,
+        "censored": false,
+        "failures": [
+          "100-frame p95 timing limit reached; test stopped"
+        ],
+        "before": {
+          "battery_c": 33.4,
+          "thermal_status": 0
+        },
+        "after": {
+          "battery_c": 33.3,
+          "thermal_status": 0
+        },
+        "wake_command_duration_ms": 111.65770003572106
+      },
+      {
+        "run": 20,
+        "variant": "B",
+        "baseline": {
+          "frames": 100,
+          "mean_ms": 34.31857,
+          "p95_ms": 36.3326,
+          "max_ms": 37.001,
+          "over_50ms": 0
+        },
+        "wake": {
+          "frames": 100,
+          "mean_ms": 40.37057,
+          "p95_ms": 76.42819999999999,
+          "max_ms": 92.486,
+          "over_50ms": 20
+        },
+        "infrastructure_failure": false,
+        "censored": false,
+        "failures": [
+          "100-frame p95 timing limit reached; test stopped"
+        ],
+        "before": {
+          "battery_c": 33.3,
+          "thermal_status": 0
+        },
+        "after": {
+          "battery_c": 33.5,
+          "thermal_status": 0
+        },
+        "wake_command_duration_ms": 97.73549996316433
+      },
+      {
+        "run": 21,
+        "variant": "B",
+        "baseline": {
+          "frames": 100,
+          "mean_ms": 34.69366,
+          "p95_ms": 37.00505,
+          "max_ms": 37.962,
+          "over_50ms": 0
+        },
+        "wake": {
+          "frames": 100,
+          "mean_ms": 40.6374,
+          "p95_ms": 79.38905,
+          "max_ms": 88.698,
+          "over_50ms": 20
+        },
+        "infrastructure_failure": false,
+        "censored": false,
+        "failures": [
+          "100-frame p95 timing limit reached; test stopped"
+        ],
+        "before": {
+          "battery_c": 33.5,
+          "thermal_status": 0
+        },
+        "after": {
+          "battery_c": 33.6,
+          "thermal_status": 0
+        },
+        "wake_command_duration_ms": 180.79380004201084
+      },
+      {
+        "run": 22,
+        "variant": "A",
+        "baseline": {
+          "frames": 100,
+          "mean_ms": 35.03411,
+          "p95_ms": 36.6749,
+          "max_ms": 54.723,
+          "over_50ms": 3
+        },
+        "wake": {
+          "frames": 100,
+          "mean_ms": 40.33523,
+          "p95_ms": 79.60395,
+          "max_ms": 89.298,
+          "over_50ms": 18
+        },
+        "infrastructure_failure": false,
+        "censored": false,
+        "failures": [
+          "100-frame p95 timing limit reached; test stopped"
+        ],
+        "before": {
+          "battery_c": 33.6,
+          "thermal_status": 0
+        },
+        "after": {
+          "battery_c": 33.7,
+          "thermal_status": 0
+        },
+        "wake_command_duration_ms": 99.62760005146265
+      },
+      {
+        "run": 23,
+        "variant": "B",
+        "baseline": {
+          "frames": 100,
+          "mean_ms": 34.822100000000006,
+          "p95_ms": 36.43085,
+          "max_ms": 57.163,
+          "over_50ms": 2
+        },
+        "wake": {
+          "frames": 100,
+          "mean_ms": 43.338370000000005,
+          "p95_ms": 76.04289999999999,
+          "max_ms": 88.237,
+          "over_50ms": 28
+        },
+        "infrastructure_failure": false,
+        "censored": false,
+        "failures": [
+          "100-frame p95 timing limit reached; test stopped"
+        ],
+        "before": {
+          "battery_c": 33.7,
+          "thermal_status": 0
+        },
+        "after": {
+          "battery_c": 33.8,
+          "thermal_status": 0
+        },
+        "wake_command_duration_ms": 203.1550999963656
+      },
+      {
+        "run": 24,
+        "variant": "A",
+        "baseline": {
+          "frames": 100,
+          "mean_ms": 34.10947,
+          "p95_ms": 35.97965,
+          "max_ms": 36.651,
+          "over_50ms": 0
+        },
+        "wake": {
+          "frames": 100,
+          "mean_ms": 40.60879,
+          "p95_ms": 78.5803,
+          "max_ms": 92.73,
+          "over_50ms": 18
+        },
+        "infrastructure_failure": false,
+        "censored": false,
+        "failures": [
+          "100-frame p95 timing limit reached; test stopped"
+        ],
+        "before": {
+          "battery_c": 33.8,
+          "thermal_status": 0
+        },
+        "after": {
+          "battery_c": 33.9,
+          "thermal_status": 0
+        },
+        "wake_command_duration_ms": 148.60780001617968
+      }
+    ],
+    "all_common_output_bytes_match": true,
+    "all_predeclared_attempts_accounted_for": true,
+    "apk_sha256": {
+      "A": "04f30c1ab046d42412f68c1850b60151afde2673d397164145e608e1278afb4b",
+      "B": "0cbc023d8173eba5f288e7167febbb37d87fb998931e12b9128710611e0fdf6c"
+    },
+    "traced": false,
+    "censored_trials": 2,
+    "paired": {},
+    "primary_unavailable": "Censored wake windows and a thermal-monitor failure; no overall uncensored wake-gain estimate",
+    "predeclared_baseline_unavailable": "Trial 10 has no measured baseline; the all-trials baseline requirement was not met",
+    "posthoc_complete_pair_baseline": {
+      "pairs": 11,
+      "control_minus_candidate_ms": -0.16223000000000162,
+      "paired_differences_ms": [
+        -0.32951999999999515,
+        -0.02360000000000184,
+        -0.5045799999999971,
+        -0.6250400000000127,
+        0.25745000000000573,
+        -0.8116700000000066,
+        -0.07271000000001493,
+        0.73125000000001,
+        -0.03392999999999802,
+        0.34044999999999703,
+        -0.7126300000000043
+      ],
+      "candidate_faster_pairs": 3,
+      "bootstrap_95pct_interval_ms": [
+        -0.4265621363636403,
+        0.11482645454545373
+      ],
+      "two_sided_sign_flip_p": 0.283203125
+    },
+    "posthoc_excluded_pair": 5,
+    "posthoc_note": "Exploratory complete-pair screen-off analysis after an infrastructure failure; not the predeclared all-pair baseline estimate; does not estimate wake improvement",
+    "unit_of_replication": "trial pair, not individual frames",
+    "A": {
+      "attempts": 12,
+      "wake_trials": 11,
+      "timing_stops": 11,
+      "infrastructure_failures": 1,
+      "censored": 2
+    },
+    "B": {
+      "attempts": 12,
+      "wake_trials": 12,
+      "timing_stops": 12,
+      "infrastructure_failures": 0,
+      "censored": 0
+    }
+  },
+  "diagnostics": {
+    "01-A": {
+      "frames": 300,
+      "counters": {
+        "jl.async_actual": {
+          "count": 300,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "jl.deadline_enabled": {
+          "count": 300,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "jl.fence_after_status": {
+          "count": 300,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "jl.fence_before_status": {
+          "count": 300,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "jl.fence_clock_valid": {
+          "count": 300,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "jl.fence_count": {
+          "count": 600,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "jl.fence_info_after_rc": {
+          "count": 300,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "jl.fence_info_before_rc": {
+          "count": 300,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "jl.frame_id": {
+          "count": 300,
+          "min": 0.0,
+          "max": 299.0
+        },
+        "jl.hw_executions": {
+          "count": 300,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "jl.hw_us": {
+          "count": 300,
+          "min": 29837.0,
+          "max": 58380.0
+        },
+        "jl.metrics_status": {
+          "count": 600,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "jl.output_events": {
+          "count": 300,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "jl.signal_to_return_us": {
+          "count": 300,
+          "min": 18.0,
+          "max": 2150.0
+        },
+        "jl.submit_to_signal_us": {
+          "count": 300,
+          "min": 30696.0,
+          "max": 94243.0
+        }
+      },
+      "trace_errors": [],
+      "scheduler_coverage_complete": true,
+      "trace_sha256": "02f0519bedc96ea3ddba82e4b89704c6434b274fcc7f1b6e85e1b34c9a6e39e6"
+    },
+    "02-B": {
+      "frames": 222,
+      "counters": {
+        "jl.async_actual": {
+          "count": 222,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "jl.deadline_enabled": {
+          "count": 222,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "jl.deadline_rc": {
+          "count": 222,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "jl.fence_after_status": {
+          "count": 222,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "jl.fence_before_status": {
+          "count": 222,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "jl.fence_clock_valid": {
+          "count": 222,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "jl.fence_count": {
+          "count": 444,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "jl.fence_info_after_rc": {
+          "count": 222,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "jl.fence_info_before_rc": {
+          "count": 222,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "jl.frame_id": {
+          "count": 222,
+          "min": 0.0,
+          "max": 221.0
+        },
+        "jl.hw_executions": {
+          "count": 222,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "jl.hw_us": {
+          "count": 222,
+          "min": 29018.0,
+          "max": 53972.0
+        },
+        "jl.metrics_status": {
+          "count": 444,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "jl.output_events": {
+          "count": 222,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "jl.signal_to_return_us": {
+          "count": 222,
+          "min": 19.0,
+          "max": 2075.0
+        },
+        "jl.submit_to_signal_us": {
+          "count": 222,
+          "min": 29739.0,
+          "max": 116046.0
+        }
+      },
+      "trace_errors": [],
+      "scheduler_coverage_complete": true,
+      "trace_sha256": "560d05507a87424212109bb4b2f9a3c50a5804dd0af2d8b37c280ad778cbd357"
+    },
+    "all_common_output_bytes_match": true,
+    "reference_probe": {
+      "verified_frames": 300,
+      "trace_errors": [],
+      "single_fence_all_frames": true,
+      "all_fence_timestamps_valid": true,
+      "all_scheduler_coverage_complete": true,
+      "stage_stats_ms": {
+        "baseline": {
+          "jl.submit_to_signal_us": {
+            "mean": 31.49747,
+            "median": 31.565,
+            "max": 33.691
+          },
+          "jl.signal_to_return_us": {
+            "mean": 0.78268,
+            "median": 0.419,
+            "max": 2.138
+          },
+          "jl.hw_us": {
+            "mean": 29.56871,
+            "median": 29.5515,
+            "max": 30.12
+          }
+        },
+        "wake": {
+          "jl.submit_to_signal_us": {
+            "mean": 39.72491,
+            "median": 31.6985,
+            "max": 92.002
+          },
+          "jl.signal_to_return_us": {
+            "mean": 0.1072,
+            "median": 0.0795,
+            "max": 1.606
+          },
+          "jl.hw_us": {
+            "mean": 32.01321,
+            "median": 30.572,
+            "max": 52.251
+          }
+        }
+      },
+      "slowest_wake_frames": [
+        {
+          "frame_id": 210,
+          "jl.metrics_status": [
+            0.0,
+            0.0
+          ],
+          "jl.async_actual": [
+            1.0
+          ],
+          "jl.fence_info_before_rc": [
+            0.0
+          ],
+          "jl.fence_before_status": [
+            0.0
+          ],
+          "jl.fence_count": [
+            1.0,
+            1.0
+          ],
+          "jl.fence_info_after_rc": [
+            0.0
+          ],
+          "jl.fence_after_status": [
+            1.0
+          ],
+          "jl.fence_clock_valid": [
+            1.0
+          ],
+          "jl.submit_to_signal_us": [
+            92002.0
+          ],
+          "jl.signal_to_return_us": [
+            26.0
+          ],
+          "jl.output_events": [
+            1.0
+          ],
+          "jl.hw_us": [
+            34662.0
+          ],
+          "jl.hw_executions": [
+            1.0
+          ],
+          "jl.request": {
+            "wall_ms": 92.988556,
+            "running_ms": 1.176187,
+            "runnable_ms": 0.009271,
+            "blocked_ms": 91.803098,
+            "covered_ms": 92.988556
+          },
+          "jl.host_lock": {
+            "wall_ms": 0.001432,
+            "running_ms": 0.001432,
+            "runnable_ms": 0.0,
+            "blocked_ms": 0.0,
+            "covered_ms": 0.001432
+          },
+          "jl.infer": {
+            "wall_ms": 92.712473,
+            "running_ms": 0.900104,
+            "runnable_ms": 0.009271,
+            "blocked_ms": 91.803098,
+            "covered_ms": 92.712473
+          },
+          "jl.queue": {
+            "wall_ms": 0.204662,
+            "running_ms": 0.204662,
+            "runnable_ms": 0.0,
+            "blocked_ms": 0.0,
+            "covered_ms": 0.204662
+          },
+          "jl.input": {
+            "wall_ms": 0.186588,
+            "running_ms": 0.186588,
+            "runnable_ms": 0.0,
+            "blocked_ms": 0.0,
+            "covered_ms": 0.186588
+          },
+          "jl.invoke": {
+            "wall_ms": 92.172473,
+            "running_ms": 0.360104,
+            "runnable_ms": 0.009271,
+            "blocked_ms": 91.803098,
+            "covered_ms": 92.172473
+          },
+          "jl.async_submit": {
+            "wall_ms": 0.175834,
+            "running_ms": 0.175834,
+            "runnable_ms": 0.0,
+            "blocked_ms": 0.0,
+            "covered_ms": 0.175834
+          },
+          "jl.output_wait": {
+            "wall_ms": 91.89204,
+            "running_ms": 0.079671,
+            "runnable_ms": 0.009271,
+            "blocked_ms": 91.803098,
+            "covered_ms": 91.89204
+          },
+          "jl.fence_driver:edgetpu": {
+            "wall_ms": 0.001084,
+            "running_ms": 0.001084,
+            "runnable_ms": 0.0,
+            "blocked_ms": 0.0,
+            "covered_ms": 0.001084
+          },
+          "jl.fence_driver:detached-driver": {
+            "wall_ms": 0.000781,
+            "running_ms": 0.000781,
+            "runnable_ms": 0.0,
+            "blocked_ms": 0.0,
+            "covered_ms": 0.000781
+          },
+          "jl.output": {
+            "wall_ms": 0.078359,
+            "running_ms": 0.078359,
+            "runnable_ms": 0.0,
+            "blocked_ms": 0.0,
+            "covered_ms": 0.078359
+          },
+          "jl.hint": {
+            "wall_ms": 0.024089,
+            "running_ms": 0.024089,
+            "runnable_ms": 0.0,
+            "blocked_ms": 0.0,
+            "covered_ms": 0.024089
+          },
+          "jl.telemetry": {
+            "wall_ms": 0.011198,
+            "running_ms": 0.011198,
+            "runnable_ms": 0.0,
+            "blocked_ms": 0.0,
+            "covered_ms": 0.011198
+          },
+          "jl.send": {
+            "wall_ms": 0.093177,
+            "running_ms": 0.093177,
+            "runnable_ms": 0.0,
+            "blocked_ms": 0.0,
+            "covered_ms": 0.093177
+          }
+        },
+        {
+          "frame_id": 215,
+          "jl.metrics_status": [
+            0.0,
+            0.0
+          ],
+          "jl.async_actual": [
+            1.0
+          ],
+          "jl.fence_info_before_rc": [
+            0.0
+          ],
+          "jl.fence_before_status": [
+            0.0
+          ],
+          "jl.fence_count": [
+            1.0,
+            1.0
+          ],
+          "jl.fence_info_after_rc": [
+            0.0
+          ],
+          "jl.fence_after_status": [
+            1.0
+          ],
+          "jl.fence_clock_valid": [
+            1.0
+          ],
+          "jl.submit_to_signal_us": [
+            86945.0
+          ],
+          "jl.signal_to_return_us": [
+            22.0
+          ],
+          "jl.output_events": [
+            1.0
+          ],
+          "jl.hw_us": [
+            36349.0
+          ],
+          "jl.hw_executions": [
+            1.0
+          ],
+          "jl.request": {
+            "wall_ms": 88.144659,
+            "running_ms": 1.382838,
+            "runnable_ms": 0.031067,
+            "blocked_ms": 86.730754,
+            "covered_ms": 88.144659
+          },
+          "jl.host_lock": {
+            "wall_ms": 0.006354,
+            "running_ms": 0.006354,
+            "runnable_ms": 0.0,
+            "blocked_ms": 0.0,
+            "covered_ms": 0.006354
+          },
+          "jl.infer": {
+            "wall_ms": 87.838436,
+            "running_ms": 1.076615,
+            "runnable_ms": 0.031067,
+            "blocked_ms": 86.730754,
+            "covered_ms": 87.838436
+          },
+          "jl.queue": {
+            "wall_ms": 0.258489,
+            "running_ms": 0.234635,
+            "runnable_ms": 0.023854,
+            "blocked_ms": 0.0,
+            "covered_ms": 0.258489
+          },
+          "jl.input": {
+            "wall_ms": 0.296589,
+            "running_ms": 0.296589,
+            "runnable_ms": 0.0,
+            "blocked_ms": 0.0,
+            "covered_ms": 0.296589
+          },
+          "jl.invoke": {
+            "wall_ms": 87.114634,
+            "running_ms": 0.376667,
+            "runnable_ms": 0.007213,
+            "blocked_ms": 86.730754,
+            "covered_ms": 87.114634
+          },
+          "jl.async_submit": {
+            "wall_ms": 0.190182,
+            "running_ms": 0.190182,
+            "runnable_ms": 0.0,
+            "blocked_ms": 0.0,
+            "covered_ms": 0.190182
+          },
+          "jl.output_wait": {
+            "wall_ms": 86.81479,
+            "running_ms": 0.076823,
+            "runnable_ms": 0.007213,
+            "blocked_ms": 86.730754,
+            "covered_ms": 86.81479
+          },
+          "jl.fence_driver:edgetpu": {
+            "wall_ms": 0.000703,
+            "running_ms": 0.000703,
+            "runnable_ms": 0.0,
+            "blocked_ms": 0.0,
+            "covered_ms": 0.000703
+          },
+          "jl.fence_driver:detached-driver": {
+            "wall_ms": 0.000782,
+            "running_ms": 0.000782,
+            "runnable_ms": 0.0,
+            "blocked_ms": 0.0,
+            "covered_ms": 0.000782
+          },
+          "jl.output": {
+            "wall_ms": 0.089583,
+            "running_ms": 0.089583,
+            "runnable_ms": 0.0,
+            "blocked_ms": 0.0,
+            "covered_ms": 0.089583
+          },
+          "jl.hint": {
+            "wall_ms": 0.025131,
+            "running_ms": 0.025131,
+            "runnable_ms": 0.0,
+            "blocked_ms": 0.0,
+            "covered_ms": 0.025131
+          },
+          "jl.telemetry": {
+            "wall_ms": 0.015859,
+            "running_ms": 0.015859,
+            "runnable_ms": 0.0,
+            "blocked_ms": 0.0,
+            "covered_ms": 0.015859
+          },
+          "jl.send": {
+            "wall_ms": 0.108838,
+            "running_ms": 0.108838,
+            "runnable_ms": 0.0,
+            "blocked_ms": 0.0,
+            "covered_ms": 0.108838
+          }
+        },
+        {
+          "frame_id": 214,
+          "jl.metrics_status": [
+            0.0,
+            0.0
+          ],
+          "jl.async_actual": [
+            1.0
+          ],
+          "jl.fence_info_before_rc": [
+            0.0
+          ],
+          "jl.fence_before_status": [
+            0.0
+          ],
+          "jl.fence_count": [
+            1.0,
+            1.0
+          ],
+          "jl.fence_info_after_rc": [
+            0.0
+          ],
+          "jl.fence_after_status": [
+            1.0
+          ],
+          "jl.fence_clock_valid": [
+            1.0
+          ],
+          "jl.submit_to_signal_us": [
+            84120.0
+          ],
+          "jl.signal_to_return_us": [
+            29.0
+          ],
+          "jl.output_events": [
+            1.0
+          ],
+          "jl.hw_us": [
+            35581.0
+          ],
+          "jl.hw_executions": [
+            1.0
+          ],
+          "jl.request": {
+            "wall_ms": 85.58927,
+            "running_ms": 1.420714,
+            "runnable_ms": 0.284729,
+            "blocked_ms": 83.883827,
+            "covered_ms": 85.58927
+          },
+          "jl.host_lock": {
+            "wall_ms": 0.001797,
+            "running_ms": 0.001797,
+            "runnable_ms": 0.0,
+            "blocked_ms": 0.0,
+            "covered_ms": 0.001797
+          },
+          "jl.infer": {
+            "wall_ms": 85.071484,
+            "running_ms": 1.031548,
+            "runnable_ms": 0.156109,
+            "blocked_ms": 83.883827,
+            "covered_ms": 85.071484
+          },
+          "jl.queue": {
+            "wall_ms": 0.301833,
+            "running_ms": 0.262599,
+            "runnable_ms": 0.039234,
+            "blocked_ms": 0.0,
+            "covered_ms": 0.301833
+          },
+          "jl.input": {
+            "wall_ms": 0.208412,
+            "running_ms": 0.191693,
+            "runnable_ms": 0.016719,
+            "blocked_ms": 0.0,
+            "covered_ms": 0.208412
+          },
+          "jl.invoke": {
+            "wall_ms": 84.385754,
+            "running_ms": 0.401771,
+            "runnable_ms": 0.100156,
+            "blocked_ms": 83.883827,
+            "covered_ms": 84.385754
+          },
+          "jl.async_submit": {
+            "wall_ms": 0.214141,
+            "running_ms": 0.198047,
+            "runnable_ms": 0.016094,
+            "blocked_ms": 0.0,
+            "covered_ms": 0.214141
+          },
+          "jl.output_wait": {
+            "wall_ms": 83.973645,
+            "running_ms": 0.079141,
+            "runnable_ms": 0.010677,
+            "blocked_ms": 83.883827,
+            "covered_ms": 83.973645
+          },
+          "jl.fence_driver:edgetpu": {
+            "wall_ms": 0.000677,
+            "running_ms": 0.000677,
+            "runnable_ms": 0.0,
+            "blocked_ms": 0.0,
+            "covered_ms": 0.000677
+          },
+          "jl.fence_driver:detached-driver": {
+            "wall_ms": 0.000912,
+            "running_ms": 0.000912,
+            "runnable_ms": 0.0,
+            "blocked_ms": 0.0,
+            "covered_ms": 0.000912
+          },
+          "jl.output": {
+            "wall_ms": 0.097125,
+            "running_ms": 0.097125,
+            "runnable_ms": 0.0,
+            "blocked_ms": 0.0,
+            "covered_ms": 0.097125
+          },
+          "jl.hint": {
+            "wall_ms": 0.029896,
+            "running_ms": 0.029896,
+            "runnable_ms": 0.0,
+            "blocked_ms": 0.0,
+            "covered_ms": 0.029896
+          },
+          "jl.telemetry": {
+            "wall_ms": 0.012865,
+            "running_ms": 0.012865,
+            "runnable_ms": 0.0,
+            "blocked_ms": 0.0,
+            "covered_ms": 0.012865
+          },
+          "jl.send": {
+            "wall_ms": 0.258646,
+            "running_ms": 0.149792,
+            "runnable_ms": 0.108854,
+            "blocked_ms": 0.0,
+            "covered_ms": 0.258646
+          }
+        },
+        {
+          "frame_id": 212,
+          "jl.metrics_status": [
+            0.0,
+            0.0
+          ],
+          "jl.async_actual": [
+            1.0
+          ],
+          "jl.fence_info_before_rc": [
+            0.0
+          ],
+          "jl.fence_before_status": [
+            0.0
+          ],
+          "jl.fence_count": [
+            1.0,
+            1.0
+          ],
+          "jl.fence_info_after_rc": [
+            0.0
+          ],
+          "jl.fence_after_status": [
+            1.0
+          ],
+          "jl.fence_clock_valid": [
+            1.0
+          ],
+          "jl.submit_to_signal_us": [
+            84060.0
+          ],
+          "jl.signal_to_return_us": [
+            23.0
+          ],
+          "jl.output_events": [
+            1.0
+          ],
+          "jl.hw_us": [
+            35672.0
+          ],
+          "jl.hw_executions": [
+            1.0
+          ],
+          "jl.request": {
+            "wall_ms": 85.065937,
+            "running_ms": 1.205287,
+            "runnable_ms": 0.008125,
+            "blocked_ms": 83.852525,
+            "covered_ms": 85.065937
+          },
+          "jl.host_lock": {
+            "wall_ms": 0.001354,
+            "running_ms": 0.001354,
+            "runnable_ms": 0.0,
+            "blocked_ms": 0.0,
+            "covered_ms": 0.001354
+          },
+          "jl.infer": {
+            "wall_ms": 84.792889,
+            "running_ms": 0.932239,
+            "runnable_ms": 0.008125,
+            "blocked_ms": 83.852525,
+            "covered_ms": 84.792889
+          },
+          "jl.queue": {
+            "wall_ms": 0.223202,
+            "running_ms": 0.223202,
+            "runnable_ms": 0.0,
+            "blocked_ms": 0.0,
+            "covered_ms": 0.223202
+          },
+          "jl.input": {
+            "wall_ms": 0.186303,
+            "running_ms": 0.186303,
+            "runnable_ms": 0.0,
+            "blocked_ms": 0.0,
+            "covered_ms": 0.186303
+          },
+          "jl.invoke": {
+            "wall_ms": 84.232107,
+            "running_ms": 0.371457,
+            "runnable_ms": 0.008125,
+            "blocked_ms": 83.852525,
+            "covered_ms": 84.232107
+          },
+          "jl.async_submit": {
+            "wall_ms": 0.187682,
+            "running_ms": 0.187682,
+            "runnable_ms": 0.0,
+            "blocked_ms": 0.0,
+            "covered_ms": 0.187682
+          },
+          "jl.output_wait": {
+            "wall_ms": 83.93065,
+            "running_ms": 0.07,
+            "runnable_ms": 0.008125,
+            "blocked_ms": 83.852525,
+            "covered_ms": 83.93065
+          },
+          "jl.fence_driver:edgetpu": {
+            "wall_ms": 0.000521,
+            "running_ms": 0.000521,
+            "runnable_ms": 0.0,
+            "blocked_ms": 0.0,
+            "covered_ms": 0.000521
+          },
+          "jl.fence_driver:detached-driver": {
+            "wall_ms": 0.000531,
+            "running_ms": 0.000531,
+            "runnable_ms": 0.0,
+            "blocked_ms": 0.0,
+            "covered_ms": 0.000531
+          },
+          "jl.output": {
+            "wall_ms": 0.074479,
+            "running_ms": 0.074479,
+            "runnable_ms": 0.0,
+            "blocked_ms": 0.0,
+            "covered_ms": 0.074479
+          },
+          "jl.hint": {
+            "wall_ms": 0.024411,
+            "running_ms": 0.024411,
+            "runnable_ms": 0.0,
+            "blocked_ms": 0.0,
+            "covered_ms": 0.024411
+          },
+          "jl.telemetry": {
+            "wall_ms": 0.011666,
+            "running_ms": 0.011666,
+            "runnable_ms": 0.0,
+            "blocked_ms": 0.0,
+            "covered_ms": 0.011666
+          },
+          "jl.send": {
+            "wall_ms": 0.098214,
+            "running_ms": 0.098214,
+            "runnable_ms": 0.0,
+            "blocked_ms": 0.0,
+            "covered_ms": 0.098214
+          }
+        },
+        {
+          "frame_id": 213,
+          "jl.metrics_status": [
+            0.0,
+            0.0
+          ],
+          "jl.async_actual": [
+            1.0
+          ],
+          "jl.fence_info_before_rc": [
+            0.0
+          ],
+          "jl.fence_before_status": [
+            0.0
+          ],
+          "jl.fence_count": [
+            1.0,
+            1.0
+          ],
+          "jl.fence_info_after_rc": [
+            0.0
+          ],
+          "jl.fence_after_status": [
+            1.0
+          ],
+          "jl.fence_clock_valid": [
+            1.0
+          ],
+          "jl.submit_to_signal_us": [
+            83834.0
+          ],
+          "jl.signal_to_return_us": [
+            22.0
+          ],
+          "jl.output_events": [
+            1.0
+          ],
+          "jl.hw_us": [
+            36163.0
+          ],
+          "jl.hw_executions": [
+            1.0
+          ],
+          "jl.request": {
+            "wall_ms": 84.814244,
+            "running_ms": 1.16375,
+            "runnable_ms": 0.00776,
+            "blocked_ms": 83.642734,
+            "covered_ms": 84.814244
+          },
+          "jl.host_lock": {
+            "wall_ms": 0.001302,
+            "running_ms": 0.001302,
+            "runnable_ms": 0.0,
+            "blocked_ms": 0.0,
+            "covered_ms": 0.001302
+          },
+          "jl.infer": {
+            "wall_ms": 84.539114,
+            "running_ms": 0.88862,
+            "runnable_ms": 0.00776,
+            "blocked_ms": 83.642734,
+            "covered_ms": 84.539114
+          },
+          "jl.queue": {
+            "wall_ms": 0.22315,
+            "running_ms": 0.22315,
+            "runnable_ms": 0.0,
+            "blocked_ms": 0.0,
+            "covered_ms": 0.22315
+          },
+          "jl.input": {
+            "wall_ms": 0.166416,
+            "running_ms": 0.166416,
+            "runnable_ms": 0.0,
+            "blocked_ms": 0.0,
+            "covered_ms": 0.166416
+          },
+          "jl.invoke": {
+            "wall_ms": 83.997785,
+            "running_ms": 0.347291,
+            "runnable_ms": 0.00776,
+            "blocked_ms": 83.642734,
+            "covered_ms": 83.997785
+          },
+          "jl.async_submit": {
+            "wall_ms": 0.167291,
+            "running_ms": 0.167291,
+            "runnable_ms": 0.0,
+            "blocked_ms": 0.0,
+            "covered_ms": 0.167291
+          },
+          "jl.output_wait": {
+            "wall_ms": 83.727291,
+            "running_ms": 0.076797,
+            "runnable_ms": 0.00776,
+            "blocked_ms": 83.642734,
+            "covered_ms": 83.727291
+          },
+          "jl.fence_driver:edgetpu": {
+            "wall_ms": 0.000494,
+            "running_ms": 0.000494,
+            "runnable_ms": 0.0,
+            "blocked_ms": 0.0,
+            "covered_ms": 0.000494
+          },
+          "jl.fence_driver:detached-driver": {
+            "wall_ms": 0.001041,
+            "running_ms": 0.001041,
+            "runnable_ms": 0.0,
+            "blocked_ms": 0.0,
+            "covered_ms": 0.001041
+          },
+          "jl.output": {
+            "wall_ms": 0.078151,
+            "running_ms": 0.078151,
+            "runnable_ms": 0.0,
+            "blocked_ms": 0.0,
+            "covered_ms": 0.078151
+          },
+          "jl.hint": {
+            "wall_ms": 0.027605,
+            "running_ms": 0.027605,
+            "runnable_ms": 0.0,
+            "blocked_ms": 0.0,
+            "covered_ms": 0.027605
+          },
+          "jl.telemetry": {
+            "wall_ms": 0.003151,
+            "running_ms": 0.003151,
+            "runnable_ms": 0.0,
+            "blocked_ms": 0.0,
+            "covered_ms": 0.003151
+          },
+          "jl.send": {
+            "wall_ms": 0.076485,
+            "running_ms": 0.076485,
+            "runnable_ms": 0.0,
+            "blocked_ms": 0.0,
+            "covered_ms": 0.076485
+          }
+        }
+      ],
+      "trace_sha256": "cac3603810e9d52e60a20310975feeb752d2846ca78e98a521ea820aeeceaae4"
+    },
+    "camera_correlation_only": {
+      "frames": 68.0,
+      "first_after_frame_200_ms": 206.860205,
+      "last_after_frame_200_ms": 2400.006714,
+      "trace_sha256": "5a01d9c2156f856bc1de8d3c9aeb1f021f0ea79e1e5e462b7e4bbacb88e97731",
+      "causality_established": false
+    }
+  },
+  "manifests": [
+    {
+      "batch": "controls",
+      "sha256": "03f1252a70c79c3e2d9a5944273fd0ca77fd1a3c389e80e82644172063c70a31",
+      "failures": [
+        "Non-timing failure; stopping experiment"
+      ],
+      "rollback": "original APK reinstalled and launched"
+    },
+    {
+      "batch": "controls-continuation",
+      "sha256": "d4b1095c0dc17b2343fc72f426271f17ade83795c4617d7258e47da2d5be8565",
+      "failures": [],
+      "rollback": "original APK reinstalled and launched"
+    }
+  ],
+  "interruption": {
+    "trial": 10,
+    "pair": 5,
+    "warmup_frames": 95,
+    "measured_frames": 0,
+    "resumed_only_unrun_suffix": true,
+    "posthoc_plan_sha256": "8505502caaca01e836dfcbb746ea2428466312546ff401bffdff1bb55142858e"
+  },
+  "trial_provenance": [
+    {
+      "run": 1,
+      "variant": "A",
+      "batch": "controls",
+      "result_sha256": "407880c29731031dd535f949155b266296440b822163e26b7f0e433afd5cada6",
+      "frames_sha256": "bf34fc6b379f4758a5ec38a7695ffd7e7cd4368735b0589face1b3deaca3514f"
+    },
+    {
+      "run": 2,
+      "variant": "B",
+      "batch": "controls",
+      "result_sha256": "290913ab894ac4e0d74fba17937889571160feb90217a2499bc9f088c09178b2",
+      "frames_sha256": "223d1afae8c51cc2b3cfad615963550789b80d4f935942d21a803abff6154e15"
+    },
+    {
+      "run": 3,
+      "variant": "B",
+      "batch": "controls",
+      "result_sha256": "4929826e98fa537f9a1442da1629b78981713d839e75f75fb1dc7b9d2f9c1884",
+      "frames_sha256": "317b7a33d100c813af4ede8ca748c6683fe4c3c9715a0531464270958e5b8fce"
+    },
+    {
+      "run": 4,
+      "variant": "A",
+      "batch": "controls",
+      "result_sha256": "549017619faa2cfa62ea3e4fdfda7e83c32db408224047959f67f4a8e3a94df4",
+      "frames_sha256": "219accd7ea5cd7610cebe7ce1498cc972e2e76e3494ba929074389bf6f3ac4ee"
+    },
+    {
+      "run": 5,
+      "variant": "A",
+      "batch": "controls",
+      "result_sha256": "c247f99310bb4518c312b61b31025751e90f26aba15dddbb89ca11e70ac4bfb5",
+      "frames_sha256": "d315798dd19a4a0477f0f6cc0fbbcae04df8be970c179e1f07ae34bdeace63fd"
+    },
+    {
+      "run": 6,
+      "variant": "B",
+      "batch": "controls",
+      "result_sha256": "9a2ca642592065d24065ea00cae18dc9dcf0f18ae6e6399f026baec1d4484d5d",
+      "frames_sha256": "00e32c86734131f5d2258e7416446d7cc589072dc82d1bfb42f63e1d91e5580a"
+    },
+    {
+      "run": 7,
+      "variant": "B",
+      "batch": "controls",
+      "result_sha256": "60cbb02c81584465fadc1ffdc58949198ddf6eeb82c88b69f3af673ab77b0fb5",
+      "frames_sha256": "b258b692f8ebf0e8494e0e1be28c3f72247363b15e5fd4dba26d40c91b5a905b"
+    },
+    {
+      "run": 8,
+      "variant": "A",
+      "batch": "controls",
+      "result_sha256": "6f23d6e07c47af29c84a0d5d831991690f29a1d4c5283d15c75545fb905854c2",
+      "frames_sha256": "02f336dfaf214bbbc65d8b45e0b0f878620bb7f89feb0d684f4493ecada6016e"
+    },
+    {
+      "run": 9,
+      "variant": "B",
+      "batch": "controls",
+      "result_sha256": "68b2b3ad30dab3069f155e3e7b8a2f737891026f23d99a5c88ee9d9060fe7233",
+      "frames_sha256": "38a913e0498b2286094476cc5cdb076929b10000c81d0a27060b6e047863becf"
+    },
+    {
+      "run": 10,
+      "variant": "A",
+      "batch": "controls",
+      "result_sha256": "12409253b76e747d2ca19f07156f32e7b2a5dcb7e69b6dd11038f877bdb54dbe",
+      "frames_sha256": "1fa387ae55e50956f04908ee5f1ca489a67b3075ee44e9b1366a6340600e2fa7"
+    },
+    {
+      "run": 11,
+      "variant": "B",
+      "batch": "controls-continuation",
+      "result_sha256": "86355a7b11cc2bd504847d507b4a4a238e5ed1e64897dc52c4d6e66f305daad2",
+      "frames_sha256": "26c68598691398a96ce24713e27ee8216ba06ea73f2cd180db5e2ff22b9fa194"
+    },
+    {
+      "run": 12,
+      "variant": "A",
+      "batch": "controls-continuation",
+      "result_sha256": "60d0dc4ba07e5fab587e3c33883ea47338c4ef764432f5125699e779bd87e8c3",
+      "frames_sha256": "86006d6fe0f6d5f86a4b54b648277446d4146ac26b4c499fc2e52b36b7fe03b6"
+    },
+    {
+      "run": 13,
+      "variant": "A",
+      "batch": "controls-continuation",
+      "result_sha256": "43051575fecd2d36d15313f95fdb557ce0323e9f255c71af91a0eb24e9711273",
+      "frames_sha256": "44c7b06353b9e8687c00e7323585a1486d6567b111616f349dbd27f6cc7ae95c"
+    },
+    {
+      "run": 14,
+      "variant": "B",
+      "batch": "controls-continuation",
+      "result_sha256": "2ab7fd2cb3e69040608f939510805900f17aa71324f57dbd09a0c666a08df367",
+      "frames_sha256": "bab85866d688d69776600bbfe5b69f5231d664ded4eaac2c61ef4f19efad52fb"
+    },
+    {
+      "run": 15,
+      "variant": "A",
+      "batch": "controls-continuation",
+      "result_sha256": "27d70668598b9a2dfa9137ac2983f44f7e73ed0414e9ebada5c36d32c98f432d",
+      "frames_sha256": "14fe4aa4a79b746ed38f7d7a8a7406a9c744ac074b4405e34d306df036e3c45e"
+    },
+    {
+      "run": 16,
+      "variant": "B",
+      "batch": "controls-continuation",
+      "result_sha256": "307366a3210fe7abe37e19757ebac620be0d9435495c0ad3d15f22f9540e18f1",
+      "frames_sha256": "774b8251593759a159e6be566ff734a09fa26fd571911b6230431594f2422bec"
+    },
+    {
+      "run": 17,
+      "variant": "A",
+      "batch": "controls-continuation",
+      "result_sha256": "59ef09893727f27bb95064f6a1760a383d3fe60b3b6123db184844d89017bbf8",
+      "frames_sha256": "6516de1cf4bb3a51f39f2c8db03906acb5ec94a7fff3904cad67362aebff710c"
+    },
+    {
+      "run": 18,
+      "variant": "B",
+      "batch": "controls-continuation",
+      "result_sha256": "b32ce2ebe18f6a516e98d254c0fb6bf111360f9a3c46b9d48125dcb2a3c7e7de",
+      "frames_sha256": "a1de75a6fb914821c67e320978558ee0645cb282a64099dcf79b12bfa03c8f5d"
+    },
+    {
+      "run": 19,
+      "variant": "A",
+      "batch": "controls-continuation",
+      "result_sha256": "e99dc82a70dce2c3b9cc453f663057717d8a092a3256ff6d7d25dec9c18993ce",
+      "frames_sha256": "6c485645e9ff0e19cedfb90180e4215b49fc5166181fb9408248bb4acd7aef65"
+    },
+    {
+      "run": 20,
+      "variant": "B",
+      "batch": "controls-continuation",
+      "result_sha256": "720b5a27df5728976e6982cdd3761599a51b20f6f0a3f50ef19fda19ca70235e",
+      "frames_sha256": "9eb81dcf4ab9b05a48d9c3fb6b9436b9716fb313bce4c28ee9f8d1b1ec585456"
+    },
+    {
+      "run": 21,
+      "variant": "B",
+      "batch": "controls-continuation",
+      "result_sha256": "5199947ad0f7667a0500ca19244c10c1aeeb85ef3f11d3f1c2eff631f083d001",
+      "frames_sha256": "536d07ef1cbdec87af13f492941986f213a2f707d318c8972fc8946faffe9d33"
+    },
+    {
+      "run": 22,
+      "variant": "A",
+      "batch": "controls-continuation",
+      "result_sha256": "a498704b09fb81689c6f49f9243fb878aa11c631c6662761c5ed569d2cd62260",
+      "frames_sha256": "053f110d4c96d73ced29f9c87c34d42f4de6770985fec993f6e195973b4ba167"
+    },
+    {
+      "run": 23,
+      "variant": "B",
+      "batch": "controls-continuation",
+      "result_sha256": "78e28cf9c05449f88a5f14dcf9792d8e477acda7c44cdb589b62ba934741a875",
+      "frames_sha256": "6d340fbab9f5d4ae13ef3b0706fcbca973e8926ae0c80f15943146a430d7e4c1"
+    },
+    {
+      "run": 24,
+      "variant": "A",
+      "batch": "controls-continuation",
+      "result_sha256": "3a6f703f36db91b1fc46b265a3d73e843aa835dff028ad7c97d9fc4e09dee4e4",
+      "frames_sha256": "59f347b88057395760adf0289b294133d91e1b6c2a7e88af55b3daef6aba227c"
+    }
+  ],
+  "cleanup": {
+    "status": "complete",
+    "version": "0.8.5-clarity-tensor.9",
+    "installed_apk_sha256": "b3b69287a6bb2a9209a604003937435c2ce1715329881eb66154afbef8a0f07d",
+    "adb_forwards_empty": true,
+    "developer_listener_disabled": true,
+    "port_5599_closed": true,
+    "selected_model": "Cinque Terre Model V2",
+    "status_screen_restored": true,
+    "owned_remote_ui_file_removed": true,
+    "face_unlock_settings_changed": false
+  }
+}

@@ -1,0 +1,21 @@
+diff --git a/JetlinkKit/Sources/CLiteRt/wake_async.inc b/JetlinkKit/Sources/CLiteRt/wake_async.inc
+--- a/JetlinkKit/Sources/CLiteRt/wake_async.inc
++++ b/JetlinkKit/Sources/CLiteRt/wake_async.inc
+@@ -1,4 +1,4 @@
+-#define JL_WAKE_DEADLINE 0
++#define JL_WAKE_DEADLINE 1
+ #include <linux/sync_file.h>
+ #include <sys/ioctl.h>
+ #include <errno.h>
+diff --git a/android/app/build.gradle.kts b/android/app/build.gradle.kts
+--- a/android/app/build.gradle.kts
++++ b/android/app/build.gradle.kts
+@@ -35,7 +35,7 @@
+         minSdk = 31
+         targetSdk = 36
+         versionCode = jetlinkVersionCode * 100 + 9
+-        versionName = jetlinkVersion + "-clarity-tensor.9-wake-deadline0"
++        versionName = jetlinkVersion + "-clarity-tensor.9-wake-deadline1"
+         // The QNN runtime is arm64 only, and so is every Snapdragon with an NPU
+         // worth driving on. The emulator on an Apple silicon Mac is arm64 too.
+         ndk { abiFilters += "arm64-v8a" }

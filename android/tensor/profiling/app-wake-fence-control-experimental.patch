@@ -1,0 +1,109 @@
+diff --git a/JetlinkKit/Sources/CLiteRt/wake_async.inc b/JetlinkKit/Sources/CLiteRt/wake_async.inc
+--- a/JetlinkKit/Sources/CLiteRt/wake_async.inc
++++ b/JetlinkKit/Sources/CLiteRt/wake_async.inc
+@@ -1,3 +1,7 @@
++#define JL_WAKE_DEADLINE 0
++#include <linux/sync_file.h>
++#include <sys/ioctl.h>
++#include <errno.h>
+ // Desk experiment only: retain a synchronous bridge contract in both variants.
+ // Public C ABI from google-ai-edge/LiteRT litert/c/litert_event.h:
+ // LiteRtStatus LiteRtWaitEvent(LiteRtEvent event, int64_t timeout_in_ms);
+@@ -8,6 +12,7 @@
+   __typeof__(&LiteRtGetTensorBufferEvent) event;
+   __typeof__(&LiteRtClearTensorBufferEvent) clear;
+   LiteRtStatus (*wait)(LiteRtEvent, int64_t);
++  LiteRtStatus (*get_fd)(LiteRtEvent, int *);
+ } wake_async_api;
+ static pthread_once_t wake_async_once = PTHREAD_ONCE_INIT;
+ static void wake_async_init(void) {
+@@ -19,6 +24,7 @@
+   wake_async_api.event = dlsym(lib, "LiteRtGetTensorBufferEvent");
+   wake_async_api.clear = dlsym(lib, "LiteRtClearTensorBufferEvent");
+   wake_async_api.wait = dlsym(lib, "LiteRtWaitEvent");
++  wake_async_api.get_fd = dlsym(lib, "LiteRtGetEventSyncFenceFd");
+ }
+ static bool wake_section(const char *name) {
+ #ifdef __ANDROID__
+@@ -42,6 +48,37 @@
+   (void)name; (void)value;
+ #endif
+ }
++// Read-only diagnostics on this inference's borrowed output fence only.
++static int64_t fence_clock(void) {
++  struct timespec ts;
++  if (clock_gettime(CLOCK_MONOTONIC,&ts)!=0) return 0;
++  return (int64_t)ts.tv_sec*1000000000LL+ts.tv_nsec;
++}
++static void fence_info(int fd,int64_t submit,int64_t returned) {
++  struct sync_fence_info detail[4]={0};
++  struct sync_file_info info={0};
++  info.num_fences=4;
++  info.sync_fence_info=(uint64_t)(uintptr_t)detail;
++  int rc=fd>=0 ? ioctl(fd,SYNC_IOC_FILE_INFO,&info) : -1;
++  wake_counter(returned ? "jl.fence_info_after_rc" : "jl.fence_info_before_rc",rc==0 ? 0 : -errno);
++  if (rc!=0) return;
++  wake_counter(returned ? "jl.fence_after_status" : "jl.fence_before_status",info.status);
++  wake_counter("jl.fence_count",info.num_fences);
++  if (info.num_fences!=1) return; // Missing/compound data is not assumed zero.
++  char label[100];
++  snprintf(label,sizeof(label),"jl.fence_driver:%.*s",32,detail[0].driver_name);
++  bool section=wake_section(label);wake_end(section);
++  if (returned) {
++    int64_t signal=(int64_t)detail[0].timestamp_ns;
++    bool valid=detail[0].status==1 && signal>=submit && signal<=returned;
++    wake_counter("jl.fence_clock_valid",valid ? 1 : 0);
++    if (valid) {
++      wake_counter("jl.submit_to_signal_us",(signal-submit)/1000);
++      wake_counter("jl.signal_to_return_us",(returned-signal)/1000);
++    }
++  }
++}
++
+ char *jl_litert_run(jl_litert_model *model, jl_litert_buffer *const *inputs, size_t n_inputs,
+                     jl_litert_buffer *const *outputs, size_t n_outputs) {
+   pthread_once(&wake_async_once,wake_async_init);
+@@ -59,6 +96,7 @@
+     call="missing async experiment API";
+   } else {
+     bool async=false;
++    int64_t submit_start=fence_clock();
+     bool section=wake_section("jl.async_submit");
+     status=wake_async_api.run(model->compiled,0,n_inputs,
+         (LiteRtTensorBuffer *)inputs,n_outputs,(LiteRtTensorBuffer *)outputs,&async);
+@@ -76,7 +114,23 @@
+         LiteRtStatus s=wake_async_api.event((LiteRtTensorBuffer)outputs[i],&event);
+         if (s==kLiteRtStatusOk && event) {
+           ++events;
++          bool probe=wake_api.enabled && wake_api.enabled();
++          int fd=-1;
++          if (wake_async_api.get_fd) wake_async_api.get_fd(event,&fd);
++          if (JL_WAKE_DEADLINE) {
++            // Advisory public kernel hint on this run's borrowed fence. This
++            // neither changes the wait timeout nor bypasses the timing guard.
++            struct sync_set_deadline hint={0};
++            hint.deadline_ns=(uint64_t)(submit_start+50000000LL);
++            int rc=fd>=0 ? ioctl(fd,SYNC_IOC_SET_DEADLINE,&hint) : -1;
++            int error=fd>=0 ? errno : EBADF;
++            wake_counter("jl.deadline_rc",rc==0 ? 0 : -error);
++          }
++          wake_counter("jl.deadline_enabled",JL_WAKE_DEADLINE);
++          if (probe) fence_info(fd,submit_start,0);
+           s=wake_async_api.wait(event,-1);
++          int64_t wait_return=fence_clock();
++          if (probe) fence_info(fd,submit_start,wait_return);
+           if (s==kLiteRtStatusOk) s=wake_async_api.clear((LiteRtTensorBuffer)outputs[i]);
+         }
+         // Drain every available output even if another output failed.
+diff --git a/android/app/build.gradle.kts b/android/app/build.gradle.kts
+--- a/android/app/build.gradle.kts
++++ b/android/app/build.gradle.kts
+@@ -35,7 +35,7 @@
+         minSdk = 31
+         targetSdk = 36
+         versionCode = jetlinkVersionCode * 100 + 9
+-        versionName = jetlinkVersion + "-clarity-tensor.9-wake-async1"
++        versionName = jetlinkVersion + "-clarity-tensor.9-wake-deadline0"
+         // The QNN runtime is arm64 only, and so is every Snapdragon with an NPU
+         // worth driving on. The emulator on an Apple silicon Mac is arm64 too.
+         ndk { abiFilters += "arm64-v8a" }

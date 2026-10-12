@@ -5,7 +5,7 @@ pre-wake and 100-frame wake window. A timing stop ends that trial; the next
 predeclared trial starts a fresh app/session after a health check and cooldown.
 An early stop censors its window and must never be reported as a complete pass.
 """
-import argparse, datetime, json, os, pathlib, re, subprocess, sys, time, uuid
+import argparse, datetime, hashlib, json, os, pathlib, re, subprocess, sys, time, uuid
 from paired_app import health, sha, PACKAGE, ACTIVITY
 
 ROOT=pathlib.Path(__file__).resolve().parent
@@ -17,9 +17,11 @@ def stopped_before_wake(row):
     return (bool(row['failures']) and all(f in TIMING_STOPS for f in row['failures'])
             and 0 < row['measured_frames'] <= 100 and not row.get('wake_stimulus'))
 
-def validate_continuation(previous, order, hashes, rollback_hash, traced, saved_results):
+def validate_continuation(previous, order, hashes, rollback_hash, traced, saved_results, trace_hash=None):
     if saved_results!={r['result'] for r in previous['runs']}:
         raise ValueError('Saved results differ from manifest; reconcile orphaned trials before continuing')
+    if previous.get('trace_config_sha256')!=trace_hash:
+        raise ValueError('Continuation trace configuration differs or is unrecorded')
     completed=len(previous['runs'])
     if (not previous['failures'] or not 0 < completed < len(previous['order'])
             or ''.join(r['variant'] for r in previous['runs'])!=previous['order'][:completed]
@@ -41,7 +43,11 @@ def main():
     p.add_argument('--control-label',default='burst 5')
     p.add_argument('--candidate-label',default='high performance 3')
     p.add_argument('--trace',action='store_true',help='Diagnostic only; exclude traced runs from latency comparison')
+    p.add_argument('--trace-config',type=pathlib.Path,help='Explicit diagnostic trace config; requires --trace')
     a=p.parse_args()
+    if a.trace_config and (not a.trace or not a.trace_config.is_file()):p.error('--trace-config requires --trace and an existing file')
+    trace_text=(a.trace_config or ROOT/'app-scheduler.pbtxt').read_text().replace('120000','35000') if a.trace else None
+    trace_hash=hashlib.sha256(trace_text.encode()).hexdigest() if trace_text is not None else None
     if not re.fullmatch(r'[AB]{1,32}' if a.continuation_of else r'(?:AB|BA){1,16}',a.order):p.error('Expected complete AB/BA pairs or an explicit interrupted continuation')
     if sha(a.rollback_apk)!=a.rollback_sha256:p.error('Rollback hash mismatch')
     if not re.fullmatch(r'[0-9a-f]{64}',a.source_sha256) or a.source_bytes<=0:p.error('Invalid source identity')
@@ -51,7 +57,7 @@ def main():
     if a.continuation_of:
         previous=json.loads(a.continuation_of.read_text())
         saved={path.name for path in a.continuation_of.parent.glob('[0-9][0-9]-[AB].json')}
-        try:completed=validate_continuation(previous,a.order,hashes,a.rollback_sha256,a.trace,saved)
+        try:completed=validate_continuation(previous,a.order,hashes,a.rollback_sha256,a.trace,saved,trace_hash)
         except ValueError as error:p.error(str(error))
         if (previous['variant_A'],previous['variant_B'])!=(a.control_label,a.candidate_label):p.error('Continuation labels differ')
         continuation={'parent_manifest_sha256':sha(a.continuation_of),'completed_in_parent':completed,'remaining_order':a.order}
@@ -61,7 +67,7 @@ def main():
     remote_prefix='jetlink-wake-'+uuid.uuid4().hex[:12]
     manifest={'created_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),
         'order':a.order,'variant_A':a.control_label,'variant_B':a.candidate_label,
-        'apk_sha256':hashes,'rollback_sha256':a.rollback_sha256,'traced':a.trace,
+        'apk_sha256':hashes,'rollback_sha256':a.rollback_sha256,'traced':a.trace,'trace_config_sha256':trace_hash,
         'warmup_frames':100,'baseline_frames':100,'wake_frame':200,'wake_window_frames':100,
         'primary':'mean phone latency in fixed frame IDs 200..299; incomplete windows are censored',
         'secondary':['wake maximum','wake p95','frames >50 ms','timing stops','baseline mean'],
@@ -87,7 +93,7 @@ def main():
             trace=None
             if a.trace:
                 config=a.output/(name+'.pbtxt')
-                config.write_text((ROOT/'app-scheduler.pbtxt').read_text().replace('120000','35000'))
+                config.write_text(trace_text)
                 remote=f'/data/local/tmp/{remote_prefix}-{name}.pbtxt'
                 trace=f'/data/misc/perfetto-traces/{remote_prefix}-{name}.pftrace'
                 adb('push',str(config),remote)

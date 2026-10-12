@@ -85,4 +85,12 @@ class WakeRunnerTests(unittest.TestCase):
             with self.subTest(saved=saved),self.assertRaisesRegex(ValueError,'reconcile orphaned trials'):
                 wake_app.validate_continuation(previous,'BBA',{'A':'a','B':'b'},'r',False,saved)
 
+    def test_continuation_preserves_exact_diagnostic_configuration(self):
+        previous={'order':'ABBA','runs':[{'variant':'A','result':'01-A.json'}],'failures':['health query failed'],
+                  'apk_sha256':{'A':'a','B':'b'},'rollback_sha256':'r','traced':True,'trace_config_sha256':'one'}
+        self.assertEqual(wake_app.validate_continuation(previous,'BBA',{'A':'a','B':'b'},'r',True,{'01-A.json'},'one'),1)
+        for config in ('two',None):
+            with self.subTest(config=config),self.assertRaisesRegex(ValueError,'trace configuration'):
+                wake_app.validate_continuation(previous,'BBA',{'A':'a','B':'b'},'r',True,{'01-A.json'},config)
+
 if __name__=='__main__':unittest.main()

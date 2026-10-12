@@ -1,0 +1,34 @@
+buffers { size_kb: 131072 fill_policy: DISCARD }
+duration_ms: 35000
+data_sources {
+  config {
+    name: "linux.ftrace"
+    ftrace_config {
+      ftrace_events: "sched/sched_switch"
+      ftrace_events: "sched/sched_waking"
+      ftrace_events: "power/cpu_frequency"
+      ftrace_events: "task/task_newtask"
+      ftrace_events: "task/task_rename"
+      atrace_categories: "sync"
+      atrace_categories: "camera"
+      atrace_categories: "nnapi"
+      atrace_apps: "io.zoompilot.jetlink.android"
+    }
+  }
+}
+data_sources {
+  config {
+    name: "track_event"
+    track_event_config {
+      disabled_categories: "*"
+      enabled_categories: "DarwiNNRuntime"
+      enabled_categories: "edgetpu_fences"
+    }
+  }
+}
+data_sources {
+  config {
+    name: "linux.process_stats"
+    process_stats_config { scan_all_processes_on_start: true }
+  }
+}
