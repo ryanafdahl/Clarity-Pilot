@@ -1,0 +1,847 @@
+{
+  "date": "2026-10-17",
+  "scope": "Readable retained full-rate logs; earliest session has a missing prefix. Private route identifiers and location data excluded.",
+  "qlog_segments": 246,
+  "full_rate_segments": 246,
+  "sessions": [
+    {
+      "session": 1,
+      "segments": 17,
+      "model_outputs": {
+        "large": 19553
+      },
+      "large_execution_ms": {
+        "n": 19553,
+        "min": 21.911470219492912,
+        "mean": 22.97324008781657,
+        "median": 22.680453956127167,
+        "p95": 24.887511506676674,
+        "p99": 26.19626745581627,
+        "max": 32.167308032512665,
+        "over_50": 0
+      },
+      "large_camera_to_publication_ms": {
+        "n": 19553,
+        "min": 46.688132,
+        "mean": 48.06491563483864,
+        "median": 47.764865,
+        "p95": 50.00312,
+        "p99": 51.284586,
+        "max": 57.427756,
+        "over_50": 985
+      },
+      "large_frame_id_delta": {
+        "n": 19552,
+        "min": 1,
+        "mean": 1.0,
+        "median": 1.0,
+        "p95": 1,
+        "p99": 1,
+        "max": 1,
+        "over_50": 0
+      },
+      "large_drop_percent": {
+        "n": 19553,
+        "min": 0.0,
+        "mean": 0.0,
+        "median": 0.0,
+        "p95": 0.0,
+        "p99": 0.0,
+        "max": 0.0,
+        "over_50": 0
+      },
+      "transitions": [
+        {
+          "seconds": 3001.109,
+          "mode": "large"
+        }
+      ],
+      "peer": [],
+      "startup_retries": [],
+      "events": {
+        "gasPressedOverride": 389,
+        "steerOverride": 245,
+        "preLaneChangeLeft": 2,
+        "laneChange": 25,
+        "driverUnresponsive1": 7,
+        "preLaneChangeRight": 2,
+        "wrongGear": 28,
+        "preEnableStandstill": 9,
+        "seatbeltNotLatched": 17,
+        "doorOpen": 3
+      },
+      "missing_expected_process_samples": 0,
+      "parser_errors": []
+    },
+    {
+      "session": 2,
+      "segments": 1,
+      "model_outputs": {
+        "small": 311,
+        "large": 135
+      },
+      "large_execution_ms": {
+        "n": 135,
+        "min": 22.323742508888245,
+        "mean": 23.171211199627983,
+        "median": 22.611433640122414,
+        "p95": 24.58418719470501,
+        "p99": 26.65688283741474,
+        "max": 44.679876416921616,
+        "over_50": 0
+      },
+      "large_camera_to_publication_ms": {
+        "n": 135,
+        "min": 47.294838,
+        "mean": 48.34190228148148,
+        "median": 47.782572,
+        "p95": 49.987759,
+        "p99": 52.089776,
+        "max": 69.768362,
+        "over_50": 6
+      },
+      "large_frame_id_delta": {
+        "n": 134,
+        "min": 1,
+        "mean": 1.0,
+        "median": 1.0,
+        "p95": 1,
+        "p99": 1,
+        "max": 1,
+        "over_50": 0
+      },
+      "large_drop_percent": {
+        "n": 135,
+        "min": 0.0,
+        "mean": 0.0,
+        "median": 0.0,
+        "p95": 0.0,
+        "p99": 0.0,
+        "max": 0.0,
+        "over_50": 0
+      },
+      "transitions": [
+        {
+          "seconds": 10.864,
+          "mode": "small"
+        },
+        {
+          "seconds": 26.416,
+          "mode": "large"
+        }
+      ],
+      "peer": [
+        "NVIDIA Orin-sm87 / TensorRT 10.16.2.10"
+      ],
+      "startup_retries": [
+        {
+          "seconds": 18.068,
+          "message": "jetlink: not joined yet (gadget read failed: [Errno 19] No such device (udc: default)), retrying in 5s"
+        }
+      ],
+      "events": {
+        "selfdriveInitializing": 7,
+        "wrongGear": 66,
+        "seatbeltNotLatched": 93,
+        "reverseGear": 46,
+        "steerOverride": 48,
+        "bigModelLoading": 6,
+        "preEnableStandstill": 17,
+        "gasPressedOverride": 12
+      },
+      "missing_expected_process_samples": 0,
+      "parser_errors": []
+    },
+    {
+      "session": 3,
+      "segments": 3,
+      "model_outputs": {
+        "small": 320,
+        "large": 2605
+      },
+      "large_execution_ms": {
+        "n": 2605,
+        "min": 21.93867228925228,
+        "mean": 23.819498088561183,
+        "median": 23.70869554579258,
+        "p95": 25.97910352051258,
+        "p99": 26.865465566515923,
+        "max": 35.693053156137466,
+        "over_50": 0
+      },
+      "large_camera_to_publication_ms": {
+        "n": 2605,
+        "min": 46.988594,
+        "mean": 49.065785835316696,
+        "median": 48.959803,
+        "p95": 51.069178,
+        "p99": 52.134593,
+        "max": 60.947175,
+        "over_50": 806
+      },
+      "large_frame_id_delta": {
+        "n": 2604,
+        "min": 1,
+        "mean": 1.0,
+        "median": 1.0,
+        "p95": 1,
+        "p99": 1,
+        "max": 1,
+        "over_50": 0
+      },
+      "large_drop_percent": {
+        "n": 2605,
+        "min": 0.0,
+        "mean": 0.0,
+        "median": 0.0,
+        "p95": 0.0,
+        "p99": 0.0,
+        "max": 0.0,
+        "over_50": 0
+      },
+      "transitions": [
+        {
+          "seconds": 11.544,
+          "mode": "small"
+        },
+        {
+          "seconds": 27.528,
+          "mode": "large"
+        }
+      ],
+      "peer": [
+        "NVIDIA Orin-sm87 / TensorRT 10.16.2.10"
+      ],
+      "startup_retries": [
+        {
+          "seconds": 19.469,
+          "message": "jetlink: not joined yet (gadget read failed: [Errno 19] No such device (udc: default)), retrying in 5s"
+        }
+      ],
+      "events": {
+        "selfdriveInitializing": 7,
+        "wrongGear": 34,
+        "seatbeltNotLatched": 27,
+        "bigModelLoading": 5,
+        "preEnableStandstill": 7,
+        "steerOverride": 66,
+        "gasPressedOverride": 73,
+        "preLaneChangeLeft": 2,
+        "laneChange": 6
+      },
+      "missing_expected_process_samples": 0,
+      "parser_errors": []
+    },
+    {
+      "session": 4,
+      "segments": 24,
+      "model_outputs": {
+        "small": 354,
+        "large": 28021
+      },
+      "large_execution_ms": {
+        "n": 28021,
+        "min": 21.844474598765373,
+        "mean": 22.686024559555722,
+        "median": 22.588400170207024,
+        "p95": 24.1395216435194,
+        "p99": 25.062447413802147,
+        "max": 32.06042945384979,
+        "over_50": 0
+      },
+      "large_camera_to_publication_ms": {
+        "n": 28021,
+        "min": 46.771546,
+        "mean": 47.88092076071518,
+        "median": 47.719736,
+        "p95": 49.371433,
+        "p99": 50.312274,
+        "max": 60.568898,
+        "over_50": 422
+      },
+      "large_frame_id_delta": {
+        "n": 28020,
+        "min": 1,
+        "mean": 1.0,
+        "median": 1.0,
+        "p95": 1,
+        "p99": 1,
+        "max": 1,
+        "over_50": 0
+      },
+      "large_drop_percent": {
+        "n": 28021,
+        "min": 0.0,
+        "mean": 0.0,
+        "median": 0.0,
+        "p95": 0.0,
+        "p99": 0.0,
+        "max": 0.0,
+        "over_50": 0
+      },
+      "transitions": [
+        {
+          "seconds": 9.131,
+          "mode": "small"
+        },
+        {
+          "seconds": 26.808,
+          "mode": "large"
+        }
+      ],
+      "peer": [
+        "NVIDIA Orin-sm87 / TensorRT 10.16.2.10"
+      ],
+      "startup_retries": [
+        {
+          "seconds": 18.184,
+          "message": "jetlink: not joined yet (gadget read failed: [Errno 19] No such device (udc: default)), retrying in 5s"
+        }
+      ],
+      "events": {
+        "selfdriveInitializing": 7,
+        "wrongGear": 6,
+        "bigModelLoading": 4,
+        "preEnableStandstill": 373,
+        "gasPressedOverride": 743,
+        "steerOverride": 506,
+        "preLaneChangeLeft": 8,
+        "laneChange": 169,
+        "stockFcw": 5,
+        "preLaneChangeRight": 18,
+        "driverDistracted1": 6,
+        "driverDistracted2": 5,
+        "steerSaturated": 1,
+        "seatbeltNotLatched": 57
+      },
+      "missing_expected_process_samples": 0,
+      "parser_errors": []
+    },
+    {
+      "session": 5,
+      "segments": 44,
+      "model_outputs": {
+        "small": 352,
+        "large": 51644
+      },
+      "large_execution_ms": {
+        "n": 51644,
+        "min": 21.845052018761635,
+        "mean": 22.896002104579328,
+        "median": 22.665690630674362,
+        "p95": 24.73866380751133,
+        "p99": 26.166772469878197,
+        "max": 32.721251249313354,
+        "over_50": 0
+      },
+      "large_camera_to_publication_ms": {
+        "n": 51644,
+        "min": 46.777559,
+        "mean": 48.13715371849585,
+        "median": 47.8753705,
+        "p95": 49.996519,
+        "p99": 51.377183,
+        "max": 57.608708,
+        "over_50": 2573
+      },
+      "large_frame_id_delta": {
+        "n": 51643,
+        "min": 1,
+        "mean": 1.0,
+        "median": 1,
+        "p95": 1,
+        "p99": 1,
+        "max": 1,
+        "over_50": 0
+      },
+      "large_drop_percent": {
+        "n": 51644,
+        "min": 0.0,
+        "mean": 0.0,
+        "median": 0.0,
+        "p95": 0.0,
+        "p99": 0.0,
+        "max": 0.0,
+        "over_50": 0
+      },
+      "transitions": [
+        {
+          "seconds": 9.327,
+          "mode": "small"
+        },
+        {
+          "seconds": 26.934,
+          "mode": "large"
+        }
+      ],
+      "peer": [
+        "NVIDIA Orin-sm87 / TensorRT 10.16.2.10"
+      ],
+      "startup_retries": [
+        {
+          "seconds": 19.421,
+          "message": "jetlink: not joined yet (only 0 of 32 bytes arrived in time), retrying in 5s"
+        }
+      ],
+      "events": {
+        "selfdriveInitializing": 7,
+        "wrongGear": 34,
+        "bigModelLoading": 4,
+        "preEnableStandstill": 89,
+        "steerOverride": 299,
+        "gasPressedOverride": 642,
+        "preLaneChangeLeft": 5,
+        "laneChange": 61,
+        "fcw": 1,
+        "stockFcw": 5,
+        "driverUnresponsive1": 1,
+        "preLaneChangeRight": 3
+      },
+      "missing_expected_process_samples": 0,
+      "parser_errors": []
+    },
+    {
+      "session": 6,
+      "segments": 2,
+      "model_outputs": {
+        "small": 318,
+        "large": 1314
+      },
+      "large_execution_ms": {
+        "n": 1314,
+        "min": 22.155245766043663,
+        "mean": 22.891521629632155,
+        "median": 22.61814009398222,
+        "p95": 24.237751960754395,
+        "p99": 26.996733620762825,
+        "max": 37.82481327652931,
+        "over_50": 0
+      },
+      "large_camera_to_publication_ms": {
+        "n": 1314,
+        "min": 47.106501,
+        "mean": 48.01662875266362,
+        "median": 47.716654500000004,
+        "p95": 49.611641,
+        "p99": 52.161573,
+        "max": 62.668154,
+        "over_50": 40
+      },
+      "large_frame_id_delta": {
+        "n": 1313,
+        "min": 1,
+        "mean": 1.0,
+        "median": 1,
+        "p95": 1,
+        "p99": 1,
+        "max": 1,
+        "over_50": 0
+      },
+      "large_drop_percent": {
+        "n": 1314,
+        "min": 0.0,
+        "mean": 0.0,
+        "median": 0.0,
+        "p95": 0.0,
+        "p99": 0.0,
+        "max": 0.0,
+        "over_50": 0
+      },
+      "transitions": [
+        {
+          "seconds": 10.204,
+          "mode": "small"
+        },
+        {
+          "seconds": 26.086,
+          "mode": "large"
+        }
+      ],
+      "peer": [
+        "NVIDIA Orin-sm87 / TensorRT 10.16.2.10"
+      ],
+      "startup_retries": [
+        {
+          "seconds": 18.098,
+          "message": "jetlink: not joined yet (gadget read failed: [Errno 19] No such device (udc: default)), retrying in 5s"
+        }
+      ],
+      "events": {
+        "selfdriveInitializing": 7,
+        "wrongGear": 6,
+        "reverseGear": 6,
+        "steerOverride": 97,
+        "steerTempUnavailableSilent": 1,
+        "bigModelLoading": 8,
+        "preEnableStandstill": 27,
+        "gasPressedOverride": 61,
+        "locationdTemporaryError": 160
+      },
+      "missing_expected_process_samples": 0,
+      "parser_errors": []
+    },
+    {
+      "session": 7,
+      "segments": 37,
+      "model_outputs": {
+        "small": 3,
+        "large": 43032
+      },
+      "large_execution_ms": {
+        "n": 43032,
+        "min": 3.2478130888193846,
+        "mean": 22.870048780604698,
+        "median": 22.686561569571495,
+        "p95": 24.434177204966545,
+        "p99": 25.37989616394043,
+        "max": 55.48390746116638,
+        "over_50": 1
+      },
+      "large_camera_to_publication_ms": {
+        "n": 43032,
+        "min": 28.567188,
+        "mean": 47.7873317007111,
+        "median": 47.582634,
+        "p95": 49.417953,
+        "p99": 50.361635,
+        "max": 80.269635,
+        "over_50": 682
+      },
+      "large_frame_id_delta": {
+        "n": 43031,
+        "min": 1,
+        "mean": 1.0,
+        "median": 1,
+        "p95": 1,
+        "p99": 1,
+        "max": 1,
+        "over_50": 0
+      },
+      "large_drop_percent": {
+        "n": 43032,
+        "min": 0.0,
+        "mean": 0.0,
+        "median": 0.0,
+        "p95": 0.0,
+        "p99": 0.0,
+        "max": 0.0,
+        "over_50": 0
+      },
+      "transitions": [
+        {
+          "seconds": 14.601,
+          "mode": "small"
+        },
+        {
+          "seconds": 14.771,
+          "mode": "large"
+        }
+      ],
+      "peer": [
+        "NVIDIA Orin-sm87 / TensorRT 10.16.2.10"
+      ],
+      "startup_retries": [],
+      "events": {
+        "selfdriveInitializing": 7,
+        "bigModelLoading": 11,
+        "controlsMismatch": 4,
+        "steerOverride": 578,
+        "gasPressedOverride": 857,
+        "stockFcw": 4,
+        "preLaneChangeRight": 1,
+        "laneChange": 13,
+        "preLaneChangeLeft": 1
+      },
+      "missing_expected_process_samples": 0,
+      "parser_errors": []
+    },
+    {
+      "session": 8,
+      "segments": 117,
+      "model_outputs": {
+        "small": 323,
+        "large": 139163
+      },
+      "large_execution_ms": {
+        "n": 139163,
+        "min": 21.841317415237427,
+        "mean": 22.87724113712164,
+        "median": 22.66046777367592,
+        "p95": 24.593239650130272,
+        "p99": 25.846390053629875,
+        "max": 41.354138404130936,
+        "over_50": 0
+      },
+      "large_camera_to_publication_ms": {
+        "n": 139163,
+        "min": 46.372609,
+        "mean": 47.78289726738429,
+        "median": 47.546596,
+        "p95": 49.547179,
+        "p99": 50.767153,
+        "max": 66.13574,
+        "over_50": 3340
+      },
+      "large_frame_id_delta": {
+        "n": 139162,
+        "min": 1,
+        "mean": 1.0,
+        "median": 1.0,
+        "p95": 1,
+        "p99": 1,
+        "max": 1,
+        "over_50": 0
+      },
+      "large_drop_percent": {
+        "n": 139163,
+        "min": 0.0,
+        "mean": 0.0,
+        "median": 0.0,
+        "p95": 0.0,
+        "p99": 0.0,
+        "max": 0.0,
+        "over_50": 0
+      },
+      "transitions": [
+        {
+          "seconds": 10.023,
+          "mode": "small"
+        },
+        {
+          "seconds": 26.198,
+          "mode": "large"
+        }
+      ],
+      "peer": [
+        "NVIDIA Orin-sm87 / TensorRT 10.16.2.10"
+      ],
+      "startup_retries": [
+        {
+          "seconds": 18.853,
+          "message": "jetlink: not joined yet (gadget read failed: [Errno 19] No such device (udc: default)), retrying in 5s"
+        }
+      ],
+      "events": {
+        "selfdriveInitializing": 7,
+        "wrongGear": 171,
+        "reverseGear": 28,
+        "bigModelLoading": 5,
+        "steerOverride": 916,
+        "gasPressedOverride": 1813,
+        "preEnableStandstill": 106,
+        "ldw": 6,
+        "stockFcw": 14,
+        "preLaneChangeLeft": 13,
+        "laneChange": 246,
+        "preLaneChangeRight": 13,
+        "parkBrake": 19,
+        "seatbeltNotLatched": 14,
+        "doorOpen": 2
+      },
+      "missing_expected_process_samples": 0,
+      "parser_errors": []
+    },
+    {
+      "session": 9,
+      "segments": 1,
+      "model_outputs": {
+        "small": 911
+      },
+      "large_execution_ms": {},
+      "large_camera_to_publication_ms": {},
+      "large_frame_id_delta": {},
+      "large_drop_percent": {},
+      "transitions": [
+        {
+          "seconds": 11.543,
+          "mode": "small"
+        }
+      ],
+      "peer": [],
+      "startup_retries": [
+        {
+          "seconds": 55.654,
+          "message": "jetlink: not joined yet (no jetson attached within 45s), retrying in 5s"
+        }
+      ],
+      "events": {
+        "selfdriveInitializing": 7,
+        "wrongGear": 80,
+        "seatbeltNotLatched": 138,
+        "reverseGear": 42,
+        "steerOverride": 54,
+        "bigModelLoading": 10,
+        "gasPressedOverride": 22,
+        "preEnableStandstill": 18,
+        "parkBrake": 22
+      },
+      "missing_expected_process_samples": 0,
+      "parser_errors": []
+    }
+  ],
+  "large_outputs": 285467,
+  "large_execution_weighted_mean_ms": 22.87616012798506,
+  "large_execution_max_ms": 55.48390746116638,
+  "large_camera_to_publication_over_50_ms": 8854,
+  "jetson_temperature_c_range": [
+    24.1,
+    71.9
+  ],
+  "warning_samples": {
+    "stockFcw": 28,
+    "steerSaturated": 1,
+    "fcw": 1,
+    "controlsMismatch": 4
+  },
+  "warning_windows": [
+    {
+      "session": 4,
+      "event": "steerSaturated",
+      "sampled_seconds": 1345.8063032229838,
+      "full_rate_matches": [
+        {
+          "seconds": 1345.8063032229838,
+          "brake_pressed": true,
+          "steering_pressed": false,
+          "enabled": false,
+          "active": false,
+          "state": "disabled",
+          "lat_active": true,
+          "long_active": false,
+          "mads_enabled": true,
+          "large": true,
+          "execution_ms": 22.57251739501953
+        }
+      ]
+    },
+    {
+      "session": 5,
+      "event": "fcw",
+      "sampled_seconds": 454.9369125670055,
+      "full_rate_matches": [
+        {
+          "seconds": 454.9397447760275,
+          "brake_pressed": false,
+          "steering_pressed": false,
+          "enabled": true,
+          "active": true,
+          "state": "enabled",
+          "lat_active": true,
+          "long_active": true,
+          "mads_enabled": true,
+          "large": true,
+          "execution_ms": 22.68996089696884
+        }
+      ]
+    }
+  ],
+  "desk_check": {
+    "protocol": 3,
+    "sha256": "09d080f36965bb2a0790500452bd328aa03c484d0222aa79d1ad9f021a522aec",
+    "frames": 101,
+    "finite": true,
+    "full_raw_output": true,
+    "transport": "desk TCP, not USB",
+    "client_pin": "4b747ae",
+    "server_release": "0.8.7",
+    "hello": {
+      "device": "Orin-sm87",
+      "backend": "trt",
+      "loaded": "09d080f36965bb2a0790500452bd328aa03c484d0222aa79d1ad9f021a522aec",
+      "engine_state": "none"
+    },
+    "mean_ms": 99.72399915049849,
+    "max_ms": 188.2891120039858
+  },
+  "jetson_benchmark": {
+    "seconds_requested": 60,
+    "frame_mean_ms": 18.1,
+    "frame_max_ms": 18.3,
+    "accelerator_mean_ms": 17.6,
+    "over_35_ms": 0,
+    "over_50_ms": 0,
+    "thermal_state_start": "nominal",
+    "thermal_state_end": "nominal",
+    "transport": "engine only; no camera or USB"
+  },
+  "usb_regressions": {
+    "passed": 200,
+    "subtests_passed": 2
+  },
+  "security_packages_updated": 32,
+  "compatibility": {
+    "comma_client": "v0.8.5 + verified USB patches",
+    "adapter_api": 2,
+    "jetson_server": "v0.8.7",
+    "protocol": 3,
+    "upstream_v087_comma_migration": "not deployed; requires newer model pipeline"
+  },
+  "startup_controls_context": [
+    {
+      "seconds": 13.487787443000002,
+      "kind": "controlsMismatch",
+      "ignition": true,
+      "controls_allowed": false,
+      "device_started": true,
+      "lat_active": false,
+      "long_active": false,
+      "mads_enabled": false,
+      "enabled": false,
+      "active": false,
+      "state": "disabled"
+    },
+    {
+      "seconds": 13.507357182,
+      "kind": "controlsMismatch",
+      "ignition": true,
+      "controls_allowed": false,
+      "device_started": true,
+      "lat_active": false,
+      "long_active": false,
+      "mads_enabled": false,
+      "enabled": false,
+      "active": false,
+      "state": "disabled"
+    },
+    {
+      "seconds": 13.619368223999999,
+      "kind": "controlsMismatch",
+      "ignition": true,
+      "controls_allowed": false,
+      "device_started": true,
+      "lat_active": false,
+      "long_active": false,
+      "mads_enabled": false,
+      "enabled": false,
+      "active": false,
+      "state": "disabled"
+    },
+    {
+      "seconds": 14.23234463,
+      "kind": "controlsMismatch",
+      "ignition": true,
+      "controls_allowed": false,
+      "device_started": true,
+      "lat_active": false,
+      "long_active": false,
+      "mads_enabled": false,
+      "enabled": false,
+      "active": false,
+      "state": "disabled"
+    },
+    {
+      "seconds": 14.770646608999996,
+      "kind": "large_execution_outlier",
+      "execution_ms": 55.48390746116638,
+      "ignition": true,
+      "controls_allowed": false,
+      "device_started": true,
+      "lat_active": false,
+      "long_active": false,
+      "mads_enabled": false,
+      "enabled": false,
+      "active": false,
+      "state": "disabled"
+    }
+  ]
+}

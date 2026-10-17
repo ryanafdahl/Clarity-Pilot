@@ -81,3 +81,19 @@ The October 10 update backfills all available retained and archived logs. The ea
 The private segment ledger deduplicates archived/device copies. A later full-rate record replaces a compact record for the same segment; a compact copy cannot overwrite full-rate evidence after raw-log cleanup. Historical backfill is idempotent. Existing private assistance and engagement ledgers are preserved.
 
 Deploy `publish_model_miles.py`, `test_model_history.py` and `test_model_collection.py` with the other updater files. The parent publisher lock protects the durable ledger and the dedicated model-site checkout. Only `data/model-miles.json` may be staged by this publisher. The existing 30-minute offroad timer refreshes this aggregate independently of nightly engagement publication and hourly cloud Connect totals. The comma must be powered, offroad and online to publish; failures leave dated public data intact. No manually reported miles are added.
+
+## Truncated recordings (October 17 maintenance)
+
+Both local collectors now catch malformed Cap'n Proto records and invalid Zstandard
+streams per segment. An unreadable segment contributes no new count. A previously
+verified record remains intact; the bad file's fingerprint is not cached, so a
+repaired copy can be retried. Other recordings continue processing, and the
+summary reports `unreadable_this_run`. This recovered the offroad publisher from
+a truncated-recording crash that had blocked the model-mileage website refresh.
+Connect lifetime totals remain independently owned by GitHub Actions.
+
+The isolated regression fixtures exercise both malformed formats, continued
+collection, repeat-run deduplication and preservation of an earlier good record.
+Run `test_collect_corruption` with the comma's Python/cereal environment alongside
+the existing counter tests. Deploy both `collect.py` and `collect_model_usage.py`
+while holding the publisher lock; preserve private ledgers before replacing them.

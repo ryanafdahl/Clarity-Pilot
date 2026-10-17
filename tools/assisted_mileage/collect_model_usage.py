@@ -31,10 +31,11 @@ def main():
     if ledger['version'] != VERSION:
       raise RuntimeError('Model usage ledger version changed; migrate explicitly')
     sys.path.insert(0, '/data/openpilot')
+    import capnp
     import zstandard
     from openpilot.cereal import log
     deadline = time.monotonic() + args.budget_seconds
-    scanned = reused = 0
+    scanned = reused = unreadable = 0
     last_route = last_index = last_record = None
     # One record per segment, preferring full-rate evidence. Never replace a
     # previously analyzed full-rate record with a compact copy after cleanup.
@@ -65,35 +66,42 @@ def main():
         last_route, last_index, last_record = route, index, cached
         reused += 1
         continue
-      with source.open('rb') as compressed, zstandard.ZstdDecompressor().stream_reader(compressed) as stream:
-        raw = stream.read()
-      samples = []
-      models = []
-      wall_time_ns = None
-      for event in log.Event.read_multiple_bytes(raw):
-        kind, t = event.which(), event.logMonoTime / 1e9
-        if kind == 'initData' and wall_time_ns is None:
-          wall_time_ns = event.initData.wallTimeNanos
-        if kind == 'carState':
-          car = event.carState
-          samples.append((t, 3, car.vEgo, event.valid and car.canValid, car.standstill))
-        elif kind == 'carControl':
-          control = event.carControl
-          samples.append((t, 1, bool(control.latActive or control.longActive), event.valid))
-        elif kind == ('drivingModelData' if compact else 'modelV2'):
-          big = bool(getattr(event, kind).big)
-          if compact: models.append((t, big, event.valid))
-          else: samples.append((t, 2, big, event.valid))
-        elif kind in ('logMessage', 'errorLogMessage'):
-          raw_message = str(getattr(event, kind))
-          try:
-            obj = json.loads(raw_message)
-            message = obj.get('msg', obj.get('msg$s', '')) if isinstance(obj, dict) else raw_message
-          except ValueError:
-            message = raw_message
-          peer = peer_from_message(message)
-          if peer is not None:
-            samples.append((t, 0, peer, True))
+      try:
+        with source.open('rb') as compressed, zstandard.ZstdDecompressor().stream_reader(compressed) as stream:
+          raw = stream.read()
+        samples = []
+        models = []
+        wall_time_ns = None
+        for event in log.Event.read_multiple_bytes(raw):
+          kind, t = event.which(), event.logMonoTime / 1e9
+          if kind == 'initData' and wall_time_ns is None:
+            wall_time_ns = event.initData.wallTimeNanos
+          if kind == 'carState':
+            car = event.carState
+            samples.append((t, 3, car.vEgo, event.valid and car.canValid, car.standstill))
+          elif kind == 'carControl':
+            control = event.carControl
+            samples.append((t, 1, bool(control.latActive or control.longActive), event.valid))
+          elif kind == ('drivingModelData' if compact else 'modelV2'):
+            big = bool(getattr(event, kind).big)
+            if compact: models.append((t, big, event.valid))
+            else: samples.append((t, 2, big, event.valid))
+          elif kind in ('logMessage', 'errorLogMessage'):
+            raw_message = str(getattr(event, kind))
+            try:
+              obj = json.loads(raw_message)
+              message = obj.get('msg', obj.get('msg$s', '')) if isinstance(obj, dict) else raw_message
+            except ValueError:
+              message = raw_message
+            peer = peer_from_message(message)
+            if peer is not None:
+              samples.append((t, 0, peer, True))
+      except (capnp.KjException, zstandard.ZstdError) as exc:
+        # Do not credit a partial recording or overwrite verified history.
+        # No new fingerprint is saved, so a repaired file is retried later.
+        unreadable += 1
+        print(json.dumps({'unreadable_segment_key': key, 'error': type(exc).__name__}), flush=True)
+        continue
       if compact:
         samples += sampled_model_events(sorted(models))
       samples.sort(key=lambda row: (row[0], row[1]))
@@ -125,6 +133,7 @@ def main():
     summary = summarize(list(ledger['segments'].values()))
     summary['scanned_this_run'] = scanned
     summary['reused_this_run'] = reused
+    summary['unreadable_this_run'] = unreadable
     atomic_json(args.base/'model-usage-summary.json', summary)
     print(json.dumps(summary))
 

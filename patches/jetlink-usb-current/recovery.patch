@@ -1,0 +1,292 @@
+diff --git a/jetlink/client.py b/jetlink/client.py
+index 350fb39..20f4a34 100644
+--- a/jetlink/client.py
++++ b/jetlink/client.py
+@@ -420,6 +420,20 @@ class JetlinkClient:
+     if self.waiting_for() > self.deadline:
+       self.dead = True
+       raise LinkError(f"no answer to {len(self._in_flight)} frames in {self.deadline:.1f}s; link abandoned")
++    # A completed USB write only says the host accepted bytes, not that its
++    # engine is free. After a slow inference, queuing more frames here makes
++    # them stale before execution and can exhaust the host's receive reserve.
++    # prepare() drains late replies before this call. Do not wait, reset the
++    # oldest request's deadline, or suppress a real transport error.
++    limit = getattr(self.t, 'max_in_flight', None)
++    if skip_if_busy and not self.t.datagrams and limit is not None and len(self._in_flight) >= limit:
++      try:
++        if check_health := getattr(self.t, 'check_health', None):
++          check_health()
++      except LinkError:
++        self.dead = True
++        raise
++      return None
+     warped = _as_bytes(warped, self.spec.warped_nbytes, 'warped')
+     packed = _as_bytes(packed, self.spec.packed_nbytes, 'packed')
+     seq = self._next_seq()
+diff --git a/jetlink/openpilot/link.py b/jetlink/openpilot/link.py
+index 8957b41..6b442dd 100644
+--- a/jetlink/openpilot/link.py
++++ b/jetlink/openpilot/link.py
+@@ -105,6 +105,15 @@ class Link:
+     """The client, opening one if we have not got one yet, or if the one held
+     is dead: a big model retired after a link loss closes its client, and
+     reusing it failed the next attempt with EBADF, 5 s after every loss."""
++    if self.client is not None and not self.client.dead:
++      from jetlink.transport.base import LinkError
++      check = getattr(self.client.t, 'check_health', None)
++      if check is not None:
++        try:
++          check()
++        except LinkError as e:
++          self.log.warning("jetlink: replacing failed transport before rejoin (%s)", e)
++          self.client.dead = True
+     if self.client is not None and self.client.dead:
+       self.close()
+     if self.client is None:
+diff --git a/jetlink/transport/base.py b/jetlink/transport/base.py
+index e6565d5..2253a40 100644
+--- a/jetlink/transport/base.py
++++ b/jetlink/transport/base.py
+@@ -69,6 +69,10 @@ class Transport(ABC):
+   back a view into a reusable buffer: copy anything you need to keep.
+   """
+ 
++  # Optional inference requests may hold the last output instead of adding
++  # work beyond this bound. Blocking calls and datagrams retain their policy.
++  max_in_flight: int | None = None
++
+   def link_info(self) -> dict:
+     """What the comma's hello says about this link: its kind (usb, cable or
+     tcp) and, over USB, the speed the controller negotiated. Empty when there
+diff --git a/jetlink/transport/ffs.py b/jetlink/transport/ffs.py
+index 12c48bb..bd6f3a5 100644
+--- a/jetlink/transport/ffs.py
++++ b/jetlink/transport/ffs.py
+@@ -48,19 +48,20 @@ USB_ENDPOINT_XFER_BULK = 0x02
+ EP_OUT = 0x01  # host -> device
+ EP_IN = 0x82   # device -> host
+ 
+-# FunctionFS kmallocs a contiguous buffer per read and frees it on return. 16 KB
+-# is an order-2 page allocation, which this kernel retries without bound under
+-# memory pressure; vm.extra_free_kbytes (jetlink-root.sh) keeps that from
+-# stalling: no reclaim in 3,396 reads of a recording bench (2026-10-07). 8 KB
+-# would come from the slab like the writes, but a reply is 8,356 bytes, so it
+-# took a second read: +0.3 ms a frame at p50.
+-READ_CHUNK = 16 * P.USB_MAX_PACKET
++# FunctionFS kmallocs a contiguous kernel buffer on every read even when the
++# userspace buffer is pooled. Keep this within kmalloc-8192, as on the send
++# path, instead of requesting an order-2 allocation for every reply. The
++# 8,356-byte inference reply now takes two reads (previous bench: +0.3 ms
++# p50); StreamTransport reassembles it without changing framing or deadlines.
++# Slab allocation can still stall: this removes the larger allocation risk,
++# not a guarantee that every observed interruption had that cause.
++READ_CHUNK = 8 * P.USB_MAX_PACKET
+ # How much the reader may queue before it stops. Only bounds memory if the
+ # consumer stalls: inference never needs more than one response.
+ MAX_QUEUED = 512 << 10
+ # Read buffers kept for reuse. Steady state has one or two in flight, so this is
+-# only a ceiling for a transient backlog. 8 * 16 KB = 128 KB.
+-FREE_BUFS = 8
++# only a ceiling for a transient backlog. 16 * 8 KB = 128 KB.
++FREE_BUFS = 16
+ # Just below modeld's frame loop (54), so the loop wins a contended core and the
+ # reader still preempts everything else. See _raise_reader_priority.
+ READER_RT_PRIORITY = 51
+@@ -179,6 +180,9 @@ class FfsTransport(StreamTransport):
+   # ends on a short packet.
+   write_chunk = P.GADGET_TX_ALIGN // 2
+   tx_align = P.GADGET_TX_ALIGN
++  # The bulk server executes one inference at a time. Keep expensive camera
++  # work out of its input queue while a previous inference is still pending.
++  max_in_flight = 1
+ 
+   def __init__(self, mount: str = MOUNT, gadget: str | None = None,
+                udc: str | None = None):
+@@ -492,6 +496,25 @@ class FfsTransport(StreamTransport):
+ 
+   # -- writes: AIO ---------------------------------------------------------
+ 
++  def check_health(self) -> None:
++    """Check an existing transport before a background reconnect handshake.
++
++    LEAVE only queues its writes. A reset can complete them with ESHUTDOWN
++    after that call returned, while the client still looks alive. Reap those
++    completions before reusing it; otherwise HELLO wastes an entire retry.
++    Never wait for the host, open endpoints, or reject an ordinary backlog.
++    """
++    with self._tx_lock:
++      if self._closing:
++        raise LinkError('gadget closing')
++      if self._aio is not None:
++        self._collect()
++      if self._tx_error is not None:
++        raise LinkError(self._tx_error)
++    with self._cv:
++      if self._reader_error is not None:
++        raise LinkError(self._reader_error)
++
+   def try_send(self, msg_type: int, seq: int, parts=(), timeout: float | None = None) -> bool:
+     """Queue one message unless that means waiting for the host: False, and
+     nothing sent, while writes it has not taken leave no room for this one
+diff --git a/tests/openpilot/test_link.py b/tests/openpilot/test_link.py
+index 8a1d81f..156aaaf 100644
+--- a/tests/openpilot/test_link.py
++++ b/tests/openpilot/test_link.py
+@@ -143,6 +143,25 @@ class BorrowingTheGadget(OpenpilotTest):
+     borrow.assert_called_once()
+     assert all(c.kwargs['loan'] is loan for c in connect.call_args_list)
+ 
++  def test_async_endpoint_failure_replaces_client_before_hello(self):
++    from jetlink.transport.base import LinkError
++    old = mock.Mock(dead=False)
++    old.t.check_health.side_effect = LinkError('Cannot send after transport endpoint shutdown')
++    loan = mock.Mock(closed=False)
++    self.link.client, self.link.loan = old, loan
++    with mock.patch.object(link, 'connect') as connect:
++      assert self.link.open() is connect.return_value
++    old.close.assert_called_once()
++    old.hello.assert_not_called()
++    assert connect.call_args.kwargs['loan'] is loan
++
++  def test_live_transport_is_reused_without_a_new_handshake(self):
++    old = mock.Mock(dead=False)
++    self.link.client = old
++    assert self.link.open() is old
++    old.close.assert_not_called()
++    old.t.check_health.assert_called_once()
++
+   def test_a_dead_client_is_replaced_not_reused(self):
+     # a big model retired after a link loss closes its client; the next
+     # attempt reused it and failed on EBADF, a whole retry after every loss
+diff --git a/tests/test_client.py b/tests/test_client.py
+index a78a236..19cfbcd 100644
+--- a/tests/test_client.py
++++ b/tests/test_client.py
+@@ -293,3 +293,69 @@ class FramesAsDatagrams(FramesInFlight):
+       for frame_id in range(1, 4):
+         self.lose(frame_id)
+     self.assertTrue(self.client.dead)
++
++
++class USBInferenceBackpressure(FramesInFlight):
++  """A slow inference must not turn USB's empty write queue into a backlog
++  of expensive, already-old camera frames. The fake clock avoids sleeps."""
++
++  def setUp(self):
++    super().setUp()
++    self.ours.max_in_flight = 1
++
++  def optional(self, frame_id):
++    spec = self.client.spec
++    return self.client.infer_begin(bytes(spec.warped_nbytes), bytes(spec.packed_nbytes),
++                                   frame_id=frame_id, skip_if_busy=True)
++
++  def test_124ms_spike_does_not_queue_two_more_inferences(self):
++    clock = [100.0]
++    with mock.patch('jetlink.client.time.monotonic', side_effect=lambda: clock[0]):
++      first = self.optional(1)
++      self.assertIsNotNone(first)
++      for elapsed in (0.050, 0.100):
++        clock[0] = 100 + elapsed
++        with mock.patch.object(self.ours, 'try_send', return_value=True) as send:
++          self.assertIsNone(self.optional(int(elapsed * 20) + 1))
++          send.assert_not_called()
++        self.assertEqual(self.client.unanswered, 1)
++        self.assertFalse(self.client.dead)
++      clock[0] = 100.124
++      self.answer()
++      self.assertEqual(self.client.infer_end(first)[0], 1.0)
++      clock[0] = 100.150
++      next_seq = self.optional(4)
++      self.assertIsNotNone(next_seq)
++      self.answer()
++      self.assertEqual(self.client.infer_end(next_seq)[0], 4.0)
++      self.assertEqual(self.client.unanswered, 0)
++
++  def test_an_unanswered_request_still_expires(self):
++    clock = [100.0]
++    with mock.patch('jetlink.client.time.monotonic', side_effect=lambda: clock[0]):
++      self.optional(1)
++      clock[0] += self.client.deadline + 0.001
++      with self.assertRaisesRegex(LinkError, 'no answer to 1 frames'):
++        self.optional(2)
++      self.assertTrue(self.client.dead)
++
++  def test_endpoint_failure_is_not_hidden_by_backpressure(self):
++    self.optional(1)
++    with mock.patch.object(self.ours, 'check_health', create=True,
++                           side_effect=LinkError('endpoint shutdown')):
++      with self.assertRaisesRegex(LinkError, 'endpoint shutdown'):
++        self.optional(2)
++    self.assertTrue(self.client.dead)
++
++  def test_blocking_requests_keep_the_existing_pipeline(self):
++    t = self.answering(2)
++    self.send(1)
++    second = self.send(2)
++    self.assertEqual(self.client.infer_end(second)[0], 2.0)
++    t.join(2.0)
++
++  def test_transport_limit_is_only_on_functionfs(self):
++    from jetlink.transport.ffs import FfsTransport
++    from jetlink.transport.base import Transport
++    self.assertEqual(FfsTransport.max_in_flight, 1)
++    self.assertIsNone(Transport.max_in_flight)
+diff --git a/tests/test_ffs.py b/tests/test_ffs.py
+index 59b3fe1..5301676 100644
+--- a/tests/test_ffs.py
++++ b/tests/test_ffs.py
+@@ -93,7 +93,7 @@ def test_data_written_by_the_host_arrives_through_the_reader(mount):
+     t.close()
+ 
+ 
+-@pytest.mark.parametrize('nelem', [18452, (2 << 20) // 4])
++@pytest.mark.parametrize('nelem', [2081, 18452, (2 << 20) // 4])
+ def test_inference_reply_spans_bounded_kernel_reads(mount, monkeypatch, nelem):
+   from types import SimpleNamespace
+ 
+@@ -133,8 +133,8 @@ def test_inference_reply_spans_bounded_kernel_reads(mount, monkeypatch, nelem):
+       assert not writer.is_alive()
+       assert bytes(msg.payload) == payload
+       assert msg.seq == 7
+-      assert len(reads) >= 5
+-      assert max(reads) <= 16 * 1024
++      assert len(reads) >= (len(wire) + 8191) // 8192
++      assert max(reads) <= 8 * 1024
+       assert all(n % P.USB_MAX_PACKET == 0 for n in reads)
+     finally:
+       real_os.close(host)
+diff --git a/tests/test_ffs_send.py b/tests/test_ffs_send.py
+index 3b827b9..5d15fcb 100644
+--- a/tests/test_ffs_send.py
++++ b/tests/test_ffs_send.py
+@@ -213,3 +213,29 @@ def test_requests_cover_the_message_in_order_without_a_copy():
+     else:
+       merged.append((addr, n))
+   assert merged == spans
++
++
++def test_rejoin_health_reaps_reset_before_another_hello(sender):
++  t, aio = sender
++  aio.holding = True
++  t.send(P.Msg.LEAVE, 4, (b'{}',))
++  aio.shutdown()
++  submitted = aio.submits
++  with pytest.raises(LinkError, match='shutdown'):
++    t.check_health()
++  assert aio.submits == submitted, 'a health probe must not send a handshake'
++
++
++def test_rejoin_health_keeps_a_slow_but_live_transport(sender):
++  t, aio = sender
++  aio.holding = True
++  t.send(P.Msg.LEAVE, 4, (b'{}',))
++  t.check_health()
++  assert not t._unbound and aio.outstanding > 0
++
++
++def test_rejoin_health_reports_reader_failure_without_waiting(sender):
++  t, _ = sender
++  t._fail('USB reader stopped after reset')
++  with pytest.raises(LinkError, match='reader stopped'):
++    t.check_health()

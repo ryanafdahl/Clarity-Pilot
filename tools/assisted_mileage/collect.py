@@ -44,9 +44,10 @@ def main():
     if ledger['method_version'] != METHOD_VERSION:
       raise RuntimeError('Ledger method changed; migrate explicitly before collecting')
     sys.path.insert(0, args.openpilot)
+    import capnp
     import zstandard
     from openpilot.cereal import log
-    scanned = skipped = reused = 0
+    scanned = skipped = reused = unreadable = 0
     for path in sorted(args.root.glob('*/rlog.zst')):
       require_offroad()
       if path.is_symlink() or path.parent.is_symlink() or any(path.parent.glob('*.lock')) or time.time() - path.stat().st_mtime < args.minimum_age:
@@ -64,23 +65,31 @@ def main():
       wall_time_ns = None
       # Decode only the required fields. The general LogReader caches and sorts
       # every event; CAN traffic is irrelevant to this integration and expensive.
-      with path.open('rb') as compressed, zstandard.ZstdDecompressor().stream_reader(compressed) as stream:
-        data = stream.read()
-      samples = []
-      for event in log.Event.read_multiple_bytes(data):
-          kind = event.which()
-          if kind == 'initData' and wall_time_ns is None:
-            wall_time_ns = event.initData.wallTimeNanos
-          if kind not in ('carState', 'carControl'):
-            continue
-          first_ns = event.logMonoTime if first_ns is None else min(first_ns, event.logMonoTime)
-          last_ns = event.logMonoTime
-          if kind == 'carControl':
-            control = event.carControl
-            samples.append((event.logMonoTime, 0, control.latActive, control.longActive, event.valid))
-          else:
-            car = event.carState
-            samples.append((event.logMonoTime, 1, car.vEgo, event.valid and car.canValid, car.standstill))
+      try:
+        with path.open('rb') as compressed, zstandard.ZstdDecompressor().stream_reader(compressed) as stream:
+          data = stream.read()
+        samples = []
+        for event in log.Event.read_multiple_bytes(data):
+            kind = event.which()
+            if kind == 'initData' and wall_time_ns is None:
+              wall_time_ns = event.initData.wallTimeNanos
+            if kind not in ('carState', 'carControl'):
+              continue
+            first_ns = event.logMonoTime if first_ns is None else min(first_ns, event.logMonoTime)
+            last_ns = event.logMonoTime
+            if kind == 'carControl':
+              control = event.carControl
+              samples.append((event.logMonoTime, 0, control.latActive, control.longActive, event.valid))
+            else:
+              car = event.carState
+              samples.append((event.logMonoTime, 1, car.vEgo, event.valid and car.canValid, car.standstill))
+      except (capnp.KjException, zstandard.ZstdError) as exc:
+        # A power-cut tail must not block later recordings or the website.
+        # Keep a prior verified entry, and do not cache this fingerprint: a
+        # repaired/re-uploaded file should be retried on the next collection.
+        unreadable += 1
+        print(json.dumps({'unreadable_segment_key': key, 'error': type(exc).__name__}), flush=True)
+        continue
       for timestamp_ns, kind, x, y, z in sorted(samples, key=lambda sample: sample[0]):
         if kind == 0:
           counter.control(timestamp_ns / 1e9, x, y, z)
@@ -115,6 +124,7 @@ def main():
       'scanned_this_run': scanned,
       'reused_this_run': reused,
       'deferred_this_run': skipped,
+      'unreadable_this_run': unreadable,
       'collected_at_utc': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()),
     }
     atomic_json(args.summary, summary)
