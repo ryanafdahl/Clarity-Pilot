@@ -1,5 +1,17 @@
 # Connect driving history and private assistance ledger
 
+## Retired from the comma on October 17, 2026
+
+At the owner's request, the installed mileage updater, systemd service/timer and
+device-side website deploy key were removed. Private historical JSON ledgers were
+retained under `/data/maintenance/20261017/mileage-retired-data`.
+
+The website now displays only the combined comma 3 and comma 4 totals fetched
+from comma connect by the website repository's hourly GitHub Actions workflow.
+Do not reinstall this local updater as part of a normal comma recovery. The code
+and descriptions below remain as a historical reference; model/engagement log
+mileage is no longer published by the comma or shown on the homepage.
+
 ## Model and accelerator usage
 
 The offroad updater also runs `collect_model_usage.py`. It records a separate,

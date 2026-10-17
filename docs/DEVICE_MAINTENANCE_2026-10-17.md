@@ -4,6 +4,22 @@ The Jetson now runs **JetLink 0.8.7**, with **32 compatible Ubuntu security-pack
 
 The comma's mileage job had been failing on a truncated recording. Both collectors now skip unreadable segments, retain prior verified history, and continue through healthy recordings. A successful publisher rerun processed 155 new healthy segments, reused 94, and skipped one unreadable segment; verified Connect lifetime totals remained 60,995 miles. The exact USB patches are also packaged in the reinstall branch as one guarded recovery step.
 
+## Follow-up: Connect-only mileage
+
+After the checks above, the owner requested removal of the local mileage updater.
+Its timer and service were stopped, disabled and removed, along with the installed
+`/data/maintenance/ai-mileage` directory and its device-side website deploy key.
+Both systemd units now report `not-found`; the system mount was restored read-only.
+Twelve historical JSON files were preserved privately under
+`/data/maintenance/20261017/mileage-retired-data`.
+
+The website's existing hourly GitHub Actions Connect refresh remains active and
+independent of the comma. The displayed total is the sum of verified comma 3 and
+comma 4 Connect statistics, with no local-log increments or manual additions.
+The homepage now contains only miles, current work and LinkedIn. Its big-model
+section and GitHub links were removed. The collector repair and test results
+above document the investigation before retirement, not a currently installed job.
+
 ## What the drive logs show
 
 Reviewed **246 compact logs and 246 full-rate segments from nine retained recordings**. The earliest recording has a missing prefix. Totals describe readable retained records, not lifetime use or uninterrupted coverage of the missing period. The general log reader reported a corrupt/truncated tail; the collectors conservatively exclude unreadable segments from new mileage rather than crediting partial data. Raw logs, private identifiers, coordinates and credentials are not published.
