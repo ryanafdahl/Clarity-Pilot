@@ -1,0 +1,145 @@
+{
+  "status": "reviewed diagnostic pair; phone performance evaluation recorded separately",
+  "base_commit": "d26001b4161f33bab28d806de6a99b96325a429b",
+  "patch_application": "Apply exactly one complete patch to clean base; do not stack on tensor-support.patch",
+  "version_code": 80710,
+  "signer_sha256": "50e670489a4ba19aec5e9fbad6f06074556d4d07be629ba012b3ca78f1eabb4e",
+  "artifacts": [
+    {
+      "mode": 0,
+      "name": "0.8.7-clarity-tensor.10-deep-output-rare1",
+      "version_code": 80710,
+      "patch_sha256": "27725346c18b3f0581d6f54c6a3b9c5513929a664e20749c7394bcfd877d6e3c",
+      "apk_sha256": "644023d8baf1e6ae0243ccee870e2124eaf74c399462d3d177d672c54d289e6e",
+      "apk_bytes": 104213016,
+      "signer_sha256": "50e670489a4ba19aec5e9fbad6f06074556d4d07be629ba012b3ca78f1eabb4e",
+      "android_tests": {
+        "tests": 59,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "mode": 1,
+      "name": "0.8.7-clarity-tensor.10-deep-output-often1",
+      "version_code": 80710,
+      "patch_sha256": "e7b1a81199267249eb7167d878a80a989d278cabc5f0208628fa29e7970dae3d",
+      "apk_sha256": "1be1db98bd1159a3231123632e7001b7b340f77e8c6b2343814831e55b962ace",
+      "apk_bytes": 104213036,
+      "signer_sha256": "50e670489a4ba19aec5e9fbad6f06074556d4d07be629ba012b3ca78f1eabb4e",
+      "android_tests": {
+        "tests": 59,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    }
+  ],
+  "verified_pair": {
+    "variants": [
+      "deep-output-rare1",
+      "deep-output-often1"
+    ],
+    "source_differences_only": [
+      "CPU read/write frequency flag macro",
+      "version label"
+    ],
+    "source_normalized_sha256": "9ada7e0cde7a9cb7b9b4a3a90007f9070cb0d54b99e0e9a292f8fd128ab494d2",
+    "version_code": 80710,
+    "android_tests_per_variant": 59,
+    "ownership_suites_passed": 7,
+    "packaged_libraries_unchanged_except_expected_app_library": true,
+    "swift_resolved_dependencies_match_production": true,
+    "library_differences": {
+      "lib/arm64-v8a/libjetlink.so": {
+        "production": "205a2321f66b74d0720d131e5035322e0d6797dbb3921f709c13a267533ad870",
+        "control": "7641a6f19ce4cc0d139c9cceab0ad8a94d28e0179dc4e04aabf235656df1b2b9",
+        "candidate": "d2c2312da0804244e543f77b0fe591b3e460f7cda8d1dc67af06854a1ba94000"
+      }
+    },
+    "rollback_sha256": "cf760fe7c69c8d56e2eb0dc2bd45bf2cc9c8780548e8dbbe909834ead66872bd",
+    "phone_access": false
+  },
+  "reviewed_sources": {
+    "bridge_control_sha256": "4d717d0416709a05d4c3af2425b86c931d61c302d4bf8597e99f70e7197b96c0",
+    "bridge_candidate_sha256": "4dd3536607a20a769e8f11dd704cb0495f565097344b82b33e72f8f23860d512",
+    "output_import_sha256": "c60278fd96dc1d90d41929a7defa1ddd677072cb25b49e776ad99415dd1d1220",
+    "swift_lifetime_sha256": "78aea9ec21bdbbe432dfe500099e47955e4eec96fbdb46bd38d8e3f52a485935"
+  },
+  "independent_review": {
+    "completed": true,
+    "scope": [
+      "precompiled Tensor-only gate",
+      "managed inputs and other backends unchanged",
+      "NULL-deallocator caller ownership",
+      "strong Swift model owner without cycle",
+      "wrapper before model before raw buffer teardown",
+      "partial construction and rebind cleanup",
+      "uncertain mapping/execution process termination",
+      "error-string OOM cannot become success",
+      "active release-mode lifecycle assertions and specific fatal-path checks"
+    ],
+    "assumption": "existing serialized synchronous engine construction, execution and close",
+    "blocking_findings_remaining": 0
+  },
+  "fixture_suites": [
+    {
+      "suite": "C ownership rare",
+      "passed": true,
+      "source_sha256": "4d717d0416709a05d4c3af2425b86c931d61c302d4bf8597e99f70e7197b96c0"
+    },
+    {
+      "suite": "C ownership often",
+      "passed": true,
+      "source_sha256": "4dd3536607a20a769e8f11dd704cb0495f565097344b82b33e72f8f23860d512"
+    },
+    {
+      "suite": "Swift lifecycle",
+      "passed": true,
+      "exit": 0
+    },
+    {
+      "suite": "Swift zero",
+      "passed": true,
+      "exit": -4
+    },
+    {
+      "suite": "Swift read",
+      "passed": true,
+      "exit": -4
+    },
+    {
+      "suite": "Swift write",
+      "passed": true,
+      "exit": -4
+    },
+    {
+      "suite": "Swift run",
+      "passed": true,
+      "exit": -4
+    }
+  ],
+  "source_only": true,
+  "sdk_models_apks_vendor_headers_included": false,
+  "phone_access_by_packaging": false,
+  "files_sha256": {
+    "README.md": "309c447f6cac5d84531a9139192ba656c1792199db95d7f8720c62f42d878dea",
+    "mock/android/hardware_buffer.h": "cdc6071242490c176ce1ffb71a84a12db3ce65d10410a3ca838b36fb3d54234c",
+    "often-source.patch": "e7b1a81199267249eb7167d878a80a989d278cabc5f0208628fa29e7970dae3d",
+    "rare-source.patch": "27725346c18b3f0581d6f54c6a3b9c5513929a664e20749c7394bcfd877d6e3c",
+    "test.py": "9c1296a2ce66778f22425fdef4e31fd0103b422d1778441a56280e5edc49782c",
+    "test_output_ahwb.c": "a1ee3c68ef0f3b47a82f68d44a77fb0bae27ce5dd3b8c02d05102b1002f9a414"
+  },
+  "portable_ownership_runner_retested": true,
+  "full_patches_apply_to_clean_base": true,
+  "files_lf_normalized_sha256": {
+    "README.md": "76797a8e9087b0e0e7ce4810edc58044b5389aba794330a6397f131517102d0b",
+    "mock/android/hardware_buffer.h": "67430c1508b3fb00498cf05e2eec4d5c9402829d7bf3f6fff5a948d4d9318f05",
+    "often-source.patch": "e7b1a81199267249eb7167d878a80a989d278cabc5f0208628fa29e7970dae3d",
+    "rare-source.patch": "27725346c18b3f0581d6f54c6a3b9c5513929a664e20749c7394bcfd877d6e3c",
+    "test.py": "9c1296a2ce66778f22425fdef4e31fd0103b422d1778441a56280e5edc49782c",
+    "test_output_ahwb.c": "a1ee3c68ef0f3b47a82f68d44a77fb0bae27ce5dd3b8c02d05102b1002f9a414"
+  },
+  "text_hash_normalization": "Raw hashes retain reviewed/captured bytes; LF-normalized hashes accept equivalent checkouts and normalize CRLF only."
+}

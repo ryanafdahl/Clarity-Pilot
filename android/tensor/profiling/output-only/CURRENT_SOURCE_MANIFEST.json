@@ -1,0 +1,98 @@
+{
+  "kind": "current_published_output_only_followup_snapshot",
+  "reason": "Current base includes checkout-portability wrapper fix; native output-only logic unchanged",
+  "historical_manifest": {
+    "path": "SOURCE_MANIFEST.json",
+    "bytes": 2436,
+    "raw_sha256": "bb864360cc8abae62c6ab4e0e0df6c79ec2453524c752746dc164183a08c4b12",
+    "lf_normalized_sha256": "50154c0ee43fd0f3227082c45cc8f6b91a53b9b98fd57851ff1a08ed64672cd3"
+  },
+  "base_current_manifest": {
+    "path": "../buffer-tools/CURRENT_SOURCE_MANIFEST.json",
+    "bytes": 3288,
+    "raw_sha256": "e2b08588df72e7a1c90e6ff3da5d2244512f437b40cb2390713e0ac9e0bf4098",
+    "lf_normalized_sha256": "e2b08588df72e7a1c90e6ff3da5d2244512f437b40cb2390713e0ac9e0bf4098"
+  },
+  "source_changes": [
+    {
+      "path": "ahwb_allocation.inc",
+      "base": {
+        "bytes": 7852,
+        "raw_sha256": "0eda38de9f2c09ee6578b7f943479f36868b0799dd3dce57358595c7ff89396f",
+        "lf_normalized_sha256": "e88c68d7f390b6d71253dfc9e9067c7632b46ce4e290b7eb70c921330113dab1"
+      },
+      "patched": {
+        "bytes": 7946,
+        "raw_sha256": "4b6a6c6e482887829af5a27003cb8203f08949424efca48c73b65465354b368a",
+        "lf_normalized_sha256": "0df9bbfbcf6bd9f75eb69d51125d62e56131a93295051bfe69bc00f446d300a4"
+      }
+    },
+    {
+      "path": "test_ahwb.c",
+      "base": {
+        "bytes": 8765,
+        "raw_sha256": "edcc2da5a19a01524201af08d8adbb4d255f0e5ac76586edde9066ee40194fd7",
+        "lf_normalized_sha256": "f301118cbf4cf0a86b639ea51a23ee8a14ce826517a8062728504c47720228ed"
+      },
+      "patched": {
+        "bytes": 9868,
+        "raw_sha256": "5859674e9d721444362637b965847dd08c73a04ab458154f61237cd2651f13f9",
+        "lf_normalized_sha256": "163df524e15c7bffadff200157c8a013a2c027e93d626947c9349578146ac3a9"
+      }
+    },
+    {
+      "path": "build.py",
+      "base": {
+        "bytes": 10995,
+        "raw_sha256": "136b3881c4ad6dca138b7609027d6a65840d5d3f12219f93ba6517e72ef4e142",
+        "lf_normalized_sha256": "2d1436f597cad6cd41ef18c79c2ba1e552e70395e6012fffdfba1fd2502a8d3f"
+      },
+      "patched": {
+        "bytes": 11085,
+        "raw_sha256": "c391756e190ae07930d72df16c54465785da0f989ebfaa32c1b4aab4be651cb8",
+        "lf_normalized_sha256": "bcea31873b6c28d8466c408d4bf43eedc33517dc5762285c6a4836faa539c22c"
+      }
+    },
+    {
+      "path": "README.md",
+      "base": {
+        "bytes": 7884,
+        "raw_sha256": "f1fb4b2973a1a6bfc270d3c38015620734ffc8424b110fa57ac6bd1a89b495fa",
+        "lf_normalized_sha256": "63a468c2a201e640bc7d086b037b68b33211ed2a80ed66365cec8d9c80d1078c"
+      },
+      "patched": {
+        "bytes": 8107,
+        "raw_sha256": "7c3458a0e5eb311173f79af0e54a1bf4b37c94a991c7a67d55fed525e0234cd5",
+        "lf_normalized_sha256": "b082ba6b1ad40ed59feb01af5cd72c85a2afd7c6efb02406ae90b362c48f5e1a"
+      }
+    }
+  ],
+  "package_files": [
+    {
+      "path": "README.md",
+      "bytes": 3903,
+      "raw_sha256": "188ed5d2dd08a7ad9d50de8afa95bb9e65c302a5a1e49fd98d2f1bcdefeea0e2",
+      "lf_normalized_sha256": "8339a4f39fd2de8aa1a06567f001d961fc3cbeeb07a75922d9dc81d52adbd05c"
+    },
+    {
+      "path": "output-only.patch",
+      "bytes": 10221,
+      "raw_sha256": "092f44b1211bd4fd58f5bf9768b4874206750a574226e024c6fcee18ceacdc72",
+      "lf_normalized_sha256": "092f44b1211bd4fd58f5bf9768b4874206750a574226e024c6fcee18ceacdc72"
+    },
+    {
+      "path": "offline-validation.json",
+      "bytes": 931,
+      "raw_sha256": "1084d0738bffd2b9fcfd50cd50d5727bb13f450fb5fedc49d307821d504645e6",
+      "lf_normalized_sha256": "89107278f9f51af10311e8fe5eaafd4941069500bd617b16e5e8b50288c11957"
+    }
+  ],
+  "validation": {
+    "current_base_apply_check_passed": true,
+    "ndk_build_passed": true,
+    "io_ahwb_host_tests_passed": true,
+    "binary_sha256": "bfa13fea91af682c7786cbf11fc104bcac89c5c9d9fedaadd02141461594b633",
+    "matches_original_recorded_binary": true
+  },
+  "normalization": "CRLF to LF only; raw hashes describe this checkout"
+}

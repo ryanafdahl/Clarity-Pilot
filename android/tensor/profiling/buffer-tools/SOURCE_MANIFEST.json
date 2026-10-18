@@ -1,0 +1,65 @@
+{
+  "kind": "source_only_native_buffer_diagnostics",
+  "production_optimization_claim": false,
+  "payloads_excluded": [
+    "binaries",
+    "runtime_or_sdk_libraries",
+    "model_weights",
+    "device_identifiers",
+    "private_paths",
+    "raw_traces"
+  ],
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 7225,
+      "sha256": "a49ad4d5fd6985aec3b6b64a391e75d6a178e19e69146dfba1156bdbbca75b71"
+    },
+    {
+      "path": "build.py",
+      "bytes": 10691,
+      "sha256": "fc93aa057f1c9e7afeb0ee5ef6c73045057b5183a01f12aab7b82bfc8f264d46"
+    },
+    {
+      "path": "test.py",
+      "bytes": 2429,
+      "sha256": "1b2778ef8a0b30f7839a71a17ff27e4dcc9383eca4202e51711a533d798fcbd4"
+    },
+    {
+      "path": "io_profile.h",
+      "bytes": 314,
+      "sha256": "a78fd8f814b75188a52017250695cf5f17317864adbaff79d099795d501c0dc8"
+    },
+    {
+      "path": "io_profile.inc",
+      "bytes": 4792,
+      "sha256": "9720f462ee9ea64efb3074b8514e2c50fe082f2874f0148d707148452f567381"
+    },
+    {
+      "path": "ahwb_allocation.inc",
+      "bytes": 7852,
+      "sha256": "0eda38de9f2c09ee6578b7f943479f36868b0799dd3dce57358595c7ff89396f"
+    },
+    {
+      "path": "test_io_profile.c",
+      "bytes": 2155,
+      "sha256": "9cbb0d85d191f802e63f71f66780b8c988584ea19865390824547b6f44fb1752"
+    },
+    {
+      "path": "test_ahwb.c",
+      "bytes": 8765,
+      "sha256": "edcc2da5a19a01524201af08d8adbb4d255f0e5ac76586edde9066ee40194fd7"
+    },
+    {
+      "path": "mock/android/hardware_buffer.h",
+      "bytes": 905,
+      "sha256": "cdc6071242490c176ce1ffb71a84a12db3ce65d10410a3ca838b36fb3d54234c"
+    },
+    {
+      "path": "offline-validation.json",
+      "bytes": 1295,
+      "sha256": "627972dfa82be886da1fa71fbecd21c7bc46abe5487d3e5a34282eb4a1f92e78"
+    }
+  ],
+  "validation": "offline-validation.json"
+}

@@ -1,0 +1,24 @@
+{
+  "kind": "output_only_v1_offline_validation",
+  "base_package_hashes_unchanged": true,
+  "patch_applies_with_documented_command": true,
+  "patched_source_hashes_match": true,
+  "portable_and_isolated_binary_identical": true,
+  "binary_sha256": "bfa13fea91af682c7786cbf11fc104bcac89c5c9d9fedaadd02141461594b633",
+  "host_tests": [
+    {
+      "suite": "io",
+      "exit_code": 0,
+      "source_sha256": "9cbb0d85d191f802e63f71f66780b8c988584ea19865390824547b6f44fb1752",
+      "binary_sha256": "ee1ecdcd45418b0866303ba276a6ea257d8136cfcab46b32e243e12969ec103d"
+    },
+    {
+      "suite": "ahwb",
+      "exit_code": 0,
+      "source_sha256": "5859674e9d721444362637b965847dd08c73a04ab458154f61237cd2651f13f9",
+      "binary_sha256": "fcac05e8fb09b277b312f2603cf176310bf234155e208ae611ad7d6727deb37b"
+    }
+  ],
+  "descriptor_cases": "six inputs plus one output in each mode",
+  "no_device_access": true
+}

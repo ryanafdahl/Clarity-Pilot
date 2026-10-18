@@ -1,0 +1,52 @@
+{
+  "kind": "source_only_output_allocation_followup",
+  "experiment": "output_only_v1",
+  "base_package_unchanged": true,
+  "source_changes": [
+    {
+      "file": "ahwb_allocation.inc",
+      "base_sha256": "0eda38de9f2c09ee6578b7f943479f36868b0799dd3dce57358595c7ff89396f",
+      "patched_sha256_lf_normalized": "0df9bbfbcf6bd9f75eb69d51125d62e56131a93295051bfe69bc00f446d300a4",
+      "base_sha256_lf_normalized": "e88c68d7f390b6d71253dfc9e9067c7632b46ce4e290b7eb70c921330113dab1"
+    },
+    {
+      "file": "test_ahwb.c",
+      "base_sha256": "edcc2da5a19a01524201af08d8adbb4d255f0e5ac76586edde9066ee40194fd7",
+      "patched_sha256_lf_normalized": "163df524e15c7bffadff200157c8a013a2c027e93d626947c9349578146ac3a9",
+      "base_sha256_lf_normalized": "f301118cbf4cf0a86b639ea51a23ee8a14ce826517a8062728504c47720228ed"
+    },
+    {
+      "file": "build.py",
+      "base_sha256": "fc93aa057f1c9e7afeb0ee5ef6c73045057b5183a01f12aab7b82bfc8f264d46",
+      "patched_sha256_lf_normalized": "d828e315ae75ff9a3f70523a358aedfac5c534e75b4d9c14ba6d33a8ba8f566d",
+      "base_sha256_lf_normalized": "71ad641727298645a503b2aa4a58f093f3b3f15da03f4a39716b5c0e331cd966"
+    },
+    {
+      "file": "README.md",
+      "base_sha256": "a49ad4d5fd6985aec3b6b64a391e75d6a178e19e69146dfba1156bdbbca75b71",
+      "patched_sha256_lf_normalized": "176b9b184c6e3bffe5d9ee175f07a911198a0be89bc1149d0c02d17ed9e740af",
+      "base_sha256_lf_normalized": "e0f81b8229635ba4c00e5c803a872e2ddecaccf13b9d44a36669c73adfbc3178"
+    }
+  ],
+  "only_runtime_change": "Output buffers may use CPU OFTEN; input buffers stay CPU RARELY. All API calls and lifetime rules remain.",
+  "no_optimization_claim": true,
+  "patch_sha256": "092f44b1211bd4fd58f5bf9768b4874206750a574226e024c6fcee18ceacdc72",
+  "package_files": [
+    {
+      "path": "README.md",
+      "bytes": 3356,
+      "sha256": "b73f0c63f2947ec1669636d9eed1dbbfe85134ca4913e6d471558c764ccc3b45"
+    },
+    {
+      "path": "output-only.patch",
+      "bytes": 10221,
+      "sha256": "092f44b1211bd4fd58f5bf9768b4874206750a574226e024c6fcee18ceacdc72"
+    },
+    {
+      "path": "offline-validation.json",
+      "bytes": 931,
+      "sha256": "1084d0738bffd2b9fcfd50cd50d5727bb13f450fb5fedc49d307821d504645e6"
+    }
+  ],
+  "hash_normalization": "Raw base hashes identify the captured original files; LF-normalized hashes tolerate checkout line-ending conversion."
+}

@@ -1,0 +1,44 @@
+{
+  "builds": [
+    {
+      "kind": "io",
+      "build_exit": 0,
+      "source_matches_prior_ignoring_line_indentation": {
+        "CLiteRt/jl_litert.c": true,
+        "native_profile.c": true
+      },
+      "binary_sha256": "03282f1ec2ac8d7c0bd5334b0bb125953c562060a00dc6392bf719905cff796e"
+    },
+    {
+      "kind": "ahwb",
+      "build_exit": 0,
+      "source_matches_prior_ignoring_line_indentation": {
+        "CLiteRt/jl_litert.c": true,
+        "native_profile.c": true
+      },
+      "binary_sha256": "e77eaec0c5e4402e776d6137a1d53bb7b59f2e488d6191b6184ac2285c663bf2"
+    }
+  ],
+  "host_tests": [
+    {
+      "suite": "io",
+      "exit_code": 0,
+      "source_sha256": "9cbb0d85d191f802e63f71f66780b8c988584ea19865390824547b6f44fb1752",
+      "binary_sha256": "c121484e4ff8a9412f9c3bbd6b5b95be90bf042287d8c6873e1f7c60240582dc"
+    },
+    {
+      "suite": "ahwb",
+      "exit_code": 0,
+      "source_sha256": "edcc2da5a19a01524201af08d8adbb4d255f0e5ac76586edde9066ee40194fd7",
+      "binary_sha256": "bbdc34d5458ebcbfe4a83e13c59deaa17cd51b5e1ff2149227232ededde5e0b0"
+    }
+  ],
+  "output_guard_refusals": [
+    "source",
+    "profiler",
+    "package"
+  ],
+  "plain_and_prepared_bridges_generate_identical_base": true,
+  "partial_bridge_variants_refused": 2,
+  "no_device_access": true
+}

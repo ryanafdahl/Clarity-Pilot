@@ -1,10 +1,14 @@
 {
   "source_sha256": "09d080f36965bb2a0790500452bd328aa03c484d0222aa79d1ad9f021a522aec",
-  "compiled_sha256": "fc393523c5c1ddba9774382db513a5c62fad50cb187968ea25bc96db5480b51b",
+  "compiled_sha256": "328ae315dcd6e62e08aa670e04f11219e4766a11cfc37c261a54ef89f7c6c571",
   "soc": "Tensor_G6",
   "litert": "2.3.0",
-  "sdk_sha256": "d74bea45081aa90a39505a675c15f566d46dbcc35e55a98f755c02017464cd1f",
+  "sdk_sha256": "14e84153cbcf60463d011ba739fc15ff222188c6448a283c0abea639fa19cb68",
   "precision": "half",
   "sharding": "minimal",
-  "compiled_bytes": 834528528
+  "sdk_release": "2.1_2026_10_14",
+  "source_converted_sha256": "60c74bc8ce8bc111b110571b40bc6bfae86483f3857a8e052fe7a670de2af897",
+  "sdk_archive_sha256": "0e99f7683bacaf997c0c502c75a38d5bfc994db6abbe5b51ad24d004eb157b20",
+  "sdk_worker_sha256": "e6a8f7c0bdfebbb754e18f82b7bcde83b22c526c1297ce555a1797a2cd099294",
+  "compiled_bytes": 835398160
 }

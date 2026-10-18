@@ -1,0 +1,3298 @@
+{
+  "kind": "app_output_only_ahwb_six_balanced_pairs",
+  "completed_as_planned": true,
+  "primary_metric": "phone server_total run mean; positive A-minus-B favors OFTEN output",
+  "transport": "desk ADB TCP; not direct vehicle USB",
+  "screen_policy": "off before each run per runner protocol",
+  "order": "ABABABBABABA",
+  "pair_orders": [
+    "AB",
+    "AB",
+    "AB",
+    "BA",
+    "BA",
+    "BA"
+  ],
+  "apk_sha256": {
+    "A": "644023d8baf1e6ae0243ccee870e2124eaf74c399462d3d177d672c54d289e6e",
+    "B": "1be1db98bd1159a3231123632e7001b7b340f77e8c6b2343814831e55b962ace"
+  },
+  "rollback_apk_sha256": "cf760fe7c69c8d56e2eb0dc2bd45bf2cc9c8780548e8dbbe909834ead66872bd",
+  "fixture_source_sha256": "09d080f36965bb2a0790500452bd328aa03c484d0222aa79d1ad9f021a522aec",
+  "completed_runs": 12,
+  "measured_frames": 3600,
+  "warmup_frames": 240,
+  "failures": [],
+  "interrupted_or_replaced_runs": false,
+  "rollback_confirmed": true,
+  "allocation_scope": "Only precompiled Tensor outputs are imported; managed input allocation remains unchanged in both APKs.",
+  "all_completed_runs": [
+    {
+      "blocks_100": [
+        {
+          "start_measured_index": 0,
+          "frames": 100,
+          "metrics": {
+            "server_total": {
+              "count": 100,
+              "mean_ms": 33.56734,
+              "p50_ms": 33.5185,
+              "p95_ms": 35.59545000000001,
+              "p99_ms": 36.79912,
+              "max_ms": 37.504,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "inference": {
+              "count": 100,
+              "mean_ms": 32.40838,
+              "p50_ms": 32.328,
+              "p95_ms": 34.19605,
+              "p99_ms": 35.47129000000001,
+              "max_ms": 36.391,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "queues": {
+              "count": 100,
+              "mean_ms": 0.95853,
+              "p50_ms": 0.947,
+              "p95_ms": 1.2142,
+              "p99_ms": 1.9464500000000022,
+              "max_ms": 2.387,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "round_trip": {
+              "count": 100,
+              "mean_ms": 50.2880709999954,
+              "p50_ms": 49.23374999907537,
+              "p95_ms": 55.3961599998729,
+              "p99_ms": 67.75106000028246,
+              "max_ms": 69.62810000004538,
+              "over_46ms": 98,
+              "over_50ms": 33
+            }
+          }
+        },
+        {
+          "start_measured_index": 100,
+          "frames": 100,
+          "metrics": {
+            "server_total": {
+              "count": 100,
+              "mean_ms": 33.642920000000004,
+              "p50_ms": 33.571,
+              "p95_ms": 35.50585,
+              "p99_ms": 36.61427000000001,
+              "max_ms": 38.324,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "inference": {
+              "count": 100,
+              "mean_ms": 32.445570000000004,
+              "p50_ms": 32.4005,
+              "p95_ms": 34.012,
+              "p99_ms": 34.86400000000001,
+              "max_ms": 37.141,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "queues": {
+              "count": 100,
+              "mean_ms": 0.99977,
+              "p50_ms": 0.9615,
+              "p95_ms": 1.2264,
+              "p99_ms": 2.3945300000000005,
+              "max_ms": 2.546,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "round_trip": {
+              "count": 100,
+              "mean_ms": 49.70350600002348,
+              "p50_ms": 48.95345000022644,
+              "p95_ms": 57.118249999712134,
+              "p99_ms": 59.53051999964376,
+              "max_ms": 65.24480000007316,
+              "over_46ms": 96,
+              "over_50ms": 30
+            }
+          }
+        },
+        {
+          "start_measured_index": 200,
+          "frames": 100,
+          "metrics": {
+            "server_total": {
+              "count": 100,
+              "mean_ms": 33.71765,
+              "p50_ms": 33.8565,
+              "p95_ms": 35.4814,
+              "p99_ms": 35.86393,
+              "max_ms": 36.055,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "inference": {
+              "count": 100,
+              "mean_ms": 32.59859,
+              "p50_ms": 32.6905,
+              "p95_ms": 34.3371,
+              "p99_ms": 34.58152,
+              "max_ms": 34.732,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "queues": {
+              "count": 100,
+              "mean_ms": 0.92944,
+              "p50_ms": 0.9544999999999999,
+              "p95_ms": 1.0958999999999999,
+              "p99_ms": 1.191910000000001,
+              "max_ms": 1.381,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "round_trip": {
+              "count": 100,
+              "mean_ms": 50.054131999932,
+              "p50_ms": 49.795349999840255,
+              "p95_ms": 54.736735000096814,
+              "p99_ms": 61.01130899989585,
+              "max_ms": 62.81399999897985,
+              "over_46ms": 95,
+              "over_50ms": 44
+            }
+          }
+        }
+      ],
+      "server_frames_over_50ms": [],
+      "slowest_five_server_frames": [
+        {
+          "frame_id": 194,
+          "server_total_ms": 38.324,
+          "inference_ms": 37.141,
+          "queues_ms": 1.011,
+          "round_trip_ms": 59.47279999963939
+        },
+        {
+          "frame_id": 31,
+          "server_total_ms": 37.504,
+          "inference_ms": 36.391,
+          "queues_ms": 0.916,
+          "round_trip_ms": 52.23920000025828
+        },
+        {
+          "frame_id": 89,
+          "server_total_ms": 36.792,
+          "inference_ms": 35.462,
+          "queues_ms": 1.13,
+          "round_trip_ms": 51.75770000096236
+        },
+        {
+          "frame_id": 193,
+          "server_total_ms": 36.597,
+          "inference_ms": 33.838,
+          "queues_ms": 2.546,
+          "round_trip_ms": 52.668400001493865
+        },
+        {
+          "frame_id": 26,
+          "server_total_ms": 36.566,
+          "inference_ms": 34.425,
+          "queues_ms": 1.942,
+          "round_trip_ms": 52.18609999974433
+        }
+      ],
+      "id": "output-app-01-A",
+      "series": "output-app",
+      "run": 1,
+      "variant": "A",
+      "measured_frames": 300,
+      "warmup_frames": 20,
+      "finite_frames": 300,
+      "failures": [],
+      "metrics": {
+        "server_total": {
+          "count": 300,
+          "mean_ms": 33.64263666666667,
+          "p50_ms": 33.632000000000005,
+          "p95_ms": 35.59545000000001,
+          "p99_ms": 36.59895,
+          "max_ms": 38.324,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "inference": {
+          "count": 300,
+          "mean_ms": 32.48418,
+          "p50_ms": 32.451499999999996,
+          "p95_ms": 34.29705,
+          "p99_ms": 34.84721,
+          "max_ms": 37.141,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "queues": {
+          "count": 300,
+          "mean_ms": 0.96258,
+          "p50_ms": 0.954,
+          "p95_ms": 1.21005,
+          "p99_ms": 1.9464499999999958,
+          "max_ms": 2.546,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "round_trip": {
+          "count": 300,
+          "mean_ms": 50.015236333316956,
+          "p50_ms": 49.222099999497004,
+          "p95_ms": 56.12412500013306,
+          "p99_ms": 65.26847900007849,
+          "max_ms": 69.62810000004538,
+          "over_46ms": 289,
+          "over_50ms": 107
+        }
+      },
+      "health": {
+        "battery_c_range": [
+          33.8,
+          34.8
+        ],
+        "thermal_statuses": [
+          0
+        ],
+        "phone_samples": 17,
+        "power_save_observed": false
+      },
+      "protocol_pass": true,
+      "server_timing_pass": true,
+      "round_trip_timing_pass": false,
+      "driving_ready": false,
+      "all_320_output_hash_sequence_sha256": "27b866dcda4d9f97bff53a430d1994d130cd64a46bacadb82101af0176a0225c",
+      "measured_300_output_hash_sequence_sha256": "c1c5f1ad2d15266b456c242c89af2c0d3b166fe1c3e2dde058e6028cd5889603",
+      "summary_sha256": "e5f7ed90d6dce3310462798d819cbe014a38ff710b564e08218b50d9b8841da6",
+      "frame_evidence_sha256": "9b8ed45a08b71ab7dc78b121281117eb49f7b92713be1b7674c78a47dd6f3d80"
+    },
+    {
+      "blocks_100": [
+        {
+          "start_measured_index": 0,
+          "frames": 100,
+          "metrics": {
+            "server_total": {
+              "count": 100,
+              "mean_ms": 33.63463,
+              "p50_ms": 33.6665,
+              "p95_ms": 35.16005,
+              "p99_ms": 36.29912,
+              "max_ms": 36.905,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "inference": {
+              "count": 100,
+              "mean_ms": 32.41041,
+              "p50_ms": 32.456,
+              "p95_ms": 33.9045,
+              "p99_ms": 34.81111,
+              "max_ms": 35.614,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "queues": {
+              "count": 100,
+              "mean_ms": 1.02911,
+              "p50_ms": 1.005,
+              "p95_ms": 1.19395,
+              "p99_ms": 1.7469600000000127,
+              "max_ms": 4.218,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "round_trip": {
+              "count": 100,
+              "mean_ms": 50.65597199998592,
+              "p50_ms": 49.89500000010594,
+              "p95_ms": 57.12446499946964,
+              "p99_ms": 62.94484899988676,
+              "max_ms": 65.31580000046233,
+              "over_46ms": 99,
+              "over_50ms": 48
+            }
+          }
+        },
+        {
+          "start_measured_index": 100,
+          "frames": 100,
+          "metrics": {
+            "server_total": {
+              "count": 100,
+              "mean_ms": 33.33707,
+              "p50_ms": 33.474000000000004,
+              "p95_ms": 35.2167,
+              "p99_ms": 35.75934,
+              "max_ms": 35.991,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "inference": {
+              "count": 100,
+              "mean_ms": 32.15901,
+              "p50_ms": 32.283500000000004,
+              "p95_ms": 33.82535,
+              "p99_ms": 34.08253,
+              "max_ms": 34.135,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "queues": {
+              "count": 100,
+              "mean_ms": 0.98327,
+              "p50_ms": 0.9864999999999999,
+              "p95_ms": 1.3747,
+              "p99_ms": 1.908830000000002,
+              "max_ms": 2.288,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "round_trip": {
+              "count": 100,
+              "mean_ms": 49.86616399986815,
+              "p50_ms": 49.48829999921145,
+              "p95_ms": 57.04919500003598,
+              "p99_ms": 60.644554999707914,
+              "max_ms": 61.521200001152465,
+              "over_46ms": 93,
+              "over_50ms": 40
+            }
+          }
+        },
+        {
+          "start_measured_index": 200,
+          "frames": 100,
+          "metrics": {
+            "server_total": {
+              "count": 100,
+              "mean_ms": 33.51528,
+              "p50_ms": 33.561499999999995,
+              "p95_ms": 35.286449999999995,
+              "p99_ms": 36.025330000000004,
+              "max_ms": 36.256,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "inference": {
+              "count": 100,
+              "mean_ms": 32.30902,
+              "p50_ms": 32.343,
+              "p95_ms": 34.00395,
+              "p99_ms": 34.22954,
+              "max_ms": 34.283,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "queues": {
+              "count": 100,
+              "mean_ms": 0.99007,
+              "p50_ms": 0.9755,
+              "p95_ms": 1.2351999999999999,
+              "p99_ms": 1.2916000000000003,
+              "max_ms": 1.351,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "round_trip": {
+              "count": 100,
+              "mean_ms": 49.1294060000655,
+              "p50_ms": 48.872299999857205,
+              "p95_ms": 53.11871999992945,
+              "p99_ms": 55.29294700072569,
+              "max_ms": 55.436199998439406,
+              "over_46ms": 95,
+              "over_50ms": 30
+            }
+          }
+        }
+      ],
+      "server_frames_over_50ms": [],
+      "slowest_five_server_frames": [
+        {
+          "frame_id": 56,
+          "server_total_ms": 36.905,
+          "inference_ms": 35.614,
+          "queues_ms": 1.096,
+          "round_trip_ms": 54.50530000052822
+        },
+        {
+          "frame_id": 71,
+          "server_total_ms": 36.293,
+          "inference_ms": 31.948,
+          "queues_ms": 4.218,
+          "round_trip_ms": 52.78659999930824
+        },
+        {
+          "frame_id": 274,
+          "server_total_ms": 36.256,
+          "inference_ms": 33.319,
+          "queues_ms": 1.284,
+          "round_trip_ms": 52.883700000165845
+        },
+        {
+          "frame_id": 312,
+          "server_total_ms": 36.023,
+          "inference_ms": 34.218,
+          "queues_ms": 1.068,
+          "round_trip_ms": 55.29150000074878
+        },
+        {
+          "frame_id": 100,
+          "server_total_ms": 36.009,
+          "inference_ms": 34.803,
+          "queues_ms": 0.99,
+          "round_trip_ms": 50.27350000091246
+        }
+      ],
+      "id": "output-app-02-B",
+      "series": "output-app",
+      "run": 2,
+      "variant": "B",
+      "measured_frames": 300,
+      "warmup_frames": 20,
+      "finite_frames": 300,
+      "failures": [],
+      "metrics": {
+        "server_total": {
+          "count": 300,
+          "mean_ms": 33.49566,
+          "p50_ms": 33.554,
+          "p95_ms": 35.249750000000006,
+          "p99_ms": 36.025330000000004,
+          "max_ms": 36.905,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "inference": {
+          "count": 300,
+          "mean_ms": 32.292813333333335,
+          "p50_ms": 32.352000000000004,
+          "p95_ms": 33.9158,
+          "p99_ms": 34.28628,
+          "max_ms": 35.614,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "queues": {
+          "count": 300,
+          "mean_ms": 1.0008166666666667,
+          "p50_ms": 0.9884999999999999,
+          "p95_ms": 1.2595,
+          "p99_ms": 1.7238299999999984,
+          "max_ms": 4.218,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "round_trip": {
+          "count": 300,
+          "mean_ms": 49.88384733330653,
+          "p50_ms": 49.37985000015033,
+          "p95_ms": 55.441759998575435,
+          "p99_ms": 61.060552999715576,
+          "max_ms": 65.31580000046233,
+          "over_46ms": 287,
+          "over_50ms": 118
+        }
+      },
+      "health": {
+        "battery_c_range": [
+          34.1,
+          34.1
+        ],
+        "thermal_statuses": [
+          0
+        ],
+        "phone_samples": 17,
+        "power_save_observed": false
+      },
+      "protocol_pass": true,
+      "server_timing_pass": true,
+      "round_trip_timing_pass": false,
+      "driving_ready": false,
+      "all_320_output_hash_sequence_sha256": "27b866dcda4d9f97bff53a430d1994d130cd64a46bacadb82101af0176a0225c",
+      "measured_300_output_hash_sequence_sha256": "c1c5f1ad2d15266b456c242c89af2c0d3b166fe1c3e2dde058e6028cd5889603",
+      "summary_sha256": "6077a8c71a28e277ad7ec0d73406c2f1a384511137429fe59fcfc633974ce488",
+      "frame_evidence_sha256": "5ba919ce46ab658442fe4d165dbe11a24d31a896331e489a19d2eb4e2489725a"
+    },
+    {
+      "blocks_100": [
+        {
+          "start_measured_index": 0,
+          "frames": 100,
+          "metrics": {
+            "server_total": {
+              "count": 100,
+              "mean_ms": 34.4192,
+              "p50_ms": 34.3125,
+              "p95_ms": 36.8867,
+              "p99_ms": 37.158110000000015,
+              "max_ms": 40.337,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "inference": {
+              "count": 100,
+              "mean_ms": 33.05678,
+              "p50_ms": 32.991,
+              "p95_ms": 34.716,
+              "p99_ms": 35.75757,
+              "max_ms": 35.814,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "queues": {
+              "count": 100,
+              "mean_ms": 1.14812,
+              "p50_ms": 1.0755,
+              "p95_ms": 1.3355499999999998,
+              "p99_ms": 2.2194100000000154,
+              "max_ms": 5.23,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "round_trip": {
+              "count": 100,
+              "mean_ms": 50.61597100002473,
+              "p50_ms": 49.76470000019617,
+              "p95_ms": 59.35643499933576,
+              "p99_ms": 65.04190100096821,
+              "max_ms": 65.7547999999224,
+              "over_46ms": 99,
+              "over_50ms": 41
+            }
+          }
+        },
+        {
+          "start_measured_index": 100,
+          "frames": 100,
+          "metrics": {
+            "server_total": {
+              "count": 100,
+              "mean_ms": 34.12835,
+              "p50_ms": 34.2145,
+              "p95_ms": 35.964,
+              "p99_ms": 37.30449000000001,
+              "max_ms": 39.135,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "inference": {
+              "count": 100,
+              "mean_ms": 32.81091,
+              "p50_ms": 32.914500000000004,
+              "p95_ms": 34.4677,
+              "p99_ms": 35.21009000000001,
+              "max_ms": 35.615,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "queues": {
+              "count": 100,
+              "mean_ms": 1.13256,
+              "p50_ms": 1.072,
+              "p95_ms": 1.40015,
+              "p99_ms": 5.24478,
+              "max_ms": 5.322,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "round_trip": {
+              "count": 100,
+              "mean_ms": 50.04290699993362,
+              "p50_ms": 49.67250000026979,
+              "p95_ms": 55.06408000073861,
+              "p99_ms": 57.28936200013777,
+              "max_ms": 57.37469999985478,
+              "over_46ms": 92,
+              "over_50ms": 41
+            }
+          }
+        },
+        {
+          "start_measured_index": 200,
+          "frames": 100,
+          "metrics": {
+            "server_total": {
+              "count": 100,
+              "mean_ms": 34.52769,
+              "p50_ms": 34.4315,
+              "p95_ms": 36.7429,
+              "p99_ms": 37.573620000000005,
+              "max_ms": 38.526,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "inference": {
+              "count": 100,
+              "mean_ms": 33.22932,
+              "p50_ms": 33.093500000000006,
+              "p95_ms": 34.7988,
+              "p99_ms": 35.82381,
+              "max_ms": 36.102,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "queues": {
+              "count": 100,
+              "mean_ms": 1.05887,
+              "p50_ms": 1.0245,
+              "p95_ms": 1.30835,
+              "p99_ms": 1.8779300000000025,
+              "max_ms": 2.366,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "round_trip": {
+              "count": 100,
+              "mean_ms": 50.25333800000226,
+              "p50_ms": 49.617200000284356,
+              "p95_ms": 54.50924999986455,
+              "p99_ms": 58.143367001230274,
+              "max_ms": 69.68349999988277,
+              "over_46ms": 100,
+              "over_50ms": 41
+            }
+          }
+        }
+      ],
+      "server_frames_over_50ms": [],
+      "slowest_five_server_frames": [
+        {
+          "frame_id": 24,
+          "server_total_ms": 40.337,
+          "inference_ms": 33.908,
+          "queues_ms": 5.23,
+          "round_trip_ms": 58.794599999600905
+        },
+        {
+          "frame_id": 180,
+          "server_total_ms": 39.135,
+          "inference_ms": 33.587,
+          "queues_ms": 5.322,
+          "round_trip_ms": 57.28850000014063
+        },
+        {
+          "frame_id": 248,
+          "server_total_ms": 38.526,
+          "inference_ms": 34.111,
+          "queues_ms": 1.076,
+          "round_trip_ms": 56.208300000434974
+        },
+        {
+          "frame_id": 252,
+          "server_total_ms": 37.564,
+          "inference_ms": 36.102,
+          "queues_ms": 1.25,
+          "round_trip_ms": 50.98790000010922
+        },
+        {
+          "frame_id": 187,
+          "server_total_ms": 37.286,
+          "inference_ms": 31.921,
+          "queues_ms": 5.244,
+          "round_trip_ms": 52.25919999975304
+        }
+      ],
+      "id": "output-app-03-A",
+      "series": "output-app",
+      "run": 3,
+      "variant": "A",
+      "measured_frames": 300,
+      "warmup_frames": 20,
+      "finite_frames": 300,
+      "failures": [],
+      "metrics": {
+        "server_total": {
+          "count": 300,
+          "mean_ms": 34.35841333333333,
+          "p50_ms": 34.3125,
+          "p95_ms": 36.7429,
+          "p99_ms": 37.57361999999999,
+          "max_ms": 40.337,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "inference": {
+          "count": 300,
+          "mean_ms": 33.032336666666666,
+          "p50_ms": 33.0145,
+          "p95_ms": 34.7168,
+          "p99_ms": 35.757569999999994,
+          "max_ms": 36.102,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "queues": {
+          "count": 300,
+          "mean_ms": 1.1131833333333334,
+          "p50_ms": 1.062,
+          "p95_ms": 1.3762000000000003,
+          "p99_ms": 2.394639999999974,
+          "max_ms": 5.322,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "round_trip": {
+          "count": 300,
+          "mean_ms": 50.30407199998687,
+          "p50_ms": 49.70314999900438,
+          "p95_ms": 55.91190000031929,
+          "p99_ms": 63.42347499936294,
+          "max_ms": 69.68349999988277,
+          "over_46ms": 291,
+          "over_50ms": 123
+        }
+      },
+      "health": {
+        "battery_c_range": [
+          34.1,
+          34.2
+        ],
+        "thermal_statuses": [
+          0
+        ],
+        "phone_samples": 17,
+        "power_save_observed": false
+      },
+      "protocol_pass": true,
+      "server_timing_pass": true,
+      "round_trip_timing_pass": false,
+      "driving_ready": false,
+      "all_320_output_hash_sequence_sha256": "27b866dcda4d9f97bff53a430d1994d130cd64a46bacadb82101af0176a0225c",
+      "measured_300_output_hash_sequence_sha256": "c1c5f1ad2d15266b456c242c89af2c0d3b166fe1c3e2dde058e6028cd5889603",
+      "summary_sha256": "c6b587ec5045354ef6bae1aaf15d16f0d454c7ef94a1ee84dd915aa023fb268a",
+      "frame_evidence_sha256": "531160123bd49eb8cf5966feb08105c42d7c2da62d5c65f7db05218d356b5102"
+    },
+    {
+      "blocks_100": [
+        {
+          "start_measured_index": 0,
+          "frames": 100,
+          "metrics": {
+            "server_total": {
+              "count": 100,
+              "mean_ms": 34.34628,
+              "p50_ms": 34.1815,
+              "p95_ms": 35.9129,
+              "p99_ms": 38.044440000000016,
+              "max_ms": 39.87,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "inference": {
+              "count": 100,
+              "mean_ms": 33.11322,
+              "p50_ms": 33.021,
+              "p95_ms": 34.62455,
+              "p99_ms": 36.51004000000001,
+              "max_ms": 38.494,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "queues": {
+              "count": 100,
+              "mean_ms": 1.01455,
+              "p50_ms": 0.992,
+              "p95_ms": 1.29145,
+              "p99_ms": 1.3844900000000002,
+              "max_ms": 1.433,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "round_trip": {
+              "count": 100,
+              "mean_ms": 51.38465400013956,
+              "p50_ms": 50.129150000429945,
+              "p95_ms": 60.58178000002954,
+              "p99_ms": 74.56359299894758,
+              "max_ms": 76.67159999982687,
+              "over_46ms": 100,
+              "over_50ms": 54
+            }
+          }
+        },
+        {
+          "start_measured_index": 100,
+          "frames": 100,
+          "metrics": {
+            "server_total": {
+              "count": 100,
+              "mean_ms": 33.85949,
+              "p50_ms": 33.986999999999995,
+              "p95_ms": 35.8618,
+              "p99_ms": 37.25039000000001,
+              "max_ms": 38.576,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "inference": {
+              "count": 100,
+              "mean_ms": 32.66129,
+              "p50_ms": 32.7395,
+              "p95_ms": 34.58695,
+              "p99_ms": 35.85098000000001,
+              "max_ms": 37.136,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "queues": {
+              "count": 100,
+              "mean_ms": 0.98783,
+              "p50_ms": 1.0085,
+              "p95_ms": 1.1961,
+              "p99_ms": 1.253940000000001,
+              "max_ms": 1.446,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "round_trip": {
+              "count": 100,
+              "mean_ms": 50.28327100000752,
+              "p50_ms": 49.64499999914551,
+              "p95_ms": 56.13552000040726,
+              "p99_ms": 64.78637499993057,
+              "max_ms": 66.46689999979571,
+              "over_46ms": 92,
+              "over_50ms": 47
+            }
+          }
+        },
+        {
+          "start_measured_index": 200,
+          "frames": 100,
+          "metrics": {
+            "server_total": {
+              "count": 100,
+              "mean_ms": 34.23741,
+              "p50_ms": 34.3725,
+              "p95_ms": 35.8952,
+              "p99_ms": 36.96371,
+              "max_ms": 37.232,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "inference": {
+              "count": 100,
+              "mean_ms": 32.98825,
+              "p50_ms": 33.08,
+              "p95_ms": 34.599399999999996,
+              "p99_ms": 35.89289,
+              "max_ms": 35.981,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "queues": {
+              "count": 100,
+              "mean_ms": 1.03747,
+              "p50_ms": 1.011,
+              "p95_ms": 1.2547999999999997,
+              "p99_ms": 1.9118100000000036,
+              "max_ms": 2.586,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "round_trip": {
+              "count": 100,
+              "mean_ms": 50.58967000006305,
+              "p50_ms": 50.39180000039778,
+              "p95_ms": 54.35262500095632,
+              "p99_ms": 59.05479400031256,
+              "max_ms": 62.905300001148134,
+              "over_46ms": 100,
+              "over_50ms": 54
+            }
+          }
+        }
+      ],
+      "server_frames_over_50ms": [],
+      "slowest_five_server_frames": [
+        {
+          "frame_id": 65,
+          "server_total_ms": 39.87,
+          "inference_ms": 38.494,
+          "queues_ms": 1.153,
+          "round_trip_ms": 65.4670999992959
+        },
+        {
+          "frame_id": 151,
+          "server_total_ms": 38.576,
+          "inference_ms": 37.136,
+          "queues_ms": 1.195,
+          "round_trip_ms": 54.957199999989825
+        },
+        {
+          "frame_id": 113,
+          "server_total_ms": 38.026,
+          "inference_ms": 36.49,
+          "queues_ms": 1.319,
+          "round_trip_ms": 51.84649999864632
+        },
+        {
+          "frame_id": 26,
+          "server_total_ms": 37.336,
+          "inference_ms": 35.677,
+          "queues_ms": 1.433,
+          "round_trip_ms": 52.38860000099521
+        },
+        {
+          "frame_id": 191,
+          "server_total_ms": 37.237,
+          "inference_ms": 35.838,
+          "queues_ms": 1.148,
+          "round_trip_ms": 52.51270000007935
+        }
+      ],
+      "id": "output-app-04-B",
+      "series": "output-app",
+      "run": 4,
+      "variant": "B",
+      "measured_frames": 300,
+      "warmup_frames": 20,
+      "finite_frames": 300,
+      "failures": [],
+      "metrics": {
+        "server_total": {
+          "count": 300,
+          "mean_ms": 34.147726666666664,
+          "p50_ms": 34.1525,
+          "p95_ms": 35.896100000000004,
+          "p99_ms": 37.34289999999999,
+          "max_ms": 39.87,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "inference": {
+          "count": 300,
+          "mean_ms": 32.92092,
+          "p50_ms": 32.858,
+          "p95_ms": 34.6182,
+          "p99_ms": 35.98609,
+          "max_ms": 38.494,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "queues": {
+          "count": 300,
+          "mean_ms": 1.0132833333333333,
+          "p50_ms": 1.0059999999999998,
+          "p95_ms": 1.249,
+          "p99_ms": 1.43313,
+          "max_ms": 2.586,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "round_trip": {
+          "count": 300,
+          "mean_ms": 50.75253166673671,
+          "p50_ms": 50.049249999574386,
+          "p95_ms": 56.08487000035895,
+          "p99_ms": 65.47709799930088,
+          "max_ms": 76.67159999982687,
+          "over_46ms": 292,
+          "over_50ms": 155
+        }
+      },
+      "health": {
+        "battery_c_range": [
+          34.1,
+          34.2
+        ],
+        "thermal_statuses": [
+          0
+        ],
+        "phone_samples": 17,
+        "power_save_observed": false
+      },
+      "protocol_pass": true,
+      "server_timing_pass": true,
+      "round_trip_timing_pass": false,
+      "driving_ready": false,
+      "all_320_output_hash_sequence_sha256": "27b866dcda4d9f97bff53a430d1994d130cd64a46bacadb82101af0176a0225c",
+      "measured_300_output_hash_sequence_sha256": "c1c5f1ad2d15266b456c242c89af2c0d3b166fe1c3e2dde058e6028cd5889603",
+      "summary_sha256": "958fab5e5178435fda3f50a9d0c571bab922ebc5d8cd2c18ae9c9634c5336905",
+      "frame_evidence_sha256": "8e5431acf3db62b3e75f0f323174037041d79eb2d945247814be2622cb64d408"
+    },
+    {
+      "blocks_100": [
+        {
+          "start_measured_index": 0,
+          "frames": 100,
+          "metrics": {
+            "server_total": {
+              "count": 100,
+              "mean_ms": 34.50546,
+              "p50_ms": 34.482,
+              "p95_ms": 36.02225,
+              "p99_ms": 38.03066000000001,
+              "max_ms": 39.68,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "inference": {
+              "count": 100,
+              "mean_ms": 33.14789,
+              "p50_ms": 33.1125,
+              "p95_ms": 34.793699999999994,
+              "p99_ms": 36.552459999999996,
+              "max_ms": 36.796,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "queues": {
+              "count": 100,
+              "mean_ms": 1.12788,
+              "p50_ms": 1.0935000000000001,
+              "p95_ms": 1.4264999999999999,
+              "p99_ms": 2.1811900000000035,
+              "max_ms": 2.893,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "round_trip": {
+              "count": 100,
+              "mean_ms": 50.73943800001871,
+              "p50_ms": 50.21530000067287,
+              "p95_ms": 56.80183499944178,
+              "p99_ms": 60.30221100094424,
+              "max_ms": 62.76839999918593,
+              "over_46ms": 100,
+              "over_50ms": 54
+            }
+          }
+        },
+        {
+          "start_measured_index": 100,
+          "frames": 100,
+          "metrics": {
+            "server_total": {
+              "count": 100,
+              "mean_ms": 34.19762,
+              "p50_ms": 34.082,
+              "p95_ms": 35.8043,
+              "p99_ms": 36.69736000000001,
+              "max_ms": 37.624,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "inference": {
+              "count": 100,
+              "mean_ms": 32.89789,
+              "p50_ms": 32.826499999999996,
+              "p95_ms": 34.55245,
+              "p99_ms": 34.95427000000001,
+              "max_ms": 36.268,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "queues": {
+              "count": 100,
+              "mean_ms": 1.08218,
+              "p50_ms": 1.085,
+              "p95_ms": 1.4529499999999997,
+              "p99_ms": 1.8675600000000054,
+              "max_ms": 2.913,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "round_trip": {
+              "count": 100,
+              "mean_ms": 50.87052199991376,
+              "p50_ms": 50.08364999957848,
+              "p95_ms": 61.355679998541746,
+              "p99_ms": 67.0831959995303,
+              "max_ms": 70.72599999992235,
+              "over_46ms": 93,
+              "over_50ms": 51
+            }
+          }
+        },
+        {
+          "start_measured_index": 200,
+          "frames": 100,
+          "metrics": {
+            "server_total": {
+              "count": 100,
+              "mean_ms": 34.64306,
+              "p50_ms": 34.656499999999994,
+              "p95_ms": 36.278549999999996,
+              "p99_ms": 36.720040000000004,
+              "max_ms": 36.823,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "inference": {
+              "count": 100,
+              "mean_ms": 33.36453,
+              "p50_ms": 33.3685,
+              "p95_ms": 34.9545,
+              "p99_ms": 35.30153000000001,
+              "max_ms": 35.651,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "queues": {
+              "count": 100,
+              "mean_ms": 1.08453,
+              "p50_ms": 1.065,
+              "p95_ms": 1.3072,
+              "p99_ms": 1.4750400000000006,
+              "max_ms": 1.578,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "round_trip": {
+              "count": 100,
+              "mean_ms": 51.37689899995166,
+              "p50_ms": 50.45399999926303,
+              "p95_ms": 59.22847999872828,
+              "p99_ms": 65.82501800017782,
+              "max_ms": 67.80679999974382,
+              "over_46ms": 100,
+              "over_50ms": 61
+            }
+          }
+        }
+      ],
+      "server_frames_over_50ms": [],
+      "slowest_five_server_frames": [
+        {
+          "frame_id": 25,
+          "server_total_ms": 39.68,
+          "inference_ms": 36.55,
+          "queues_ms": 2.893,
+          "round_trip_ms": 54.52530000002298
+        },
+        {
+          "frame_id": 59,
+          "server_total_ms": 38.014,
+          "inference_ms": 36.796,
+          "queues_ms": 1.004,
+          "round_trip_ms": 57.31550000018615
+        },
+        {
+          "frame_id": 143,
+          "server_total_ms": 37.624,
+          "inference_ms": 36.268,
+          "queues_ms": 1.125,
+          "round_trip_ms": 52.65090000102646
+        },
+        {
+          "frame_id": 304,
+          "server_total_ms": 36.823,
+          "inference_ms": 35.651,
+          "queues_ms": 0.959,
+          "round_trip_ms": 51.778099999864935
+        },
+        {
+          "frame_id": 318,
+          "server_total_ms": 36.719,
+          "inference_ms": 35.298,
+          "queues_ms": 1.209,
+          "round_trip_ms": 53.652900000088266
+        }
+      ],
+      "id": "output-app-05-A",
+      "series": "output-app",
+      "run": 5,
+      "variant": "A",
+      "measured_frames": 300,
+      "warmup_frames": 20,
+      "finite_frames": 300,
+      "failures": [],
+      "metrics": {
+        "server_total": {
+          "count": 300,
+          "mean_ms": 34.44871333333333,
+          "p50_ms": 34.4615,
+          "p95_ms": 36.1601,
+          "p99_ms": 36.83100999999999,
+          "max_ms": 39.68,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "inference": {
+          "count": 300,
+          "mean_ms": 33.13677,
+          "p50_ms": 33.1475,
+          "p95_ms": 34.8412,
+          "p99_ms": 35.65717,
+          "max_ms": 36.796,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "queues": {
+          "count": 300,
+          "mean_ms": 1.0981966666666667,
+          "p50_ms": 1.0785,
+          "p95_ms": 1.423,
+          "p99_ms": 1.860169999999997,
+          "max_ms": 2.913,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "round_trip": {
+          "count": 300,
+          "mean_ms": 50.995619666628045,
+          "p50_ms": 50.27475000042614,
+          "p95_ms": 59.128084998701524,
+          "p99_ms": 65.81741400017562,
+          "max_ms": 70.72599999992235,
+          "over_46ms": 293,
+          "over_50ms": 166
+        }
+      },
+      "health": {
+        "battery_c_range": [
+          34.1,
+          34.3
+        ],
+        "thermal_statuses": [
+          0
+        ],
+        "phone_samples": 17,
+        "power_save_observed": false
+      },
+      "protocol_pass": true,
+      "server_timing_pass": true,
+      "round_trip_timing_pass": false,
+      "driving_ready": false,
+      "all_320_output_hash_sequence_sha256": "27b866dcda4d9f97bff53a430d1994d130cd64a46bacadb82101af0176a0225c",
+      "measured_300_output_hash_sequence_sha256": "c1c5f1ad2d15266b456c242c89af2c0d3b166fe1c3e2dde058e6028cd5889603",
+      "summary_sha256": "be07417ef95486ea331253ddbc4932e2e51385987c3968fcf7dda54a5095658e",
+      "frame_evidence_sha256": "1b3e64512b9c730a2b568bfdce8028666a1c949173f51a19319a4491ed674dc4"
+    },
+    {
+      "blocks_100": [
+        {
+          "start_measured_index": 0,
+          "frames": 100,
+          "metrics": {
+            "server_total": {
+              "count": 100,
+              "mean_ms": 33.92774,
+              "p50_ms": 33.647,
+              "p95_ms": 35.94,
+              "p99_ms": 36.93406000000002,
+              "max_ms": 40.108,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "inference": {
+              "count": 100,
+              "mean_ms": 32.53141,
+              "p50_ms": 32.336,
+              "p95_ms": 34.355999999999995,
+              "p99_ms": 35.74219,
+              "max_ms": 35.761,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "queues": {
+              "count": 100,
+              "mean_ms": 1.18113,
+              "p50_ms": 1.119,
+              "p95_ms": 1.55585,
+              "p99_ms": 3.4717000000000002,
+              "max_ms": 3.541,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "round_trip": {
+              "count": 100,
+              "mean_ms": 50.538146999933815,
+              "p50_ms": 50.05549999896175,
+              "p95_ms": 54.72234500039121,
+              "p99_ms": 58.76921899942321,
+              "max_ms": 65.24569999965024,
+              "over_46ms": 100,
+              "over_50ms": 53
+            }
+          }
+        },
+        {
+          "start_measured_index": 100,
+          "frames": 100,
+          "metrics": {
+            "server_total": {
+              "count": 100,
+              "mean_ms": 33.77398,
+              "p50_ms": 33.647999999999996,
+              "p95_ms": 35.735899999999994,
+              "p99_ms": 36.454580000000014,
+              "max_ms": 39.482,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "inference": {
+              "count": 100,
+              "mean_ms": 32.42634,
+              "p50_ms": 32.340999999999994,
+              "p95_ms": 34.030550000000005,
+              "p99_ms": 34.738730000000004,
+              "max_ms": 35.108,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "queues": {
+              "count": 100,
+              "mean_ms": 1.0998999999999999,
+              "p50_ms": 1.05,
+              "p95_ms": 1.3570499999999992,
+              "p99_ms": 2.7945500000000107,
+              "max_ms": 4.829,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "round_trip": {
+              "count": 100,
+              "mean_ms": 50.724832999949285,
+              "p50_ms": 49.7150999999576,
+              "p95_ms": 56.51503000026423,
+              "p99_ms": 69.11174199902236,
+              "max_ms": 71.80870000047435,
+              "over_46ms": 97,
+              "over_50ms": 44
+            }
+          }
+        },
+        {
+          "start_measured_index": 200,
+          "frames": 100,
+          "metrics": {
+            "server_total": {
+              "count": 100,
+              "mean_ms": 33.47998,
+              "p50_ms": 33.3305,
+              "p95_ms": 35.175149999999995,
+              "p99_ms": 35.67782,
+              "max_ms": 35.759,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "inference": {
+              "count": 100,
+              "mean_ms": 32.18247,
+              "p50_ms": 32.132000000000005,
+              "p95_ms": 33.844,
+              "p99_ms": 34.38815,
+              "max_ms": 34.601,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "queues": {
+              "count": 100,
+              "mean_ms": 1.09911,
+              "p50_ms": 1.1,
+              "p95_ms": 1.2947999999999997,
+              "p99_ms": 2.1963900000000005,
+              "max_ms": 2.235,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "round_trip": {
+              "count": 100,
+              "mean_ms": 50.17329599990262,
+              "p50_ms": 49.08564999914233,
+              "p95_ms": 55.81315999997968,
+              "p99_ms": 61.709960000826,
+              "max_ms": 70.2794000007998,
+              "over_46ms": 98,
+              "over_50ms": 36
+            }
+          }
+        }
+      ],
+      "server_frames_over_50ms": [],
+      "slowest_five_server_frames": [
+        {
+          "frame_id": 26,
+          "server_total_ms": 40.108,
+          "inference_ms": 35.761,
+          "queues_ms": 3.541,
+          "round_trip_ms": 57.70229999870935
+        },
+        {
+          "frame_id": 191,
+          "server_total_ms": 39.482,
+          "inference_ms": 34.443,
+          "queues_ms": 4.829,
+          "round_trip_ms": 56.314499999643886
+        },
+        {
+          "frame_id": 41,
+          "server_total_ms": 36.902,
+          "inference_ms": 35.742,
+          "queues_ms": 0.971,
+          "round_trip_ms": 51.88540000017383
+        },
+        {
+          "frame_id": 47,
+          "server_total_ms": 36.771,
+          "inference_ms": 35.048,
+          "queues_ms": 1.524,
+          "round_trip_ms": 54.13049999879149
+        },
+        {
+          "frame_id": 201,
+          "server_total_ms": 36.424,
+          "inference_ms": 33.662,
+          "queues_ms": 2.13,
+          "round_trip_ms": 52.046999999220134
+        }
+      ],
+      "id": "output-app-06-B",
+      "series": "output-app",
+      "run": 6,
+      "variant": "B",
+      "measured_frames": 300,
+      "warmup_frames": 20,
+      "finite_frames": 300,
+      "failures": [],
+      "metrics": {
+        "server_total": {
+          "count": 300,
+          "mean_ms": 33.72723333333333,
+          "p50_ms": 33.561,
+          "p95_ms": 35.652300000000004,
+          "p99_ms": 36.77231,
+          "max_ms": 40.108,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "inference": {
+          "count": 300,
+          "mean_ms": 32.380073333333335,
+          "p50_ms": 32.289500000000004,
+          "p95_ms": 34.179899999999996,
+          "p99_ms": 35.0486,
+          "max_ms": 35.761,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "queues": {
+          "count": 300,
+          "mean_ms": 1.1267133333333332,
+          "p50_ms": 1.087,
+          "p95_ms": 1.5002500000000003,
+          "p99_ms": 2.7809699999999937,
+          "max_ms": 4.829,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "round_trip": {
+          "count": 300,
+          "mean_ms": 50.47875866659524,
+          "p50_ms": 49.59089999920252,
+          "p95_ms": 56.51503000026423,
+          "p99_ms": 66.16102999974825,
+          "max_ms": 71.80870000047435,
+          "over_46ms": 295,
+          "over_50ms": 133
+        }
+      },
+      "health": {
+        "battery_c_range": [
+          34.1,
+          34.3
+        ],
+        "thermal_statuses": [
+          0
+        ],
+        "phone_samples": 17,
+        "power_save_observed": false
+      },
+      "protocol_pass": true,
+      "server_timing_pass": true,
+      "round_trip_timing_pass": false,
+      "driving_ready": false,
+      "all_320_output_hash_sequence_sha256": "27b866dcda4d9f97bff53a430d1994d130cd64a46bacadb82101af0176a0225c",
+      "measured_300_output_hash_sequence_sha256": "c1c5f1ad2d15266b456c242c89af2c0d3b166fe1c3e2dde058e6028cd5889603",
+      "summary_sha256": "2473366d7d63d220c6e3c456726cbdddfd03b2f8c5f59d009a1d44445d653b54",
+      "frame_evidence_sha256": "844114ec3a30753b3c27ea8b0aca3165461347fcea0a0448ebb06042a71eed22"
+    },
+    {
+      "blocks_100": [
+        {
+          "start_measured_index": 0,
+          "frames": 100,
+          "metrics": {
+            "server_total": {
+              "count": 100,
+              "mean_ms": 33.59482,
+              "p50_ms": 33.6405,
+              "p95_ms": 35.4789,
+              "p99_ms": 35.941430000000004,
+              "max_ms": 36.182,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "inference": {
+              "count": 100,
+              "mean_ms": 32.28778,
+              "p50_ms": 32.3305,
+              "p95_ms": 33.9525,
+              "p99_ms": 34.61393,
+              "max_ms": 34.706,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "queues": {
+              "count": 100,
+              "mean_ms": 1.10229,
+              "p50_ms": 1.0995,
+              "p95_ms": 1.48655,
+              "p99_ms": 1.854910000000001,
+              "max_ms": 2.044,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "round_trip": {
+              "count": 100,
+              "mean_ms": 49.798105000045325,
+              "p50_ms": 49.2611500003477,
+              "p95_ms": 54.07419499970273,
+              "p99_ms": 66.6409460002069,
+              "max_ms": 67.47710000126972,
+              "over_46ms": 94,
+              "over_50ms": 35
+            }
+          }
+        },
+        {
+          "start_measured_index": 100,
+          "frames": 100,
+          "metrics": {
+            "server_total": {
+              "count": 100,
+              "mean_ms": 33.60291,
+              "p50_ms": 33.658,
+              "p95_ms": 35.27905,
+              "p99_ms": 35.789320000000004,
+              "max_ms": 36.415,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "inference": {
+              "count": 100,
+              "mean_ms": 32.26426,
+              "p50_ms": 32.323499999999996,
+              "p95_ms": 33.808550000000004,
+              "p99_ms": 34.24300000000001,
+              "max_ms": 35.134,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "queues": {
+              "count": 100,
+              "mean_ms": 1.12918,
+              "p50_ms": 1.0945,
+              "p95_ms": 1.5183999999999997,
+              "p99_ms": 2.0350200000000025,
+              "max_ms": 2.532,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "round_trip": {
+              "count": 100,
+              "mean_ms": 49.39421500001117,
+              "p50_ms": 49.23440000038681,
+              "p95_ms": 51.99304500074504,
+              "p99_ms": 66.47123599983388,
+              "max_ms": 66.7816999994102,
+              "over_46ms": 93,
+              "over_50ms": 30
+            }
+          }
+        },
+        {
+          "start_measured_index": 200,
+          "frames": 100,
+          "metrics": {
+            "server_total": {
+              "count": 100,
+              "mean_ms": 33.69138,
+              "p50_ms": 33.7055,
+              "p95_ms": 35.2605,
+              "p99_ms": 35.705670000000005,
+              "max_ms": 35.97,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "inference": {
+              "count": 100,
+              "mean_ms": 32.32313,
+              "p50_ms": 32.262,
+              "p95_ms": 33.96835,
+              "p99_ms": 34.224309999999996,
+              "max_ms": 34.255,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "queues": {
+              "count": 100,
+              "mean_ms": 1.15627,
+              "p50_ms": 1.084,
+              "p95_ms": 1.5892499999999994,
+              "p99_ms": 2.174780000000006,
+              "max_ms": 3.341,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "round_trip": {
+              "count": 100,
+              "mean_ms": 49.677420999978494,
+              "p50_ms": 49.00679999991553,
+              "p95_ms": 54.18621999933748,
+              "p99_ms": 64.7089169996616,
+              "max_ms": 64.96799999877112,
+              "over_46ms": 97,
+              "over_50ms": 32
+            }
+          }
+        }
+      ],
+      "server_frames_over_50ms": [],
+      "slowest_five_server_frames": [
+        {
+          "frame_id": 153,
+          "server_total_ms": 36.415,
+          "inference_ms": 35.134,
+          "queues_ms": 1.091,
+          "round_trip_ms": 50.464100000681356
+        },
+        {
+          "frame_id": 21,
+          "server_total_ms": 36.182,
+          "inference_ms": 34.706,
+          "queues_ms": 1.191,
+          "round_trip_ms": 53.02099999971688
+        },
+        {
+          "frame_id": 297,
+          "server_total_ms": 35.97,
+          "inference_ms": 33.838,
+          "queues_ms": 1.841,
+          "round_trip_ms": 50.684600000749924
+        },
+        {
+          "frame_id": 31,
+          "server_total_ms": 35.939,
+          "inference_ms": 33.359,
+          "queues_ms": 1.016,
+          "round_trip_ms": 51.38000000079046
+        },
+        {
+          "frame_id": 25,
+          "server_total_ms": 35.884,
+          "inference_ms": 34.057,
+          "queues_ms": 1.099,
+          "round_trip_ms": 51.933099999587284
+        }
+      ],
+      "id": "output-app-07-B",
+      "series": "output-app",
+      "run": 7,
+      "variant": "B",
+      "measured_frames": 300,
+      "warmup_frames": 20,
+      "finite_frames": 300,
+      "failures": [],
+      "metrics": {
+        "server_total": {
+          "count": 300,
+          "mean_ms": 33.62970333333333,
+          "p50_ms": 33.667,
+          "p95_ms": 35.37545,
+          "p99_ms": 35.93931,
+          "max_ms": 36.415,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "inference": {
+          "count": 300,
+          "mean_ms": 32.29172333333333,
+          "p50_ms": 32.318,
+          "p95_ms": 33.94805,
+          "p99_ms": 34.25858,
+          "max_ms": 35.134,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "queues": {
+          "count": 300,
+          "mean_ms": 1.1292466666666667,
+          "p50_ms": 1.0935000000000001,
+          "p95_ms": 1.5462000000000002,
+          "p99_ms": 2.045189999999999,
+          "max_ms": 3.341,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "round_trip": {
+          "count": 300,
+          "mean_ms": 49.623247000011666,
+          "p50_ms": 49.154400000588794,
+          "p95_ms": 53.94380500074476,
+          "p99_ms": 66.46974399984174,
+          "max_ms": 67.47710000126972,
+          "over_46ms": 284,
+          "over_50ms": 97
+        }
+      },
+      "health": {
+        "battery_c_range": [
+          34.1,
+          34.1
+        ],
+        "thermal_statuses": [
+          0
+        ],
+        "phone_samples": 17,
+        "power_save_observed": false
+      },
+      "protocol_pass": true,
+      "server_timing_pass": true,
+      "round_trip_timing_pass": false,
+      "driving_ready": false,
+      "all_320_output_hash_sequence_sha256": "27b866dcda4d9f97bff53a430d1994d130cd64a46bacadb82101af0176a0225c",
+      "measured_300_output_hash_sequence_sha256": "c1c5f1ad2d15266b456c242c89af2c0d3b166fe1c3e2dde058e6028cd5889603",
+      "summary_sha256": "f7d35a2e783f63cecfcd5306f963dcfd99ca6688b5bcf48b7cb101487e4f1cf6",
+      "frame_evidence_sha256": "a38a5bc95552c23144a71f933a911d3a2074ed8e9832e32b57561c998b2699b5"
+    },
+    {
+      "blocks_100": [
+        {
+          "start_measured_index": 0,
+          "frames": 100,
+          "metrics": {
+            "server_total": {
+              "count": 100,
+              "mean_ms": 34.57284,
+              "p50_ms": 34.3485,
+              "p95_ms": 36.247749999999996,
+              "p99_ms": 37.930130000000005,
+              "max_ms": 38.339,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "inference": {
+              "count": 100,
+              "mean_ms": 33.28466,
+              "p50_ms": 33.0855,
+              "p95_ms": 35.08255,
+              "p99_ms": 35.99321,
+              "max_ms": 36.707,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "queues": {
+              "count": 100,
+              "mean_ms": 1.07842,
+              "p50_ms": 1.0445,
+              "p95_ms": 1.26125,
+              "p99_ms": 1.5334000000000008,
+              "max_ms": 1.672,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "round_trip": {
+              "count": 100,
+              "mean_ms": 50.80239199985954,
+              "p50_ms": 49.72654999983206,
+              "p95_ms": 56.163415000446534,
+              "p99_ms": 66.03610699923595,
+              "max_ms": 71.21449999976903,
+              "over_46ms": 100,
+              "over_50ms": 46
+            }
+          }
+        },
+        {
+          "start_measured_index": 100,
+          "frames": 100,
+          "metrics": {
+            "server_total": {
+              "count": 100,
+              "mean_ms": 34.32711,
+              "p50_ms": 34.3785,
+              "p95_ms": 36.3445,
+              "p99_ms": 37.082050000000024,
+              "max_ms": 40.75,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "inference": {
+              "count": 100,
+              "mean_ms": 32.9845,
+              "p50_ms": 33.003,
+              "p95_ms": 34.92675,
+              "p99_ms": 35.19023000000001,
+              "max_ms": 35.411,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "queues": {
+              "count": 100,
+              "mean_ms": 1.13169,
+              "p50_ms": 1.0835,
+              "p95_ms": 1.35235,
+              "p99_ms": 2.822540000000024,
+              "max_ms": 7.529,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "round_trip": {
+              "count": 100,
+              "mean_ms": 51.22774500012383,
+              "p50_ms": 50.05284999970172,
+              "p95_ms": 58.50125000006301,
+              "p99_ms": 68.14004700017928,
+              "max_ms": 114.72419999881822,
+              "over_46ms": 94,
+              "over_50ms": 52
+            }
+          }
+        },
+        {
+          "start_measured_index": 200,
+          "frames": 100,
+          "metrics": {
+            "server_total": {
+              "count": 100,
+              "mean_ms": 34.31496,
+              "p50_ms": 34.269000000000005,
+              "p95_ms": 36.42535,
+              "p99_ms": 37.343790000000006,
+              "max_ms": 38.016,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "inference": {
+              "count": 100,
+              "mean_ms": 32.99483,
+              "p50_ms": 32.943,
+              "p95_ms": 34.7726,
+              "p99_ms": 35.88945,
+              "max_ms": 36.033,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "queues": {
+              "count": 100,
+              "mean_ms": 1.13331,
+              "p50_ms": 1.0455,
+              "p95_ms": 1.6235999999999995,
+              "p99_ms": 2.7029800000000046,
+              "max_ms": 3.592,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "round_trip": {
+              "count": 100,
+              "mean_ms": 50.47317800002929,
+              "p50_ms": 49.95020000023942,
+              "p95_ms": 54.86427000023468,
+              "p99_ms": 61.99358100060636,
+              "max_ms": 63.16979999974137,
+              "over_46ms": 100,
+              "over_50ms": 49
+            }
+          }
+        }
+      ],
+      "server_frames_over_50ms": [],
+      "slowest_five_server_frames": [
+        {
+          "frame_id": 162,
+          "server_total_ms": 40.75,
+          "inference_ms": 32.993,
+          "queues_ms": 7.529,
+          "round_trip_ms": 67.66950000019278
+        },
+        {
+          "frame_id": 75,
+          "server_total_ms": 38.339,
+          "inference_ms": 36.707,
+          "queues_ms": 1.196,
+          "round_trip_ms": 52.38889999964158
+        },
+        {
+          "frame_id": 278,
+          "server_total_ms": 38.016,
+          "inference_ms": 35.888,
+          "queues_ms": 1.806,
+          "round_trip_ms": 54.07780000132334
+        },
+        {
+          "frame_id": 50,
+          "server_total_ms": 37.926,
+          "inference_ms": 35.986,
+          "queues_ms": 1.672,
+          "round_trip_ms": 54.78880000009667
+        },
+        {
+          "frame_id": 236,
+          "server_total_ms": 37.337,
+          "inference_ms": 36.033,
+          "queues_ms": 1.129,
+          "round_trip_ms": 53.05650000082096
+        }
+      ],
+      "id": "output-app-08-A",
+      "series": "output-app",
+      "run": 8,
+      "variant": "A",
+      "measured_frames": 300,
+      "warmup_frames": 20,
+      "finite_frames": 300,
+      "failures": [],
+      "metrics": {
+        "server_total": {
+          "count": 300,
+          "mean_ms": 34.40497,
+          "p50_ms": 34.337,
+          "p95_ms": 36.392,
+          "p99_ms": 37.9269,
+          "max_ms": 40.75,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "inference": {
+          "count": 300,
+          "mean_ms": 33.08799666666667,
+          "p50_ms": 33.015,
+          "p95_ms": 34.926750000000006,
+          "p99_ms": 35.89591,
+          "max_ms": 36.707,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "queues": {
+          "count": 300,
+          "mean_ms": 1.1144733333333334,
+          "p50_ms": 1.0630000000000002,
+          "p95_ms": 1.3835000000000002,
+          "p99_ms": 2.694809999999999,
+          "max_ms": 7.529,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "round_trip": {
+          "count": 300,
+          "mean_ms": 50.83443833333755,
+          "p50_ms": 49.960850000388746,
+          "p95_ms": 56.36235999963901,
+          "p99_ms": 66.00065699924015,
+          "max_ms": 114.72419999881822,
+          "over_46ms": 294,
+          "over_50ms": 147
+        }
+      },
+      "health": {
+        "battery_c_range": [
+          34.1,
+          34.5
+        ],
+        "thermal_statuses": [
+          0
+        ],
+        "phone_samples": 17,
+        "power_save_observed": false
+      },
+      "protocol_pass": true,
+      "server_timing_pass": true,
+      "round_trip_timing_pass": false,
+      "driving_ready": false,
+      "all_320_output_hash_sequence_sha256": "27b866dcda4d9f97bff53a430d1994d130cd64a46bacadb82101af0176a0225c",
+      "measured_300_output_hash_sequence_sha256": "c1c5f1ad2d15266b456c242c89af2c0d3b166fe1c3e2dde058e6028cd5889603",
+      "summary_sha256": "d6b440d98d086ce4533e714b9f195102daf634891968228833b52eed11b644eb",
+      "frame_evidence_sha256": "b4d00cbc2f5fd9013e616fa7af91a5ba58f66f94db654d1a8a688f0c33f44c6d"
+    },
+    {
+      "blocks_100": [
+        {
+          "start_measured_index": 0,
+          "frames": 100,
+          "metrics": {
+            "server_total": {
+              "count": 100,
+              "mean_ms": 34.35219,
+              "p50_ms": 34.385,
+              "p95_ms": 35.7532,
+              "p99_ms": 36.51725,
+              "max_ms": 36.938,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "inference": {
+              "count": 100,
+              "mean_ms": 33.03221,
+              "p50_ms": 33.0685,
+              "p95_ms": 34.46125,
+              "p99_ms": 35.04822,
+              "max_ms": 35.565,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "queues": {
+              "count": 100,
+              "mean_ms": 1.08584,
+              "p50_ms": 1.0655000000000001,
+              "p95_ms": 1.40435,
+              "p99_ms": 1.5064600000000028,
+              "max_ms": 2.047,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "round_trip": {
+              "count": 100,
+              "mean_ms": 51.01113400005488,
+              "p50_ms": 50.5201500000112,
+              "p95_ms": 55.61693999916315,
+              "p99_ms": 61.59457400099201,
+              "max_ms": 64.22540000130539,
+              "over_46ms": 100,
+              "over_50ms": 63
+            }
+          }
+        },
+        {
+          "start_measured_index": 100,
+          "frames": 100,
+          "metrics": {
+            "server_total": {
+              "count": 100,
+              "mean_ms": 33.75392,
+              "p50_ms": 33.972,
+              "p95_ms": 35.55395,
+              "p99_ms": 36.003960000000006,
+              "max_ms": 36.792,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "inference": {
+              "count": 100,
+              "mean_ms": 32.54227,
+              "p50_ms": 32.626999999999995,
+              "p95_ms": 34.30165,
+              "p99_ms": 34.91209,
+              "max_ms": 35.515,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "queues": {
+              "count": 100,
+              "mean_ms": 1.01641,
+              "p50_ms": 1.029,
+              "p95_ms": 1.2792499999999998,
+              "p99_ms": 1.823730000000001,
+              "max_ms": 1.995,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "round_trip": {
+              "count": 100,
+              "mean_ms": 50.54316099987773,
+              "p50_ms": 49.758800000745396,
+              "p95_ms": 56.02681500058679,
+              "p99_ms": 65.67363100124582,
+              "max_ms": 95.01039999850036,
+              "over_46ms": 92,
+              "over_50ms": 48
+            }
+          }
+        },
+        {
+          "start_measured_index": 200,
+          "frames": 100,
+          "metrics": {
+            "server_total": {
+              "count": 100,
+              "mean_ms": 34.11213,
+              "p50_ms": 34.046499999999995,
+              "p95_ms": 35.7091,
+              "p99_ms": 36.090180000000004,
+              "max_ms": 36.306,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "inference": {
+              "count": 100,
+              "mean_ms": 32.83445,
+              "p50_ms": 32.784499999999994,
+              "p95_ms": 34.413149999999995,
+              "p99_ms": 34.653819999999996,
+              "max_ms": 34.735,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "queues": {
+              "count": 100,
+              "mean_ms": 1.05471,
+              "p50_ms": 1.0375,
+              "p95_ms": 1.3674,
+              "p99_ms": 1.5919300000000005,
+              "max_ms": 1.684,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "round_trip": {
+              "count": 100,
+              "mean_ms": 50.22815200012701,
+              "p50_ms": 49.476050000521354,
+              "p95_ms": 54.17053999944983,
+              "p99_ms": 64.88158799935266,
+              "max_ms": 70.41449999996985,
+              "over_46ms": 99,
+              "over_50ms": 37
+            }
+          }
+        }
+      ],
+      "server_frames_over_50ms": [],
+      "slowest_five_server_frames": [
+        {
+          "frame_id": 35,
+          "server_total_ms": 36.938,
+          "inference_ms": 35.565,
+          "queues_ms": 1.13,
+          "round_trip_ms": 53.37539999891305
+        },
+        {
+          "frame_id": 206,
+          "server_total_ms": 36.792,
+          "inference_ms": 35.515,
+          "queues_ms": 1.033,
+          "round_trip_ms": 58.00269999963348
+        },
+        {
+          "frame_id": 80,
+          "server_total_ms": 36.513,
+          "inference_ms": 35.043,
+          "queues_ms": 1.187,
+          "round_trip_ms": 52.443599999605794
+        },
+        {
+          "frame_id": 104,
+          "server_total_ms": 36.337,
+          "inference_ms": 34.04,
+          "queues_ms": 2.047,
+          "round_trip_ms": 51.688800000192714
+        },
+        {
+          "frame_id": 285,
+          "server_total_ms": 36.306,
+          "inference_ms": 33.9,
+          "queues_ms": 0.969,
+          "round_trip_ms": 53.6686000014015
+        }
+      ],
+      "id": "output-app-09-B",
+      "series": "output-app",
+      "run": 9,
+      "variant": "B",
+      "measured_frames": 300,
+      "warmup_frames": 20,
+      "finite_frames": 300,
+      "failures": [],
+      "metrics": {
+        "server_total": {
+          "count": 300,
+          "mean_ms": 34.07274666666667,
+          "p50_ms": 34.076499999999996,
+          "p95_ms": 35.70845,
+          "p99_ms": 36.33876,
+          "max_ms": 36.938,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "inference": {
+          "count": 300,
+          "mean_ms": 32.802976666666666,
+          "p50_ms": 32.8335,
+          "p95_ms": 34.42585,
+          "p99_ms": 34.90737,
+          "max_ms": 35.565,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "queues": {
+          "count": 300,
+          "mean_ms": 1.05232,
+          "p50_ms": 1.0425,
+          "p95_ms": 1.3669500000000003,
+          "p99_ms": 1.6853799999999988,
+          "max_ms": 2.047,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "round_trip": {
+          "count": 300,
+          "mean_ms": 50.594149000019875,
+          "p50_ms": 49.97769999954471,
+          "p95_ms": 55.61420499916494,
+          "p99_ms": 64.83121599936567,
+          "max_ms": 95.01039999850036,
+          "over_46ms": 291,
+          "over_50ms": 148
+        }
+      },
+      "health": {
+        "battery_c_range": [
+          34.2,
+          34.2
+        ],
+        "thermal_statuses": [
+          0
+        ],
+        "phone_samples": 17,
+        "power_save_observed": false
+      },
+      "protocol_pass": true,
+      "server_timing_pass": true,
+      "round_trip_timing_pass": false,
+      "driving_ready": false,
+      "all_320_output_hash_sequence_sha256": "27b866dcda4d9f97bff53a430d1994d130cd64a46bacadb82101af0176a0225c",
+      "measured_300_output_hash_sequence_sha256": "c1c5f1ad2d15266b456c242c89af2c0d3b166fe1c3e2dde058e6028cd5889603",
+      "summary_sha256": "ca69a5cfb5f31d613f0ad9423bfc6f89bf116dd27c052d4507ba4e120ff370ab",
+      "frame_evidence_sha256": "303925787c1d8c2b30a04ffd15f40e6d8d8c43cac26030bd551a9e9001c26e3c"
+    },
+    {
+      "blocks_100": [
+        {
+          "start_measured_index": 0,
+          "frames": 100,
+          "metrics": {
+            "server_total": {
+              "count": 100,
+              "mean_ms": 34.1187,
+              "p50_ms": 33.911500000000004,
+              "p95_ms": 35.99275,
+              "p99_ms": 37.028470000000006,
+              "max_ms": 37.57,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "inference": {
+              "count": 100,
+              "mean_ms": 32.84457,
+              "p50_ms": 32.617000000000004,
+              "p95_ms": 34.69515,
+              "p99_ms": 35.86162,
+              "max_ms": 36.121,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "queues": {
+              "count": 100,
+              "mean_ms": 1.08426,
+              "p50_ms": 1.0375,
+              "p95_ms": 1.33425,
+              "p99_ms": 1.5404200000000003,
+              "max_ms": 1.582,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "round_trip": {
+              "count": 100,
+              "mean_ms": 49.99350399995819,
+              "p50_ms": 49.47040000115521,
+              "p95_ms": 53.97273500057054,
+              "p99_ms": 60.00726199948989,
+              "max_ms": 66.26030000006722,
+              "over_46ms": 98,
+              "over_50ms": 39
+            }
+          }
+        },
+        {
+          "start_measured_index": 100,
+          "frames": 100,
+          "metrics": {
+            "server_total": {
+              "count": 100,
+              "mean_ms": 33.721379999999996,
+              "p50_ms": 33.8245,
+              "p95_ms": 35.811749999999996,
+              "p99_ms": 36.151199999999996,
+              "max_ms": 36.27,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "inference": {
+              "count": 100,
+              "mean_ms": 32.51681,
+              "p50_ms": 32.59,
+              "p95_ms": 34.34695,
+              "p99_ms": 34.78835,
+              "max_ms": 35.12,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "queues": {
+              "count": 100,
+              "mean_ms": 1.0094,
+              "p50_ms": 0.9984999999999999,
+              "p95_ms": 1.26885,
+              "p99_ms": 1.4853200000000017,
+              "max_ms": 1.814,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "round_trip": {
+              "count": 100,
+              "mean_ms": 50.402710999878764,
+              "p50_ms": 49.288150000393216,
+              "p95_ms": 61.27901999980167,
+              "p99_ms": 69.78512999909073,
+              "max_ms": 71.8868999992992,
+              "over_46ms": 95,
+              "over_50ms": 36
+            }
+          }
+        },
+        {
+          "start_measured_index": 200,
+          "frames": 100,
+          "metrics": {
+            "server_total": {
+              "count": 100,
+              "mean_ms": 33.99184,
+              "p50_ms": 33.870999999999995,
+              "p95_ms": 35.65485,
+              "p99_ms": 36.242070000000005,
+              "max_ms": 37.734,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "inference": {
+              "count": 100,
+              "mean_ms": 32.75545,
+              "p50_ms": 32.649,
+              "p95_ms": 34.4789,
+              "p99_ms": 34.784440000000004,
+              "max_ms": 36.313,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "queues": {
+              "count": 100,
+              "mean_ms": 1.04199,
+              "p50_ms": 1.0299999999999998,
+              "p95_ms": 1.2379,
+              "p99_ms": 1.3577600000000003,
+              "max_ms": 1.433,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "round_trip": {
+              "count": 100,
+              "mean_ms": 50.19952099990405,
+              "p50_ms": 49.46099999961007,
+              "p95_ms": 55.07653999957256,
+              "p99_ms": 60.06963200110486,
+              "max_ms": 78.5065999989456,
+              "over_46ms": 99,
+              "over_50ms": 39
+            }
+          }
+        }
+      ],
+      "server_frames_over_50ms": [],
+      "slowest_five_server_frames": [
+        {
+          "frame_id": 229,
+          "server_total_ms": 37.734,
+          "inference_ms": 36.313,
+          "queues_ms": 1.184,
+          "round_trip_ms": 55.05819999962114
+        },
+        {
+          "frame_id": 111,
+          "server_total_ms": 37.57,
+          "inference_ms": 36.121,
+          "queues_ms": 1.236,
+          "round_trip_ms": 52.26260000017646
+        },
+        {
+          "frame_id": 54,
+          "server_total_ms": 37.023,
+          "inference_ms": 35.859,
+          "queues_ms": 0.957,
+          "round_trip_ms": 53.93820000062988
+        },
+        {
+          "frame_id": 40,
+          "server_total_ms": 36.445,
+          "inference_ms": 35.22,
+          "queues_ms": 1.043,
+          "round_trip_ms": 51.90749999928812
+        },
+        {
+          "frame_id": 38,
+          "server_total_ms": 36.29,
+          "inference_ms": 34.979,
+          "queues_ms": 1.188,
+          "round_trip_ms": 52.327399998830515
+        }
+      ],
+      "id": "output-app-10-A",
+      "series": "output-app",
+      "run": 10,
+      "variant": "A",
+      "measured_frames": 300,
+      "warmup_frames": 20,
+      "finite_frames": 300,
+      "failures": [],
+      "metrics": {
+        "server_total": {
+          "count": 300,
+          "mean_ms": 33.94397333333333,
+          "p50_ms": 33.8775,
+          "p95_ms": 35.84595,
+          "p99_ms": 36.450779999999995,
+          "max_ms": 37.734,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "inference": {
+          "count": 300,
+          "mean_ms": 32.70561,
+          "p50_ms": 32.628,
+          "p95_ms": 34.55325,
+          "p99_ms": 35.226389999999995,
+          "max_ms": 36.313,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "queues": {
+          "count": 300,
+          "mean_ms": 1.0452166666666667,
+          "p50_ms": 1.026,
+          "p95_ms": 1.2860500000000001,
+          "p99_ms": 1.4825799999999996,
+          "max_ms": 1.814,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "round_trip": {
+          "count": 300,
+          "mean_ms": 50.19857866658034,
+          "p50_ms": 49.44520000026387,
+          "p95_ms": 55.45797999875504,
+          "p99_ms": 66.2953360000574,
+          "max_ms": 78.5065999989456,
+          "over_46ms": 292,
+          "over_50ms": 114
+        }
+      },
+      "health": {
+        "battery_c_range": [
+          34.2,
+          34.4
+        ],
+        "thermal_statuses": [
+          0
+        ],
+        "phone_samples": 17,
+        "power_save_observed": false
+      },
+      "protocol_pass": true,
+      "server_timing_pass": true,
+      "round_trip_timing_pass": false,
+      "driving_ready": false,
+      "all_320_output_hash_sequence_sha256": "27b866dcda4d9f97bff53a430d1994d130cd64a46bacadb82101af0176a0225c",
+      "measured_300_output_hash_sequence_sha256": "c1c5f1ad2d15266b456c242c89af2c0d3b166fe1c3e2dde058e6028cd5889603",
+      "summary_sha256": "70c4a4343c993d28f3f042bbc5e423d18ecdcad22f852024f408256f3ad1b8bb",
+      "frame_evidence_sha256": "3d8c71dc3dfefb2e0215d42c8b325a6f75a37518fcf0b4ac4d843659c8225621"
+    },
+    {
+      "blocks_100": [
+        {
+          "start_measured_index": 0,
+          "frames": 100,
+          "metrics": {
+            "server_total": {
+              "count": 100,
+              "mean_ms": 34.43693,
+              "p50_ms": 34.3305,
+              "p95_ms": 35.949999999999996,
+              "p99_ms": 36.43266,
+              "max_ms": 36.597,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "inference": {
+              "count": 100,
+              "mean_ms": 33.06983,
+              "p50_ms": 33.025999999999996,
+              "p95_ms": 34.5336,
+              "p99_ms": 34.75244000000001,
+              "max_ms": 35.093,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "queues": {
+              "count": 100,
+              "mean_ms": 1.16995,
+              "p50_ms": 1.1045,
+              "p95_ms": 1.65155,
+              "p99_ms": 2.4386000000000023,
+              "max_ms": 2.894,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "round_trip": {
+              "count": 100,
+              "mean_ms": 51.20282799991401,
+              "p50_ms": 50.419549999787705,
+              "p95_ms": 57.88876499873368,
+              "p99_ms": 63.35854799925074,
+              "max_ms": 64.7393999988708,
+              "over_46ms": 100,
+              "over_50ms": 60
+            }
+          }
+        },
+        {
+          "start_measured_index": 100,
+          "frames": 100,
+          "metrics": {
+            "server_total": {
+              "count": 100,
+              "mean_ms": 34.1798,
+              "p50_ms": 34.169,
+              "p95_ms": 35.8682,
+              "p99_ms": 35.932860000000005,
+              "max_ms": 36.315,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "inference": {
+              "count": 100,
+              "mean_ms": 32.91444,
+              "p50_ms": 32.911500000000004,
+              "p95_ms": 34.3793,
+              "p99_ms": 34.64804,
+              "max_ms": 35.147,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "queues": {
+              "count": 100,
+              "mean_ms": 1.06015,
+              "p50_ms": 1.06,
+              "p95_ms": 1.2988,
+              "p99_ms": 1.3976400000000007,
+              "max_ms": 1.56,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "round_trip": {
+              "count": 100,
+              "mean_ms": 50.16145800003869,
+              "p50_ms": 49.65785000058531,
+              "p95_ms": 55.62294499886775,
+              "p99_ms": 64.17805600027351,
+              "max_ms": 67.02489999952377,
+              "over_46ms": 95,
+              "over_50ms": 43
+            }
+          }
+        },
+        {
+          "start_measured_index": 200,
+          "frames": 100,
+          "metrics": {
+            "server_total": {
+              "count": 100,
+              "mean_ms": 34.22361,
+              "p50_ms": 34.313500000000005,
+              "p95_ms": 35.88625,
+              "p99_ms": 36.38036,
+              "max_ms": 36.614,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "inference": {
+              "count": 100,
+              "mean_ms": 32.92655,
+              "p50_ms": 32.966499999999996,
+              "p95_ms": 34.5433,
+              "p99_ms": 34.87332000000001,
+              "max_ms": 35.4,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "queues": {
+              "count": 100,
+              "mean_ms": 1.10051,
+              "p50_ms": 1.0910000000000002,
+              "p95_ms": 1.3703,
+              "p99_ms": 2.0271000000000057,
+              "max_ms": 3.126,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "round_trip": {
+              "count": 100,
+              "mean_ms": 50.48443699999552,
+              "p50_ms": 49.662099999295606,
+              "p95_ms": 54.48906000092392,
+              "p99_ms": 68.6756769986278,
+              "max_ms": 75.97960000020976,
+              "over_46ms": 97,
+              "over_50ms": 37
+            }
+          }
+        }
+      ],
+      "server_frames_over_50ms": [],
+      "slowest_five_server_frames": [
+        {
+          "frame_id": 281,
+          "server_total_ms": 36.614,
+          "inference_ms": 35.4,
+          "queues_ms": 1.001,
+          "round_trip_ms": 53.98629999945115
+        },
+        {
+          "frame_id": 23,
+          "server_total_ms": 36.597,
+          "inference_ms": 34.545,
+          "queues_ms": 1.85,
+          "round_trip_ms": 53.50179999913962
+        },
+        {
+          "frame_id": 115,
+          "server_total_ms": 36.431,
+          "inference_ms": 35.093,
+          "queues_ms": 1.04,
+          "round_trip_ms": 51.32749999938824
+        },
+        {
+          "frame_id": 317,
+          "server_total_ms": 36.378,
+          "inference_ms": 34.868,
+          "queues_ms": 1.179,
+          "round_trip_ms": 52.82980000083626
+        },
+        {
+          "frame_id": 79,
+          "server_total_ms": 36.36,
+          "inference_ms": 34.648,
+          "queues_ms": 1.512,
+          "round_trip_ms": 51.01549999926647
+        }
+      ],
+      "id": "output-app-11-B",
+      "series": "output-app",
+      "run": 11,
+      "variant": "B",
+      "measured_frames": 300,
+      "warmup_frames": 20,
+      "finite_frames": 300,
+      "failures": [],
+      "metrics": {
+        "server_total": {
+          "count": 300,
+          "mean_ms": 34.28011333333333,
+          "p50_ms": 34.2565,
+          "p95_ms": 35.87805,
+          "p99_ms": 36.37853,
+          "max_ms": 36.614,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "inference": {
+          "count": 300,
+          "mean_ms": 32.97027333333333,
+          "p50_ms": 32.968,
+          "p95_ms": 34.522549999999995,
+          "p99_ms": 34.87025,
+          "max_ms": 35.4,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "queues": {
+          "count": 300,
+          "mean_ms": 1.1102033333333334,
+          "p50_ms": 1.0845,
+          "p95_ms": 1.38365,
+          "p99_ms": 2.0201799999999963,
+          "max_ms": 3.126,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "round_trip": {
+          "count": 300,
+          "mean_ms": 50.61624099998274,
+          "p50_ms": 49.90584999995917,
+          "p95_ms": 56.82771500023592,
+          "p99_ms": 64.76225499887731,
+          "max_ms": 75.97960000020976,
+          "over_46ms": 292,
+          "over_50ms": 140
+        }
+      },
+      "health": {
+        "battery_c_range": [
+          34.2,
+          34.3
+        ],
+        "thermal_statuses": [
+          0
+        ],
+        "phone_samples": 17,
+        "power_save_observed": false
+      },
+      "protocol_pass": true,
+      "server_timing_pass": true,
+      "round_trip_timing_pass": false,
+      "driving_ready": false,
+      "all_320_output_hash_sequence_sha256": "27b866dcda4d9f97bff53a430d1994d130cd64a46bacadb82101af0176a0225c",
+      "measured_300_output_hash_sequence_sha256": "c1c5f1ad2d15266b456c242c89af2c0d3b166fe1c3e2dde058e6028cd5889603",
+      "summary_sha256": "026bcdee1cf7d8e5c2691d14b1c47131984ef602aa55cfd4622f5b65f3ac0b7c",
+      "frame_evidence_sha256": "6d21be210c6541aa7a7bca60d48f57538c88f8cbd7a0d3cdf33f81093cc50f6d"
+    },
+    {
+      "blocks_100": [
+        {
+          "start_measured_index": 0,
+          "frames": 100,
+          "metrics": {
+            "server_total": {
+              "count": 100,
+              "mean_ms": 33.76356,
+              "p50_ms": 33.5135,
+              "p95_ms": 36.057449999999996,
+              "p99_ms": 40.26166000000004,
+              "max_ms": 47.554,
+              "over_46ms": 1,
+              "over_50ms": 0
+            },
+            "inference": {
+              "count": 100,
+              "mean_ms": 32.51373,
+              "p50_ms": 32.2265,
+              "p95_ms": 34.30245,
+              "p99_ms": 38.90392000000002,
+              "max_ms": 42.658,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "queues": {
+              "count": 100,
+              "mean_ms": 1.04897,
+              "p50_ms": 1.0074999999999998,
+              "p95_ms": 1.2924499999999999,
+              "p99_ms": 3.105970000000008,
+              "max_ms": 4.687,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "round_trip": {
+              "count": 100,
+              "mean_ms": 49.644202000090445,
+              "p50_ms": 48.74124999969354,
+              "p95_ms": 55.22970500005612,
+              "p99_ms": 68.97267499980447,
+              "max_ms": 73.0985000009241,
+              "over_46ms": 93,
+              "over_50ms": 29
+            }
+          }
+        },
+        {
+          "start_measured_index": 100,
+          "frames": 100,
+          "metrics": {
+            "server_total": {
+              "count": 100,
+              "mean_ms": 33.54164,
+              "p50_ms": 33.4825,
+              "p95_ms": 35.57425,
+              "p99_ms": 36.647840000000016,
+              "max_ms": 39.503,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "inference": {
+              "count": 100,
+              "mean_ms": 32.29024,
+              "p50_ms": 32.2065,
+              "p95_ms": 33.93985,
+              "p99_ms": 34.909920000000014,
+              "max_ms": 38.268,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "queues": {
+              "count": 100,
+              "mean_ms": 1.0499,
+              "p50_ms": 1.0179999999999998,
+              "p95_ms": 1.3054999999999999,
+              "p99_ms": 2.366590000000012,
+              "max_ms": 4.702,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "round_trip": {
+              "count": 100,
+              "mean_ms": 50.66390299985869,
+              "p50_ms": 49.156500000208325,
+              "p95_ms": 58.42806999935419,
+              "p99_ms": 68.90633600043668,
+              "max_ms": 91.80860000014945,
+              "over_46ms": 97,
+              "over_50ms": 37
+            }
+          }
+        },
+        {
+          "start_measured_index": 200,
+          "frames": 100,
+          "metrics": {
+            "server_total": {
+              "count": 100,
+              "mean_ms": 33.67006,
+              "p50_ms": 33.7705,
+              "p95_ms": 35.6573,
+              "p99_ms": 39.87403,
+              "max_ms": 39.976,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "inference": {
+              "count": 100,
+              "mean_ms": 32.357639999999996,
+              "p50_ms": 32.4405,
+              "p95_ms": 33.998149999999995,
+              "p99_ms": 36.569610000000004,
+              "max_ms": 37.422,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "queues": {
+              "count": 100,
+              "mean_ms": 1.10766,
+              "p50_ms": 1.064,
+              "p95_ms": 1.6310499999999997,
+              "p99_ms": 2.1364600000000054,
+              "max_ms": 3.172,
+              "over_46ms": 0,
+              "over_50ms": 0
+            },
+            "round_trip": {
+              "count": 100,
+              "mean_ms": 51.68475699998453,
+              "p50_ms": 50.09890000019368,
+              "p95_ms": 63.66194500060374,
+              "p99_ms": 71.33988800023873,
+              "max_ms": 74.35819999955129,
+              "over_46ms": 100,
+              "over_50ms": 51
+            }
+          }
+        }
+      ],
+      "server_frames_over_50ms": [],
+      "slowest_five_server_frames": [
+        {
+          "frame_id": 94,
+          "server_total_ms": 47.554,
+          "inference_ms": 42.658,
+          "queues_ms": 4.687,
+          "round_trip_ms": 73.0985000009241
+        },
+        {
+          "frame_id": 21,
+          "server_total_ms": 40.188,
+          "inference_ms": 38.866,
+          "queues_ms": 1.007,
+          "round_trip_ms": 56.78970000008121
+        },
+        {
+          "frame_id": 276,
+          "server_total_ms": 39.976,
+          "inference_ms": 36.561,
+          "queues_ms": 3.172,
+          "round_trip_ms": 57.54009999873233
+        },
+        {
+          "frame_id": 224,
+          "server_total_ms": 39.873,
+          "inference_ms": 37.422,
+          "queues_ms": 1.063,
+          "round_trip_ms": 71.30940000024566
+        },
+        {
+          "frame_id": 202,
+          "server_total_ms": 39.503,
+          "inference_ms": 38.268,
+          "queues_ms": 1.031,
+          "round_trip_ms": 56.0948999991524
+        }
+      ],
+      "id": "output-app-12-A",
+      "series": "output-app",
+      "run": 12,
+      "variant": "A",
+      "measured_frames": 300,
+      "warmup_frames": 20,
+      "finite_frames": 300,
+      "failures": [],
+      "metrics": {
+        "server_total": {
+          "count": 300,
+          "mean_ms": 33.65842,
+          "p50_ms": 33.572500000000005,
+          "p95_ms": 35.75155,
+          "p99_ms": 39.87403,
+          "max_ms": 47.554,
+          "over_46ms": 1,
+          "over_50ms": 0
+        },
+        "inference": {
+          "count": 300,
+          "mean_ms": 32.38720333333333,
+          "p50_ms": 32.334500000000006,
+          "p95_ms": 34.27145,
+          "p99_ms": 37.43045999999999,
+          "max_ms": 42.658,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "queues": {
+          "count": 300,
+          "mean_ms": 1.0688433333333334,
+          "p50_ms": 1.031,
+          "p95_ms": 1.4262500000000007,
+          "p99_ms": 3.090819999999999,
+          "max_ms": 4.702,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "round_trip": {
+          "count": 300,
+          "mean_ms": 50.66428733331122,
+          "p50_ms": 49.324950000482204,
+          "p95_ms": 60.295939999650734,
+          "p99_ms": 71.32729100025243,
+          "max_ms": 91.80860000014945,
+          "over_46ms": 290,
+          "over_50ms": 117
+        }
+      },
+      "health": {
+        "battery_c_range": [
+          34.3,
+          34.7
+        ],
+        "thermal_statuses": [
+          0
+        ],
+        "phone_samples": 17,
+        "power_save_observed": false
+      },
+      "protocol_pass": true,
+      "server_timing_pass": true,
+      "round_trip_timing_pass": false,
+      "driving_ready": false,
+      "all_320_output_hash_sequence_sha256": "27b866dcda4d9f97bff53a430d1994d130cd64a46bacadb82101af0176a0225c",
+      "measured_300_output_hash_sequence_sha256": "c1c5f1ad2d15266b456c242c89af2c0d3b166fe1c3e2dde058e6028cd5889603",
+      "summary_sha256": "2ff6c1ef32a102dbb11d1ee5a42d22fc80d3d24244c13c55c6b024f515aed385",
+      "frame_evidence_sha256": "367ac7da4b33aae27e82cd2a25419752ba88fd4d04be7361b3c03b5d3652be64"
+    }
+  ],
+  "pairs": [
+    {
+      "pair": 1,
+      "order": "AB",
+      "A": "output-app-01-A",
+      "B": "output-app-02-B",
+      "gain_A_minus_B_ms": {
+        "server_total": 0.1469766666666672,
+        "inference": 0.19136666666666713,
+        "queues": -0.0382366666666667,
+        "round_trip": 0.1313890000104294
+      }
+    },
+    {
+      "pair": 2,
+      "order": "AB",
+      "A": "output-app-03-A",
+      "B": "output-app-04-B",
+      "gain_A_minus_B_ms": {
+        "server_total": 0.21068666666666758,
+        "inference": 0.11141666666666339,
+        "queues": 0.0999000000000001,
+        "round_trip": -0.44845966674984084
+      }
+    },
+    {
+      "pair": 3,
+      "order": "AB",
+      "A": "output-app-05-A",
+      "B": "output-app-06-B",
+      "gain_A_minus_B_ms": {
+        "server_total": 0.7214799999999997,
+        "inference": 0.756696666666663,
+        "queues": -0.028516666666666524,
+        "round_trip": 0.5168610000328044
+      }
+    },
+    {
+      "pair": 4,
+      "order": "BA",
+      "A": "output-app-08-A",
+      "B": "output-app-07-B",
+      "gain_A_minus_B_ms": {
+        "server_total": 0.775266666666667,
+        "inference": 0.7962733333333389,
+        "queues": -0.014773333333333305,
+        "round_trip": 1.2111913333258855
+      }
+    },
+    {
+      "pair": 5,
+      "order": "BA",
+      "A": "output-app-10-A",
+      "B": "output-app-09-B",
+      "gain_A_minus_B_ms": {
+        "server_total": -0.12877333333333496,
+        "inference": -0.09736666666666594,
+        "queues": -0.007103333333333239,
+        "round_trip": -0.3955703334395366
+      }
+    },
+    {
+      "pair": 6,
+      "order": "BA",
+      "A": "output-app-12-A",
+      "B": "output-app-11-B",
+      "gain_A_minus_B_ms": {
+        "server_total": -0.621693333333333,
+        "inference": -0.5830699999999993,
+        "queues": -0.04136000000000006,
+        "round_trip": 0.04804633332847885
+      }
+    }
+  ],
+  "pooled_by_variant": {
+    "A": {
+      "label": "imported output RARELY; managed inputs; SDK v2.1",
+      "runs": 6,
+      "measured_frames": 1800,
+      "metrics": {
+        "server_total": {
+          "count": 1800,
+          "mean_ms": 34.076187777777776,
+          "p50_ms": 34.0225,
+          "p95_ms": 36.0768,
+          "p99_ms": 37.56406,
+          "max_ms": 47.554,
+          "over_46ms": 1,
+          "over_50ms": 0
+        },
+        "inference": {
+          "count": 1800,
+          "mean_ms": 32.805682777777776,
+          "p50_ms": 32.7685,
+          "p95_ms": 34.672,
+          "p99_ms": 35.85929,
+          "max_ms": 42.658,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "queues": {
+          "count": 1800,
+          "mean_ms": 1.0670822222222223,
+          "p50_ms": 1.035,
+          "p95_ms": 1.3422999999999998,
+          "p99_ms": 2.274689999999999,
+          "max_ms": 7.529,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "round_trip": {
+          "count": 1800,
+          "mean_ms": 50.5020387221935,
+          "p50_ms": 49.68009999993228,
+          "p95_ms": 57.553134998852315,
+          "p99_ms": 67.05206299953716,
+          "max_ms": 114.72419999881822,
+          "over_46ms": 1749,
+          "over_50ms": 774
+        }
+      }
+    },
+    "B": {
+      "label": "imported output OFTEN; managed inputs; SDK v2.1",
+      "runs": 6,
+      "measured_frames": 1800,
+      "metrics": {
+        "server_total": {
+          "count": 1800,
+          "mean_ms": 33.89219722222222,
+          "p50_ms": 33.8965,
+          "p95_ms": 35.7262,
+          "p99_ms": 36.47934,
+          "max_ms": 40.108,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "inference": {
+          "count": 1800,
+          "mean_ms": 32.60979666666667,
+          "p50_ms": 32.609,
+          "p95_ms": 34.3621,
+          "p99_ms": 35.09315,
+          "max_ms": 38.494,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "queues": {
+          "count": 1800,
+          "mean_ms": 1.0720972222222223,
+          "p50_ms": 1.051,
+          "p95_ms": 1.3760499999999998,
+          "p99_ms": 2.04403,
+          "max_ms": 4.829,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "round_trip": {
+          "count": 1800,
+          "mean_ms": 50.324795777775456,
+          "p50_ms": 49.657550000119954,
+          "p95_ms": 55.90593000079025,
+          "p99_ms": 65.31641500047044,
+          "max_ms": 95.01039999850036,
+          "over_46ms": 1741,
+          "over_50ms": 791
+        }
+      }
+    }
+  },
+  "paired_inference": {
+    "server_total": {
+      "replication_unit": "run_pair",
+      "pairs": 6,
+      "mean_A_minus_B_ms": 0.18399055555555557,
+      "bootstrap_percentile_95_ci_ms": [
+        -0.20116333333333358,
+        0.5585261111111114
+      ],
+      "bootstrap_resamples": 50000,
+      "bootstrap_seed": 202610175,
+      "exact_two_sided_paired_sign_flip_p": 0.34375,
+      "sign_flip_assignments": 64,
+      "pairs_favor_B": 4,
+      "pairs_favor_A": 2,
+      "leave_one_pair_out_gain_range_ms": [
+        0.0657353333333333,
+        0.3451273333333333
+      ],
+      "role": "primary"
+    },
+    "inference": {
+      "replication_unit": "run_pair",
+      "pairs": 6,
+      "mean_A_minus_B_ms": 0.1958861111111112,
+      "bootstrap_percentile_95_ci_ms": [
+        -0.18967333333333394,
+        0.5681205555555557
+      ],
+      "bootstrap_resamples": 50000,
+      "bootstrap_seed": 202610175,
+      "exact_two_sided_paired_sign_flip_p": 0.3125,
+      "sign_flip_assignments": 64,
+      "pairs_favor_B": 4,
+      "pairs_favor_A": 2,
+      "leave_one_pair_out_gain_range_ms": [
+        0.07580866666666566,
+        0.3516773333333333
+      ],
+      "role": "exploratory_secondary"
+    },
+    "queues": {
+      "replication_unit": "run_pair",
+      "pairs": 6,
+      "mean_A_minus_B_ms": -0.005014999999999954,
+      "bootstrap_percentile_95_ci_ms": [
+        -0.03374722222222223,
+        0.039410555555555615
+      ],
+      "bootstrap_resamples": 50000,
+      "bootstrap_seed": 202610175,
+      "exact_two_sided_paired_sign_flip_p": 0.875,
+      "sign_flip_assignments": 64,
+      "pairs_favor_B": 1,
+      "pairs_favor_A": 5,
+      "leave_one_pair_out_gain_range_ms": [
+        -0.025997999999999966,
+        0.002254000000000067
+      ],
+      "role": "exploratory_secondary"
+    },
+    "round_trip": {
+      "replication_unit": "run_pair",
+      "pairs": 6,
+      "mean_A_minus_B_ms": 0.17724294441803679,
+      "bootstrap_percentile_95_ci_ms": [
+        -0.24636188894470004,
+        0.6477089444302256
+      ],
+      "bootstrap_resamples": 50000,
+      "bootstrap_seed": 202610175,
+      "exact_two_sided_paired_sign_flip_p": 0.53125,
+      "sign_flip_assignments": 64,
+      "pairs_favor_B": 4,
+      "pairs_favor_A": 2,
+      "leave_one_pair_out_gain_range_ms": [
+        -0.029546733363532952,
+        0.3023834666516123
+      ],
+      "role": "exploratory_secondary"
+    }
+  },
+  "output_equality": {
+    "all_320_corresponding_hashes_equal_across_12_runs": true,
+    "includes_warmups": true,
+    "all_320_equal_to_preserved_production_reference": true,
+    "sequence_sha256": "27b866dcda4d9f97bff53a430d1994d130cd64a46bacadb82101af0176a0225c",
+    "scope": "Finite recurrent fixture; not universal model accuracy proof"
+  },
+  "health": {
+    "battery_c_range": [
+      33.8,
+      34.8
+    ],
+    "thermal_statuses": [
+      0
+    ]
+  },
+  "manifest_sha256": "34931bad2b0e9c40699cf48664011bc86e99df7f8c2c38ef196c314361c288ac",
+  "reference_raw_frames_sha256": "61a6cff545cae5cca5cef1769d43389cf2148c94b5b3c183d72c3be01b94cb23",
+  "limitations": [
+    "Six run pairs are the replication unit, not3600 independent experiments; two-sided exact sign-flip resolution is0.03125 at best.",
+    "Bootstrap resamples pairs. Exchangeability, approximate independence and stable device conditions remain assumptions.",
+    "Inference, queues, roundtrip and tail summaries are exploratory secondary metrics without multiplicity correction.",
+    "All frames and outliers are retained; pooled quantiles are descriptive.",
+    "Both variants are matched experimental APKs with imported outputs and common ownership/error handling; this is not a controlled production-APK comparison.",
+    "The native allocation experiment imported inputs too, so its absolute timing and effect size must not be substituted for this app comparison.",
+    "No deliberate wake, hours-long thermal, physical vehicle USB or driving qualification is established by this screen."
+  ]
+}

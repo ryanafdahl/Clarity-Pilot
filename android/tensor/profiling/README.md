@@ -39,6 +39,22 @@ warmup infrastructure failure. The exploratory 11-pair baseline comparison
 averaged 0.162 ms slower; its interval includes zero. The original release was
 restored and the temporary listener disabled.
 
+## October 17 compiler and runtime investigation
+
+[Full report](../../../docs/TENSOR_COMPILER_RUNTIME_2026-10-17.md) and
+[sanitized aggregates](results-2026-10-17/): SDK v2.1 improved the same model
+on the production `.10` app. Compiler, graph, I/O, async completion and buffer
+allocation were tested separately. Earlier `.9` statements above describe the
+October 11 experiments; current installation instructions are in the
+[Android README](../../README.md).
+
+Reproduction sources: [compiler/graph tools](../compiler-tools/),
+[I/O and allocation tools](buffer-tools/),
+[output-only allocation follow-up](output-only/),
+[reviewed async controls](async-reviewed/),
+[paired-model runner](model-pairs/), and [vendor-metrics probe](metrics-detail/).
+Experimental patches are independent controls, not cumulative app updates.
+
 ## Boundaries
 
 - Desk use only. Disconnect the phone from the comma before running this tool.

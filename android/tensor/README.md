@@ -8,7 +8,7 @@ The separate **Tensor NPU (on-device)** choice uses upstream's runtime compiler 
 
 ## Current results and remaining checks
 
-[October 11 TPU profiling](../../docs/TPU_PERFORMANCE_2026-10-11.md) separates hardware execution from runtime and scheduling delays. Alternate sharding and an Android priority candidate did not establish a repeatable app speedup; the original `.9` APK and model remain installed. The [isolated profiler](profiling/README.md) retains the hardware-counter and timing workflow.
+[October 17 compiler/runtime investigation](../../docs/TENSOR_COMPILER_RUNTIME_2026-10-17.md) found a repeatable gain from Tensor SDK v2.1: two separate balanced comparisons on the unchanged `.10` app showed **7.4–8.4% lower average processing time**. The subsequent 6,000-frame screen-off run averaged **34.19 ms**, with one frame at **50.10 ms**. Three subsequent wake checks still hit the timing guard, with maxima of 84–93 ms. The source model and FP16 precision stay unchanged. This is desk phone processing, not full vehicle latency. [Earlier TPU profiling](../../docs/TPU_PERFORMANCE_2026-10-11.md) and the [isolated profiler](profiling/README.md) retain the hardware-counter workflow and unsuccessful candidates.
 
 [October 10 stability and LiteRT report](../../docs/PIXEL_USB_STABILITY_LITERT23_2026-10-10.md) records the installed APK identity, normal handshake, numerical comparison, sustained desk timing and test counts. Removal of the parked restriction is a functional change, not driving qualification. The subsequent [direct-USB drive](../../docs/PIXEL_DRIVE_SCREEN_OFF_2026-10-10.md) recorded 8.67 assisted miles on the Pixel large-model path and a clean 11 min 45.7 s finish, but also three early USB resets. Screen/charging/Android Auto effects remain unisolated, detailed phone stage logs are unavailable, and repeated failure recovery and sustained reliability remain open. The comma retains its existing warmup, deadlines and fallback limits and now bounds optional USB inference to one outstanding request.
 
@@ -17,18 +17,19 @@ The [October 3 archive](history-2026-10-03.md) retains the short direct-USB pass
 ## Exact model and compiler
 
 - Original V2 ONNX: `09d080f36965bb2a0790500452bd328aa03c484d0222aa79d1ad9f021a522aec`, 766,040,736 bytes.
-- Compiled model: `fc393523c5c1ddba9774382db513a5c62fad50cb187968ea25bc96db5480b51b`, 834,528,528 bytes.
-- Compiler: `d74bea45081aa90a39505a675c15f566d46dbcc35e55a98f755c02017464cd1f`.
+- Compiled model: `328ae315dcd6e62e08aa670e04f11219e4766a11cfc37c261a54ef89f7c6c571`, 835,398,160 bytes.
+- Tensor SDK v2.1 compiler library: `14e84153cbcf60463d011ba739fc15ff222188c6448a283c0abea639fa19cb68`.
+- Compiler worker: `e6a8f7c0bdfebbb754e18f82b7bcde83b22c526c1297ce555a1797a2cd099294`.
 - Target `Tensor_G6`, precision `half`, sharding `minimal`, LiteRT `2.3.0`; all 2,424 operators compiled into one NPU partition, and the live engine requires full NPU execution.
-- [Machine-readable manifest](qualified-model.json). Model weights and the private SDK compiler are not redistributed.
+- [Current desk-validated manifest](qualified-model.json), with archive and converted-input hashes. [Prior SDK v2.0/LiteRT 2.3 manifest](qualified-model-sdk20-litert23.json) is retained for rollback. Model weights and the private SDK compiler are not redistributed.
 
 The update recompiled V2 with ai-edge-litert 2.3.0 and verified its output again. Image history retains exact bytes; feature/desire history retains the existing half-precision rounding. Burst scheduling is unchanged from the previously tested Tensor build.
 
 ## Rebuild and compile
 
-Check out upstream `d26001b4161f33bab28d806de6a99b96325a429b`, apply [tensor-support.patch](tensor-support.patch), and build using [the Android instructions](../README.md#validation-and-rebuilding). The patch is for that exact base. The previous [`.6` patch](tensor-support-0.8.5-clarity-tensor.6.patch), [`.5` patch](tensor-support-0.8.5-clarity-tensor.5.patch) and [`.4` patch](tensor-support-0.8.0-clarity-tensor.4.patch) remain archived.
+Check out upstream `d26001b4161f33bab28d806de6a99b96325a429b`, apply [tensor-support.patch](tensor-support.patch), and build using [the Android instructions](../README.md#validation-and-rebuilding). The patch is for that exact base. Its compile helper has an additional provenance-only update; the [archived exact `.10` source patch](tensor-support-0.8.7-clarity-tensor.10.patch) matches the APK source. Runtime code is unchanged. The previous [`.6` patch](tensor-support-0.8.5-clarity-tensor.6.patch), [`.5` patch](tensor-support-0.8.5-clarity-tensor.5.patch) and [`.4` patch](tensor-support-0.8.0-clarity-tensor.4.patch) remain archived.
 
-The app build pins and verifies all three LiteRT 2.3.0 Maven AARs: core, GPU and Google Tensor NPU runtime. It does not download the private SDK compiler. Extract your SDK locally and use Python with `ai-edge-litert==2.3.0`. The [Tensor SDK codelab](https://codelabs.developers.google.com/codelabs/google-tensor-ml-sdk#0) documents the stable backend switch; the compiler script sets it before importing LiteRT and points explicitly at your private compiler directory:
+The app build pins and verifies all three LiteRT 2.3.0 Maven AARs: core, GPU and Google Tensor NPU runtime. It does not download the private SDK compiler. Extract Tensor SDK v2.1 locally and use Python with `ai-edge-litert==2.3.0`. Keep the worker beside its compiler library. The compile helper records converted input, library and executable hashes; `--sdk-worker` selects a helper if the layout is ambiguous. Library-only SDK v2.0 remains supported for rollback. The [Tensor SDK codelab](https://codelabs.developers.google.com/codelabs/google-tensor-ml-sdk#0) documents the stable backend switch; the compiler script sets it before importing LiteRT and points explicitly at your private compiler directory:
 
 ```sh
 cd JetlinkKit
@@ -47,12 +48,24 @@ Use the actual phone chipset and validate each new model. Automatic precision wa
 
 Open the app once to create its `tensor-models` folder. Replace `SOURCE_SHA256` with the original ONNX hash and copy the two compiler outputs directly into that folder:
 
+Stop JetLink before replacing either file. Preserve the previous model and manifest locally for rollback, then stage the replacement under temporary names:
+
 ```sh
-adb push /path/to/compiled/SOURCE_SHA256/model.tflite /sdcard/Android/data/io.zoompilot.jetlink.android/files/tensor-models/SOURCE_SHA256.tflite
-adb push /path/to/compiled/SOURCE_SHA256/manifest.json /sdcard/Android/data/io.zoompilot.jetlink.android/files/tensor-models/SOURCE_SHA256.json
+adb shell am force-stop io.zoompilot.jetlink.android
+adb push /path/to/compiled/SOURCE_SHA256/model.tflite /sdcard/Android/data/io.zoompilot.jetlink.android/files/tensor-models/SOURCE_SHA256.tflite.pending
+adb push /path/to/compiled/SOURCE_SHA256/manifest.json /sdcard/Android/data/io.zoompilot.jetlink.android/files/tensor-models/SOURCE_SHA256.json.pending
+adb shell sha256sum /sdcard/Android/data/io.zoompilot.jetlink.android/files/tensor-models/SOURCE_SHA256.tflite.pending
 ```
 
-Do not create a shell-owned nested directory. Restart the app after replacing a model. Select **Settings → Processor → Tensor TPU (precompiled)**, then prepare Cinque Terre V2. Source, chipset, runtime and compiled-file checks protect imports; a changed manifest hash invalidates the cached compiled artifact.
+Compare that digest with `compiled_sha256` in the manifest before continuing. Keep the app stopped while replacing the pair:
+
+```sh
+adb shell mv /sdcard/Android/data/io.zoompilot.jetlink.android/files/tensor-models/SOURCE_SHA256.tflite.pending /sdcard/Android/data/io.zoompilot.jetlink.android/files/tensor-models/SOURCE_SHA256.tflite
+adb shell mv /sdcard/Android/data/io.zoompilot.jetlink.android/files/tensor-models/SOURCE_SHA256.json.pending /sdcard/Android/data/io.zoompilot.jetlink.android/files/tensor-models/SOURCE_SHA256.json
+adb shell am start -n io.zoompilot.jetlink.android/io.zoompilot.jetlink.MainActivity
+```
+
+Do not create a shell-owned nested directory. A fresh process is required: a live engine request can reuse an already loaded model with the same source identity. On fresh load, the imported compiled hash is compared with prepared metadata and a changed hash triggers rebuild. The copied model is hashed during preparation; existing prepared bytes are not rehashed on every load. Select **Settings → Processor → Tensor TPU (precompiled)**, then prepare Cinque Terre V2. Source, chipset, runtime and compiled-file checks protect imports; a changed manifest hash invalidates the cached compiled artifact.
 
 ## Connect and repeat desk validation
 

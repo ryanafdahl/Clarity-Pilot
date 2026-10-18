@@ -1,0 +1,41 @@
+--- a/native_profile.c
++++ b/native_profile.c
+@@ -11,6 +11,7 @@
+ #include <unistd.h>
+ 
+ int jl_bench_mode = 5;
++int jl_bench_metrics_detail = 0;
+ extern void jl_bench_metrics(jl_litert_model *model, int start);
+ static uint64_t now(void) { struct timespec t; clock_gettime(CLOCK_MONOTONIC, &t); return (uint64_t)t.tv_sec*1000000000ULL+t.tv_nsec; }
+ static void check(char *error) { if(error) { fprintf(stderr,"%s\n",error); jl_litert_free(error); exit(2); } }
+@@ -40,6 +41,14 @@
+   return t;
+ }
+ int main(int argc,char **argv) {
++  const char *metrics_detail = getenv("BENCH_METRICS_DETAIL");
++  if (metrics_detail && strcmp(metrics_detail,"0") && strcmp(metrics_detail,"1")) {
++    fprintf(stderr,"BENCH_METRICS_DETAIL must be exactly 0 or 1\n");
++    return 2;
++  }
++  jl_bench_metrics_detail = metrics_detail && !strcmp(metrics_detail,"1");
++  fprintf(stderr,"METRICS requested detail_level=%d (vendor-dependent)\n",jl_bench_metrics_detail);
++
+   if(argc!=8){fprintf(stderr,"usage: bench runtime model mode frames period_us output_dir copy_inputs\n");return 2;}
+   jl_bench_mode=atoi(argv[3]);int frames=atoi(argv[4]),period=atoi(argv[5]),copy_inputs=atoi(argv[7]);
+   if(jl_bench_mode<3||jl_bench_mode>5||frames<10||frames>12000||period<0||period>1000000||(copy_inputs!=0&&copy_inputs!=1))return 2;
+--- a/metrics.inc
++++ b/metrics.inc
+@@ -1,3 +1,4 @@
++extern int jl_bench_metrics_detail;
+ // Optional hardware counters for this isolated benchmark, never the app.
+ void jl_bench_metrics(jl_litert_model *model, int start) {
+   static int active=0;
+@@ -13,7 +14,7 @@
+   METRIC_FN(LiteRtDestroyMetrics)
+ #undef METRIC_FN
+   if(start) {
+-    LiteRtStatus status=fn_LiteRtCompiledModelStartMetricsCollection(model->compiled,0);
++    LiteRtStatus status=fn_LiteRtCompiledModelStartMetricsCollection(model->compiled,jl_bench_metrics_detail);
+     fprintf(stderr,"METRICS start status=%d\n",status);active=status==kLiteRtStatusOk;
+   } else if(active) {
+     LiteRtMetrics metrics=NULL;LiteRtStatus status=fn_LiteRtCreateMetrics(&metrics);

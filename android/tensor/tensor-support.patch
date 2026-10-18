@@ -1907,20 +1907,75 @@ index e711806..ddfac5c 100644
  [plugins]
 diff --git a/android/scripts/compile-tensor.py b/android/scripts/compile-tensor.py
 new file mode 100644
-index 0000000..b1e2f0d
 --- /dev/null
 +++ b/android/scripts/compile-tensor.py
-@@ -0,0 +1,36 @@
+@@ -0,0 +1,97 @@
 +import argparse, hashlib, json, os, pathlib
 +
 +def sha(path):
 +    with open(path, 'rb') as stream:
 +        return hashlib.file_digest(stream, 'sha256').hexdigest()
 +
++def is_executable_helper(path):
++    # ELF entry-point metadata distinguishes executable/PIE helpers from .so
++    # libraries. Also allow executable scripts; ignore executable license files
++    # on filesystems that expose every file with executable permission bits.
++    if not path.stat().st_mode & 0o111:
++        return False
++    with path.open('rb') as stream:
++        header = stream.read(32)
++    if header.startswith(b'#!'):
++        return True
++    if len(header) < 32 or header[:4] != bytes([127, 69, 76, 70]) or header[4] not in (1, 2) or header[5] not in (1, 2):
++        return False
++    order = 'little' if header[5] == 1 else 'big'
++    kind = int.from_bytes(header[16:18], order)
++    entry = int.from_bytes(header[24:28 if header[4] == 1 else 32], order)
++    return kind == 2 or (kind == 3 and entry != 0)
++
++
++def sdk_provenance(sdk, worker=None):
++    """Inventory colocated helpers; the v2.0 SDK needs no separate worker.
++
++    This records supplied SDK files, not a claim that each file was executed.
++    A sole colocated executable is discovered without relying on its filename.
++    Ambiguous SDK layouts require explicit selection instead of guessing.
++    """
++    sdk = sdk.resolve()
++    library = sdk / 'liblitert_plugin_compiler.so'
++    executables = {}
++    for path in sorted(sdk.iterdir()):
++        if not path.is_file() or path.resolve() == library.resolve():
++            continue
++        if is_executable_helper(path):
++            name = path.relative_to(sdk).as_posix()
++            executables[name] = sha(path)
++    if worker is not None:
++        path = (sdk / worker).resolve()
++        try:
++            selected = path.relative_to(sdk).as_posix()
++        except ValueError:
++            raise ValueError('--sdk-worker must be inside --sdk') from None
++        if not path.is_file() or path == library.resolve() or not is_executable_helper(path):
++            raise ValueError('--sdk-worker must name an executable helper inside --sdk')
++        executables[selected] = sha(path)
++        executables = dict(sorted(executables.items()))
++    elif len(executables) == 1:
++        selected = next(iter(executables))
++    elif len(executables) > 1:
++        raise ValueError('Multiple SDK executable helpers found; select one with --sdk-worker')
++    else:
++        selected = None
++    result = {'sdk_sha256': sha(library), 'sdk_executables_sha256': executables}
++    if selected is not None:
++        result.update(sdk_worker=selected, sdk_worker_sha256=executables[selected])
++    return result
++
 +p = argparse.ArgumentParser(description='Compile an app-converted model for Google Tensor; SDK stays local.')
 +p.add_argument('--model', type=pathlib.Path, required=True)
 +p.add_argument('--source', type=pathlib.Path, required=True, help='Original ONNX model')
 +p.add_argument('--sdk', type=pathlib.Path, required=True, help='Directory containing liblitert_plugin_compiler.so')
++p.add_argument('--sdk-worker', type=pathlib.Path, help='Optional executable helper inside --sdk; required only for ambiguous layouts')
 +p.add_argument('--output', type=pathlib.Path, required=True)
 +p.add_argument('--soc', choices=['Tensor_G5', 'Tensor_G6'], default='Tensor_G6')
 +p.add_argument('--precision', choices=['auto', 'half', 'bfloat16', 'no_truncation'], default='half')
@@ -1935,6 +1990,11 @@ index 0000000..b1e2f0d
 +import importlib.metadata
 +if importlib.metadata.version('ai-edge-litert') != '2.3.0':
 +    p.error('Use ai-edge-litert==2.3.0')
++try:
++    provenance = sdk_provenance(a.sdk, a.sdk_worker)
++except ValueError as error:
++    p.error(str(error))
++converted_hash = sha(a.model)
 +source_hash = sha(a.source)
 +out = a.output / source_hash
 +out.mkdir(parents=True, exist_ok=True)
@@ -1944,7 +2004,7 @@ index 0000000..b1e2f0d
 +    raise RuntimeError('Tensor compilation did not produce exactly one model')
 +compiled = out / 'model.tflite'
 +result.models[0].save(compiled, export_only=True)
-+manifest = {'source_sha256': source_hash, 'compiled_sha256': sha(compiled), 'soc': a.soc, 'litert': '2.3.0', 'sdk_sha256': sha(a.sdk / 'liblitert_plugin_compiler.so'), 'precision': a.precision, 'sharding': a.sharding}
++manifest = {'source_sha256': source_hash, 'compiled_sha256': sha(compiled), 'soc': a.soc, 'litert': '2.3.0', 'source_converted_sha256': converted_hash, **provenance, 'precision': a.precision, 'sharding': a.sharding}
 +(out / 'manifest.json').write_text(json.dumps(manifest, indent=2) + '\n')
 +print(out, flush=True)
 diff --git a/android/settings.gradle.kts b/android/settings.gradle.kts

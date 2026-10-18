@@ -1,0 +1,148 @@
+{
+  "scope": "isolated native fixed-input diagnostic; no installed app/model change",
+  "date": "2026-10-17",
+  "sdk_release": "2.1",
+  "runtime": "LiteRT 2.3.0",
+  "target": "Tensor G6",
+  "precision": "half",
+  "sharding": "minimal",
+  "compiler_flag": "--google_tensor_dump_op_timings=true",
+  "compiled_model_sha256": "b2ad0ae9e9a8efa69bb0d48b9705ed147cbfcdc67c9f60a6b95d05bafce25120",
+  "mode": 5,
+  "period_us": 50000,
+  "warmup_frames_per_run": 20,
+  "copy_inputs_each_frame": true,
+  "run_order": [
+    0,
+    1
+  ],
+  "runs": [
+    {
+      "detail_level": 0,
+      "frames": 120,
+      "metrics_start_status": 0,
+      "metrics_stop_status": 0,
+      "metrics": {
+        "hardware_execution_time_us": 3331698,
+        "number_of_graph_executions": 120
+      },
+      "hardware_mean_ms": 27.76415,
+      "input_ms": {
+        "mean": 0.9404007,
+        "p50": 0.8717445,
+        "p95": 1.4060446999999998,
+        "p99": 1.84013486,
+        "max": 2.027473,
+        "over_46": 0,
+        "over_50": 0
+      },
+      "invoke_ms": {
+        "mean": 32.483528075,
+        "p50": 32.766600499999996,
+        "p95": 34.1564104,
+        "p99": 35.044243820000005,
+        "max": 35.482004,
+        "over_46": 0,
+        "over_50": 0
+      },
+      "output_ms": {
+        "mean": 0.37291063333333335,
+        "p50": 0.3244715,
+        "p95": 0.54760055,
+        "p99": 0.8875636000000003,
+        "max": 1.385234,
+        "over_46": 0,
+        "over_50": 0
+      },
+      "total_ms": {
+        "mean": 33.796839408333334,
+        "p50": 33.982234000000005,
+        "p95": 35.5922405,
+        "p99": 36.19973075,
+        "max": 37.109584,
+        "over_46": 0,
+        "over_50": 0
+      },
+      "thermal": {
+        "samples": 3,
+        "battery_c_min": 33.4,
+        "battery_c_max": 33.4,
+        "thermal_statuses": [
+          0
+        ]
+      },
+      "final_output_sha256": {
+        "output-0.bin": "4953ad8d2dabca6b7bc2a415cfca377f6ff7c757d029e86ea3e1653993c612b1"
+      },
+      "per_operation_table_observed_in_captured_stdout_stderr_logcat": false,
+      "logcat_threadpool_notice_observed": true
+    },
+    {
+      "detail_level": 1,
+      "frames": 120,
+      "metrics_start_status": 0,
+      "metrics_stop_status": 0,
+      "metrics": {
+        "hardware_execution_time_us": 3331053,
+        "number_of_graph_executions": 120
+      },
+      "hardware_mean_ms": 27.758775,
+      "input_ms": {
+        "mean": 0.9833521333333334,
+        "p50": 0.8878515,
+        "p95": 1.3885905499999998,
+        "p99": 1.9553961600000003,
+        "max": 3.960312,
+        "over_46": 0,
+        "over_50": 0
+      },
+      "invoke_ms": {
+        "mean": 32.08487698333333,
+        "p50": 32.0480735,
+        "p95": 33.851014899999996,
+        "p99": 34.258657570000004,
+        "max": 34.489192,
+        "over_46": 0,
+        "over_50": 0
+      },
+      "output_ms": {
+        "mean": 0.34620701666666664,
+        "p50": 0.322284,
+        "p95": 0.50975615,
+        "p99": 0.7814951400000003,
+        "max": 0.929975,
+        "over_46": 0,
+        "over_50": 0
+      },
+      "total_ms": {
+        "mean": 33.41443613333333,
+        "p50": 33.4019,
+        "p95": 35.101582449999995,
+        "p99": 35.95002316,
+        "max": 36.205885,
+        "over_46": 0,
+        "over_50": 0
+      },
+      "thermal": {
+        "samples": 3,
+        "battery_c_min": 33.0,
+        "battery_c_max": 33.4,
+        "thermal_statuses": [
+          0
+        ]
+      },
+      "final_output_sha256": {
+        "output-0.bin": "4953ad8d2dabca6b7bc2a415cfca377f6ff7c757d029e86ea3e1653993c612b1"
+      },
+      "per_operation_table_observed_in_captured_stdout_stderr_logcat": false,
+      "logcat_threadpool_notice_observed": true
+    }
+  ],
+  "final_outputs_match": true,
+  "interpretation": "Both detail values were accepted and returned the same two aggregate counter names. No per-operation timing table was visible in captured host compiler output or device stdout, stderr and PID-filtered logcat. This does not establish that the compiler flag is ineffective or that another supported diagnostic channel cannot expose data.",
+  "limitations": [
+    "Detail-level semantics are vendor-dependent; level 1 is not documented here as per-operation profiling.",
+    "One sequential run per detail value is not a controlled performance comparison.",
+    "Final fixed-input equality is not recurrent model qualification or a direct USB/driving test."
+  ]
+}

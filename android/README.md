@@ -2,7 +2,7 @@
 
 [Download jetlink-0.8.7-clarity-tensor.10-pixel.apk](https://github.com/ryanafdahl/Clarity-Pilot/raw/refs/heads/main/android/jetlink-0.8.7-clarity-tensor.10-pixel.apk)
 
-Installed and verified on the Pixel 11 Pro XL on October 17, 2026. This updates upstream to v0.8.7 while preserving Tensor support, LiteRT 2.3.0, the model, CPU hints, USB recovery and thermal protections. Upstream changes improve model catalog and LFS lookup; **no repeatable inference speedup is established**. [Update results and remaining speed targets](../docs/PIXEL_UPDATE_2026-10-17.md).
+Installed and verified on the Pixel 11 Pro XL on October 17, 2026. This updates upstream to v0.8.7 while preserving Tensor support, LiteRT 2.3.0, the model, CPU hints, USB recovery and thermal protections. Upstream changes improve model catalog and LFS lookup; **the APK maintenance update alone did not establish a speedup**. The subsequent SDK v2.1 model compile reduced average phone processing by **7.4–8.4%** in two separate balanced desk app comparisons, using this same APK. A 6,000-frame screen-off run averaged 34.19 ms, with one frame at 50.10 ms. [Compiler/runtime results](../docs/TENSOR_COMPILER_RUNTIME_2026-10-17.md) · [APK maintenance validation](../docs/PIXEL_UPDATE_2026-10-17.md).
 
 | Field | Value |
 | --- | --- |

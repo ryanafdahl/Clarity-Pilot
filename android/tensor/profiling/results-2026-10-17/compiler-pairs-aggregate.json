@@ -1,0 +1,2389 @@
+{
+  "schema_version": 1,
+  "analysis": "exploratory paired native benchmark",
+  "compiler": {
+    "experiment": "six paired SDK compiler comparisons",
+    "variants": {
+      "A": "Tensor SDK v2.0 compiler",
+      "B": "Tensor SDK v2.1 compiler"
+    },
+    "plan_sha256": "d61df6ef76e2c983d347b72188c3b7615d2ca0144f75d5ab3b0a2bf9adea75b7",
+    "results_sha256": "2758e2ec86a4a293bb43542061a3b5c7feddedaefad2ea85d6e52bdf4680caeb",
+    "model_sha256": {
+      "v20": "fc393523c5c1ddba9774382db513a5c62fad50cb187968ea25bc96db5480b51b",
+      "v21": "328ae315dcd6e62e08aa670e04f11219e4766a11cfc37c261a54ef89f7c6c571"
+    },
+    "order": [
+      "AB",
+      "BA",
+      "BA",
+      "BA",
+      "AB",
+      "AB"
+    ],
+    "completed_runs": 12,
+    "total_measured_frames": 7200,
+    "primary_outcome": "paired mean native total latency; positive A-minus-B favors v2.1",
+    "primary_inference": {
+      "replication_unit": "run_pair",
+      "pairs": 6,
+      "mean_A_minus_B_ms": 3.240382366111113,
+      "bootstrap_percentile_95_ci_ms": [
+        3.127629807222224,
+        3.3396969225000013
+      ],
+      "bootstrap_resamples": 50000,
+      "bootstrap_seed": 202610171,
+      "exact_two_sided_sign_flip_p": 0.03125,
+      "sign_flip_assignments": 64,
+      "pairs_favor_B": 6,
+      "pairs_favor_A": 0,
+      "ties": 0,
+      "leave_one_pair_out_mean_gain_range_ms": [
+        3.209481314666669,
+        3.288341149666669
+      ],
+      "percent_of_A_mean": 9.236739649074295
+    },
+    "pairs": [
+      {
+        "pair": 0,
+        "order": "AB",
+        "A_mean_total_ms": 35.1760206,
+        "B_mean_total_ms": 31.972705748333333,
+        "A_minus_B_mean_ms": {
+          "input_ms": 0.006175241666666609,
+          "invoke_ms": 3.1885892749999982,
+          "output_ms": 0.00855033500000002,
+          "total_ms": 3.2033148516666685,
+          "input_cpu_ms": 0.005447983333333406,
+          "invoke_cpu_ms": -0.04745313333333334,
+          "output_cpu_ms": 0.006063583333333344
+        },
+        "A_minus_B_hardware_mean_ms": 3.2618833333333335
+      },
+      {
+        "pair": 1,
+        "order": "BA",
+        "A_mean_total_ms": 35.03166091166667,
+        "B_mean_total_ms": 31.85267479,
+        "A_minus_B_mean_ms": {
+          "input_ms": -0.054689216666666596,
+          "invoke_ms": 3.2424707716666674,
+          "output_ms": -0.008795433333333325,
+          "total_ms": 3.1789861216666715,
+          "input_cpu_ms": -0.038469626666666645,
+          "invoke_cpu_ms": -0.025783726666666618,
+          "output_cpu_ms": -0.0009009916666666284
+        },
+        "A_minus_B_hardware_mean_ms": 3.280341666666665
+      },
+      {
+        "pair": 2,
+        "order": "BA",
+        "A_mean_total_ms": 35.05443916,
+        "B_mean_total_ms": 31.762494591666666,
+        "A_minus_B_mean_ms": {
+          "input_ms": 0.010937923333333321,
+          "invoke_ms": 3.2882541416666697,
+          "output_ms": -0.007247496666666631,
+          "total_ms": 3.291944568333335,
+          "input_cpu_ms": -0.0019407783333332818,
+          "invoke_cpu_ms": 0.02269899833333333,
+          "output_cpu_ms": 0.0005351833333333555
+        },
+        "A_minus_B_hardware_mean_ms": 3.334773333333331
+      },
+      {
+        "pair": 3,
+        "order": "BA",
+        "A_mean_total_ms": 35.07041068,
+        "B_mean_total_ms": 32.06982223166667,
+        "A_minus_B_mean_ms": {
+          "input_ms": -0.0441019966666667,
+          "invoke_ms": 3.071963625000002,
+          "output_ms": -0.027273180000000008,
+          "total_ms": 3.000588448333332,
+          "input_cpu_ms": -0.012508506666666697,
+          "invoke_cpu_ms": -0.07424818833333335,
+          "output_cpu_ms": -0.00784648333333332
+        },
+        "A_minus_B_hardware_mean_ms": 3.3239333333333363
+      },
+      {
+        "pair": 4,
+        "order": "AB",
+        "A_mean_total_ms": 35.06796819666667,
+        "B_mean_total_ms": 31.695395613333332,
+        "A_minus_B_mean_ms": {
+          "input_ms": 0.06996264000000008,
+          "invoke_ms": 3.3067040933333374,
+          "output_ms": -0.004094150000000019,
+          "total_ms": 3.372572583333337,
+          "input_cpu_ms": -0.026478086666666734,
+          "invoke_cpu_ms": -0.017584651666666673,
+          "output_cpu_ms": -0.0020824299999999685
+        },
+        "A_minus_B_hardware_mean_ms": 3.3067866666666674
+      },
+      {
+        "pair": 5,
+        "order": "AB",
+        "A_mean_total_ms": 35.088211136666665,
+        "B_mean_total_ms": 31.693323513333333,
+        "A_minus_B_mean_ms": {
+          "input_ms": -0.004379458333333419,
+          "invoke_ms": 3.388524859999997,
+          "output_ms": 0.010742221666666663,
+          "total_ms": 3.3948876233333323,
+          "input_cpu_ms": -0.006507710000000055,
+          "invoke_cpu_ms": -0.006482201666666687,
+          "output_cpu_ms": 0.004930500000000004
+        },
+        "A_minus_B_hardware_mean_ms": 3.341414999999998
+      }
+    ],
+    "runs": [
+      {
+        "run": "pair-00-A",
+        "measured_frames": 600,
+        "warmup_frames": 20,
+        "latency_ms": {
+          "input_ms": {
+            "count": 600,
+            "mean": 0.8703125716666666,
+            "p50": 0.8039320000000001,
+            "p95": 1.2784211499999998,
+            "p99": 2.239477789999999,
+            "maximum": 2.618724,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "invoke_ms": {
+            "count": 600,
+            "mean": 33.98749401333333,
+            "p50": 33.8777985,
+            "p95": 35.309510100000004,
+            "p99": 36.195624089999995,
+            "maximum": 36.878046,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "output_ms": {
+            "count": 600,
+            "mean": 0.318214015,
+            "p50": 0.29714850000000004,
+            "p95": 0.5650847999999997,
+            "p99": 0.8942367099999998,
+            "maximum": 3.25875,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "total_ms": {
+            "count": 600,
+            "mean": 35.1760206,
+            "p50": 35.053476,
+            "p95": 36.7645941,
+            "p99": 37.61674451,
+            "maximum": 39.189078,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "input_cpu_ms": {
+            "count": 600,
+            "mean": 0.7907582183333334,
+            "p50": 0.7670345000000001,
+            "p95": 1.028519,
+            "p99": 1.1323417499999997,
+            "maximum": 1.56742,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "invoke_cpu_ms": {
+            "count": 600,
+            "mean": 0.8758997783333333,
+            "p50": 0.851153,
+            "p95": 1.2734920499999998,
+            "p99": 1.54326803,
+            "maximum": 1.713395,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "output_cpu_ms": {
+            "count": 600,
+            "mean": 0.2739471316666667,
+            "p50": 0.28664500000000004,
+            "p95": 0.35575704999999996,
+            "p99": 0.40607952,
+            "maximum": 0.466667,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          }
+        },
+        "hardware_mean_ms": 31.014441666666666,
+        "hardware_execution_count": 600,
+        "health": {
+          "sample_count": 8,
+          "battery_c_range": [
+            27.0,
+            27.1
+          ],
+          "thermal_status_range": [
+            0,
+            0
+          ],
+          "thermal_guard_pass": true
+        },
+        "output_sha256": {
+          "output-0.bin": "4953ad8d2dabca6b7bc2a415cfca377f6ff7c757d029e86ea3e1653993c612b1"
+        },
+        "raw_samples_sha256": "9fa3de99f80ce1102492aa2a53779b5995c88a8439109fb6030bc19d9a0df69f",
+        "raw_summary_sha256": "3c2980869f04cc549f2fbb6dbdd839935d6a992f69a5651d2f6a301a7ec0b6d4",
+        "pair": 0,
+        "variant": "A"
+      },
+      {
+        "run": "pair-00-B",
+        "measured_frames": 600,
+        "warmup_frames": 20,
+        "latency_ms": {
+          "input_ms": {
+            "count": 600,
+            "mean": 0.86413733,
+            "p50": 0.809708,
+            "p95": 1.22442805,
+            "p99": 1.8008214599999997,
+            "maximum": 3.613958,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "invoke_ms": {
+            "count": 600,
+            "mean": 30.798904738333334,
+            "p50": 30.645916,
+            "p95": 32.3878524,
+            "p99": 33.54930424,
+            "maximum": 35.277343,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "output_ms": {
+            "count": 600,
+            "mean": 0.30966368,
+            "p50": 0.297435,
+            "p95": 0.5313637,
+            "p99": 0.8498860599999991,
+            "maximum": 2.314177,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "total_ms": {
+            "count": 600,
+            "mean": 31.972705748333333,
+            "p50": 31.798156,
+            "p95": 33.761738199999996,
+            "p99": 34.92991292999999,
+            "maximum": 36.843776,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "input_cpu_ms": {
+            "count": 600,
+            "mean": 0.785310235,
+            "p50": 0.7742955,
+            "p95": 1.0195271,
+            "p99": 1.1902262599999998,
+            "maximum": 1.364775,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "invoke_cpu_ms": {
+            "count": 600,
+            "mean": 0.9233529116666667,
+            "p50": 0.9092875,
+            "p95": 1.3163284999999998,
+            "p99": 1.48877194,
+            "maximum": 1.678209,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "output_cpu_ms": {
+            "count": 600,
+            "mean": 0.26788354833333333,
+            "p50": 0.283768,
+            "p95": 0.34841579999999994,
+            "p99": 0.37916121,
+            "maximum": 0.428474,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          }
+        },
+        "hardware_mean_ms": 27.752558333333333,
+        "hardware_execution_count": 600,
+        "health": {
+          "sample_count": 8,
+          "battery_c_range": [
+            27.1,
+            27.5
+          ],
+          "thermal_status_range": [
+            0,
+            0
+          ],
+          "thermal_guard_pass": true
+        },
+        "output_sha256": {
+          "output-0.bin": "4953ad8d2dabca6b7bc2a415cfca377f6ff7c757d029e86ea3e1653993c612b1"
+        },
+        "raw_samples_sha256": "1a5514b5cd8917c754c949b3469ad6e66f518670ffb8fe3e7ce9a621e1fde4ee",
+        "raw_summary_sha256": "23f44eaca7affc0bc61148e2c654bb411204aaa3ecf5a4eb002ec66cdcf37308",
+        "pair": 0,
+        "variant": "B"
+      },
+      {
+        "run": "pair-01-B",
+        "measured_frames": 600,
+        "warmup_frames": 20,
+        "latency_ms": {
+          "input_ms": {
+            "count": 600,
+            "mean": 0.879262495,
+            "p50": 0.8104819999999999,
+            "p95": 1.2482570999999996,
+            "p99": 1.8354386399999978,
+            "maximum": 3.555521,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "invoke_ms": {
+            "count": 600,
+            "mean": 30.675579505,
+            "p50": 30.596379499999998,
+            "p95": 31.880655,
+            "p99": 33.05898723,
+            "maximum": 34.247213,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "output_ms": {
+            "count": 600,
+            "mean": 0.29783279,
+            "p50": 0.281467,
+            "p95": 0.5375032999999999,
+            "p99": 0.7036707799999997,
+            "maximum": 1.003881,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "total_ms": {
+            "count": 600,
+            "mean": 31.85267479,
+            "p50": 31.7274975,
+            "p95": 33.37369345,
+            "p99": 34.237810749999994,
+            "maximum": 35.270078,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "input_cpu_ms": {
+            "count": 600,
+            "mean": 0.8007352133333333,
+            "p50": 0.781471,
+            "p95": 1.02692355,
+            "p99": 1.17135655,
+            "maximum": 1.284479,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "invoke_cpu_ms": {
+            "count": 600,
+            "mean": 0.8643138666666667,
+            "p50": 0.8549125,
+            "p95": 1.219112,
+            "p99": 1.3459075499999997,
+            "maximum": 1.514548,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "output_cpu_ms": {
+            "count": 600,
+            "mean": 0.26254466,
+            "p50": 0.2753565,
+            "p95": 0.34427575,
+            "p99": 0.38349782,
+            "maximum": 0.426625,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          }
+        },
+        "hardware_mean_ms": 27.744435000000003,
+        "hardware_execution_count": 600,
+        "health": {
+          "sample_count": 8,
+          "battery_c_range": [
+            27.5,
+            27.9
+          ],
+          "thermal_status_range": [
+            0,
+            0
+          ],
+          "thermal_guard_pass": true
+        },
+        "output_sha256": {
+          "output-0.bin": "4953ad8d2dabca6b7bc2a415cfca377f6ff7c757d029e86ea3e1653993c612b1"
+        },
+        "raw_samples_sha256": "bfc5e41071ad76573b2ec3fe22f261aaf90f27ead813732f74ac76cba5780bbc",
+        "raw_summary_sha256": "f3a6e9f7b3db21ddacf2f8ee4d9c3c8dab430d19e0336314055771df794ef1c8",
+        "pair": 1,
+        "variant": "B"
+      },
+      {
+        "run": "pair-01-A",
+        "measured_frames": 600,
+        "warmup_frames": 20,
+        "latency_ms": {
+          "input_ms": {
+            "count": 600,
+            "mean": 0.8245732783333334,
+            "p50": 0.7799345,
+            "p95": 1.1831999499999992,
+            "p99": 1.6772858099999997,
+            "maximum": 2.72672,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "invoke_ms": {
+            "count": 600,
+            "mean": 33.91805027666667,
+            "p50": 33.8689835,
+            "p95": 35.0684326,
+            "p99": 35.96309746,
+            "maximum": 36.642004,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "output_ms": {
+            "count": 600,
+            "mean": 0.2890373566666667,
+            "p50": 0.2803255,
+            "p95": 0.47938899999999995,
+            "p99": 0.73678388,
+            "maximum": 1.180427,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "total_ms": {
+            "count": 600,
+            "mean": 35.03166091166667,
+            "p50": 34.9774045,
+            "p95": 36.324415800000004,
+            "p99": 37.21283384,
+            "maximum": 37.857603,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "input_cpu_ms": {
+            "count": 600,
+            "mean": 0.7622655866666667,
+            "p50": 0.7429429999999999,
+            "p95": 0.9968864499999995,
+            "p99": 1.1392807699999996,
+            "maximum": 1.293448,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "invoke_cpu_ms": {
+            "count": 600,
+            "mean": 0.83853014,
+            "p50": 0.8303955000000001,
+            "p95": 1.2090472499999998,
+            "p99": 1.37766049,
+            "maximum": 1.687448,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "output_cpu_ms": {
+            "count": 600,
+            "mean": 0.26164366833333336,
+            "p50": 0.2753015,
+            "p95": 0.3487431,
+            "p99": 0.38960424999999993,
+            "maximum": 0.448298,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          }
+        },
+        "hardware_mean_ms": 31.024776666666668,
+        "hardware_execution_count": 600,
+        "health": {
+          "sample_count": 8,
+          "battery_c_range": [
+            27.9,
+            28.5
+          ],
+          "thermal_status_range": [
+            0,
+            0
+          ],
+          "thermal_guard_pass": true
+        },
+        "output_sha256": {
+          "output-0.bin": "4953ad8d2dabca6b7bc2a415cfca377f6ff7c757d029e86ea3e1653993c612b1"
+        },
+        "raw_samples_sha256": "e789dcc6ce32c8c022bb06d271a0da3eb4104a181d25a59573cc8d63965099ed",
+        "raw_summary_sha256": "3a9df17d7a99b60bd13d678fa4748c2b23f718446709b0b529ae5cc04acf17e3",
+        "pair": 1,
+        "variant": "A"
+      },
+      {
+        "run": "pair-02-B",
+        "measured_frames": 600,
+        "warmup_frames": 20,
+        "latency_ms": {
+          "input_ms": {
+            "count": 600,
+            "mean": 0.8629615083333333,
+            "p50": 0.795321,
+            "p95": 1.2460393499999993,
+            "p99": 1.9195919399999999,
+            "maximum": 6.235667,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "invoke_ms": {
+            "count": 600,
+            "mean": 30.597684423333334,
+            "p50": 30.494791499999998,
+            "p95": 31.88167425,
+            "p99": 32.70626582,
+            "maximum": 33.567057,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "output_ms": {
+            "count": 600,
+            "mean": 0.30184866,
+            "p50": 0.28488800000000003,
+            "p95": 0.5307047499999997,
+            "p99": 0.7593871699999999,
+            "maximum": 1.740677,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "total_ms": {
+            "count": 600,
+            "mean": 31.762494591666666,
+            "p50": 31.6059165,
+            "p95": 33.294872500000004,
+            "p99": 34.27913572,
+            "maximum": 36.946187,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "input_cpu_ms": {
+            "count": 600,
+            "mean": 0.77613963,
+            "p50": 0.7614110000000001,
+            "p95": 0.9820026999999998,
+            "p99": 1.14446202,
+            "maximum": 1.60177,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "invoke_cpu_ms": {
+            "count": 600,
+            "mean": 0.858090795,
+            "p50": 0.826396,
+            "p95": 1.24798755,
+            "p99": 1.41836624,
+            "maximum": 1.495963,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "output_cpu_ms": {
+            "count": 600,
+            "mean": 0.26287801,
+            "p50": 0.27667949999999997,
+            "p95": 0.34855514999999987,
+            "p99": 0.40464616,
+            "maximum": 0.467917,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          }
+        },
+        "hardware_mean_ms": 27.681721666666668,
+        "hardware_execution_count": 600,
+        "health": {
+          "sample_count": 8,
+          "battery_c_range": [
+            28.4,
+            28.8
+          ],
+          "thermal_status_range": [
+            0,
+            0
+          ],
+          "thermal_guard_pass": true
+        },
+        "output_sha256": {
+          "output-0.bin": "4953ad8d2dabca6b7bc2a415cfca377f6ff7c757d029e86ea3e1653993c612b1"
+        },
+        "raw_samples_sha256": "43363abce4cac411853c666cf6ed85d7539cfff9715f447d4b587c3aa222226e",
+        "raw_summary_sha256": "2baace56363745f894cd86edc5c9009f0b218a62f76d47a08c2a42f45781d7dd",
+        "pair": 2,
+        "variant": "B"
+      },
+      {
+        "run": "pair-02-A",
+        "measured_frames": 600,
+        "warmup_frames": 20,
+        "latency_ms": {
+          "input_ms": {
+            "count": 600,
+            "mean": 0.8738994316666666,
+            "p50": 0.8055335,
+            "p95": 1.3096071499999995,
+            "p99": 2.3289900699999992,
+            "maximum": 3.192942,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "invoke_ms": {
+            "count": 600,
+            "mean": 33.885938565000004,
+            "p50": 33.8129235,
+            "p95": 34.99582935,
+            "p99": 35.795546959999996,
+            "maximum": 37.425338,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "output_ms": {
+            "count": 600,
+            "mean": 0.29460116333333336,
+            "p50": 0.289665,
+            "p95": 0.48819529999999994,
+            "p99": 0.6564914199999999,
+            "maximum": 2.529645,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "total_ms": {
+            "count": 600,
+            "mean": 35.05443916,
+            "p50": 34.947460500000005,
+            "p95": 36.3977189,
+            "p99": 37.30164815,
+            "maximum": 39.344478,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "input_cpu_ms": {
+            "count": 600,
+            "mean": 0.7741988516666667,
+            "p50": 0.7559605,
+            "p95": 1.00139995,
+            "p99": 1.10710281,
+            "maximum": 1.612103,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "invoke_cpu_ms": {
+            "count": 600,
+            "mean": 0.8807897933333333,
+            "p50": 0.873911,
+            "p95": 1.2262173499999998,
+            "p99": 1.43007058,
+            "maximum": 1.600806,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "output_cpu_ms": {
+            "count": 600,
+            "mean": 0.26341319333333335,
+            "p50": 0.2799525,
+            "p95": 0.34354894999999996,
+            "p99": 0.37855197999999995,
+            "maximum": 0.407645,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          }
+        },
+        "hardware_mean_ms": 31.016495,
+        "hardware_execution_count": 600,
+        "health": {
+          "sample_count": 8,
+          "battery_c_range": [
+            28.8,
+            29.4
+          ],
+          "thermal_status_range": [
+            0,
+            0
+          ],
+          "thermal_guard_pass": true
+        },
+        "output_sha256": {
+          "output-0.bin": "4953ad8d2dabca6b7bc2a415cfca377f6ff7c757d029e86ea3e1653993c612b1"
+        },
+        "raw_samples_sha256": "fd815441271a7f491e6a541c67743230a9ea64a190b5ef4a345d07f5bf91521b",
+        "raw_summary_sha256": "a5530cd671bb8644c8205c54e3d56b00cb8a18022313ae42ca549631bfdee843",
+        "pair": 2,
+        "variant": "A"
+      },
+      {
+        "run": "pair-03-B",
+        "measured_frames": 600,
+        "warmup_frames": 20,
+        "latency_ms": {
+          "input_ms": {
+            "count": 600,
+            "mean": 0.895156415,
+            "p50": 0.8078695,
+            "p95": 1.2372085999999995,
+            "p99": 2.6975895599999977,
+            "maximum": 4.977787,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "invoke_ms": {
+            "count": 600,
+            "mean": 30.842407695,
+            "p50": 30.6405205,
+            "p95": 32.606514499999996,
+            "p99": 33.58434755,
+            "maximum": 45.770364,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "output_ms": {
+            "count": 600,
+            "mean": 0.3322581216666667,
+            "p50": 0.302721,
+            "p95": 0.5862587499999996,
+            "p99": 1.0321724399999992,
+            "maximum": 5.563516,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "total_ms": {
+            "count": 600,
+            "mean": 32.06982223166667,
+            "p50": 31.8714705,
+            "p95": 33.99510375,
+            "p99": 35.41768636,
+            "maximum": 47.016067,
+            "over_46_ms": 1,
+            "over_50_ms": 0
+          },
+          "input_cpu_ms": {
+            "count": 600,
+            "mean": 0.7923662466666667,
+            "p50": 0.774601,
+            "p95": 1.0453584499999997,
+            "p99": 1.1350100899999997,
+            "maximum": 1.539619,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "invoke_cpu_ms": {
+            "count": 600,
+            "mean": 0.9241202583333333,
+            "p50": 0.9193614999999999,
+            "p95": 1.31664565,
+            "p99": 1.48029749,
+            "maximum": 1.667333,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "output_cpu_ms": {
+            "count": 600,
+            "mean": 0.27329163,
+            "p50": 0.2884895,
+            "p95": 0.35587434999999995,
+            "p99": 0.40597230999999995,
+            "maximum": 0.855611,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          }
+        },
+        "hardware_mean_ms": 27.73040333333333,
+        "hardware_execution_count": 600,
+        "health": {
+          "sample_count": 8,
+          "battery_c_range": [
+            29.4,
+            29.4
+          ],
+          "thermal_status_range": [
+            0,
+            0
+          ],
+          "thermal_guard_pass": true
+        },
+        "output_sha256": {
+          "output-0.bin": "4953ad8d2dabca6b7bc2a415cfca377f6ff7c757d029e86ea3e1653993c612b1"
+        },
+        "raw_samples_sha256": "e15f8bb3f28c676710bcc4a3a123047451bf2d8df6a16b58b5d92bbf10c1533f",
+        "raw_summary_sha256": "5d33211e2d16f25a290b231c07a1951051b5c93b1ab5db853087c9deddc0673e",
+        "pair": 3,
+        "variant": "B"
+      },
+      {
+        "run": "pair-03-A",
+        "measured_frames": 600,
+        "warmup_frames": 20,
+        "latency_ms": {
+          "input_ms": {
+            "count": 600,
+            "mean": 0.8510544183333333,
+            "p50": 0.798411,
+            "p95": 1.1678914499999993,
+            "p99": 1.6748090899999997,
+            "maximum": 3.790859,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "invoke_ms": {
+            "count": 600,
+            "mean": 33.91437132,
+            "p50": 33.8447005,
+            "p95": 35.16725425,
+            "p99": 36.11521946,
+            "maximum": 36.754557,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "output_ms": {
+            "count": 600,
+            "mean": 0.3049849416666667,
+            "p50": 0.2867185,
+            "p95": 0.5516973,
+            "p99": 0.8192870299999994,
+            "maximum": 2.764286,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "total_ms": {
+            "count": 600,
+            "mean": 35.07041068,
+            "p50": 34.959036,
+            "p95": 36.58165095,
+            "p99": 37.622993019999996,
+            "maximum": 38.14,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "input_cpu_ms": {
+            "count": 600,
+            "mean": 0.77985774,
+            "p50": 0.7677005,
+            "p95": 0.9839256999999999,
+            "p99": 1.1658180899999997,
+            "maximum": 1.303375,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "invoke_cpu_ms": {
+            "count": 600,
+            "mean": 0.84987207,
+            "p50": 0.8405435,
+            "p95": 1.1840431499999995,
+            "p99": 1.35492162,
+            "maximum": 1.58643,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "output_cpu_ms": {
+            "count": 600,
+            "mean": 0.2654451466666667,
+            "p50": 0.2776955,
+            "p95": 0.34936759999999994,
+            "p99": 0.45138930999999993,
+            "maximum": 1.681497,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          }
+        },
+        "hardware_mean_ms": 31.054336666666668,
+        "hardware_execution_count": 600,
+        "health": {
+          "sample_count": 8,
+          "battery_c_range": [
+            29.4,
+            30.2
+          ],
+          "thermal_status_range": [
+            0,
+            0
+          ],
+          "thermal_guard_pass": true
+        },
+        "output_sha256": {
+          "output-0.bin": "4953ad8d2dabca6b7bc2a415cfca377f6ff7c757d029e86ea3e1653993c612b1"
+        },
+        "raw_samples_sha256": "ed7564911b8479b0458d16bd968c79a7de003cdf5132ccafc6285cbd7e733957",
+        "raw_summary_sha256": "fce10068591d7da8f9a7eb018eb372cfafc76c93442d1d12b3e016850011bd87",
+        "pair": 3,
+        "variant": "A"
+      },
+      {
+        "run": "pair-04-A",
+        "measured_frames": 600,
+        "warmup_frames": 20,
+        "latency_ms": {
+          "input_ms": {
+            "count": 600,
+            "mean": 0.9234944066666667,
+            "p50": 0.7973435,
+            "p95": 1.2761078499999996,
+            "p99": 2.0167049299999977,
+            "maximum": 40.045442,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "invoke_ms": {
+            "count": 600,
+            "mean": 33.85603818166667,
+            "p50": 33.822343000000004,
+            "p95": 35.050976399999996,
+            "p99": 36.01023129,
+            "maximum": 40.02151,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "output_ms": {
+            "count": 600,
+            "mean": 0.2884356083333333,
+            "p50": 0.2788925,
+            "p95": 0.49178954999999996,
+            "p99": 0.6717847999999994,
+            "maximum": 2.717032,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "total_ms": {
+            "count": 600,
+            "mean": 35.06796819666667,
+            "p50": 34.9096395,
+            "p95": 36.5876929,
+            "p99": 37.71019601,
+            "maximum": 72.791328,
+            "over_46_ms": 1,
+            "over_50_ms": 1
+          },
+          "input_cpu_ms": {
+            "count": 600,
+            "mean": 0.7631326916666666,
+            "p50": 0.7573799999999999,
+            "p95": 1.00910555,
+            "p99": 1.10343497,
+            "maximum": 1.346043,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "invoke_cpu_ms": {
+            "count": 600,
+            "mean": 0.8191093366666666,
+            "p50": 0.8238015000000001,
+            "p95": 1.1867173,
+            "p99": 1.2930923699999999,
+            "maximum": 1.529636,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "output_cpu_ms": {
+            "count": 600,
+            "mean": 0.2529712516666667,
+            "p50": 0.2742705,
+            "p95": 0.3413905,
+            "p99": 0.37874721999999994,
+            "maximum": 0.427047,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          }
+        },
+        "hardware_mean_ms": 31.028933333333335,
+        "hardware_execution_count": 600,
+        "health": {
+          "sample_count": 8,
+          "battery_c_range": [
+            30.2,
+            30.3
+          ],
+          "thermal_status_range": [
+            0,
+            0
+          ],
+          "thermal_guard_pass": true
+        },
+        "output_sha256": {
+          "output-0.bin": "4953ad8d2dabca6b7bc2a415cfca377f6ff7c757d029e86ea3e1653993c612b1"
+        },
+        "raw_samples_sha256": "c793518909c950f2d5eac949517e4583abb285469c189525e56cf1c3ec761693",
+        "raw_summary_sha256": "cfe04dc63f4dea4699662865c2190ecce8e2f9e27d50bb550fbf33b8ecb2c66f",
+        "pair": 4,
+        "variant": "A"
+      },
+      {
+        "run": "pair-04-B",
+        "measured_frames": 600,
+        "warmup_frames": 20,
+        "latency_ms": {
+          "input_ms": {
+            "count": 600,
+            "mean": 0.8535317666666666,
+            "p50": 0.8013675,
+            "p95": 1.1869663,
+            "p99": 1.5243826799999982,
+            "maximum": 5.549713,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "invoke_ms": {
+            "count": 600,
+            "mean": 30.54933408833333,
+            "p50": 30.439639999999997,
+            "p95": 32.068813000000006,
+            "p99": 33.106122729999996,
+            "maximum": 41.605458,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "output_ms": {
+            "count": 600,
+            "mean": 0.29252975833333333,
+            "p50": 0.280386,
+            "p95": 0.5579560499999999,
+            "p99": 0.8549598599999999,
+            "maximum": 1.525859,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "total_ms": {
+            "count": 600,
+            "mean": 31.695395613333332,
+            "p50": 31.561913500000003,
+            "p95": 33.248676399999994,
+            "p99": 34.55548427,
+            "maximum": 42.709097,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "input_cpu_ms": {
+            "count": 600,
+            "mean": 0.7896107783333334,
+            "p50": 0.7663885,
+            "p95": 1.03701615,
+            "p99": 1.1875237,
+            "maximum": 1.346926,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "invoke_cpu_ms": {
+            "count": 600,
+            "mean": 0.8366939883333333,
+            "p50": 0.821037,
+            "p95": 1.1605952499999999,
+            "p99": 1.3516349799999998,
+            "maximum": 1.660338,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "output_cpu_ms": {
+            "count": 600,
+            "mean": 0.25505368166666664,
+            "p50": 0.27437449999999997,
+            "p95": 0.3422196,
+            "p99": 0.3823637099999997,
+            "maximum": 0.595686,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          }
+        },
+        "hardware_mean_ms": 27.722146666666667,
+        "hardware_execution_count": 600,
+        "health": {
+          "sample_count": 8,
+          "battery_c_range": [
+            30.3,
+            30.7
+          ],
+          "thermal_status_range": [
+            0,
+            0
+          ],
+          "thermal_guard_pass": true
+        },
+        "output_sha256": {
+          "output-0.bin": "4953ad8d2dabca6b7bc2a415cfca377f6ff7c757d029e86ea3e1653993c612b1"
+        },
+        "raw_samples_sha256": "f185574d41c176aa891179cc42ff8eb9ffd4168ae43502e5b8a5e2ff41be0e53",
+        "raw_summary_sha256": "fa2736b1556f8e72ebc23836fa0b10d3f3ead54facde6fcf26a84449061f61f4",
+        "pair": 4,
+        "variant": "B"
+      },
+      {
+        "run": "pair-05-A",
+        "measured_frames": 600,
+        "warmup_frames": 20,
+        "latency_ms": {
+          "input_ms": {
+            "count": 600,
+            "mean": 0.8541924616666666,
+            "p50": 0.7887845,
+            "p95": 1.2388797999999999,
+            "p99": 1.9369479099999989,
+            "maximum": 3.573385,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "invoke_ms": {
+            "count": 600,
+            "mean": 33.93812154,
+            "p50": 33.842982500000005,
+            "p95": 35.1808632,
+            "p99": 36.184188639999995,
+            "maximum": 36.722864,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "output_ms": {
+            "count": 600,
+            "mean": 0.295897135,
+            "p50": 0.279518,
+            "p95": 0.4988099999999999,
+            "p99": 0.7943718599999988,
+            "maximum": 2.215546,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "total_ms": {
+            "count": 600,
+            "mean": 35.088211136666665,
+            "p50": 34.9580415,
+            "p95": 36.6943391,
+            "p99": 37.54746047,
+            "maximum": 37.844781,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "input_cpu_ms": {
+            "count": 600,
+            "mean": 0.7762071433333333,
+            "p50": 0.7616095,
+            "p95": 0.9806213499999998,
+            "p99": 1.10784431,
+            "maximum": 1.265573,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "invoke_cpu_ms": {
+            "count": 600,
+            "mean": 0.85061237,
+            "p50": 0.8413705,
+            "p95": 1.201695,
+            "p99": 1.35061686,
+            "maximum": 1.407358,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "output_cpu_ms": {
+            "count": 600,
+            "mean": 0.2589104,
+            "p50": 0.27412349999999996,
+            "p95": 0.3433236499999999,
+            "p99": 0.39032888,
+            "maximum": 0.42637,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          }
+        },
+        "hardware_mean_ms": 31.00834833333333,
+        "hardware_execution_count": 600,
+        "health": {
+          "sample_count": 8,
+          "battery_c_range": [
+            30.7,
+            31.0
+          ],
+          "thermal_status_range": [
+            0,
+            0
+          ],
+          "thermal_guard_pass": true
+        },
+        "output_sha256": {
+          "output-0.bin": "4953ad8d2dabca6b7bc2a415cfca377f6ff7c757d029e86ea3e1653993c612b1"
+        },
+        "raw_samples_sha256": "d1cb39a42857a0ef7b8974eea17992ffbb9f40bae8a3772dfcf4de16ce54b949",
+        "raw_summary_sha256": "4f54533cc0dc1a1db66435b68992fc9c5cda735e883d1a63c28fb1616dc50dd6",
+        "pair": 5,
+        "variant": "A"
+      },
+      {
+        "run": "pair-05-B",
+        "measured_frames": 600,
+        "warmup_frames": 20,
+        "latency_ms": {
+          "input_ms": {
+            "count": 600,
+            "mean": 0.85857192,
+            "p50": 0.7936325,
+            "p95": 1.2051510999999997,
+            "p99": 2.307774129999999,
+            "maximum": 4.284192,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "invoke_ms": {
+            "count": 600,
+            "mean": 30.54959668,
+            "p50": 30.478133,
+            "p95": 31.76266375,
+            "p99": 32.414680440000005,
+            "maximum": 34.769348,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "output_ms": {
+            "count": 600,
+            "mean": 0.2851549133333333,
+            "p50": 0.27832049999999997,
+            "p95": 0.48401109999999986,
+            "p99": 0.700589319999999,
+            "maximum": 1.34276,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "total_ms": {
+            "count": 600,
+            "mean": 31.693323513333333,
+            "p50": 31.5686505,
+            "p95": 33.06424275,
+            "p99": 34.058857429999996,
+            "maximum": 36.911171,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "input_cpu_ms": {
+            "count": 600,
+            "mean": 0.7827148533333333,
+            "p50": 0.7656635,
+            "p95": 0.9547047999999999,
+            "p99": 1.0944352,
+            "maximum": 2.440715,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "invoke_cpu_ms": {
+            "count": 600,
+            "mean": 0.8570945716666667,
+            "p50": 0.8445265,
+            "p95": 1.19697895,
+            "p99": 1.34643973,
+            "maximum": 1.523505,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "output_cpu_ms": {
+            "count": 600,
+            "mean": 0.2539799,
+            "p50": 0.271211,
+            "p95": 0.33691414999999997,
+            "p99": 0.36679343999999997,
+            "maximum": 0.442614,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          }
+        },
+        "hardware_mean_ms": 27.666933333333333,
+        "hardware_execution_count": 600,
+        "health": {
+          "sample_count": 8,
+          "battery_c_range": [
+            31.0,
+            31.4
+          ],
+          "thermal_status_range": [
+            0,
+            0
+          ],
+          "thermal_guard_pass": true
+        },
+        "output_sha256": {
+          "output-0.bin": "4953ad8d2dabca6b7bc2a415cfca377f6ff7c757d029e86ea3e1653993c612b1"
+        },
+        "raw_samples_sha256": "69c0402805204d13ac8f516afa1f8c15cb5e9f3db936b1fcc5cc48410f1eb8e3",
+        "raw_summary_sha256": "53503070f2283c6a7b24293db65f48dc0673ebf17c56a211896d5e96c5cb92db",
+        "pair": 5,
+        "variant": "B"
+      }
+    ],
+    "pooled_latency_ms_exploratory": {
+      "A": {
+        "input_ms": {
+          "count": 3600,
+          "mean": 0.8662544280555555,
+          "p50": 0.795825,
+          "p95": 1.2478516999999996,
+          "p99": 2.0854074299999925,
+          "maximum": 40.045442,
+          "over_46_ms": 0,
+          "over_50_ms": 0
+        },
+        "invoke_ms": {
+          "count": 3600,
+          "mean": 33.91666898277778,
+          "p50": 33.846374999999995,
+          "p95": 35.1363535,
+          "p99": 36.08487648,
+          "maximum": 40.02151,
+          "over_46_ms": 0,
+          "over_50_ms": 0
+        },
+        "output_ms": {
+          "count": 3600,
+          "mean": 0.29852837,
+          "p50": 0.2835675,
+          "p95": 0.5073218499999996,
+          "p99": 0.7892525599999998,
+          "maximum": 3.25875,
+          "over_46_ms": 0,
+          "over_50_ms": 0
+        },
+        "total_ms": {
+          "count": 3600,
+          "mean": 35.08145178083333,
+          "p50": 34.967995,
+          "p95": 36.57877765,
+          "p99": 37.60288411,
+          "maximum": 72.791328,
+          "over_46_ms": 1,
+          "over_50_ms": 1
+        },
+        "input_cpu_ms": {
+          "count": 3600,
+          "mean": 0.7744033719444444,
+          "p50": 0.7595315,
+          "p95": 1.0025487499999997,
+          "p99": 1.1208335099999995,
+          "maximum": 1.612103,
+          "over_46_ms": 0,
+          "over_50_ms": 0
+        },
+        "invoke_cpu_ms": {
+          "count": 3600,
+          "mean": 0.8524689147222222,
+          "p50": 0.844012,
+          "p95": 1.2069800499999996,
+          "p99": 1.3852478499999992,
+          "maximum": 1.713395,
+          "over_46_ms": 0,
+          "over_50_ms": 0
+        },
+        "output_cpu_ms": {
+          "count": 3600,
+          "mean": 0.2627217986111111,
+          "p50": 0.2773825,
+          "p95": 0.34786625,
+          "p99": 0.3937167999999999,
+          "maximum": 1.681497,
+          "over_46_ms": 0,
+          "over_50_ms": 0
+        }
+      },
+      "B": {
+        "input_ms": {
+          "count": 3600,
+          "mean": 0.8689369058333334,
+          "p50": 0.802422,
+          "p95": 1.2225418499999996,
+          "p99": 2.0672813699999972,
+          "maximum": 6.235667,
+          "over_46_ms": 0,
+          "over_50_ms": 0
+        },
+        "invoke_ms": {
+          "count": 3600,
+          "mean": 30.668917855,
+          "p50": 30.5522,
+          "p95": 32.09116965,
+          "p99": 33.19122978,
+          "maximum": 45.770364,
+          "over_46_ms": 0,
+          "over_50_ms": 0
+        },
+        "output_ms": {
+          "count": 3600,
+          "mean": 0.3032146538888889,
+          "p50": 0.285894,
+          "p95": 0.5375032999999994,
+          "p99": 0.8130632199999984,
+          "maximum": 5.563516,
+          "over_46_ms": 0,
+          "over_50_ms": 0
+        },
+        "total_ms": {
+          "count": 3600,
+          "mean": 31.841069414722224,
+          "p50": 31.676623,
+          "p95": 33.501833399999995,
+          "p99": 34.70544644999999,
+          "maximum": 47.016067,
+          "over_46_ms": 1,
+          "over_50_ms": 0
+        },
+        "input_cpu_ms": {
+          "count": 3600,
+          "mean": 0.7878128261111111,
+          "p50": 0.7695445000000001,
+          "p95": 1.0200904499999999,
+          "p99": 1.1638503099999982,
+          "maximum": 2.440715,
+          "over_46_ms": 0,
+          "over_50_ms": 0
+        },
+        "invoke_cpu_ms": {
+          "count": 3600,
+          "mean": 0.8772777319444445,
+          "p50": 0.8618699999999999,
+          "p95": 1.25264235,
+          "p99": 1.4116320399999998,
+          "maximum": 1.678209,
+          "over_46_ms": 0,
+          "over_50_ms": 0
+        },
+        "output_cpu_ms": {
+          "count": 3600,
+          "mean": 0.2626052383333333,
+          "p50": 0.27799450000000003,
+          "p95": 0.3466418,
+          "p99": 0.3923044599999999,
+          "maximum": 0.855611,
+          "over_46_ms": 0,
+          "over_50_ms": 0
+        }
+      }
+    },
+    "hardware_counters_exploratory": {
+      "A": {
+        "mean_ms": 31.02455527777778,
+        "run_mean_range_ms": [
+          31.00834833333333,
+          31.054336666666668
+        ]
+      },
+      "B": {
+        "mean_ms": 27.71636638888889,
+        "run_mean_range_ms": [
+          27.666933333333333,
+          27.752558333333333
+        ]
+      }
+    },
+    "health": {
+      "sample_count": 96,
+      "battery_c_range": [
+        27.0,
+        31.4
+      ],
+      "thermal_status_range": [
+        0,
+        0
+      ],
+      "thermal_guard_pass": true
+    },
+    "output_stable_within_variant": {
+      "A": true,
+      "B": true
+    },
+    "final_outputs_byte_identical_between_variants": true,
+    "limitations": [
+      "Six pairs on one phone and one session limit precision and external validity.",
+      "Pairs, not individual frames, are the inferential replication units.",
+      "Bootstrap interval is exploratory and not a guarantee; exact two-sided sign-flip resolution is 2/64.",
+      "Pooled percentiles, hardware counters and stage differences are exploratory secondary metrics without multiplicity correction.",
+      "Native fixed synthetic inputs omit recurrent app staging, transport and direct vehicle USB.",
+      "Reported hardware time is a vendor aggregate and has a different measurement scope than invocation wall time.",
+      "Thermal status zero does not establish identical frequencies or power state."
+    ]
+  },
+  "io_diagnostic": {
+    "experiment": "I/O instrumentation diagnostic ABBA",
+    "plan_sha256": "2ba772f33c12e97f0a8538f308257045a7a2f945faeca0b91d1956a5c12a24f4",
+    "runs": [
+      {
+        "run": "io-0-0",
+        "measured_frames": 120,
+        "warmup_frames": 20,
+        "latency_ms": {
+          "input_ms": {
+            "count": 120,
+            "mean": 0.9056097416666666,
+            "p50": 0.8305135,
+            "p95": 1.32046965,
+            "p99": 1.5893886800000003,
+            "maximum": 2.443724,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "invoke_ms": {
+            "count": 120,
+            "mean": 33.88781805,
+            "p50": 33.8567795,
+            "p95": 35.55586885,
+            "p99": 36.792272329999996,
+            "maximum": 37.433968,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "output_ms": {
+            "count": 120,
+            "mean": 0.31268603333333334,
+            "p50": 0.2945905,
+            "p95": 0.5413222499999999,
+            "p99": 0.6685129100000001,
+            "maximum": 0.735547,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "total_ms": {
+            "count": 120,
+            "mean": 35.106113825,
+            "p50": 35.0345775,
+            "p95": 36.6696882,
+            "p99": 38.16368791,
+            "maximum": 38.462318,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "input_cpu_ms": {
+            "count": 120,
+            "mean": 0.7955307416666667,
+            "p50": 0.785372,
+            "p95": 1.01688725,
+            "p99": 1.13233697,
+            "maximum": 1.151484,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "invoke_cpu_ms": {
+            "count": 120,
+            "mean": 0.852369425,
+            "p50": 0.871993,
+            "p95": 1.13670945,
+            "p99": 1.32407421,
+            "maximum": 1.3537,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "output_cpu_ms": {
+            "count": 120,
+            "mean": 0.2672705166666667,
+            "p50": 0.2792315,
+            "p95": 0.33778769999999997,
+            "p99": 0.36951359,
+            "maximum": 0.409271,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          }
+        },
+        "hardware_mean_ms": 31.005491666666664,
+        "hardware_execution_count": 120,
+        "health": {
+          "sample_count": 3,
+          "battery_c_range": [
+            31.5,
+            31.5
+          ],
+          "thermal_status_range": [
+            0,
+            0
+          ],
+          "thermal_guard_pass": true
+        },
+        "output_sha256": {
+          "output-0.bin": "4953ad8d2dabca6b7bc2a415cfca377f6ff7c757d029e86ea3e1653993c612b1"
+        },
+        "raw_samples_sha256": "f89ecf362f30279e2498f32c2f90364c2b219018722a09e518b19fce7e0cda3d",
+        "raw_summary_sha256": "85f2b4ba215dbf43af31c24bb77e0d4752e73ceb012e6c914e41cd4d2184424c",
+        "instrumentation": false,
+        "measured_io_stage_ms_per_frame": {
+          "packed_size_query": 0.0,
+          "lock": 0.0,
+          "memcpy": 0.0,
+          "unlock": 0.0
+        },
+        "byte_identical_output_frames": 140
+      },
+      {
+        "run": "io-1-1",
+        "measured_frames": 120,
+        "warmup_frames": 20,
+        "latency_ms": {
+          "input_ms": {
+            "count": 120,
+            "mean": 0.9125859,
+            "p50": 0.8462845,
+            "p95": 1.3220448,
+            "p99": 1.7749554500000009,
+            "maximum": 4.765896,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "invoke_ms": {
+            "count": 120,
+            "mean": 33.93431495833333,
+            "p50": 33.8464525,
+            "p95": 35.04132605,
+            "p99": 36.91791613,
+            "maximum": 38.609442,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "output_ms": {
+            "count": 120,
+            "mean": 0.30983788333333334,
+            "p50": 0.2860025,
+            "p95": 0.6419686999999998,
+            "p99": 0.9240731300000002,
+            "maximum": 0.942527,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "total_ms": {
+            "count": 120,
+            "mean": 35.156738741666665,
+            "p50": 35.044509500000004,
+            "p95": 36.515056200000004,
+            "p99": 39.563732730000005,
+            "maximum": 40.043099,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "input_cpu_ms": {
+            "count": 120,
+            "mean": 0.768771275,
+            "p50": 0.7596404999999999,
+            "p95": 0.9669841499999999,
+            "p99": 1.07729254,
+            "maximum": 1.131155,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "invoke_cpu_ms": {
+            "count": 120,
+            "mean": 0.8288607166666667,
+            "p50": 0.810365,
+            "p95": 1.12627455,
+            "p99": 1.21724805,
+            "maximum": 1.233646,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "output_cpu_ms": {
+            "count": 120,
+            "mean": 0.2652267,
+            "p50": 0.279557,
+            "p95": 0.3581735,
+            "p99": 0.36452758,
+            "maximum": 0.36624,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          }
+        },
+        "hardware_mean_ms": 30.993858333333332,
+        "hardware_execution_count": 120,
+        "health": {
+          "sample_count": 3,
+          "battery_c_range": [
+            31.5,
+            31.5
+          ],
+          "thermal_status_range": [
+            0,
+            0
+          ],
+          "thermal_guard_pass": true
+        },
+        "output_sha256": {
+          "output-0.bin": "4953ad8d2dabca6b7bc2a415cfca377f6ff7c757d029e86ea3e1653993c612b1"
+        },
+        "raw_samples_sha256": "66b7e7c3ce3b895b6781b4f44ba6918103fb502f6287a89631d48643cc76a6c4",
+        "raw_summary_sha256": "733c9d7220143eb840998579f30759f2ecef5400945ba168de2f7c739f8ac5ea",
+        "instrumentation": true,
+        "measured_io_stage_ms_per_frame": {
+          "packed_size_query": 0.008360566666666668,
+          "lock": 0.2727298416666667,
+          "memcpy": 0.8123753416666667,
+          "unlock": 0.06745394166666667
+        },
+        "byte_identical_output_frames": 140
+      },
+      {
+        "run": "io-2-1",
+        "measured_frames": 120,
+        "warmup_frames": 20,
+        "latency_ms": {
+          "input_ms": {
+            "count": 120,
+            "mean": 0.9134470083333334,
+            "p50": 0.8273170000000001,
+            "p95": 1.2323126499999997,
+            "p99": 1.8248108200000006,
+            "maximum": 3.258359,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "invoke_ms": {
+            "count": 120,
+            "mean": 33.8714877,
+            "p50": 33.888411500000004,
+            "p95": 34.71873185,
+            "p99": 35.49307204,
+            "maximum": 35.738516,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "output_ms": {
+            "count": 120,
+            "mean": 0.3187141,
+            "p50": 0.2918355,
+            "p95": 0.5308950499999999,
+            "p99": 0.7451086100000004,
+            "maximum": 0.811589,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "total_ms": {
+            "count": 120,
+            "mean": 35.10364880833333,
+            "p50": 35.072863999999996,
+            "p95": 36.29051415,
+            "p99": 36.752288840000006,
+            "maximum": 36.903645,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "input_cpu_ms": {
+            "count": 120,
+            "mean": 0.8073182583333334,
+            "p50": 0.7877025,
+            "p95": 1.0042907499999998,
+            "p99": 1.10949509,
+            "maximum": 1.168177,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "invoke_cpu_ms": {
+            "count": 120,
+            "mean": 0.856620675,
+            "p50": 0.8479245,
+            "p95": 1.17429385,
+            "p99": 1.3864973000000003,
+            "maximum": 1.584321,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "output_cpu_ms": {
+            "count": 120,
+            "mean": 0.273516125,
+            "p50": 0.2839715,
+            "p95": 0.3572279,
+            "p99": 0.38119815,
+            "maximum": 0.415597,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          }
+        },
+        "hardware_mean_ms": 31.02629166666667,
+        "hardware_execution_count": 120,
+        "health": {
+          "sample_count": 3,
+          "battery_c_range": [
+            31.1,
+            31.5
+          ],
+          "thermal_status_range": [
+            0,
+            0
+          ],
+          "thermal_guard_pass": true
+        },
+        "output_sha256": {
+          "output-0.bin": "4953ad8d2dabca6b7bc2a415cfca377f6ff7c757d029e86ea3e1653993c612b1"
+        },
+        "raw_samples_sha256": "3c35a608fe23ea42c4fb63efc7102a0d2b71599b758948e4844c4b0a871c25f5",
+        "raw_summary_sha256": "46efebb0677a2185c416e967601bd68d62e3b098e3b8317a19cb364b8d3a906e",
+        "instrumentation": true,
+        "measured_io_stage_ms_per_frame": {
+          "packed_size_query": 0.007692125,
+          "lock": 0.2828495083333334,
+          "memcpy": 0.8484834583333334,
+          "unlock": 0.06483415000000001
+        },
+        "byte_identical_output_frames": 140
+      },
+      {
+        "run": "io-3-0",
+        "measured_frames": 120,
+        "warmup_frames": 20,
+        "latency_ms": {
+          "input_ms": {
+            "count": 120,
+            "mean": 0.9122377083333333,
+            "p50": 0.8463115,
+            "p95": 1.2491640499999999,
+            "p99": 1.9945030700000015,
+            "maximum": 2.478333,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "invoke_ms": {
+            "count": 120,
+            "mean": 34.10883403333333,
+            "p50": 34.0967695,
+            "p95": 35.24394625,
+            "p99": 36.02089156,
+            "maximum": 36.340744,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "output_ms": {
+            "count": 120,
+            "mean": 0.3202366,
+            "p50": 0.2951205,
+            "p95": 0.64550055,
+            "p99": 0.8461295300000005,
+            "maximum": 0.905781,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "total_ms": {
+            "count": 120,
+            "mean": 35.34130834166667,
+            "p50": 35.2436195,
+            "p95": 36.8085061,
+            "p99": 37.508711180000006,
+            "maximum": 37.61053,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "input_cpu_ms": {
+            "count": 120,
+            "mean": 0.7953219333333333,
+            "p50": 0.784324,
+            "p95": 0.9987590999999999,
+            "p99": 1.05269795,
+            "maximum": 1.149099,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "invoke_cpu_ms": {
+            "count": 120,
+            "mean": 0.920407825,
+            "p50": 0.8874740000000001,
+            "p95": 1.2686539000000001,
+            "p99": 1.39269272,
+            "maximum": 1.436182,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          },
+          "output_cpu_ms": {
+            "count": 120,
+            "mean": 0.2735938333333333,
+            "p50": 0.28679699999999997,
+            "p95": 0.33890109999999996,
+            "p99": 0.39404353000000003,
+            "maximum": 0.420402,
+            "over_46_ms": 0,
+            "over_50_ms": 0
+          }
+        },
+        "hardware_mean_ms": 31.038116666666664,
+        "hardware_execution_count": 120,
+        "health": {
+          "sample_count": 3,
+          "battery_c_range": [
+            31.1,
+            31.1
+          ],
+          "thermal_status_range": [
+            0,
+            0
+          ],
+          "thermal_guard_pass": true
+        },
+        "output_sha256": {
+          "output-0.bin": "4953ad8d2dabca6b7bc2a415cfca377f6ff7c757d029e86ea3e1653993c612b1"
+        },
+        "raw_samples_sha256": "6b58d6af09e967033766cb903cd9bdf9ad0d0120c137e27a91a3fb3996493478",
+        "raw_summary_sha256": "95b0cce9771cc4c5992c9c797aedf2896bdff2acb66e82fd10afbd13df973611",
+        "instrumentation": false,
+        "measured_io_stage_ms_per_frame": {
+          "packed_size_query": 0.0,
+          "lock": 0.0,
+          "memcpy": 0.0,
+          "unlock": 0.0
+        },
+        "byte_identical_output_frames": 140
+      }
+    ],
+    "timer_calibration": [
+      {
+        "run": "io-0-0",
+        "samples": 10000,
+        "mean_ns": 242,
+        "min_ns": 156,
+        "max_ns": 193923,
+        "clock_reads_per_measured_copy": 5
+      },
+      {
+        "run": "io-1-1",
+        "samples": 10000,
+        "mean_ns": 369,
+        "min_ns": 26,
+        "max_ns": 2722734,
+        "clock_reads_per_measured_copy": 5
+      },
+      {
+        "run": "io-2-1",
+        "samples": 10000,
+        "mean_ns": 238,
+        "min_ns": 156,
+        "max_ns": 184636,
+        "clock_reads_per_measured_copy": 5
+      },
+      {
+        "run": "io-3-0",
+        "samples": 10000,
+        "mean_ns": 258,
+        "min_ns": 157,
+        "max_ns": 285391,
+        "clock_reads_per_measured_copy": 5
+      }
+    ],
+    "per_buffer_aggregates": [
+      {
+        "direction": "input_write",
+        "index": 0,
+        "name": "img",
+        "logical_bytes": 393216,
+        "measured_copies": 240,
+        "stages": {
+          "packed_size_query": {
+            "total_ns": 984832,
+            "mean_ns_per_copy": 4103.466666666666,
+            "min_ns": 209,
+            "max_ns": 58463
+          },
+          "lock": {
+            "total_ns": 26798299,
+            "mean_ns_per_copy": 111659.57916666666,
+            "min_ns": 30886,
+            "max_ns": 2289594
+          },
+          "memcpy": {
+            "total_ns": 33020080,
+            "mean_ns_per_copy": 137583.66666666666,
+            "min_ns": 52422,
+            "max_ns": 651536
+          },
+          "unlock": {
+            "total_ns": 4354290,
+            "mean_ns_per_copy": 18142.875,
+            "min_ns": 5235,
+            "max_ns": 140964
+          }
+        }
+      },
+      {
+        "direction": "input_write",
+        "index": 1,
+        "name": "big_img",
+        "logical_bytes": 393216,
+        "measured_copies": 240,
+        "stages": {
+          "packed_size_query": {
+            "total_ns": 89274,
+            "mean_ns_per_copy": 371.975,
+            "min_ns": 182,
+            "max_ns": 1536
+          },
+          "lock": {
+            "total_ns": 5262122,
+            "mean_ns_per_copy": 21925.508333333335,
+            "min_ns": 7708,
+            "max_ns": 215833
+          },
+          "memcpy": {
+            "total_ns": 32232503,
+            "mean_ns_per_copy": 134302.09583333333,
+            "min_ns": 52474,
+            "max_ns": 511876
+          },
+          "unlock": {
+            "total_ns": 1892594,
+            "mean_ns_per_copy": 7885.808333333333,
+            "min_ns": 2630,
+            "max_ns": 264739
+          }
+        }
+      },
+      {
+        "direction": "input_write",
+        "index": 2,
+        "name": "desire_pulse",
+        "logical_bytes": 528,
+        "measured_copies": 240,
+        "stages": {
+          "packed_size_query": {
+            "total_ns": 214454,
+            "mean_ns_per_copy": 893.5583333333333,
+            "min_ns": 156,
+            "max_ns": 18479
+          },
+          "lock": {
+            "total_ns": 4320054,
+            "mean_ns_per_copy": 18000.225,
+            "min_ns": 7474,
+            "max_ns": 260677
+          },
+          "memcpy": {
+            "total_ns": 670619,
+            "mean_ns_per_copy": 2794.2458333333334,
+            "min_ns": 1380,
+            "max_ns": 5938
+          },
+          "unlock": {
+            "total_ns": 987695,
+            "mean_ns_per_copy": 4115.395833333333,
+            "min_ns": 1718,
+            "max_ns": 6380
+          }
+        }
+      },
+      {
+        "direction": "input_write",
+        "index": 3,
+        "name": "traffic_convention",
+        "logical_bytes": 4,
+        "measured_copies": 240,
+        "stages": {
+          "packed_size_query": {
+            "total_ns": 178787,
+            "mean_ns_per_copy": 744.9458333333333,
+            "min_ns": 104,
+            "max_ns": 3386
+          },
+          "lock": {
+            "total_ns": 3387732,
+            "mean_ns_per_copy": 14115.55,
+            "min_ns": 6250,
+            "max_ns": 22734
+          },
+          "memcpy": {
+            "total_ns": 382579,
+            "mean_ns_per_copy": 1594.0791666666667,
+            "min_ns": 667,
+            "max_ns": 16667
+          },
+          "unlock": {
+            "total_ns": 1042820,
+            "mean_ns_per_copy": 4345.083333333333,
+            "min_ns": 1562,
+            "max_ns": 104896
+          }
+        }
+      },
+      {
+        "direction": "input_write",
+        "index": 4,
+        "name": "action_t",
+        "logical_bytes": 4,
+        "measured_copies": 240,
+        "stages": {
+          "packed_size_query": {
+            "total_ns": 137235,
+            "mean_ns_per_copy": 571.8125,
+            "min_ns": 105,
+            "max_ns": 2135
+          },
+          "lock": {
+            "total_ns": 4205683,
+            "mean_ns_per_copy": 17523.679166666665,
+            "min_ns": 7265,
+            "max_ns": 217293
+          },
+          "memcpy": {
+            "total_ns": 252667,
+            "mean_ns_per_copy": 1052.7791666666667,
+            "min_ns": 339,
+            "max_ns": 2500
+          },
+          "unlock": {
+            "total_ns": 1286032,
+            "mean_ns_per_copy": 5358.466666666666,
+            "min_ns": 1797,
+            "max_ns": 345001
+          }
+        }
+      },
+      {
+        "direction": "input_write",
+        "index": 5,
+        "name": "features_buffer",
+        "logical_bytes": 1048576,
+        "measured_copies": 240,
+        "stages": {
+          "packed_size_query": {
+            "total_ns": 151219,
+            "mean_ns_per_copy": 630.0791666666667,
+            "min_ns": 104,
+            "max_ns": 2256
+          },
+          "lock": {
+            "total_ns": 3991397,
+            "mean_ns_per_copy": 16630.820833333335,
+            "min_ns": 6302,
+            "max_ns": 128802
+          },
+          "memcpy": {
+            "total_ns": 83057180,
+            "mean_ns_per_copy": 346071.5833333333,
+            "min_ns": 131266,
+            "max_ns": 915452
+          },
+          "unlock": {
+            "total_ns": 2372043,
+            "mean_ns_per_copy": 9883.5125,
+            "min_ns": 3499,
+            "max_ns": 373046
+          }
+        }
+      },
+      {
+        "direction": "output_read",
+        "index": 0,
+        "name": "outputs",
+        "logical_bytes": 36904,
+        "measured_copies": 240,
+        "stages": {
+          "packed_size_query": {
+            "total_ns": 170522,
+            "mean_ns_per_copy": 710.5083333333333,
+            "min_ns": 120,
+            "max_ns": 4036
+          },
+          "lock": {
+            "total_ns": 18704235,
+            "mean_ns_per_copy": 77934.3125,
+            "min_ns": 32510,
+            "max_ns": 459791
+          },
+          "memcpy": {
+            "total_ns": 49687428,
+            "mean_ns_per_copy": 207030.95,
+            "min_ns": 70547,
+            "max_ns": 840208
+          },
+          "unlock": {
+            "total_ns": 3939097,
+            "mean_ns_per_copy": 16412.904166666667,
+            "min_ns": 5703,
+            "max_ns": 408828
+          }
+        }
+      }
+    ],
+    "mean_io_stage_ms_per_frame": {
+      "input_write": {
+        "packed_size_query": 0.007315837499999999,
+        "lock": 0.1998553625,
+        "memcpy": 0.6233984499999999,
+        "unlock": 0.04973114166666667
+      },
+      "output_read": {
+        "packed_size_query": 0.0007105083333333334,
+        "lock": 0.0779343125,
+        "memcpy": 0.20703095000000002,
+        "unlock": 0.016412904166666666
+      }
+    },
+    "pooled_latency_ms_exploratory": {
+      "off": {
+        "input_ms": {
+          "count": 240,
+          "mean": 0.908923725,
+          "p50": 0.83655,
+          "p95": 1.260174799999999,
+          "p99": 1.9146215599999927,
+          "maximum": 2.478333,
+          "over_46_ms": 0,
+          "over_50_ms": 0
+        },
+        "invoke_ms": {
+          "count": 240,
+          "mean": 33.998326041666665,
+          "p50": 33.933645,
+          "p95": 35.3094883,
+          "p99": 36.381877519999996,
+          "maximum": 37.433968,
+          "over_46_ms": 0,
+          "over_50_ms": 0
+        },
+        "output_ms": {
+          "count": 240,
+          "mean": 0.31646131666666666,
+          "p50": 0.2947555,
+          "p95": 0.6107436999999996,
+          "p99": 0.7218396699999995,
+          "maximum": 0.905781,
+          "over_46_ms": 0,
+          "over_50_ms": 0
+        },
+        "total_ms": {
+          "count": 240,
+          "mean": 35.223711083333335,
+          "p50": 35.124744,
+          "p95": 36.80495965,
+          "p99": 37.87783809999999,
+          "maximum": 38.462318,
+          "over_46_ms": 0,
+          "over_50_ms": 0
+        },
+        "input_cpu_ms": {
+          "count": 240,
+          "mean": 0.7954263375,
+          "p50": 0.7850085,
+          "p95": 1.01470105,
+          "p99": 1.1253295699999994,
+          "maximum": 1.151484,
+          "over_46_ms": 0,
+          "over_50_ms": 0
+        },
+        "invoke_cpu_ms": {
+          "count": 240,
+          "mean": 0.886388625,
+          "p50": 0.8773569999999999,
+          "p95": 1.2362282999999994,
+          "p99": 1.3737244699999995,
+          "maximum": 1.436182,
+          "over_46_ms": 0,
+          "over_50_ms": 0
+        },
+        "output_cpu_ms": {
+          "count": 240,
+          "mean": 0.270432175,
+          "p50": 0.282914,
+          "p95": 0.3389010999999999,
+          "p99": 0.3886409299999996,
+          "maximum": 0.420402,
+          "over_46_ms": 0,
+          "over_50_ms": 0
+        }
+      },
+      "on": {
+        "input_ms": {
+          "count": 240,
+          "mean": 0.9130164541666667,
+          "p50": 0.8382944999999999,
+          "p95": 1.3130120499999998,
+          "p99": 1.86250744,
+          "maximum": 4.765896,
+          "over_46_ms": 0,
+          "over_50_ms": 0
+        },
+        "invoke_ms": {
+          "count": 240,
+          "mean": 33.90290132916667,
+          "p50": 33.8614885,
+          "p95": 34.99916765,
+          "p99": 36.115206249999986,
+          "maximum": 38.609442,
+          "over_46_ms": 0,
+          "over_50_ms": 0
+        },
+        "output_ms": {
+          "count": 240,
+          "mean": 0.31427599166666664,
+          "p50": 0.289258,
+          "p95": 0.5406509999999997,
+          "p99": 0.8408872999999993,
+          "maximum": 0.942527,
+          "over_46_ms": 0,
+          "over_50_ms": 0
+        },
+        "total_ms": {
+          "count": 240,
+          "mean": 35.130193775,
+          "p50": 35.054088,
+          "p95": 36.3407803,
+          "p99": 37.90171280999999,
+          "maximum": 40.043099,
+          "over_46_ms": 0,
+          "over_50_ms": 0
+        },
+        "input_cpu_ms": {
+          "count": 240,
+          "mean": 0.7880447666666667,
+          "p50": 0.768716,
+          "p95": 1.0031622,
+          "p99": 1.10823729,
+          "maximum": 1.168177,
+          "over_46_ms": 0,
+          "over_50_ms": 0
+        },
+        "invoke_cpu_ms": {
+          "count": 240,
+          "mean": 0.8427406958333333,
+          "p50": 0.827,
+          "p95": 1.1682228000000001,
+          "p99": 1.2752332099999995,
+          "maximum": 1.584321,
+          "over_46_ms": 0,
+          "over_50_ms": 0
+        },
+        "output_cpu_ms": {
+          "count": 240,
+          "mean": 0.2693714125,
+          "p50": 0.2811895,
+          "p95": 0.3581735,
+          "p99": 0.37333124999999984,
+          "maximum": 0.415597,
+          "over_46_ms": 0,
+          "over_50_ms": 0
+        }
+      }
+    },
+    "instrumentation_on_minus_off_mean_ms_by_adjacent_pair": [
+      0.050624916666663466,
+      -0.23765953333333556
+    ],
+    "instrumentation_on_minus_off_mean_ms": -0.09351730833333605,
+    "all_final_outputs_byte_identical": true,
+    "health": {
+      "sample_count": 12,
+      "battery_c_range": [
+        31.1,
+        31.5
+      ],
+      "thermal_status_range": [
+        0,
+        0
+      ],
+      "thermal_guard_pass": true
+    },
+    "limitations": [
+      "Two adjacent diagnostic pairs cannot establish a precise causal instrumentation overhead.",
+      "No timer-floor subtraction; five extra clock reads per measured buffer copy.",
+      "Aggregation happens after timed unlock and remains in the whole-frame time.",
+      "Lock times may include lower-level cache or synchronization work; labels are API boundaries.",
+      "Measured memcpy time is only an upper bound for removing copies through direct preparation.",
+      "All original model input writes, output reads, locks, unlocks and finiteness checks are retained.",
+      "Fixed inputs exclude recurrent app staging and changing camera frames."
+    ]
+  }
+}

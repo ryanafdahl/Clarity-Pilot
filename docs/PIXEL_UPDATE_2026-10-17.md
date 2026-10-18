@@ -4,6 +4,8 @@ The Pixel 11 Pro XL was updated in place from `0.8.5-clarity-tensor.9` to **`0.8
 
 Upstream v0.8.7 changes model catalog and LFS lookup. The inference loop is unchanged relative to the previous patched release. This is a maintenance update, **not a demonstrated speed improvement**. [APK and rebuild instructions](../android/README.md), [sanitized evidence](../android/tensor/update-2026-10-17.json).
 
+The subsequent [compiler/runtime investigation](TENSOR_COMPILER_RUNTIME_2026-10-17.md) found a separate improvement from SDK v2.1 while keeping this APK unchanged. The figures below preserve the maintenance comparison with the earlier compiled model.
+
 ## Measured on the connected phone
 
 Each run used the same model identity, 20 warmup frames and 1,200 measured frames at a requested 50 ms period. These are synthetic recurrent tests over PC ADB TCP forwarding, not comma direct USB. Tests ran sequentially, baseline first; order and temperature are not controlled sufficiently to attribute small differences to the update.
@@ -29,7 +31,7 @@ The release build passed 59 Android unit tests and 53 selected native regression
 The current phone-side overhead outside inference is about 1.0 ms per frame. The October 11 instrumented native baseline measured roughly 29.36 ms of TPU hardware execution within a 32.27 ms runtime call, plus about 0.93 ms input copying and 0.32 ms output copying. Those older component figures are leads, not fresh measurements of this build.
 
 * **Runtime/driver completion latency:** the strongest unresolved issue is rare long waits, especially during screen wake. Prior fence traces placed the delay before completion signaling. Higher thread priority, sustained mode, async completion and deadline hints did not resolve wake failures. A matched newer runtime/compiler or vendor fix needs separate compatibility, output and repeated wake testing before adoption.
-* **Input preparation directly into supported NPU buffers:** eliminating a copy could reduce some overhead, but the prior resident-input upper-bound experiment saved only about 0.08 ms. That experiment cannot process changing camera frames. Any implementation must preserve buffer ownership, synchronization and exact image history; no unsafe persistent mapping or skipped updates is included.
+* **Input preparation directly into supported NPU buffers:** eliminating a copy could reduce some overhead. Prior input writes took about 0.8–1.0 ms including lock, copy and cache synchronization; the sequential resident-input test did not isolate a causal total-frame gain. It cannot process changing camera frames, and required synchronization cannot simply be removed. Any implementation must preserve buffer ownership, synchronization and exact image history; no unsafe persistent mapping or skipped updates is included.
 * **Compiler/operator optimization:** most time is actual TPU work. Operation-level profiling is the next route to a substantial gain. Existing sharding trials did not help. This release preserves the validated model and FP16 precision.
 
 See the [performance investigation](TPU_PERFORMANCE_2026-10-11.md) and [fence experiment](TPU_WAKE_FENCE_2026-10-11.md). No experimental scheduling or runtime-mode patch is promoted based on these two maintenance checks.

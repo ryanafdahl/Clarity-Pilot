@@ -1,0 +1,1387 @@
+{
+  "kind": "app_async_paired_screen_with_explicit_repeat",
+  "original_suite_completed_as_planned": false,
+  "primary_construction": "First five original pairs plus a complete repeated BA sixth pair",
+  "primary_metric": "phone server_total mean; positive A-minus-B favors async",
+  "exploratory_secondary_metrics": [
+    "inference",
+    "queues",
+    "round_trip",
+    "percentiles",
+    "tails"
+  ],
+  "transport": "desk ADB TCP; not direct vehicle USB",
+  "apk_sha256": {
+    "A": "efb0ba73a6486d68f791bd53baa118c783632b40af817c1320fd006b085b89e4",
+    "B": "3cfadbe573cc978428e1aed6aee2706881dd2aa3c0029793ee33a491a997b946"
+  },
+  "original_manifest_sha256": "a553d86ac92018ea0bb317da77703311686e7f4403f6e80cd6a4e8187cdf056d",
+  "repeat_manifest_sha256": "1662532d4397db7c996183b038841140cf7a4d2d5956276422c1e37f73f6bf61",
+  "completed_runs_total": 13,
+  "paired_runs_total": 12,
+  "orphan_run": {
+    "id": "original-11-B",
+    "series": "original",
+    "run": 11,
+    "variant": "B",
+    "measured_frames": 300,
+    "warmup_frames": 20,
+    "finite_frames": 300,
+    "failures": [],
+    "metrics": {
+      "server_total": {
+        "count": 300,
+        "mean_ms": 33.91173333333333,
+        "p50_ms": 33.927,
+        "p95_ms": 35.6959,
+        "p99_ms": 36.33304,
+        "max_ms": 39.979,
+        "over_46ms": 0,
+        "over_50ms": 0
+      },
+      "inference": {
+        "count": 300,
+        "mean_ms": 32.695553333333336,
+        "p50_ms": 32.644000000000005,
+        "p95_ms": 34.248349999999995,
+        "p99_ms": 34.971239999999995,
+        "max_ms": 35.955,
+        "over_46ms": 0,
+        "over_50ms": 0
+      },
+      "queues": {
+        "count": 300,
+        "mean_ms": 1.01313,
+        "p50_ms": 0.965,
+        "p95_ms": 1.3281,
+        "p99_ms": 1.970339999999996,
+        "max_ms": 3.913,
+        "over_46ms": 0,
+        "over_50ms": 0
+      },
+      "round_trip": {
+        "count": 300,
+        "mean_ms": 50.44377866669189,
+        "p50_ms": 49.5455000009315,
+        "p95_ms": 55.813410001155724,
+        "p99_ms": 68.44294099935722,
+        "max_ms": 73.49949999843375,
+        "over_46ms": 295,
+        "over_50ms": 119
+      }
+    },
+    "health": {
+      "battery_c_range": [
+        32.9,
+        33.0
+      ],
+      "thermal_statuses": [
+        0
+      ],
+      "phone_samples": 17,
+      "power_save_observed": false
+    },
+    "protocol_pass": true,
+    "server_timing_pass": true,
+    "round_trip_timing_pass": false,
+    "driving_ready": false,
+    "all_320_output_hash_sequence_sha256": "27b866dcda4d9f97bff53a430d1994d130cd64a46bacadb82101af0176a0225c",
+    "measured_300_output_hash_sequence_sha256": "c1c5f1ad2d15266b456c242c89af2c0d3b166fe1c3e2dde058e6028cd5889603",
+    "summary_sha256": "b26db758a49b1a826bc771efc62ea9f42ad0147d8d0071c751b6a572b2be1021",
+    "frame_evidence_sha256": "8605b40f47bb9909fc0e413fc3f44aaae0cc808516347e678ecee50310dcab1b"
+  },
+  "launch_failure": {
+    "before_planned_run": 12,
+    "variant": "A",
+    "operation": "Android activity start",
+    "exit_status": 1,
+    "inference_frames_for_failed_attempt": 0,
+    "stderr_retained": false,
+    "cause": "unknown; no crash diagnosis established",
+    "rollback_confirmed": true,
+    "recovery": "Repeated the complete BA pair, not only its missing A run"
+  },
+  "output_equality": {
+    "all_completed_runs": 13,
+    "all_320_corresponding_frame_hashes_equal": true,
+    "includes_warmups": true,
+    "includes_orphan": true,
+    "sequence_sha256": "27b866dcda4d9f97bff53a430d1994d130cd64a46bacadb82101af0176a0225c",
+    "scope": "Finite 320-frame recurrent fixture; not universal accuracy proof"
+  },
+  "all_completed_runs": [
+    {
+      "id": "original-01-A",
+      "series": "original",
+      "run": 1,
+      "variant": "A",
+      "measured_frames": 300,
+      "warmup_frames": 20,
+      "finite_frames": 300,
+      "failures": [],
+      "metrics": {
+        "server_total": {
+          "count": 300,
+          "mean_ms": 33.636116666666666,
+          "p50_ms": 33.574,
+          "p95_ms": 35.35305,
+          "p99_ms": 36.25317999999999,
+          "max_ms": 39.477,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "inference": {
+          "count": 300,
+          "mean_ms": 32.42265,
+          "p50_ms": 32.381,
+          "p95_ms": 34.0407,
+          "p99_ms": 34.7712,
+          "max_ms": 34.906,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "queues": {
+          "count": 300,
+          "mean_ms": 0.99875,
+          "p50_ms": 0.9595,
+          "p95_ms": 1.26625,
+          "p99_ms": 2.050009999999999,
+          "max_ms": 4.167,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "round_trip": {
+          "count": 300,
+          "mean_ms": 49.37092333339024,
+          "p50_ms": 48.861199999919336,
+          "p95_ms": 53.77180500099712,
+          "p99_ms": 59.80440799892675,
+          "max_ms": 62.72480000006908,
+          "over_46ms": 293,
+          "over_50ms": 79
+        }
+      },
+      "health": {
+        "battery_c_range": [
+          31.9,
+          32.1
+        ],
+        "thermal_statuses": [
+          0
+        ],
+        "phone_samples": 17,
+        "power_save_observed": false
+      },
+      "protocol_pass": true,
+      "server_timing_pass": true,
+      "round_trip_timing_pass": false,
+      "driving_ready": false,
+      "all_320_output_hash_sequence_sha256": "27b866dcda4d9f97bff53a430d1994d130cd64a46bacadb82101af0176a0225c",
+      "measured_300_output_hash_sequence_sha256": "c1c5f1ad2d15266b456c242c89af2c0d3b166fe1c3e2dde058e6028cd5889603",
+      "summary_sha256": "781b5312438cff742caf2b5235fd10bacd6b798ccc02241d4172e1bc49553d30",
+      "frame_evidence_sha256": "b6dbcec1043abeed065fd45812f6dddd2fbc725bcff9c0138a8b3c0a71a842d3"
+    },
+    {
+      "id": "original-02-B",
+      "series": "original",
+      "run": 2,
+      "variant": "B",
+      "measured_frames": 300,
+      "warmup_frames": 20,
+      "finite_frames": 300,
+      "failures": [],
+      "metrics": {
+        "server_total": {
+          "count": 300,
+          "mean_ms": 33.83966,
+          "p50_ms": 33.8675,
+          "p95_ms": 35.916549999999994,
+          "p99_ms": 37.2167,
+          "max_ms": 37.646,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "inference": {
+          "count": 300,
+          "mean_ms": 32.62597,
+          "p50_ms": 32.620000000000005,
+          "p95_ms": 34.66505,
+          "p99_ms": 35.25111,
+          "max_ms": 36.265,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "queues": {
+          "count": 300,
+          "mean_ms": 1.00029,
+          "p50_ms": 1.0015,
+          "p95_ms": 1.3566500000000001,
+          "p99_ms": 1.6287399999999959,
+          "max_ms": 2.251,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "round_trip": {
+          "count": 300,
+          "mean_ms": 50.65216000009362,
+          "p50_ms": 49.67360000046028,
+          "p95_ms": 58.863954999833375,
+          "p99_ms": 68.8407789997836,
+          "max_ms": 95.60840000085591,
+          "over_46ms": 289,
+          "over_50ms": 134
+        }
+      },
+      "health": {
+        "battery_c_range": [
+          31.9,
+          32.1
+        ],
+        "thermal_statuses": [
+          0
+        ],
+        "phone_samples": 17,
+        "power_save_observed": false
+      },
+      "protocol_pass": true,
+      "server_timing_pass": true,
+      "round_trip_timing_pass": false,
+      "driving_ready": false,
+      "all_320_output_hash_sequence_sha256": "27b866dcda4d9f97bff53a430d1994d130cd64a46bacadb82101af0176a0225c",
+      "measured_300_output_hash_sequence_sha256": "c1c5f1ad2d15266b456c242c89af2c0d3b166fe1c3e2dde058e6028cd5889603",
+      "summary_sha256": "be5ef7310e0754f4923b5dc4ba6a3a0e8e1a14fa56d36a53b0a9d961ee6cff5c",
+      "frame_evidence_sha256": "79824c0bd84027ce35094bccc4f0782e408930cfdb544c96a8aa5f4126cc3742"
+    },
+    {
+      "id": "original-03-B",
+      "series": "original",
+      "run": 3,
+      "variant": "B",
+      "measured_frames": 300,
+      "warmup_frames": 20,
+      "finite_frames": 300,
+      "failures": [],
+      "metrics": {
+        "server_total": {
+          "count": 300,
+          "mean_ms": 33.27809333333333,
+          "p50_ms": 33.3275,
+          "p95_ms": 34.9146,
+          "p99_ms": 36.0492,
+          "max_ms": 40.212,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "inference": {
+          "count": 300,
+          "mean_ms": 32.09859,
+          "p50_ms": 32.114000000000004,
+          "p95_ms": 33.754799999999996,
+          "p99_ms": 34.44287,
+          "max_ms": 37.911,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "queues": {
+          "count": 300,
+          "mean_ms": 0.9700633333333333,
+          "p50_ms": 0.9644999999999999,
+          "p95_ms": 1.22645,
+          "p99_ms": 1.4876799999999977,
+          "max_ms": 2.371,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "round_trip": {
+          "count": 300,
+          "mean_ms": 49.33497700002287,
+          "p50_ms": 48.75434999939898,
+          "p95_ms": 53.982229999564886,
+          "p99_ms": 61.77162499998302,
+          "max_ms": 67.48879999940982,
+          "over_46ms": 282,
+          "over_50ms": 85
+        }
+      },
+      "health": {
+        "battery_c_range": [
+          31.9,
+          32.0
+        ],
+        "thermal_statuses": [
+          0
+        ],
+        "phone_samples": 17,
+        "power_save_observed": false
+      },
+      "protocol_pass": true,
+      "server_timing_pass": true,
+      "round_trip_timing_pass": false,
+      "driving_ready": false,
+      "all_320_output_hash_sequence_sha256": "27b866dcda4d9f97bff53a430d1994d130cd64a46bacadb82101af0176a0225c",
+      "measured_300_output_hash_sequence_sha256": "c1c5f1ad2d15266b456c242c89af2c0d3b166fe1c3e2dde058e6028cd5889603",
+      "summary_sha256": "dc7405e97c1155dc12ab707c17001bfe09f8fc0ca5835264a926fe1567dd6341",
+      "frame_evidence_sha256": "c6c43243538fd1de3d5c14a89bb51b47344bff64d75166a08c7ddb6065f81ba7"
+    },
+    {
+      "id": "original-04-A",
+      "series": "original",
+      "run": 4,
+      "variant": "A",
+      "measured_frames": 300,
+      "warmup_frames": 20,
+      "finite_frames": 300,
+      "failures": [],
+      "metrics": {
+        "server_total": {
+          "count": 300,
+          "mean_ms": 34.16925666666667,
+          "p50_ms": 34.113,
+          "p95_ms": 36.04,
+          "p99_ms": 37.48362999999999,
+          "max_ms": 40.098,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "inference": {
+          "count": 300,
+          "mean_ms": 32.92894,
+          "p50_ms": 32.9045,
+          "p95_ms": 34.6501,
+          "p99_ms": 35.72568,
+          "max_ms": 38.142,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "queues": {
+          "count": 300,
+          "mean_ms": 1.04397,
+          "p50_ms": 1.008,
+          "p95_ms": 1.4527,
+          "p99_ms": 2.1219899999999963,
+          "max_ms": 3.376,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "round_trip": {
+          "count": 300,
+          "mean_ms": 51.195611666698824,
+          "p50_ms": 49.84205000073416,
+          "p95_ms": 61.613264999868996,
+          "p99_ms": 75.34286899937793,
+          "max_ms": 82.27979999901436,
+          "over_46ms": 293,
+          "over_50ms": 140
+        }
+      },
+      "health": {
+        "battery_c_range": [
+          32,
+          32
+        ],
+        "thermal_statuses": [
+          0
+        ],
+        "phone_samples": 17,
+        "power_save_observed": false
+      },
+      "protocol_pass": true,
+      "server_timing_pass": true,
+      "round_trip_timing_pass": false,
+      "driving_ready": false,
+      "all_320_output_hash_sequence_sha256": "27b866dcda4d9f97bff53a430d1994d130cd64a46bacadb82101af0176a0225c",
+      "measured_300_output_hash_sequence_sha256": "c1c5f1ad2d15266b456c242c89af2c0d3b166fe1c3e2dde058e6028cd5889603",
+      "summary_sha256": "174f3bba082769d3a05acc63fbfb5970bbae0cf4aa2a3f1d8691c5d602e575c1",
+      "frame_evidence_sha256": "52f31f041de8e5875bbcb0dcbdaf4765d20ef9a0d6dfb554e67fc2331481d167"
+    },
+    {
+      "id": "original-05-A",
+      "series": "original",
+      "run": 5,
+      "variant": "A",
+      "measured_frames": 300,
+      "warmup_frames": 20,
+      "finite_frames": 300,
+      "failures": [],
+      "metrics": {
+        "server_total": {
+          "count": 300,
+          "mean_ms": 34.117623333333334,
+          "p50_ms": 34.089,
+          "p95_ms": 35.8774,
+          "p99_ms": 38.0597,
+          "max_ms": 41.09,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "inference": {
+          "count": 300,
+          "mean_ms": 32.91620666666667,
+          "p50_ms": 32.888000000000005,
+          "p95_ms": 34.68265,
+          "p99_ms": 35.792719999999996,
+          "max_ms": 37.857,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "queues": {
+          "count": 300,
+          "mean_ms": 0.9949933333333333,
+          "p50_ms": 0.963,
+          "p95_ms": 1.291,
+          "p99_ms": 2.7142199999999996,
+          "max_ms": 3.36,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "round_trip": {
+          "count": 300,
+          "mean_ms": 50.39026099999319,
+          "p50_ms": 49.46465000011813,
+          "p95_ms": 56.40432000082001,
+          "p99_ms": 65.80364700004792,
+          "max_ms": 68.8174999995681,
+          "over_46ms": 293,
+          "over_50ms": 120
+        }
+      },
+      "health": {
+        "battery_c_range": [
+          32,
+          32.5
+        ],
+        "thermal_statuses": [
+          0
+        ],
+        "phone_samples": 17,
+        "power_save_observed": false
+      },
+      "protocol_pass": true,
+      "server_timing_pass": true,
+      "round_trip_timing_pass": false,
+      "driving_ready": false,
+      "all_320_output_hash_sequence_sha256": "27b866dcda4d9f97bff53a430d1994d130cd64a46bacadb82101af0176a0225c",
+      "measured_300_output_hash_sequence_sha256": "c1c5f1ad2d15266b456c242c89af2c0d3b166fe1c3e2dde058e6028cd5889603",
+      "summary_sha256": "9c716e57206a8106d0c9f5d547b8ef1852a232eef21dd4f3dab096068b06bb21",
+      "frame_evidence_sha256": "3587033037320ad0dead87369361aa18f428d9c9c15cdc377dc91e2c31d2dd16"
+    },
+    {
+      "id": "original-06-B",
+      "series": "original",
+      "run": 6,
+      "variant": "B",
+      "measured_frames": 300,
+      "warmup_frames": 20,
+      "finite_frames": 300,
+      "failures": [],
+      "metrics": {
+        "server_total": {
+          "count": 300,
+          "mean_ms": 33.38233,
+          "p50_ms": 33.316,
+          "p95_ms": 35.279250000000005,
+          "p99_ms": 36.36616999999999,
+          "max_ms": 40.896,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "inference": {
+          "count": 300,
+          "mean_ms": 32.150663333333334,
+          "p50_ms": 32.05,
+          "p95_ms": 33.9125,
+          "p99_ms": 34.90155,
+          "max_ms": 36.47,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "queues": {
+          "count": 300,
+          "mean_ms": 1.0405666666666666,
+          "p50_ms": 0.996,
+          "p95_ms": 1.2898500000000002,
+          "p99_ms": 2.632459999999994,
+          "max_ms": 5.875,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "round_trip": {
+          "count": 300,
+          "mean_ms": 49.81033133331948,
+          "p50_ms": 49.0088000005926,
+          "p95_ms": 57.13142499971582,
+          "p99_ms": 61.82702099997185,
+          "max_ms": 69.28470000093512,
+          "over_46ms": 286,
+          "over_50ms": 103
+        }
+      },
+      "health": {
+        "battery_c_range": [
+          32.3,
+          32.3
+        ],
+        "thermal_statuses": [
+          0
+        ],
+        "phone_samples": 17,
+        "power_save_observed": false
+      },
+      "protocol_pass": true,
+      "server_timing_pass": true,
+      "round_trip_timing_pass": false,
+      "driving_ready": false,
+      "all_320_output_hash_sequence_sha256": "27b866dcda4d9f97bff53a430d1994d130cd64a46bacadb82101af0176a0225c",
+      "measured_300_output_hash_sequence_sha256": "c1c5f1ad2d15266b456c242c89af2c0d3b166fe1c3e2dde058e6028cd5889603",
+      "summary_sha256": "27c12bd90d6d28a9baa603ad4d5e90c52a260967071ddc7358d9bbb75fe2d0ef",
+      "frame_evidence_sha256": "4d4e26424c451ed044457afabc83167607df4802b8fbe759c0d4c1306d415076"
+    },
+    {
+      "id": "original-07-B",
+      "series": "original",
+      "run": 7,
+      "variant": "B",
+      "measured_frames": 300,
+      "warmup_frames": 20,
+      "finite_frames": 300,
+      "failures": [],
+      "metrics": {
+        "server_total": {
+          "count": 300,
+          "mean_ms": 33.9562,
+          "p50_ms": 33.915499999999994,
+          "p95_ms": 35.55645,
+          "p99_ms": 36.22726,
+          "max_ms": 36.57,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "inference": {
+          "count": 300,
+          "mean_ms": 32.743743333333335,
+          "p50_ms": 32.71,
+          "p95_ms": 34.3333,
+          "p99_ms": 34.86227,
+          "max_ms": 35.062,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "queues": {
+          "count": 300,
+          "mean_ms": 1.00494,
+          "p50_ms": 0.99,
+          "p95_ms": 1.2641000000000002,
+          "p99_ms": 1.4598599999999993,
+          "max_ms": 3.159,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "round_trip": {
+          "count": 300,
+          "mean_ms": 50.88713633327643,
+          "p50_ms": 49.920899999960966,
+          "p95_ms": 58.68464999875869,
+          "p99_ms": 68.33645400027306,
+          "max_ms": 85.39790000031644,
+          "over_46ms": 299,
+          "over_50ms": 143
+        }
+      },
+      "health": {
+        "battery_c_range": [
+          32.3,
+          32.4
+        ],
+        "thermal_statuses": [
+          0
+        ],
+        "phone_samples": 17,
+        "power_save_observed": false
+      },
+      "protocol_pass": true,
+      "server_timing_pass": true,
+      "round_trip_timing_pass": false,
+      "driving_ready": false,
+      "all_320_output_hash_sequence_sha256": "27b866dcda4d9f97bff53a430d1994d130cd64a46bacadb82101af0176a0225c",
+      "measured_300_output_hash_sequence_sha256": "c1c5f1ad2d15266b456c242c89af2c0d3b166fe1c3e2dde058e6028cd5889603",
+      "summary_sha256": "ba31ed05f783661bd67e877887d643747c5b10a9ec17970cd0c27d16d47502f6",
+      "frame_evidence_sha256": "02b835905f22bef0499ff7d9a9dd5523d26a9447273e93c06f53228dab594680"
+    },
+    {
+      "id": "original-08-A",
+      "series": "original",
+      "run": 8,
+      "variant": "A",
+      "measured_frames": 300,
+      "warmup_frames": 20,
+      "finite_frames": 300,
+      "failures": [],
+      "metrics": {
+        "server_total": {
+          "count": 300,
+          "mean_ms": 34.219366666666666,
+          "p50_ms": 34.289,
+          "p95_ms": 36.3416,
+          "p99_ms": 37.22604,
+          "max_ms": 38.857,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "inference": {
+          "count": 300,
+          "mean_ms": 32.988096666666664,
+          "p50_ms": 33.025999999999996,
+          "p95_ms": 34.80945,
+          "p99_ms": 35.70531,
+          "max_ms": 37.776,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "queues": {
+          "count": 300,
+          "mean_ms": 1.0243833333333334,
+          "p50_ms": 1.0,
+          "p95_ms": 1.3597500000000002,
+          "p99_ms": 3.3207299999999993,
+          "max_ms": 3.628,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "round_trip": {
+          "count": 300,
+          "mean_ms": 50.72723600004489,
+          "p50_ms": 49.880250000569504,
+          "p95_ms": 57.82354500161092,
+          "p99_ms": 68.87454599875127,
+          "max_ms": 73.63690000056522,
+          "over_46ms": 282,
+          "over_50ms": 141
+        }
+      },
+      "health": {
+        "battery_c_range": [
+          32.4,
+          32.4
+        ],
+        "thermal_statuses": [
+          0
+        ],
+        "phone_samples": 17,
+        "power_save_observed": false
+      },
+      "protocol_pass": true,
+      "server_timing_pass": true,
+      "round_trip_timing_pass": false,
+      "driving_ready": false,
+      "all_320_output_hash_sequence_sha256": "27b866dcda4d9f97bff53a430d1994d130cd64a46bacadb82101af0176a0225c",
+      "measured_300_output_hash_sequence_sha256": "c1c5f1ad2d15266b456c242c89af2c0d3b166fe1c3e2dde058e6028cd5889603",
+      "summary_sha256": "56bb1b969f889dfb9e40874002a3d50e29fd4f4b1d13a18ef601bf93c3360933",
+      "frame_evidence_sha256": "b2aa4347eb02bbd3505ae622d00feb0344a967eebd83ea840f97520179401eef"
+    },
+    {
+      "id": "original-09-A",
+      "series": "original",
+      "run": 9,
+      "variant": "A",
+      "measured_frames": 300,
+      "warmup_frames": 20,
+      "finite_frames": 300,
+      "failures": [],
+      "metrics": {
+        "server_total": {
+          "count": 300,
+          "mean_ms": 33.57716666666667,
+          "p50_ms": 33.6135,
+          "p95_ms": 35.49515,
+          "p99_ms": 36.65024999999999,
+          "max_ms": 39.436,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "inference": {
+          "count": 300,
+          "mean_ms": 32.38552,
+          "p50_ms": 32.3825,
+          "p95_ms": 34.02815,
+          "p99_ms": 35.59861,
+          "max_ms": 38.503,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "queues": {
+          "count": 300,
+          "mean_ms": 0.9966233333333333,
+          "p50_ms": 0.968,
+          "p95_ms": 1.2316000000000003,
+          "p99_ms": 1.5639699999999983,
+          "max_ms": 2.236,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "round_trip": {
+          "count": 300,
+          "mean_ms": 49.763994999981755,
+          "p50_ms": 48.75244999948336,
+          "p95_ms": 56.865965000997676,
+          "p99_ms": 69.04352299930905,
+          "max_ms": 77.74909999898227,
+          "over_46ms": 293,
+          "over_50ms": 86
+        }
+      },
+      "health": {
+        "battery_c_range": [
+          32.4,
+          33.0
+        ],
+        "thermal_statuses": [
+          0
+        ],
+        "phone_samples": 17,
+        "power_save_observed": false
+      },
+      "protocol_pass": true,
+      "server_timing_pass": true,
+      "round_trip_timing_pass": false,
+      "driving_ready": false,
+      "all_320_output_hash_sequence_sha256": "27b866dcda4d9f97bff53a430d1994d130cd64a46bacadb82101af0176a0225c",
+      "measured_300_output_hash_sequence_sha256": "c1c5f1ad2d15266b456c242c89af2c0d3b166fe1c3e2dde058e6028cd5889603",
+      "summary_sha256": "681e5a8e69d358896bf8424d47be1f1baa786be583d6ff32ab5edaa04bcff678",
+      "frame_evidence_sha256": "6b7ea7d1936f43903ed58fc4144309e5c4de191807b508b546474cd1a12d956d"
+    },
+    {
+      "id": "original-10-B",
+      "series": "original",
+      "run": 10,
+      "variant": "B",
+      "measured_frames": 300,
+      "warmup_frames": 20,
+      "finite_frames": 300,
+      "failures": [],
+      "metrics": {
+        "server_total": {
+          "count": 300,
+          "mean_ms": 33.49505333333333,
+          "p50_ms": 33.3915,
+          "p95_ms": 35.0942,
+          "p99_ms": 35.88439999999999,
+          "max_ms": 37.552,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "inference": {
+          "count": 300,
+          "mean_ms": 32.29175333333333,
+          "p50_ms": 32.203,
+          "p95_ms": 33.86915,
+          "p99_ms": 34.67774,
+          "max_ms": 36.291,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "queues": {
+          "count": 300,
+          "mean_ms": 0.9940366666666667,
+          "p50_ms": 0.96,
+          "p95_ms": 1.2031,
+          "p99_ms": 2.0692799999999996,
+          "max_ms": 3.769,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "round_trip": {
+          "count": 300,
+          "mean_ms": 49.431263333323535,
+          "p50_ms": 48.7794999999096,
+          "p95_ms": 54.80397999917841,
+          "p99_ms": 66.65229499934864,
+          "max_ms": 73.86429999860411,
+          "over_46ms": 291,
+          "over_50ms": 72
+        }
+      },
+      "health": {
+        "battery_c_range": [
+          32.9,
+          33.0
+        ],
+        "thermal_statuses": [
+          0
+        ],
+        "phone_samples": 17,
+        "power_save_observed": false
+      },
+      "protocol_pass": true,
+      "server_timing_pass": true,
+      "round_trip_timing_pass": false,
+      "driving_ready": false,
+      "all_320_output_hash_sequence_sha256": "27b866dcda4d9f97bff53a430d1994d130cd64a46bacadb82101af0176a0225c",
+      "measured_300_output_hash_sequence_sha256": "c1c5f1ad2d15266b456c242c89af2c0d3b166fe1c3e2dde058e6028cd5889603",
+      "summary_sha256": "b6573c0e21c4d156b182dc12da1ec988dd0bc253d060046c1287edd94d42e138",
+      "frame_evidence_sha256": "59255c62b931a7b199c959450652a8c09c6df9b6739c5ffc91b5f6dd126c75d2"
+    },
+    {
+      "id": "original-11-B",
+      "series": "original",
+      "run": 11,
+      "variant": "B",
+      "measured_frames": 300,
+      "warmup_frames": 20,
+      "finite_frames": 300,
+      "failures": [],
+      "metrics": {
+        "server_total": {
+          "count": 300,
+          "mean_ms": 33.91173333333333,
+          "p50_ms": 33.927,
+          "p95_ms": 35.6959,
+          "p99_ms": 36.33304,
+          "max_ms": 39.979,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "inference": {
+          "count": 300,
+          "mean_ms": 32.695553333333336,
+          "p50_ms": 32.644000000000005,
+          "p95_ms": 34.248349999999995,
+          "p99_ms": 34.971239999999995,
+          "max_ms": 35.955,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "queues": {
+          "count": 300,
+          "mean_ms": 1.01313,
+          "p50_ms": 0.965,
+          "p95_ms": 1.3281,
+          "p99_ms": 1.970339999999996,
+          "max_ms": 3.913,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "round_trip": {
+          "count": 300,
+          "mean_ms": 50.44377866669189,
+          "p50_ms": 49.5455000009315,
+          "p95_ms": 55.813410001155724,
+          "p99_ms": 68.44294099935722,
+          "max_ms": 73.49949999843375,
+          "over_46ms": 295,
+          "over_50ms": 119
+        }
+      },
+      "health": {
+        "battery_c_range": [
+          32.9,
+          33.0
+        ],
+        "thermal_statuses": [
+          0
+        ],
+        "phone_samples": 17,
+        "power_save_observed": false
+      },
+      "protocol_pass": true,
+      "server_timing_pass": true,
+      "round_trip_timing_pass": false,
+      "driving_ready": false,
+      "all_320_output_hash_sequence_sha256": "27b866dcda4d9f97bff53a430d1994d130cd64a46bacadb82101af0176a0225c",
+      "measured_300_output_hash_sequence_sha256": "c1c5f1ad2d15266b456c242c89af2c0d3b166fe1c3e2dde058e6028cd5889603",
+      "summary_sha256": "b26db758a49b1a826bc771efc62ea9f42ad0147d8d0071c751b6a572b2be1021",
+      "frame_evidence_sha256": "8605b40f47bb9909fc0e413fc3f44aaae0cc808516347e678ecee50310dcab1b"
+    },
+    {
+      "id": "repeat-01-B",
+      "series": "repeat",
+      "run": 1,
+      "variant": "B",
+      "measured_frames": 300,
+      "warmup_frames": 20,
+      "finite_frames": 300,
+      "failures": [],
+      "metrics": {
+        "server_total": {
+          "count": 300,
+          "mean_ms": 34.06903666666667,
+          "p50_ms": 33.9975,
+          "p95_ms": 35.943850000000005,
+          "p99_ms": 36.95198,
+          "max_ms": 37.764,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "inference": {
+          "count": 300,
+          "mean_ms": 32.824906666666664,
+          "p50_ms": 32.807500000000005,
+          "p95_ms": 34.5234,
+          "p99_ms": 35.45705,
+          "max_ms": 36.279,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "queues": {
+          "count": 300,
+          "mean_ms": 1.0309866666666667,
+          "p50_ms": 0.9995,
+          "p95_ms": 1.26435,
+          "p99_ms": 1.9397799999999994,
+          "max_ms": 2.775,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "round_trip": {
+          "count": 300,
+          "mean_ms": 50.462385333315375,
+          "p50_ms": 49.53159999968193,
+          "p95_ms": 56.23336499866127,
+          "p99_ms": 64.8914379992311,
+          "max_ms": 71.96279999880062,
+          "over_46ms": 299,
+          "over_50ms": 121
+        }
+      },
+      "health": {
+        "battery_c_range": [
+          32.1,
+          32.9
+        ],
+        "thermal_statuses": [
+          0
+        ],
+        "phone_samples": 17,
+        "power_save_observed": false
+      },
+      "protocol_pass": true,
+      "server_timing_pass": true,
+      "round_trip_timing_pass": false,
+      "driving_ready": false,
+      "all_320_output_hash_sequence_sha256": "27b866dcda4d9f97bff53a430d1994d130cd64a46bacadb82101af0176a0225c",
+      "measured_300_output_hash_sequence_sha256": "c1c5f1ad2d15266b456c242c89af2c0d3b166fe1c3e2dde058e6028cd5889603",
+      "summary_sha256": "de754be98edabaf7a30894933b5a0f6845f2d14610fddb0e1a79c2690b004e63",
+      "frame_evidence_sha256": "c6924551e83b48b6fdc78134766bc715b21aef3279cb6bc47f328f88dc379369"
+    },
+    {
+      "id": "repeat-02-A",
+      "series": "repeat",
+      "run": 2,
+      "variant": "A",
+      "measured_frames": 300,
+      "warmup_frames": 20,
+      "finite_frames": 300,
+      "failures": [],
+      "metrics": {
+        "server_total": {
+          "count": 300,
+          "mean_ms": 33.81283,
+          "p50_ms": 33.7055,
+          "p95_ms": 35.5531,
+          "p99_ms": 36.21643999999999,
+          "max_ms": 38.447,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "inference": {
+          "count": 300,
+          "mean_ms": 32.544776666666664,
+          "p50_ms": 32.495000000000005,
+          "p95_ms": 34.12545,
+          "p99_ms": 34.88127,
+          "max_ms": 37.136,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "queues": {
+          "count": 300,
+          "mean_ms": 1.0729133333333334,
+          "p50_ms": 1.0135,
+          "p95_ms": 1.3554000000000002,
+          "p99_ms": 2.801099999999999,
+          "max_ms": 4.077,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "round_trip": {
+          "count": 300,
+          "mean_ms": 50.08355000000544,
+          "p50_ms": 49.15099999925587,
+          "p95_ms": 56.18100999981834,
+          "p99_ms": 68.91381199953685,
+          "max_ms": 82.95650000036403,
+          "over_46ms": 298,
+          "over_50ms": 108
+        }
+      },
+      "health": {
+        "battery_c_range": [
+          32.1,
+          32.6
+        ],
+        "thermal_statuses": [
+          0
+        ],
+        "phone_samples": 17,
+        "power_save_observed": false
+      },
+      "protocol_pass": true,
+      "server_timing_pass": true,
+      "round_trip_timing_pass": false,
+      "driving_ready": false,
+      "all_320_output_hash_sequence_sha256": "27b866dcda4d9f97bff53a430d1994d130cd64a46bacadb82101af0176a0225c",
+      "measured_300_output_hash_sequence_sha256": "c1c5f1ad2d15266b456c242c89af2c0d3b166fe1c3e2dde058e6028cd5889603",
+      "summary_sha256": "45155e734670ff52b073687626feca10ca4b113c2d07ec29f01d8873c9026336",
+      "frame_evidence_sha256": "6df6de626bf4769031d4884ab7fe38579d436f6b1b103d51085084ab9168a619"
+    }
+  ],
+  "primary_pairs": [
+    {
+      "pair": 1,
+      "order": "AB",
+      "A": "original-01-A",
+      "B": "original-02-B",
+      "replacement_pair": false,
+      "gain_A_minus_B_ms": {
+        "server_total": -0.20354333333333585,
+        "inference": -0.20332000000000505,
+        "queues": -0.0015399999999998748,
+        "round_trip": -1.2812366667033857
+      }
+    },
+    {
+      "pair": 2,
+      "order": "BA",
+      "A": "original-04-A",
+      "B": "original-03-B",
+      "replacement_pair": false,
+      "gain_A_minus_B_ms": {
+        "server_total": 0.8911633333333384,
+        "inference": 0.8303499999999957,
+        "queues": 0.07390666666666679,
+        "round_trip": 1.8606346666759563
+      }
+    },
+    {
+      "pair": 3,
+      "order": "AB",
+      "A": "original-05-A",
+      "B": "original-06-B",
+      "replacement_pair": false,
+      "gain_A_minus_B_ms": {
+        "server_total": 0.7352933333333311,
+        "inference": 0.7655433333333335,
+        "queues": -0.045573333333333355,
+        "round_trip": 0.5799296666737064
+      }
+    },
+    {
+      "pair": 4,
+      "order": "BA",
+      "A": "original-08-A",
+      "B": "original-07-B",
+      "replacement_pair": false,
+      "gain_A_minus_B_ms": {
+        "server_total": 0.2631666666666632,
+        "inference": 0.2443533333333292,
+        "queues": 0.01944333333333348,
+        "round_trip": -0.15990033323154051
+      }
+    },
+    {
+      "pair": 5,
+      "order": "AB",
+      "A": "original-09-A",
+      "B": "original-10-B",
+      "replacement_pair": false,
+      "gain_A_minus_B_ms": {
+        "server_total": 0.08211333333333926,
+        "inference": 0.09376666666666722,
+        "queues": 0.002586666666666626,
+        "round_trip": 0.3327316666582192
+      }
+    },
+    {
+      "pair": 6,
+      "order": "BA",
+      "A": "repeat-02-A",
+      "B": "repeat-01-B",
+      "replacement_pair": true,
+      "gain_A_minus_B_ms": {
+        "server_total": -0.2562066666666709,
+        "inference": -0.28012999999999977,
+        "queues": 0.04192666666666667,
+        "round_trip": -0.3788353333099366
+      }
+    }
+  ],
+  "paired_pooled": {
+    "A": {
+      "label": "deep-sync2; SDK v2.1",
+      "runs": 6,
+      "measured_frames": 1800,
+      "metrics": {
+        "server_total": {
+          "count": 1800,
+          "mean_ms": 33.92206,
+          "p50_ms": 33.8725,
+          "p95_ms": 35.859,
+          "p99_ms": 37.23039,
+          "max_ms": 41.09,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "inference": {
+          "count": 1800,
+          "mean_ms": 32.697698333333335,
+          "p50_ms": 32.635,
+          "p95_ms": 34.58205,
+          "p99_ms": 35.614439999999995,
+          "max_ms": 38.503,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "queues": {
+          "count": 1800,
+          "mean_ms": 1.021938888888889,
+          "p50_ms": 0.982,
+          "p95_ms": 1.32825,
+          "p99_ms": 2.2397999999999976,
+          "max_ms": 4.167,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "round_trip": {
+          "count": 1800,
+          "mean_ms": 50.25526283335239,
+          "p50_ms": 49.291149999589834,
+          "p95_ms": 57.33145499980309,
+          "p99_ms": 68.8180339995597,
+          "max_ms": 82.95650000036403,
+          "over_46ms": 1752,
+          "over_50ms": 674
+        }
+      }
+    },
+    "B": {
+      "label": "deep-async2; SDK v2.1",
+      "runs": 6,
+      "measured_frames": 1800,
+      "metrics": {
+        "server_total": {
+          "count": 1800,
+          "mean_ms": 33.67006222222222,
+          "p50_ms": 33.6035,
+          "p95_ms": 35.56525,
+          "p99_ms": 36.54921,
+          "max_ms": 40.896,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "inference": {
+          "count": 1800,
+          "mean_ms": 32.45593777777778,
+          "p50_ms": 32.3785,
+          "p95_ms": 34.2813,
+          "p99_ms": 35.078070000000004,
+          "max_ms": 37.911,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "queues": {
+          "count": 1800,
+          "mean_ms": 1.006813888888889,
+          "p50_ms": 0.986,
+          "p95_ms": 1.261,
+          "p99_ms": 2.0692799999999996,
+          "max_ms": 5.875,
+          "over_46ms": 0,
+          "over_50ms": 0
+        },
+        "round_trip": {
+          "count": 1800,
+          "mean_ms": 50.09637555555855,
+          "p50_ms": 49.28505000043515,
+          "p95_ms": 56.52382500129532,
+          "p99_ms": 66.80282900020757,
+          "max_ms": 95.60840000085591,
+          "over_46ms": 1746,
+          "over_50ms": 658
+        }
+      }
+    }
+  },
+  "primary_and_secondary_paired_inference": {
+    "server_total": {
+      "replication_unit": "run_pair",
+      "pairs": 6,
+      "mean_A_minus_B_ms": 0.25199777777777754,
+      "bootstrap_percentile_95_ci_ms": [
+        -0.08217944444444807,
+        0.6038961111111097
+      ],
+      "bootstrap_resamples": 50000,
+      "bootstrap_seed": 202610172,
+      "exact_two_sided_paired_sign_flip_p": 0.28125,
+      "sign_flip_assignments": 64,
+      "pairs_favor_B": 4,
+      "pairs_favor_A": 2,
+      "leave_one_pair_out_gain_range_ms": [
+        0.12416466666666537,
+        0.3536386666666672
+      ]
+    },
+    "inference": {
+      "replication_unit": "run_pair",
+      "pairs": 6,
+      "mean_A_minus_B_ms": 0.24176055555555345,
+      "bootstrap_percentile_95_ci_ms": [
+        -0.09199500000000309,
+        0.5991188888888862
+      ],
+      "bootstrap_resamples": 50000,
+      "bootstrap_seed": 202610172,
+      "exact_two_sided_paired_sign_flip_p": 0.3125,
+      "sign_flip_assignments": 64,
+      "pairs_favor_B": 4,
+      "pairs_favor_A": 2,
+      "leave_one_pair_out_gain_range_ms": [
+        0.12404266666666501,
+        0.3461386666666641
+      ]
+    },
+    "queues": {
+      "replication_unit": "run_pair",
+      "pairs": 6,
+      "mean_A_minus_B_ms": 0.015125000000000055,
+      "bootstrap_percentile_95_ci_ms": [
+        -0.01493666666666669,
+        0.04491611111111121
+      ],
+      "bootstrap_resamples": 50000,
+      "bootstrap_seed": 202610172,
+      "exact_two_sided_paired_sign_flip_p": 0.4375,
+      "sign_flip_assignments": 64,
+      "pairs_favor_B": 4,
+      "pairs_favor_A": 2,
+      "leave_one_pair_out_gain_range_ms": [
+        0.0033686666666667086,
+        0.027264666666666736
+      ]
+    },
+    "round_trip": {
+      "replication_unit": "run_pair",
+      "pairs": 6,
+      "mean_A_minus_B_ms": 0.15888727779383652,
+      "bootstrap_percentile_95_ci_ms": [
+        -0.5707020555615211,
+        0.9371830000266831
+      ],
+      "bootstrap_resamples": 50000,
+      "bootstrap_seed": 202610172,
+      "exact_two_sided_paired_sign_flip_p": 0.6875,
+      "sign_flip_assignments": 64,
+      "pairs_favor_B": 3,
+      "pairs_favor_A": 3,
+      "leave_one_pair_out_gain_range_ms": [
+        -0.18146219998258745,
+        0.446912066693281
+      ]
+    }
+  },
+  "first_five_pairs_sensitivity": {
+    "server_total": {
+      "replication_unit": "run_pair",
+      "pairs": 5,
+      "mean_A_minus_B_ms": 0.3536386666666672,
+      "bootstrap_percentile_95_ci_ms": [
+        0.004061333333334005,
+        0.7032160000000005
+      ],
+      "bootstrap_resamples": 50000,
+      "bootstrap_seed": 202610172,
+      "exact_two_sided_paired_sign_flip_p": 0.1875,
+      "sign_flip_assignments": 32,
+      "pairs_favor_B": 4,
+      "pairs_favor_A": 1,
+      "leave_one_pair_out_gain_range_ms": [
+        0.21925749999999944,
+        0.492934166666668
+      ]
+    },
+    "inference": {
+      "replication_unit": "run_pair",
+      "pairs": 5,
+      "mean_A_minus_B_ms": 0.3461386666666641,
+      "bootstrap_percentile_95_ci_ms": [
+        0.005049333333330708,
+        0.6872279999999975
+      ],
+      "bootstrap_resamples": 50000,
+      "bootstrap_seed": 202610172,
+      "exact_two_sided_paired_sign_flip_p": 0.1875,
+      "sign_flip_assignments": 32,
+      "pairs_favor_B": 4,
+      "pairs_favor_A": 1,
+      "leave_one_pair_out_gain_range_ms": [
+        0.2250858333333312,
+        0.4835033333333314
+      ]
+    },
+    "queues": {
+      "replication_unit": "run_pair",
+      "pairs": 5,
+      "mean_A_minus_B_ms": 0.009764666666666732,
+      "bootstrap_percentile_95_ci_ms": [
+        -0.022937999999999993,
+        0.04537866666666672
+      ],
+      "bootstrap_resamples": 50000,
+      "bootstrap_seed": 202610172,
+      "exact_two_sided_paired_sign_flip_p": 0.625,
+      "sign_flip_assignments": 32,
+      "pairs_favor_B": 3,
+      "pairs_favor_A": 2,
+      "leave_one_pair_out_gain_range_ms": [
+        -0.006270833333333281,
+        0.023599166666666754
+      ]
+    },
+    "round_trip": {
+      "replication_unit": "run_pair",
+      "pairs": 5,
+      "mean_A_minus_B_ms": 0.26643180001459116,
+      "bootstrap_percentile_95_ci_ms": [
+        -0.6356493333587437,
+        1.1509470666909096
+      ],
+      "bootstrap_resamples": 50000,
+      "bootstrap_seed": 202610172,
+      "exact_two_sided_paired_sign_flip_p": 0.625,
+      "sign_flip_assignments": 32,
+      "pairs_favor_B": 3,
+      "pairs_favor_A": 2,
+      "leave_one_pair_out_gain_range_ms": [
+        -0.13211891665075015,
+        0.6533489166940853
+      ]
+    }
+  },
+  "health_all_completed": {
+    "battery_c_range": [
+      31.9,
+      33.0
+    ],
+    "thermal_statuses": [
+      0
+    ]
+  },
+  "production_comparison_warning": "A/B are matched experimental APKs with shared safety/metrics overhead. They are not a same-run controlled comparison against the production APK.",
+  "limitations": [
+    "Six run pairs, not 3600 independent frame experiments, define uncertainty.",
+    "The sixth pair was repeated after a launch interruption and rollback; the orphan remains descriptive but is excluded from paired inference.",
+    "Five-pair sensitivity reports the uninterrupted portion separately.",
+    "Bootstrap and sign-flip calculations are descriptive for these run-level differences; drift and post-interruption repeat limit generalization.",
+    "Secondary metrics are exploratory, with no multiplicity adjustment.",
+    "No physical USB, sustained thermal or deliberate wake qualification is established."
+  ]
+}

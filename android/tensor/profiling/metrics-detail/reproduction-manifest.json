@@ -1,0 +1,30 @@
+{
+  "purpose": "isolated vendor-dependent metrics detail 0/1 diagnostic; not app/runtime replacement",
+  "source_bridge_sha256": "126baa587df3c6c3a2603f7de423506b58edda7a139bd55df3796b404dd717c2",
+  "source_profiler_sha256": "dc09d2da3e8306fffd29e4a26e53dc09ff54576d40b1df5168320f420ca57140",
+  "source_metrics_sha256": "634eb0b332cfa5fc92926db2e7d62207f3cd12c5f443720b2dd1925251598dac",
+  "diagnostic_profiler_sha256": "bccb3495e15c18207408ab4a07db7270e165f3039a39b9993836b81eba44b694",
+  "diagnostic_metrics_sha256": "e035c5a3f2b56660c3787af92e4a6e6728d463b2a3f1a8aa37018a913ff0ddbc",
+  "patch_sha256": "707a6810baf8aba934579f8823fc6001ef7b4d333c61dd64711ff449500541b6",
+  "binary_sha256": "be81ae9c60cfb5cb5c2ca203e5549713b7e465bcdd80b854d72ae4c9f9e24edb",
+  "binary_bytes": 29600,
+  "default_detail_level": 0,
+  "allowed_detail_levels": [
+    0,
+    1
+  ],
+  "detail1_semantics": "vendor-dependent and unverified; may reject or return same metrics",
+  "model_precision_changed": false,
+  "model_runtime_calls_changed": false,
+  "build_flags": [
+    "-O2",
+    "-std=gnu11",
+    "-Wall",
+    "-Wextra",
+    "-ldl",
+    "-lm"
+  ],
+  "target": "aarch64-linux-android31",
+  "ndk_version": "30.0.16248370",
+  "metrics_start_detail_argument_changed": true
+}

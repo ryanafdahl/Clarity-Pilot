@@ -1,0 +1,80 @@
+{
+  "purpose": "Reviewed source-only diagnostic experiment; no app installation or performance claim implied",
+  "upstream": "https://github.com/zoompilot/jetlink",
+  "base_commit": "d26001b4161f33bab28d806de6a99b96325a429b",
+  "apply_rule": "Apply one complete source patch to clean exact base; do not stack on tensor-support.patch",
+  "version_code": 80710,
+  "original_signing_certificate_sha256": "50e670489a4ba19aec5e9fbad6f06074556d4d07be629ba012b3ca78f1eabb4e",
+  "reviewed_builds": [
+    {
+      "mode": 0,
+      "name": "0.8.7-clarity-tensor.10-deep-sync2",
+      "version_code": 80710,
+      "patch_sha256": "09030994caf789259ff3097a7bbf177cc931fbaf84603ca8d7f7db5cea10c701",
+      "apk_sha256": "efb0ba73a6486d68f791bd53baa118c783632b40af817c1320fd006b085b89e4",
+      "apk_bytes": 104213568,
+      "android_tests": {
+        "tests": 59,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "mode": 1,
+      "name": "0.8.7-clarity-tensor.10-deep-async2",
+      "version_code": 80710,
+      "patch_sha256": "9bcd795391101062fe0cd796c1235eeac705ae8a529c1abbe7843ef43c594329",
+      "apk_sha256": "3cfadbe573cc978428e1aed6aee2706881dd2aa3c0029793ee33a491a997b946",
+      "apk_bytes": 104211032,
+      "android_tests": {
+        "tests": 59,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    }
+  ],
+  "apk_hashes_are_provenance_only_apks_not_included": true,
+  "source_differences_only": [
+    "JL_WAKE_ASYNC0/1",
+    "deep-sync2/deep-async2 version label"
+  ],
+  "normalized_source_patch_sha256": "9d7f6e0f72a8e4352773eaa62994bd360ba15f0c990aba8afb7c507990dea46d",
+  "ownership_fixtures": {
+    "control": 3,
+    "candidate": 12,
+    "passed": 15,
+    "scope": "actual bridge with mocked public APIs; no device failure injection"
+  },
+  "clean_patch_validation": [
+    {
+      "variant": "sync2",
+      "clean_apply_check": true,
+      "applied": true
+    },
+    {
+      "variant": "async2",
+      "clean_apply_check": true,
+      "applied": true
+    }
+  ],
+  "recovery": "On any experimental error, force-stop process and restore preserved production APK; no in-process retry/model switch clears latch",
+  "timing_limits": "Common disabled trace wrappers, profileable manifest and failure latch differ from production; primary comparison must pair these control/candidate builds with tracing off",
+  "files": {
+    "README.md": "a4ac83be8144a841ae95877773e32466d5eaf9b64f401f522d8b95dba3bd3266",
+    "sync2-source.patch": "09030994caf789259ff3097a7bbf177cc931fbaf84603ca8d7f7db5cea10c701",
+    "async2-source.patch": "9bcd795391101062fe0cd796c1235eeac705ae8a529c1abbe7843ef43c594329",
+    "test.py": "50679c8e779565ca9044ce867ef594342f23edb5caa0478345ee01a2caff3e8a",
+    "test_async.c": "cea1431fa45301fb6e5eb9f4896cf1944d72b02695c45c6e15f3178ae63b3fd4"
+  },
+  "excluded": [
+    "APK",
+    "binary",
+    "private SDK",
+    "model",
+    "raw log",
+    "device identifier",
+    "signing key"
+  ]
+}

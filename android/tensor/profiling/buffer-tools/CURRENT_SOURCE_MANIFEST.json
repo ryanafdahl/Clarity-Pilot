@@ -1,0 +1,79 @@
+{
+  "kind": "current_published_buffer_source_snapshot",
+  "reason": "CRLF/LF checkout-compatible header pin and documentation; native diagnostic sources unchanged",
+  "historical_manifest": {
+    "path": "SOURCE_MANIFEST.json",
+    "bytes": 1883,
+    "raw_sha256": "8509576c11005155fa3751485bbfc69574cc2b08d293f485c3566f8fff68cc84",
+    "lf_normalized_sha256": "6c2d2a4adbd4522cb1dbbeec8582a396949976cf3225c31c840d3cf0f92c56e5"
+  },
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 7884,
+      "raw_sha256": "f1fb4b2973a1a6bfc270d3c38015620734ffc8424b110fa57ac6bd1a89b495fa",
+      "lf_normalized_sha256": "63a468c2a201e640bc7d086b037b68b33211ed2a80ed66365cec8d9c80d1078c"
+    },
+    {
+      "path": "build.py",
+      "bytes": 10995,
+      "raw_sha256": "136b3881c4ad6dca138b7609027d6a65840d5d3f12219f93ba6517e72ef4e142",
+      "lf_normalized_sha256": "2d1436f597cad6cd41ef18c79c2ba1e552e70395e6012fffdfba1fd2502a8d3f"
+    },
+    {
+      "path": "test.py",
+      "bytes": 2429,
+      "raw_sha256": "1b2778ef8a0b30f7839a71a17ff27e4dcc9383eca4202e51711a533d798fcbd4",
+      "lf_normalized_sha256": "3b7f1cf4d509c39a2e8d4a5db7ee7dbe0c0b63e8b6a9ebb04a1f2c4eb5b88b7c"
+    },
+    {
+      "path": "io_profile.h",
+      "bytes": 314,
+      "raw_sha256": "a78fd8f814b75188a52017250695cf5f17317864adbaff79d099795d501c0dc8",
+      "lf_normalized_sha256": "4cef031dd5886a3913103e929f806d83576cf1fb62643d9deaafec545ecef816"
+    },
+    {
+      "path": "io_profile.inc",
+      "bytes": 4792,
+      "raw_sha256": "9720f462ee9ea64efb3074b8514e2c50fe082f2874f0148d707148452f567381",
+      "lf_normalized_sha256": "4f5ba16bdb37a6af382c80382a1787fe598a0314780cc72bf67cd50222dd63f7"
+    },
+    {
+      "path": "ahwb_allocation.inc",
+      "bytes": 7852,
+      "raw_sha256": "0eda38de9f2c09ee6578b7f943479f36868b0799dd3dce57358595c7ff89396f",
+      "lf_normalized_sha256": "e88c68d7f390b6d71253dfc9e9067c7632b46ce4e290b7eb70c921330113dab1"
+    },
+    {
+      "path": "test_io_profile.c",
+      "bytes": 2155,
+      "raw_sha256": "9cbb0d85d191f802e63f71f66780b8c988584ea19865390824547b6f44fb1752",
+      "lf_normalized_sha256": "7e7645af46fc405eeaadb01901dc3989e3be040d9a5188bcef4f5ffdb33fde78"
+    },
+    {
+      "path": "test_ahwb.c",
+      "bytes": 8765,
+      "raw_sha256": "edcc2da5a19a01524201af08d8adbb4d255f0e5ac76586edde9066ee40194fd7",
+      "lf_normalized_sha256": "f301118cbf4cf0a86b639ea51a23ee8a14ce826517a8062728504c47720228ed"
+    },
+    {
+      "path": "mock/android/hardware_buffer.h",
+      "bytes": 905,
+      "raw_sha256": "cdc6071242490c176ce1ffb71a84a12db3ce65d10410a3ca838b36fb3d54234c",
+      "lf_normalized_sha256": "67430c1508b3fb00498cf05e2eec4d5c9402829d7bf3f6fff5a948d4d9318f05"
+    },
+    {
+      "path": "offline-validation.json",
+      "bytes": 1295,
+      "raw_sha256": "627972dfa82be886da1fa71fbecd21c7bc46abe5487d3e5a34282eb4a1f92e78",
+      "lf_normalized_sha256": "627972dfa82be886da1fa71fbecd21c7bc46abe5487d3e5a34282eb4a1f92e78"
+    }
+  ],
+  "normalization": "CRLF to LF only; raw hashes describe this checkout",
+  "validation": {
+    "source_pin_tests": 9,
+    "lf_and_crlf_full_io_builds_identical": true,
+    "current_output_patch_applies": true,
+    "current_output_binary_sha256": "bfa13fea91af682c7786cbf11fc104bcac89c5c9d9fedaadd02141461594b633"
+  }
+}

@@ -1,0 +1,166 @@
+--- a/ahwb_allocation.inc
++++ b/ahwb_allocation.inc
+@@ -3,6 +3,7 @@
+  *
+  * An imported buffer uses NULL deallocator: we retain the sole allocated AHWB
+  * reference ourselves until wrappers and compiled model have been destroyed.
++ * Variant output_often changes CPU hints only for output tensors.
+  * This also makes failed imports unambiguous: LiteRT never owns our reference.
+  */
+ #include <android/hardware_buffer.h>
+@@ -62,8 +63,8 @@
+   ptrdiff_t slot_index = slot(model, output, index);
+   if (slot_index < 0) return ahwb_error("no such input or output");
+   const char *mode = getenv("BENCH_AHWB_USAGE");
+-  if (!mode || (strcmp(mode,"rarely") && strcmp(mode,"often")))
+-    return ahwb_error("BENCH_AHWB_USAGE must be exactly rarely or often");
++  if (!mode || (strcmp(mode,"rarely") && strcmp(mode,"output_often")))
++    return ahwb_error("BENCH_AHWB_USAGE must be exactly rarely or output_often");
+   int registry_index = ahwb_free_slot();
+   if (registry_index < 0) return ahwb_error("AHWB diagnostic registry full");
+ 
+@@ -113,7 +114,7 @@
+   requested.layers=1;
+   requested.format=AHARDWAREBUFFER_FORMAT_BLOB;
+   requested.usage=AHARDWAREBUFFER_USAGE_GPU_DATA_BUFFER |
+-    (!strcmp(mode,"often")
++    (!strcmp(mode,"output_often") && output
+       ? AHARDWAREBUFFER_USAGE_CPU_READ_OFTEN | AHARDWAREBUFFER_USAGE_CPU_WRITE_OFTEN
+       : AHARDWAREBUFFER_USAGE_CPU_READ_RARELY | AHARDWAREBUFFER_USAGE_CPU_WRITE_RARELY);
+   if(AHardwareBuffer_isSupported(&requested)!=1){
+@@ -165,5 +166,3 @@
+   return error ? error : ahwb_error("AHWB creation failed without an error");
+ #undef AHWB_CHECK
+ }
+-
+-
+--- a/test_ahwb.c
++++ b/test_ahwb.c
+@@ -17,7 +17,7 @@
+ static int lock_fail,unlock_fail,packed_overflow,no_ahwb;
+ static size_t req_bytes;
+ static uint64_t allocated_usage;
+-static int cleanup_sequence[8],cleanup_count;
++static int cleanup_sequence[32],cleanup_count;
+ static const char *mock_status(LiteRtStatus s){(void)s;return "mock failure";}
+ static LiteRtStatus next(void){return ++api_step==fail_step?kLiteRtStatusErrorRuntimeFailure:kLiteRtStatusOk;}
+ static LiteRtStatus get_req(LiteRtCompiledModel m,LiteRtParamIndex s,LiteRtParamIndex i,LiteRtTensorBufferRequirements *out){
+@@ -63,7 +63,7 @@
+   assert(b&&!b->locked&&b->ahwb->refs==1);++destroys;cleanup_sequence[cleanup_count++]=1;free(b);
+ }
+ static jl_litert_model model;
+-static LiteRtRankedTensorType types[2];
++static LiteRtRankedTensorType types[7];
+ static void reset(void){
+   assert(ahwb_live==0);
+   allocations=releases=imports=destroys=locks=unlocks=api_step=fail_step=0;
+@@ -97,7 +97,7 @@
+   reset();setenv("BENCH_AHWB_USAGE",mode,1);req_types=2;
+   jl_litert_buffer *b=NULL;assert(!jl_litert_buffer_create(&model,output,0,&b));
+   assert(b&&ahwb_live==1&&allocations==1&&imports==1&&locks==1&&unlocks==1);
+-  assert(allocated_usage==((UINT64_C(1)<<24)|(!strcmp(mode,"often")?0x33:0x22)));
++  assert(allocated_usage==((UINT64_C(1)<<24)|(!strcmp(mode,"output_often")&&output?0x33:0x22)));
+   for(int i=0;i<32;++i)assert(((LiteRtTensorBuffer)b)->ahwb->bytes[i]==0);
+   for(int i=32;i<64;++i)assert(((LiteRtTensorBuffer)b)->ahwb->bytes[i]==0xa5);
+   unsigned char data[32],out[32];for(int i=0;i<32;++i)data[i]=(unsigned char)(i*13);
+@@ -112,6 +112,26 @@
+   assert(cleanup_sequence[0]==1&&cleanup_sequence[1]==2);
+   jl_litert_buffer_release(NULL);assert(destroys==1);
+ }
++static void seven_buffer_descriptors(const char *mode){
++  reset();setenv("BENCH_AHWB_USAGE",mode,1);
++  model.n_inputs=6;
++  jl_litert_buffer *buffers[7]={0};
++  AHardwareBuffer *retained[7]={0};
++  for(int i=0;i<7;++i){
++    int output=i==6;size_t index=output?0:(size_t)i;
++    assert(!jl_litert_buffer_create(&model,output,index,&buffers[i]));
++    retained[i]=((LiteRtTensorBuffer)buffers[i])->ahwb;
++    uint64_t expected=(UINT64_C(1)<<24)|(!strcmp(mode,"output_often")&&output?0x33:0x22);
++    assert(retained[i]->desc.usage==expected);
++  }
++  assert(ahwb_live==7&&allocations==7&&locks==7&&unlocks==7);
++  for(int i=0;i<7;++i)jl_litert_buffer_release(buffers[i]);
++  assert(destroys==7&&releases==0&&ahwb_live==7);
++  for(int i=0;i<7;++i)assert(retained[i]->refs==1);
++  jl_ahwb_release_after_model();
++  assert(releases==7&&ahwb_live==0&&cleanup_count==14);
++  for(int i=0;i<7;++i)assert(cleanup_sequence[i]==1&&cleanup_sequence[i+7]==2);
++}
+ static void death(int lock_error){
+   pid_t child=fork();assert(child>=0);
+   if(!child){
+@@ -124,7 +144,7 @@
+ int main(void){
+   setvbuf(stdout,NULL,_IOLBF,0);
+   reset();
+-  success("rarely",0);success("often",0);success("rarely",1);success("often",1);
++  success("rarely",0);success("output_often",0);success("rarely",1);success("output_often",1);
+   for(int step=1;step<=11;++step){reset();fail_step=step;expect_failure();}
+   reset();fail_step=7;import_failure_with_handle=1;expect_failure();
+   reset();no_ahwb=1;expect_failure();
+@@ -141,9 +161,9 @@
+   reset();packed_overflow=1;expect_failure();
+   reset();unsetenv("BENCH_AHWB_USAGE");expect_failure();
+   reset();setenv("BENCH_AHWB_USAGE","bad",1);expect_failure();
++  reset();setenv("BENCH_AHWB_USAGE","often",1);expect_failure();
+   reset();death(1);death(0);
++  seven_buffer_descriptors("rarely");seven_buffer_descriptors("output_often");
+   puts("{\"offline_tests\":\"passed\",\"unchanged_copy_and_lock_order\":true,\"cleanup_order_verified\":true,\"init_lock_failure_aborts\":true}");
+   return 0;
+ }
+-
+-
+--- a/build.py
++++ b/build.py
+@@ -105,7 +105,7 @@
+     anchor='  check(jl_litert_open(argv[1]));'
+     assert text.count(anchor)==1
+     text=replace_once(text, anchor,'''  const char *usage=getenv("BENCH_AHWB_USAGE");
+-      if(!usage||(strcmp(usage,"rarely")&&strcmp(usage,"often"))){fprintf(stderr,"Set BENCH_AHWB_USAGE=rarely or often\\\\n");return 2;}
++      if(!usage||(strcmp(usage,"rarely")&&strcmp(usage,"output_often"))){fprintf(stderr,"Set BENCH_AHWB_USAGE=rarely or output_often\\\\n");return 2;}
+       printf("{\\\\"diagnostic\\\\":\\\\"ahwb_usage_experiment\\\\",\\\\"mode\\\\":\\\\"%s\\\\",\\\\"all_copies_preserved\\\\":true,\\\\"all_litert_locks_preserved\\\\":true}\\\\n",usage);
+     '''.replace('\\\\','\\')+anchor)
+     text=replace_once(text, 'extern void jl_bench_metrics', 'extern void jl_ahwb_release_after_model(void);\nextern void jl_bench_metrics',1)
+@@ -162,7 +162,8 @@
+     command += ['-o', str(binary)]
+     subprocess.run(command, check=True)
+     manifest = {
+-        'kind': args.kind, 'bridge_preparation': preparation, 'android_api': args.api,
++        'kind': args.kind, 'ahwb_experiment': 'output_only_v1' if args.kind == 'ahwb' else None,
++        'bridge_preparation': preparation, 'android_api': args.api,
+         'source_bridge_sha256': sha(source/'jl_litert.c'),
+         'source_profiler_sha256': sha(profiler/'native_profile.c'),
+         'source_metrics_sha256': sha(profiler/'metrics.inc'),
+--- a/README.md
++++ b/README.md
+@@ -1,4 +1,4 @@
+-# Tensor buffer diagnostics
++# Tensor buffer diagnostics: output-only OFTEN
+ 
+ These native tools measure public LiteRT input/output staging and compare supported Android allocation hints. They are diagnostic experiments for one synchronous model and do not change the Android app, model precision, synchronization requirements or vehicle configuration. No speed improvement is claimed by the tools themselves.
+ 
+@@ -42,9 +42,9 @@
+ | Variant | Environment | CPU usage |
+ | --- | --- | --- |
+ | Control | BENCH_AHWB_USAGE=rarely | READ_RARELY and WRITE_RARELY |
+-| Candidate | BENCH_AHWB_USAGE=often | READ_OFTEN and WRITE_OFTEN |
++| Candidate | BENCH_AHWB_USAGE=output_often | READ_OFTEN and WRITE_OFTEN for outputs; inputs remain RARELY |
+ 
+-GPU_DATA_BUFFER is identical. All LiteRT locks, unlocks, copies, pending-event fence handling and synchronous model execution remain intact. No persistent mapping, direct Android lock, skipped flush or host-memory fallback is introduced. Allocation frequency hints do not guarantee a particular cache policy.
++The output-only candidate changes usage only for output tensors; every input keeps the control descriptor. GPU_DATA_BUFFER is identical. All LiteRT locks, unlocks, copies, pending-event fence handling and synchronous model execution remain intact. No persistent mapping, direct Android lock, skipped flush or host-memory fallback is introduced. Allocation frequency hints do not guarantee a particular cache policy.
+ 
+ Startup logs every supported numeric buffer type (AHWB is 2), required size/alignment/strides, actual type, packed size, allocation size and descriptor. The tool refuses unsupported AHWB requirements, nonzero strides, sizes outside the 32-bit BLOB width range, unsupported or changed descriptors, and inconsistent buffer identity/type/size. Required alignment is reported; allocation follows AHWB's descriptor-based contract, as the managed allocator does.
+ 
+@@ -53,9 +53,9 @@
+ Start with short native smoke tests of both modes, then require descriptor validation, full NPU execution/counters, normal sampled health, finite/deterministic output and matching output hashes before a balanced timing screen:
+ 
+     BENCH_AHWB_USAGE=rarely BENCH_IO_PROFILE=0 BENCH_METRICS=1 ./tensor-bench RUNTIME MODEL 5 20 50000 OUTPUT_DIR 1
+-    BENCH_AHWB_USAGE=often BENCH_IO_PROFILE=0 BENCH_METRICS=1 ./tensor-bench RUNTIME MODEL 5 20 50000 OUTPUT_DIR 1
++    BENCH_AHWB_USAGE=output_often BENCH_IO_PROFILE=0 BENCH_METRICS=1 ./tensor-bench RUNTIME MODEL 5 20 50000 OUTPUT_DIR 1
+ 
+-Expected reported descriptor usage is 16777250 for RARELY and 16777267 for OFTEN. A passing short screen does not establish sustained performance, recurrent-model accuracy, wake behavior or physical vehicle USB readiness. This tool does not schedule load or enforce thermal limits by itself; run it under an existing health-guarded controller, one workload at a time.
++Expected reported descriptor usage is 16777250 for every control buffer and every candidate input; only candidate outputs use 16777267. A passing short screen does not establish sustained performance, recurrent-model accuracy, wake behavior or physical vehicle USB readiness. This tool does not schedule load or enforce thermal limits by itself; run it under an existing health-guarded controller, one workload at a time.
+ 
+ ## Offline checks
+ 
