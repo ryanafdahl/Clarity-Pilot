@@ -32,3 +32,5 @@ remain small; a narrow bootstrap interval does not represent device-to-device
 or long-term environmental variation. Two-pair exploratory screens have no
 significance claim. Health is sampled, not continuously measured. Hash parity
 covers the stated fixtures, not every possible camera frame.
+
+[Final phone state and cleanup](final-phone-state.json) records the verified production APK, imported model, normal screen/processor selection and closed test listener.

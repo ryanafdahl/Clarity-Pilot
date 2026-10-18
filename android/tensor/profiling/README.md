@@ -52,6 +52,7 @@ Reproduction sources: [compiler/graph tools](../compiler-tools/),
 [I/O and allocation tools](buffer-tools/),
 [output-only allocation follow-up](output-only/),
 [reviewed async controls](async-reviewed/),
+[reviewed output-allocation app controls](output-app-reviewed/),
 [paired-model runner](model-pairs/), and [vendor-metrics probe](metrics-detail/).
 Experimental patches are independent controls, not cumulative app updates.
 

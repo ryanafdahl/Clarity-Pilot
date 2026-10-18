@@ -136,3 +136,9 @@ Two initial WSL compiler attempts were interrupted. The retained kernel log dire
 The [paired native-model runner](../android/tensor/profiling/model-pairs/README.md) reproduces the balanced comparison with explicit device selection, verified staged hashes, health guards and preserved raw results.
 
 The prior APK and model remain available for rollback. APK updates must preserve the existing signer and app data; do not uninstall as a downgrade workaround. The next vehicle check remains a supervised parked direct-USB test with normal health, proving, deadlines and fallback behavior.
+
+## Final phone handoff
+
+The phone was left on **Waiting for Comma**, with **Tensor TPU (precompiled)** and **Cinque Terre Model V2** selected. The production `.10` APK and v2.1 imported model hashes were rechecked after restoring the experimental APKs. The Developer listener was disabled and port 5599 remained absent after a fresh app restart; ADB forwarding and the owned native test directory were removed. The temporary host compilation swap file was also removed. Final sampled battery temperature was 32.6 C and thermal status 0.
+
+[Sanitized final-state record](../android/tensor/profiling/results-2026-10-17/final-phone-state.json). The next step is a supervised parked physical USB check. This session did not arm the comma connection window or change its driving configuration, and the wake timing failures remain unresolved.

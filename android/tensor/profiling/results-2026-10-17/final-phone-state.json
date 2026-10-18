@@ -1,0 +1,23 @@
+{
+  "app": "0.8.7-clarity-tensor.10",
+  "version_code": 80710,
+  "apk_sha256": "cf760fe7c69c8d56e2eb0dc2bd45bf2cc9c8780548e8dbbe909834ead66872bd",
+  "imported_model_sha256": "328ae315dcd6e62e08aa670e04f11219e4766a11cfc37c261a54ef89f7c6c571",
+  "manifest_identity_matches": true,
+  "prepared_private_cache_rehashed": false,
+  "battery_c": 32.6,
+  "battery_percent": 99,
+  "thermal_status": 0,
+  "temporary_listener_cleanup": "Developer section disabled; port5599 absent after process restart",
+  "driving_configuration_changed": false,
+  "physical_usb_test_performed": false,
+  "comma_connection_window_armed": false,
+  "verified_utc": "2026-10-18T02:10:26.781041+00:00",
+  "adb_forward_removed": true,
+  "selected_processor": "Tensor TPU (precompiled)",
+  "selected_model": "Cinque Terre Model V2",
+  "screen": "Waiting for Comma",
+  "service": "Running",
+  "owned_phone_test_directory_removed": true,
+  "temporary_host_swap_removed": true
+}
