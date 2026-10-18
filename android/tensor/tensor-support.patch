@@ -1475,7 +1475,7 @@ index 0000000..c3b70b9
 +  }
 +}
 diff --git a/android/app/build.gradle.kts b/android/app/build.gradle.kts
-index 058b1c9..3e99a36 100644
+index 058b1c9..e57786c 100644
 --- a/android/app/build.gradle.kts
 +++ b/android/app/build.gradle.kts
 @@ -34,8 +34,8 @@ android {
@@ -1484,8 +1484,8 @@ index 058b1c9..3e99a36 100644
          targetSdk = 36
 -        versionCode = jetlinkVersionCode
 -        versionName = jetlinkVersion
-+        versionCode = jetlinkVersionCode * 100 + 9
-+        versionName = jetlinkVersion + "-clarity-tensor.9"
++        versionCode = jetlinkVersionCode * 100 + 10
++        versionName = jetlinkVersion + "-clarity-tensor.10"
          // The QNN runtime is arm64 only, and so is every Snapdragon with an NPU
          // worth driving on. The emulator on an Apple silicon Mac is arm64 too.
          ndk { abiFilters += "arm64-v8a" }

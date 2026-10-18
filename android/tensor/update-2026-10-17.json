@@ -1,0 +1,165 @@
+{
+  "version": [
+    "versionCode=80710 minSdk=31 targetSdk=36",
+    "versionName=0.8.7-clarity-tensor.10"
+  ],
+  "apk_sha256": "cf760fe7c69c8d56e2eb0dc2bd45bf2cc9c8780548e8dbbe909834ead66872bd",
+  "apk_bytes": 104213812,
+  "signer_certificate_sha256": "50e670489a4ba19aec5e9fbad6f06074556d4d07be629ba012b3ca78f1eabb4e",
+  "same_signer_as_previous": true,
+  "in_place_install": true,
+  "upstream_commit": "d26001b4161f33bab28d806de6a99b96325a429b",
+  "android_tests": 59,
+  "native_tests": 53,
+  "parity_frames": 32,
+  "parity_slices": 15,
+  "parity_pass": true,
+  "results": {
+    "baseline": {
+      "date_utc": "2026-10-18T00:34:45.556013+00:00",
+      "transport": "desk ADB TCP baseline .9",
+      "measured_frames": 1200,
+      "finite_frames": 1200,
+      "failures": [],
+      "inference": {
+        "mean_ms": 33.6890875,
+        "p50_ms": 33.614999999999995,
+        "p95_ms": 35.1891,
+        "p99_ms": 35.92702,
+        "max_ms": 36.9,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 34.67068583333334,
+        "p50_ms": 34.667500000000004,
+        "p95_ms": 36.2871,
+        "p99_ms": 37.090270000000004,
+        "max_ms": 37.899,
+        "over_50ms": 0
+      },
+      "round_trip": {
+        "mean_ms": 49.331385750003086,
+        "p50_ms": 48.69389999930718,
+        "p95_ms": 53.716020000774726,
+        "p99_ms": 65.37782999937917,
+        "max_ms": 103.51689999879454,
+        "over_50ms": 275
+      },
+      "protocol_pass": true,
+      "server_timing_pass": true,
+      "round_trip_timing_pass": false,
+      "thermal_samples": [
+        {
+          "elapsed_s": 0.5,
+          "status": 0,
+          "battery_c": 26.2
+        },
+        {
+          "elapsed_s": 10.7,
+          "status": 0,
+          "battery_c": 26.2
+        },
+        {
+          "elapsed_s": 20.9,
+          "status": 0,
+          "battery_c": 26.0
+        },
+        {
+          "elapsed_s": 31.1,
+          "status": 0,
+          "battery_c": 26.4
+        },
+        {
+          "elapsed_s": 41.3,
+          "status": 0,
+          "battery_c": 26.4
+        },
+        {
+          "elapsed_s": 51.5,
+          "status": 0,
+          "battery_c": 26.4
+        },
+        {
+          "elapsed_s": 61.6,
+          "status": 0,
+          "battery_c": 27.2
+        }
+      ]
+    },
+    "updated": {
+      "date_utc": "2026-10-18T00:38:55.750844+00:00",
+      "transport": "desk ADB TCP update .10",
+      "measured_frames": 1200,
+      "finite_frames": 1200,
+      "failures": [],
+      "inference": {
+        "mean_ms": 33.37740333333334,
+        "p50_ms": 33.262,
+        "p95_ms": 35.045300000000005,
+        "p99_ms": 35.78931,
+        "max_ms": 36.852,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 34.40304666666667,
+        "p50_ms": 34.3325,
+        "p95_ms": 36.2633,
+        "p99_ms": 37.3925,
+        "max_ms": 38.885,
+        "over_50ms": 0
+      },
+      "round_trip": {
+        "mean_ms": 49.958991749998255,
+        "p50_ms": 49.09629999929166,
+        "p95_ms": 57.51013000008241,
+        "p99_ms": 66.53526900068755,
+        "max_ms": 72.84239999899,
+        "over_50ms": 398
+      },
+      "protocol_pass": true,
+      "server_timing_pass": true,
+      "round_trip_timing_pass": false,
+      "thermal_samples": [
+        {
+          "elapsed_s": 0.4,
+          "status": 0,
+          "battery_c": 27.1
+        },
+        {
+          "elapsed_s": 10.5,
+          "status": 0,
+          "battery_c": 27.1
+        },
+        {
+          "elapsed_s": 20.6,
+          "status": 0,
+          "battery_c": 27.2
+        },
+        {
+          "elapsed_s": 30.8,
+          "status": 0,
+          "battery_c": 27.1
+        },
+        {
+          "elapsed_s": 41.0,
+          "status": 0,
+          "battery_c": 27.1
+        },
+        {
+          "elapsed_s": 51.2,
+          "status": 0,
+          "battery_c": 27.8
+        },
+        {
+          "elapsed_s": 61.4,
+          "status": 0,
+          "battery_c": 27.8
+        }
+      ]
+    }
+  },
+  "driving_qualification": false,
+  "developer_listener_disabled_after_testing": true,
+  "temporary_adb_forwarding_removed": true,
+  "final_app_server_running": true
+}

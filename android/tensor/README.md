@@ -1,6 +1,6 @@
 # Google Tensor support on the Pixel
 
-The installed **0.8.5-clarity-tensor.9** app uses pinned upstream source plus precompiled Tensor support and the October 10 USB stability repairs, optional Android CPU hints and the matched LiteRT 2.3.0 runtime. **The parked-only handshake and Parked USB Test switch are removed.** Ordinary protocol-v3 engine requests and USB service are enabled. The selected processor is **Tensor TPU (precompiled)**, and the selected model remains **Cinque Terre V2**. [APK, installation and build provenance](../README.md).
+The installed **0.8.7-clarity-tensor.10** app uses pinned upstream source plus precompiled Tensor support and the October 10 USB stability repairs, optional Android CPU hints and the matched LiteRT 2.3.0 runtime. **The parked-only handshake and Parked USB Test switch are removed.** Ordinary protocol-v3 engine requests and USB service are enabled. The selected processor is **Tensor TPU (precompiled)**, and the selected model remains **Cinque Terre V2**. [APK, installation and build provenance](../README.md).
 
 The app retains phone health monitoring in its foreground service, including when its screen is hidden. Tensor engine requests and inference stop if telemetry is missing, malformed or five seconds old, Android thermal status is severe (3+), or battery temperature reaches 43°C. After a thermal refusal, a fresh engine request is needed once health recovers. These app thresholds do not alter Android's thermal or charging limits.
 
@@ -26,7 +26,7 @@ The update recompiled V2 with ai-edge-litert 2.3.0 and verified its output again
 
 ## Rebuild and compile
 
-Check out upstream `b079496816e617ffd891ea12e5bee5d116db1383`, apply [tensor-support.patch](tensor-support.patch), and build using [the Android instructions](../README.md#validation-and-rebuilding). The patch is for that exact base. The previous [`.6` patch](tensor-support-0.8.5-clarity-tensor.6.patch), [`.5` patch](tensor-support-0.8.5-clarity-tensor.5.patch) and [`.4` patch](tensor-support-0.8.0-clarity-tensor.4.patch) remain archived.
+Check out upstream `d26001b4161f33bab28d806de6a99b96325a429b`, apply [tensor-support.patch](tensor-support.patch), and build using [the Android instructions](../README.md#validation-and-rebuilding). The patch is for that exact base. The previous [`.6` patch](tensor-support-0.8.5-clarity-tensor.6.patch), [`.5` patch](tensor-support-0.8.5-clarity-tensor.5.patch) and [`.4` patch](tensor-support-0.8.0-clarity-tensor.4.patch) remain archived.
 
 The app build pins and verifies all three LiteRT 2.3.0 Maven AARs: core, GPU and Google Tensor NPU runtime. It does not download the private SDK compiler. Extract your SDK locally and use Python with `ai-edge-litert==2.3.0`. The [Tensor SDK codelab](https://codelabs.developers.google.com/codelabs/google-tensor-ml-sdk#0) documents the stable backend switch; the compiler script sets it before importing LiteRT and points explicitly at your private compiler directory:
 
