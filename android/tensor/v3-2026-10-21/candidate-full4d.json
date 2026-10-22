@@ -1,0 +1,15 @@
+{
+  "source_sha256": "404a18cfd86d29637d20c697dfde245bb47c666ae016730ab674c65f4d1e1aa4",
+  "compiled_sha256": "5423b7a9e099327334228dc0b687dd31c64d922e7db358eba214990a7001d617",
+  "soc": "Tensor_G6",
+  "litert": "2.3.0",
+  "source_converted_sha256": "5ea460759b75f9aa9686bd3954cdfea53bfa687ba67ee4b4de2ad1a0b8d53c83",
+  "sdk_sha256": "14e84153cbcf60463d011ba739fc15ff222188c6448a283c0abea639fa19cb68",
+  "sdk_executables_sha256": {
+    "compiler_worker": "e6a8f7c0bdfebbb754e18f82b7bcde83b22c526c1297ce555a1797a2cd099294"
+  },
+  "sdk_worker": "compiler_worker",
+  "sdk_worker_sha256": "e6a8f7c0bdfebbb754e18f82b7bcde83b22c526c1297ce555a1797a2cd099294",
+  "precision": "half",
+  "sharding": "minimal"
+}

@@ -1,0 +1,46 @@
+{
+  "source_sha256": "a60ff14e699827da4f2416c9853f5018403d1b8b5700b7dae5fbdfba065d721a",
+  "source_bytes": 766892288,
+  "plan": {
+    "slice_index": 421,
+    "concat_index": 423,
+    "view_index": 420,
+    "frame_view_index": 422,
+    "output_view_index": 2446,
+    "joined_consumers": [
+      427,
+      432,
+      2446
+    ],
+    "tail_consumers": [
+      423
+    ]
+  },
+  "tensor_ids": {
+    "state": 4,
+    "frame": 0,
+    "old_view": 7,
+    "old_tail": 9,
+    "old_frame_view": 12,
+    "old_joined": 14,
+    "out": 3219
+  },
+  "status": "written-unqualified",
+  "rewrite": "UINT8 SLICE [2,30,128,256] begin[0,6,0,0] size[2,24,128,256], then CONCAT axis1 with new_img [2,6,128,256]; restore original rank3 joined view for existing consumers",
+  "preserves": "All original tensor metadata and signatures, every other operation, original buffers and exact weight bytes, graph I/O and precision",
+  "output_sha256": "948c8abd44a05900f8367ba3d485d17f2e29de5140def594b8b5c5b14811a223",
+  "output_bytes": 766893952,
+  "added_tensor_ids": {
+    "tail": 3359,
+    "joined": 3360,
+    "begin": 3361,
+    "size": 3362
+  },
+  "original_tensors": 3359,
+  "new_tensors": 3363,
+  "original_buffers": 906,
+  "new_buffers": 908,
+  "operators": 2448,
+  "external_weight_offset_delta": 1664,
+  "all_external_weight_buffers_exact": true
+}

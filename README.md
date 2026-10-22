@@ -129,6 +129,8 @@ A TensorRT or model change can require a new engine even when the ONNX download 
 
 ## Pixel setup
 
+**October 21 model status:** the comma now selects Cinque Terre V3. Its Pixel Tensor port did not pass extended accuracy validation, so the Pixel remains on V2. The V2 setup below does not provide acceleration for the comma's current V3 selection. [Compiler defect, repair, remaining failure and rollback](docs/PIXEL_V3_MODEL_2026-10-21.md).
+
 The installed app is **0.8.7-clarity-tensor.10**, built from pinned upstream `d26001b4` with Tensor, USB recovery, bounded requests and Android CPU performance hints. **The parked-only handshake and temporary USB test switch are removed.** Normal Tensor engine requests are accepted; phone health monitoring and thermal stops remain active. [USB stability, LiteRT upgrade and results](docs/PIXEL_USB_STABILITY_LITERT23_2026-10-10.md).
 
 The [Android directory](android/README.md) contains the **exact installed APK**, its SHA-256, source patch and install steps. [Download the Tensor APK](https://github.com/ryanafdahl/Clarity-Pilot/raw/refs/heads/main/android/jetlink-0.8.7-clarity-tensor.10-pixel.apk). Install with `adb install -r android/jetlink-0.8.7-clarity-tensor.10-pixel.apk`, open JetLink and allow notifications. The installed processor is **Tensor TPU (precompiled)** with **Cinque Terre Model V2**; both were preserved by the update.

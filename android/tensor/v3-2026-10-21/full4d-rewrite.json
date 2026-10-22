@@ -1,0 +1,65 @@
+{
+  "source_sha256": "a60ff14e699827da4f2416c9853f5018403d1b8b5700b7dae5fbdfba065d721a",
+  "source_bytes": 766892288,
+  "plan": {
+    "slice_index": 421,
+    "concat_index": 423,
+    "view_index": 420,
+    "frame_view_index": 422,
+    "output_view_index": 2446,
+    "joined_consumers": [
+      427,
+      432,
+      2446
+    ],
+    "tail_consumers": [
+      423
+    ],
+    "vision_concat_index": 443,
+    "vision_removed_operators": [
+      427,
+      428,
+      429,
+      430,
+      431,
+      432,
+      433,
+      434,
+      435,
+      436
+    ]
+  },
+  "tensor_ids": {
+    "state": 4,
+    "frame": 0,
+    "old_view": 7,
+    "old_tail": 9,
+    "old_frame_view": 12,
+    "old_joined": 14,
+    "out": 3219,
+    "vision": 52
+  },
+  "status": "written-unqualified",
+  "rewrite": "4D image queue slice+concat; 4D ordinary slices [1,6,128,256] from updated queue at camera/channel [0,0],[0,24],[1,0],[1,24], concat axis1 into original cat_2. All graph I/O, tensor metadata and exact weight bytes preserved.",
+  "output_sha256": "5ea460759b75f9aa9686bd3954cdfea53bfa687ba67ee4b4de2ad1a0b8d53c83",
+  "output_bytes": 766894272,
+  "added_tensor_ids": {
+    "tail": 3359,
+    "joined": 3360,
+    "begin": 3361,
+    "size": 3362,
+    "vision_frames": [
+      3365,
+      3367,
+      3369,
+      3371
+    ]
+  },
+  "original_tensors": 3359,
+  "new_tensors": 3372,
+  "original_buffers": 906,
+  "new_buffers": 913,
+  "operators": 2442,
+  "external_weight_offset_delta": 1984,
+  "all_external_weight_buffers_exact": true
+}

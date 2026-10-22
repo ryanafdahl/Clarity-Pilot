@@ -1,0 +1,18 @@
+{
+  "source_sha256": "404a18cfd86d29637d20c697dfde245bb47c666ae016730ab674c65f4d1e1aa4",
+  "reference_sha256": "3f12a0cd266cb827d0a3edd81cf86ed70ddbeea29a99c868026a1ba56b7a4673",
+  "changes": [
+    {
+      "name": "node__symbolic",
+      "op_type": "Contiguous",
+      "input": [
+        "add_35"
+      ],
+      "output": [
+        "_symbolic"
+      ]
+    }
+  ],
+  "transformation": "Only org.tinygrad Contiguous replaced by standard Identity; weights, precision and state feedback unchanged",
+  "onnx": "1.20.1"
+}

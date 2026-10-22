@@ -1,0 +1,15 @@
+{
+  "source_sha256": "404a18cfd86d29637d20c697dfde245bb47c666ae016730ab674c65f4d1e1aa4",
+  "source_bytes": 766354845,
+  "frames": 160,
+  "output_values_each": 18452,
+  "identity_shapes_match": true,
+  "all_finite": true,
+  "reference_slices_pass": false,
+  "history_queue_lengths": [
+    5,
+    132,
+    128
+  ],
+  "driving_ready": false
+}

@@ -1,5 +1,7 @@
 # Google Tensor support on the Pixel
 
+**October 21 V3 update:** the comma selects Cinque Terre V3. A Tensor image-history defect was repaired, but the 160-frame check still failed one accuracy criterion. The Pixel remains on V2. [Evidence and rollback](../../docs/PIXEL_V3_MODEL_2026-10-21.md) · [Unqualified V3 reproduction tools](v3-2026-10-21/README.md). The qualified V2 instructions below remain unchanged.
+
 The installed **0.8.7-clarity-tensor.10** app uses pinned upstream source plus precompiled Tensor support and the October 10 USB stability repairs, optional Android CPU hints and the matched LiteRT 2.3.0 runtime. **The parked-only handshake and Parked USB Test switch are removed.** Ordinary protocol-v3 engine requests and USB service are enabled. The selected processor is **Tensor TPU (precompiled)**, and the selected model remains **Cinque Terre V2**. [APK, installation and build provenance](../README.md).
 
 The app retains phone health monitoring in its foreground service, including when its screen is hidden. Tensor engine requests and inference stop if telemetry is missing, malformed or five seconds old, Android thermal status is severe (3+), or battery temperature reaches 43°C. After a thermal refusal, a fresh engine request is needed once health recovers. These app thresholds do not alter Android's thermal or charging limits.

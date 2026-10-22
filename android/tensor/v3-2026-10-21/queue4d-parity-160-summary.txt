@@ -1,0 +1,18 @@
+pooled over 160 frames, per slice and per column:
+    action                   corr 0.999994  by error, max abs 0.03516 <= 0.5352     max abs   0.0352  mean abs 0.00543
+    desire_pred              corr 0.999984  (compared whole)                        max abs   0.1094  mean abs 0.03038
+    desire_state             corr 0.999989  by error, max abs 0.4375 <= 5.269       max abs   0.4375  mean abs 0.06302
+    hidden_state             corr 0.999978  (compared whole)                        max abs   0.2812  mean abs 0.01172
+    lane_lines               corr 0.999960  worst col 0.999901 mu[1]                    max abs   0.2002  mean abs 0.01424
+    lane_lines_prob          corr 0.999838  by error, max abs 0.207 <= 0.793        max abs   0.2070  mean abs 0.04978
+    lead                     corr 0.999983  worst col 0.999968 mu[2]    (4 by error)    max abs   1.1875  mean abs 0.03292
+    lead_prob                corr 0.999977  by error, max abs 0.08203 <= 0.9078     max abs   0.0820  mean abs 0.02077
+    meta                     corr 0.999962  (compared whole)                        max abs   0.1328  mean abs 0.03463
+    pad                      corr 1.000000  by error, max abs 0 <= 0                max abs   0.0000  mean abs 0.00000
+    plan                     corr 0.999977  worst col 0.999921 std[13]  (10 by error)   max abs   1.0000  mean abs 0.00862
+    pose                     corr 0.999994  no column correlated        (12 by error)   max abs   0.1602  mean abs 0.01391
+    road_edges               corr 0.999970  worst col 0.999873 mu[1]                    max abs   0.1943  mean abs 0.01585
+    road_transform           corr 0.999998  no column correlated        (12 by error)   max abs   0.0625  mean abs 0.01615
+    wide_from_device_euler   corr 0.999997  no column correlated        (6 by error)    max abs   0.0625  mean abs 0.01102
+
+FAIL: 1 slice(s) below corr 0.999 or past their error bound, whole or in a column: lead 0.998890 on one frame

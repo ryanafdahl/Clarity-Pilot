@@ -1,0 +1,11 @@
+{
+  "source_sha256": "404a18cfd86d29637d20c697dfde245bb47c666ae016730ab674c65f4d1e1aa4",
+  "source_bytes": 766354845,
+  "frames": 32,
+  "output_values_each": 18452,
+  "identity_shapes_match": true,
+  "all_finite": true,
+  "reference_slices_pass": false,
+  "recurrent_state": "Independent state feedback from each implementation after first-frame reset",
+  "driving_ready": false
+}

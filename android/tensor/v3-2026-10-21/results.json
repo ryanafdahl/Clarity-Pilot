@@ -1,0 +1,40 @@
+{
+  "date": "2026-10-21",
+  "model": "Cinque Terre V3",
+  "status": "not_qualified_not_installed",
+  "source_sha256": "404a18cfd86d29637d20c697dfde245bb47c666ae016730ab674c65f4d1e1aa4",
+  "apk_unchanged": "0.8.7-clarity-tensor.10",
+  "compiler": "Google Tensor SDK 2.1, LiteRT 2.3.0, Tensor_G6, half, minimal",
+  "original_queue_bug": "Compiled image-history slice copied flat first 8 frame blocks instead of per-camera tail; exact reproduction on frames 1 through 5",
+  "queue4d_cpu_outputs_exact": 32,
+  "full4d_cpu_outputs_exact": 32,
+  "native_corrected_image_and_desire_states_exact_frames": 6,
+  "extended_reference_frames": 160,
+  "extended_pooled_slices_pass": 15,
+  "extended_failed_frames": [
+    56
+  ],
+  "failed_slice": "lead",
+  "observed_correlation": 0.9988897096,
+  "required_correlation": 0.999,
+  "failed_frame_max_abs": 0.4033203125,
+  "alternative_outputs_exact_to_queue4d": {
+    "full4d": 160,
+    "fc": 160
+  },
+  "precision_changed": false,
+  "thresholds_changed": false,
+  "timing_qualification_run": false,
+  "rollback_model": "Cinque Terre V2",
+  "rollback_source_sha256": "09d080f36965bb2a0790500452bd328aa03c484d0222aa79d1ad9f021a522aec",
+  "rollback_exact_previous_outputs": 32,
+  "v3_engine_absent_from_cached_models": true,
+  "v3_request_rejected_without_qualified_import": true,
+  "developer_listener_off_after_restart": true,
+  "adb_forward_removed": true,
+  "native_test_files_removed": true,
+  "temporary_host_swap_removed": true,
+  "comma_configuration_changed": false,
+  "physical_usb_test_performed": false,
+  "driving_ready": false
+}
