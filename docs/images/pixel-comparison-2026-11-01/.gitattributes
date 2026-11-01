@@ -1,0 +1,4 @@
+# Keep these small, shareable report images in this GitHub repository.
+# The inherited LFS endpoint belongs to the upstream project.
+pixel-jetlink-comparison.png -filter -diff -merge -text
+pixel-jetlink-comparison.svg -filter diff merge text eol=lf

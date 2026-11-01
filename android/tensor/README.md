@@ -10,6 +10,8 @@ The separate **Tensor NPU (on-device)** choice uses upstream's runtime compiler 
 
 ## Current results and remaining checks
 
+[Pixel 10 / Pixel 11 comparison](../../docs/PIXEL10_TESTS_2026-11-01.md): the same APK and V2 source model averaged **50.62 ms on Tensor G5** and **32.04 ms on Tensor G6** over one complete 12,000-frame run each. The G5 run recorded timing overruns without stopping; 9,127 measured frames exceeded 50 ms. Its numerical checks passed, but its frame-budget check failed. [Shareable chart](../../docs/images/pixel-comparison-2026-11-01/pixel-jetlink-comparison.png) · [Copyable text](../../docs/images/pixel-comparison-2026-11-01/pixel-jetlink-comparison.txt).
+
 [Two longer November 1 Pixel 11 runs](../../docs/PIXEL_LONG_TESTS_2026-11-01.md) each completed 12,000 measured frames with no phone frames over 50 ms; averages were 32.04 and 32.14 ms. Both included one warmup frame above 50 ms, and both missed the PC round-trip p95 target. Temperature reached 37.9°C with light thermal pressure. These desk runs do not resolve the prior isolated stall or qualify direct USB.
 
 [November 1 app update](../../docs/PIXEL_UPDATE_2026-11-01.md) preserves the model and matched Tensor runtime. All 160 captured outputs matched the previous app exactly. The first timing run stopped on a 275 ms inference stall; all timing attempts are retained in the update report.
@@ -21,6 +23,15 @@ The separate **Tensor NPU (on-device)** choice uses upstream's runtime compiler 
 The [October 3 archive](history-2026-10-03.md) retains the short direct-USB passes and subsequent timing failures. Its stationary scripts and deployment manifest describe the previous comma integration and are not the setup procedure for this app. They have not been changed to bypass their compatibility checks.
 
 ## Exact model and compiler
+
+Choose the compilation for the actual phone; these files are not interchangeable:
+
+| Phone | Target | Compiled bytes | Manifest |
+| --- | --- | ---: | --- |
+| Pixel 10 Pro XL | `Tensor_G5` | 777,647,632 | [G5 numerical-validation manifest](validated-model-g5.json) |
+| Pixel 11 Pro XL | `Tensor_G6` | 835,398,160 | [G6 numerical-validation manifest](qualified-model.json) |
+
+Both use the same source model, SDK v2.1, explicit half precision and LiteRT 2.3.0. A numerically validated compilation does not establish that the device meets the frame budget. The details below describe the G6 compilation; use `--soc Tensor_G5` when compiling for Pixel 10.
 
 - Original V2 ONNX: `09d080f36965bb2a0790500452bd328aa03c484d0222aa79d1ad9f021a522aec`, 766,040,736 bytes.
 - Compiled model: `328ae315dcd6e62e08aa670e04f11219e4766a11cfc37c261a54ef89f7c6c571`, 835,398,160 bytes.
@@ -89,6 +100,21 @@ python scripts/verify_parity.py compare --dir /path/to/new-parity-output
 ```
 
 No `--parked` argument is used. [benchmark.py](benchmark.py), with adjacent [validation.py](validation.py), measures bounded synthetic runs using normal engine requests and checks phone health. Start with 120 measured frames, then extend after reviewing results. It requires `--source-sha256`, `--source-bytes`, `--transport` and a new `--output` path; optionally supply `--adb` for independent thermal sampling. The desk timing guard uses phone/server time, not ADB round-trip time. Each 100-frame phone p95 must stay below 50 ms and every phone execution below 100 ms. These benchmark checks do not add a parked restriction to the app.
+
+To collect a complete desk timing distribution from a slower device, add `--record-timing-overruns`. This records timing violations and continues the requested number of frames, including every slow frame in the statistics. Thermal, telemetry, finite-output and protocol checks still stop the test. A completed measurement can have `protocol_pass: true` and `server_timing_pass: false`; the command still exits with code 1 when phone timing fails. Inspect the saved result before deciding whether a further run is appropriate.
+
+For example, with the temporary listener forwarded and the patched upstream client on `PYTHONPATH`:
+
+```sh
+python android/tensor/benchmark.py \
+  --source-sha256 09d080f36965bb2a0790500452bd328aa03c484d0222aa79d1ad9f021a522aec \
+  --source-bytes 766040736 --frames 12000 --warmup 20 --period-ms 50 \
+  --record-timing-overruns --transport "desk ADB TCP forwarding over USB" \
+  --adb /path/to/adb --serial YOUR_DEVICE_SERIAL \
+  --frame-output /path/to/new-run-frames.json --output /path/to/new-run.json
+```
+
+Use a new output path for every run. The requested 50 ms period is a target: slower exchanges make the run take longer. Warmup is recorded separately from measured statistics. This option is for desk measurements only; it does not change app or comma deadlines, and direct-USB timing guards reject record mode.
 
 Remove forwarding afterward with `adb forward --remove tcp:5599`, and tap Version seven times again to disable the Developer listener. ADB/TCP measurements are not direct comma USB measurements.
 

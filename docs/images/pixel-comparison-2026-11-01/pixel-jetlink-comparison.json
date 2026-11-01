@@ -1,0 +1,1084 @@
+{
+  "date": "2026-11-01",
+  "app": "0.8.12-clarity-tensor.11",
+  "model": "Cinque Terre V2",
+  "source_sha256": "09d080f36965bb2a0790500452bd328aa03c484d0222aa79d1ad9f021a522aec",
+  "metric": "phone/server processing time in ms",
+  "aggregation": "pooled measured frames; warmup excluded",
+  "phones": [
+    {
+      "phone": "Pixel 10 Pro XL",
+      "soc": "Tensor_G5",
+      "measured_frames": 12000,
+      "requested_frames": 12000,
+      "completed_runs": 1,
+      "requested_runs": 1,
+      "total_elapsed_s": 827.3439999999828,
+      "phone_guard_pass": false,
+      "average_ms": 50.624587250000005,
+      "p95_ms": 52.16515,
+      "worst_ms": 58.077,
+      "measured_frames_over_50ms": 9127,
+      "measured_frames_at_or_over_100ms": 0,
+      "warmup_frames": 20,
+      "warmup_frames_over_50ms": 12,
+      "warmup_worst_ms": 75.846,
+      "battery_c_start": 27.0,
+      "battery_c_end": 34.4,
+      "battery_c_peak": 34.4,
+      "thermal_status_max": 0,
+      "runs": [
+        {
+          "run": 1,
+          "measured_frames": 12000,
+          "requested_frames": 12000,
+          "complete": true,
+          "stop_reasons": [],
+          "elapsed_s": 827.3439999999828,
+          "timing_mode": "record-overruns",
+          "timing_guard_pass": false,
+          "recorded_timing_overrun_events": [
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 100,
+              "elapsed_s": 8.407,
+              "server_p95_ms": 51.3396,
+              "round_trip_p95_ms": 76.14564000978135,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 200,
+              "elapsed_s": 15.25,
+              "server_p95_ms": 51.56,
+              "round_trip_p95_ms": 75.75723499176092,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 300,
+              "elapsed_s": 22.016,
+              "server_p95_ms": 51.691649999999996,
+              "round_trip_p95_ms": 72.83648002485279,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 400,
+              "elapsed_s": 28.844,
+              "server_p95_ms": 50.8254,
+              "round_trip_p95_ms": 78.13799999421462,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 500,
+              "elapsed_s": 35.672,
+              "server_p95_ms": 51.7177,
+              "round_trip_p95_ms": 76.07608998659998,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 600,
+              "elapsed_s": 42.485,
+              "server_p95_ms": 51.4745,
+              "round_trip_p95_ms": 75.7434200204443,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 700,
+              "elapsed_s": 49.313,
+              "server_p95_ms": 55.49595,
+              "round_trip_p95_ms": 75.6971949711442,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 800,
+              "elapsed_s": 56.313,
+              "server_p95_ms": 51.77205,
+              "round_trip_p95_ms": 84.93319997796789,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 900,
+              "elapsed_s": 63.235,
+              "server_p95_ms": 55.6006,
+              "round_trip_p95_ms": 79.92130500497296,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 1000,
+              "elapsed_s": 70.063,
+              "server_p95_ms": 55.42315,
+              "round_trip_p95_ms": 75.2176049980335,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 1100,
+              "elapsed_s": 76.907,
+              "server_p95_ms": 55.4679,
+              "round_trip_p95_ms": 76.94156999641564,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 1200,
+              "elapsed_s": 83.75,
+              "server_p95_ms": 53.328399999999995,
+              "round_trip_p95_ms": 82.05967000394594,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 1300,
+              "elapsed_s": 90.563,
+              "server_p95_ms": 55.2715,
+              "round_trip_p95_ms": 75.57351999857929,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 1400,
+              "elapsed_s": 97.36,
+              "server_p95_ms": 52.98049999999999,
+              "round_trip_p95_ms": 82.03005000250414,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 1500,
+              "elapsed_s": 104.235,
+              "server_p95_ms": 51.0999,
+              "round_trip_p95_ms": 79.32585501112044,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 1600,
+              "elapsed_s": 111.047,
+              "server_p95_ms": 51.092,
+              "round_trip_p95_ms": 74.42921001347713,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 1700,
+              "elapsed_s": 117.938,
+              "server_p95_ms": 55.351,
+              "round_trip_p95_ms": 77.85658499633428,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 1800,
+              "elapsed_s": 124.828,
+              "server_p95_ms": 51.31655,
+              "round_trip_p95_ms": 80.48118500446435,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 1900,
+              "elapsed_s": 131.688,
+              "server_p95_ms": 54.718999999999994,
+              "round_trip_p95_ms": 77.2215899953153,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 2000,
+              "elapsed_s": 138.563,
+              "server_p95_ms": 51.55035,
+              "round_trip_p95_ms": 77.33334499935154,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 2100,
+              "elapsed_s": 145.375,
+              "server_p95_ms": 51.3258,
+              "round_trip_p95_ms": 78.3465150394477,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 2200,
+              "elapsed_s": 152.25,
+              "server_p95_ms": 51.36305,
+              "round_trip_p95_ms": 81.71541000192519,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 2300,
+              "elapsed_s": 159.094,
+              "server_p95_ms": 51.22735,
+              "round_trip_p95_ms": 76.9537800370017,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 2400,
+              "elapsed_s": 165.86,
+              "server_p95_ms": 51.0901,
+              "round_trip_p95_ms": 75.67080002918374,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 2500,
+              "elapsed_s": 172.563,
+              "server_p95_ms": 51.428599999999996,
+              "round_trip_p95_ms": 72.34990999859292,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 2600,
+              "elapsed_s": 179.422,
+              "server_p95_ms": 51.68315,
+              "round_trip_p95_ms": 79.43434001062997,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 2700,
+              "elapsed_s": 186.172,
+              "server_p95_ms": 51.247899999999994,
+              "round_trip_p95_ms": 75.76347998110577,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 2800,
+              "elapsed_s": 192.922,
+              "server_p95_ms": 51.31845,
+              "round_trip_p95_ms": 76.83438498934265,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 2900,
+              "elapsed_s": 199.735,
+              "server_p95_ms": 51.2672,
+              "round_trip_p95_ms": 76.95256496954244,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 3000,
+              "elapsed_s": 206.625,
+              "server_p95_ms": 51.6451,
+              "round_trip_p95_ms": 77.16147000028286,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 3100,
+              "elapsed_s": 213.485,
+              "server_p95_ms": 52.742349999999995,
+              "round_trip_p95_ms": 75.26872999733314,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 3200,
+              "elapsed_s": 220.266,
+              "server_p95_ms": 51.5017,
+              "round_trip_p95_ms": 75.77231000759639,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 3300,
+              "elapsed_s": 227.063,
+              "server_p95_ms": 51.875649999999986,
+              "round_trip_p95_ms": 75.55535998544656,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 3400,
+              "elapsed_s": 233.938,
+              "server_p95_ms": 55.1894,
+              "round_trip_p95_ms": 78.55414498772006,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 3500,
+              "elapsed_s": 240.813,
+              "server_p95_ms": 55.51135,
+              "round_trip_p95_ms": 75.95583000220358,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 3600,
+              "elapsed_s": 247.641,
+              "server_p95_ms": 51.933749999999996,
+              "round_trip_p95_ms": 75.87586503650527,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 3700,
+              "elapsed_s": 254.5,
+              "server_p95_ms": 51.26095,
+              "round_trip_p95_ms": 77.15919997426681,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 3800,
+              "elapsed_s": 261.391,
+              "server_p95_ms": 51.950649999999996,
+              "round_trip_p95_ms": 76.47172499273438,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 3900,
+              "elapsed_s": 268.266,
+              "server_p95_ms": 51.75465,
+              "round_trip_p95_ms": 76.47480000159702,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 4000,
+              "elapsed_s": 275.125,
+              "server_p95_ms": 51.33025,
+              "round_trip_p95_ms": 77.79830500658134,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 4100,
+              "elapsed_s": 282.016,
+              "server_p95_ms": 52.871599999999994,
+              "round_trip_p95_ms": 80.4664300114382,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 4200,
+              "elapsed_s": 288.953,
+              "server_p95_ms": 55.8241,
+              "round_trip_p95_ms": 75.90314501139801,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 4300,
+              "elapsed_s": 295.735,
+              "server_p95_ms": 51.968399999999995,
+              "round_trip_p95_ms": 74.09949501743539,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 4400,
+              "elapsed_s": 302.672,
+              "server_p95_ms": 55.81895,
+              "round_trip_p95_ms": 77.14551005046813,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 4500,
+              "elapsed_s": 309.657,
+              "server_p95_ms": 55.2444,
+              "round_trip_p95_ms": 81.00987998768687,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 4600,
+              "elapsed_s": 316.61,
+              "server_p95_ms": 56.0385,
+              "round_trip_p95_ms": 78.62602501991205,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 4700,
+              "elapsed_s": 323.516,
+              "server_p95_ms": 55.5749,
+              "round_trip_p95_ms": 77.74107499280944,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 4800,
+              "elapsed_s": 330.453,
+              "server_p95_ms": 55.6126,
+              "round_trip_p95_ms": 78.1792449823115,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 4900,
+              "elapsed_s": 337.282,
+              "server_p95_ms": 52.13495,
+              "round_trip_p95_ms": 75.73054501845034,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 5000,
+              "elapsed_s": 344.125,
+              "server_p95_ms": 52.497199999999985,
+              "round_trip_p95_ms": 77.14380000543315,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 5100,
+              "elapsed_s": 350.985,
+              "server_p95_ms": 51.5969,
+              "round_trip_p95_ms": 76.12095502845477,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 5200,
+              "elapsed_s": 357.75,
+              "server_p95_ms": 51.4289,
+              "round_trip_p95_ms": 76.31544499308802,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 5300,
+              "elapsed_s": 364.578,
+              "server_p95_ms": 52.0556,
+              "round_trip_p95_ms": 77.10927498701491,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 5400,
+              "elapsed_s": 371.375,
+              "server_p95_ms": 51.420500000000004,
+              "round_trip_p95_ms": 75.72579495899845,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 5500,
+              "elapsed_s": 378.282,
+              "server_p95_ms": 53.080999999999996,
+              "round_trip_p95_ms": 75.66395503235981,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 5600,
+              "elapsed_s": 385.11,
+              "server_p95_ms": 51.4136,
+              "round_trip_p95_ms": 77.44970498606563,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 5700,
+              "elapsed_s": 391.938,
+              "server_p95_ms": 51.68605,
+              "round_trip_p95_ms": 74.26757498760708,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 5800,
+              "elapsed_s": 398.828,
+              "server_p95_ms": 52.125099999999996,
+              "round_trip_p95_ms": 79.10892500076443,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 5900,
+              "elapsed_s": 405.719,
+              "server_p95_ms": 51.5754,
+              "round_trip_p95_ms": 77.12139004142955,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 6000,
+              "elapsed_s": 412.625,
+              "server_p95_ms": 55.95055,
+              "round_trip_p95_ms": 76.40467501478268,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 6100,
+              "elapsed_s": 419.547,
+              "server_p95_ms": 51.82805,
+              "round_trip_p95_ms": 80.15214998449665,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 6200,
+              "elapsed_s": 426.407,
+              "server_p95_ms": 51.32705,
+              "round_trip_p95_ms": 76.77319501817692,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 6300,
+              "elapsed_s": 433.282,
+              "server_p95_ms": 51.8185,
+              "round_trip_p95_ms": 77.12368002685253,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 6400,
+              "elapsed_s": 440.188,
+              "server_p95_ms": 51.40885,
+              "round_trip_p95_ms": 79.02362502354663,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 6500,
+              "elapsed_s": 447.094,
+              "server_p95_ms": 51.5557,
+              "round_trip_p95_ms": 78.77645497501362,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 6600,
+              "elapsed_s": 454.078,
+              "server_p95_ms": 55.48895,
+              "round_trip_p95_ms": 82.37710999383124,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 6700,
+              "elapsed_s": 461.125,
+              "server_p95_ms": 55.489200000000004,
+              "round_trip_p95_ms": 85.98088001308497,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 6800,
+              "elapsed_s": 468.063,
+              "server_p95_ms": 51.6969,
+              "round_trip_p95_ms": 81.67249502730556,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 6900,
+              "elapsed_s": 475.032,
+              "server_p95_ms": 52.31374999999999,
+              "round_trip_p95_ms": 80.65752000547944,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 7000,
+              "elapsed_s": 481.985,
+              "server_p95_ms": 55.4613,
+              "round_trip_p95_ms": 78.8568350370042,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 7100,
+              "elapsed_s": 488.922,
+              "server_p95_ms": 51.9958,
+              "round_trip_p95_ms": 79.62810496683232,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 7200,
+              "elapsed_s": 495.782,
+              "server_p95_ms": 51.595749999999995,
+              "round_trip_p95_ms": 77.14841502020136,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 7300,
+              "elapsed_s": 502.641,
+              "server_p95_ms": 51.954249999999995,
+              "round_trip_p95_ms": 75.16949496930465,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 7400,
+              "elapsed_s": 509.547,
+              "server_p95_ms": 55.9302,
+              "round_trip_p95_ms": 76.18197498668451,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 7500,
+              "elapsed_s": 516.485,
+              "server_p95_ms": 52.0076,
+              "round_trip_p95_ms": 81.73166998894885,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 7600,
+              "elapsed_s": 523.391,
+              "server_p95_ms": 51.993249999999996,
+              "round_trip_p95_ms": 77.09560999937821,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 7700,
+              "elapsed_s": 530.203,
+              "server_p95_ms": 51.92745,
+              "round_trip_p95_ms": 75.32111498294398,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 7800,
+              "elapsed_s": 537.047,
+              "server_p95_ms": 55.3836,
+              "round_trip_p95_ms": 74.62127499748021,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 7900,
+              "elapsed_s": 543.922,
+              "server_p95_ms": 51.63765,
+              "round_trip_p95_ms": 78.18493500526529,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 8000,
+              "elapsed_s": 550.782,
+              "server_p95_ms": 55.686099999999996,
+              "round_trip_p95_ms": 76.2294650223339,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 8100,
+              "elapsed_s": 557.782,
+              "server_p95_ms": 52.13109999999999,
+              "round_trip_p95_ms": 80.1396900205873,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 8200,
+              "elapsed_s": 564.703,
+              "server_p95_ms": 55.07185,
+              "round_trip_p95_ms": 76.99746498838067,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 8300,
+              "elapsed_s": 571.625,
+              "server_p95_ms": 55.609300000000005,
+              "round_trip_p95_ms": 76.50654500466771,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 8400,
+              "elapsed_s": 578.641,
+              "server_p95_ms": 55.6367,
+              "round_trip_p95_ms": 78.70009000180288,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 8500,
+              "elapsed_s": 585.516,
+              "server_p95_ms": 52.71569999999999,
+              "round_trip_p95_ms": 76.22098998108412,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 8600,
+              "elapsed_s": 592.407,
+              "server_p95_ms": 51.4486,
+              "round_trip_p95_ms": 81.16965996159706,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 8700,
+              "elapsed_s": 599.344,
+              "server_p95_ms": 52.0022,
+              "round_trip_p95_ms": 80.47322999627795,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 8800,
+              "elapsed_s": 606.344,
+              "server_p95_ms": 51.4854,
+              "round_trip_p95_ms": 85.18966999836265,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 8900,
+              "elapsed_s": 613.266,
+              "server_p95_ms": 51.70715,
+              "round_trip_p95_ms": 79.17049501265865,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 9000,
+              "elapsed_s": 620.125,
+              "server_p95_ms": 55.4291,
+              "round_trip_p95_ms": 78.5654350213008,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 9100,
+              "elapsed_s": 627.047,
+              "server_p95_ms": 55.511300000000006,
+              "round_trip_p95_ms": 81.03565497440286,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 9200,
+              "elapsed_s": 634.094,
+              "server_p95_ms": 51.756049999999995,
+              "round_trip_p95_ms": 85.33475004369393,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 9300,
+              "elapsed_s": 640.922,
+              "server_p95_ms": 51.7489,
+              "round_trip_p95_ms": 75.13585003325716,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 9400,
+              "elapsed_s": 647.875,
+              "server_p95_ms": 52.55255,
+              "round_trip_p95_ms": 79.32314501085784,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 9500,
+              "elapsed_s": 654.766,
+              "server_p95_ms": 52.17174999999999,
+              "round_trip_p95_ms": 79.30225499731023,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 9600,
+              "elapsed_s": 661.625,
+              "server_p95_ms": 51.68765,
+              "round_trip_p95_ms": 76.47682998504023,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 9700,
+              "elapsed_s": 668.5,
+              "server_p95_ms": 51.9985,
+              "round_trip_p95_ms": 77.97844001324847,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 9800,
+              "elapsed_s": 675.391,
+              "server_p95_ms": 52.02735,
+              "round_trip_p95_ms": 80.13517002109438,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 9900,
+              "elapsed_s": 682.25,
+              "server_p95_ms": 51.76695,
+              "round_trip_p95_ms": 77.1353750344133,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 10000,
+              "elapsed_s": 689.172,
+              "server_p95_ms": 51.801899999999996,
+              "round_trip_p95_ms": 79.54754498787224,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 10100,
+              "elapsed_s": 696.094,
+              "server_p95_ms": 51.46755,
+              "round_trip_p95_ms": 82.75755496288184,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 10200,
+              "elapsed_s": 702.969,
+              "server_p95_ms": 55.03615,
+              "round_trip_p95_ms": 76.3403100107098,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 10300,
+              "elapsed_s": 709.938,
+              "server_p95_ms": 51.987700000000004,
+              "round_trip_p95_ms": 81.99536501197144,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 10400,
+              "elapsed_s": 716.735,
+              "server_p95_ms": 51.79455,
+              "round_trip_p95_ms": 76.54941497603431,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 10500,
+              "elapsed_s": 723.594,
+              "server_p95_ms": 51.7415,
+              "round_trip_p95_ms": 77.40642998542171,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 10600,
+              "elapsed_s": 730.516,
+              "server_p95_ms": 52.5265,
+              "round_trip_p95_ms": 77.61459998437203,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 10700,
+              "elapsed_s": 737.438,
+              "server_p95_ms": 55.9169,
+              "round_trip_p95_ms": 77.0111599995289,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 10800,
+              "elapsed_s": 744.203,
+              "server_p95_ms": 51.814699999999995,
+              "round_trip_p95_ms": 72.76500496082008,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 10900,
+              "elapsed_s": 751.141,
+              "server_p95_ms": 51.5298,
+              "round_trip_p95_ms": 79.6800499636447,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 11000,
+              "elapsed_s": 758.125,
+              "server_p95_ms": 55.937400000000004,
+              "round_trip_p95_ms": 77.4803199863527,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 11100,
+              "elapsed_s": 765.125,
+              "server_p95_ms": 56.1976,
+              "round_trip_p95_ms": 78.418674992281,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 11200,
+              "elapsed_s": 772.047,
+              "server_p95_ms": 52.12155,
+              "round_trip_p95_ms": 76.9432300090557,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 11300,
+              "elapsed_s": 778.922,
+              "server_p95_ms": 52.17094999999999,
+              "round_trip_p95_ms": 76.63125499384478,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 11400,
+              "elapsed_s": 785.828,
+              "server_p95_ms": 51.754650000000005,
+              "round_trip_p95_ms": 76.71529998769984,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 11500,
+              "elapsed_s": 792.75,
+              "server_p95_ms": 51.6031,
+              "round_trip_p95_ms": 81.45126002782489,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 11600,
+              "elapsed_s": 799.625,
+              "server_p95_ms": 52.16789999999999,
+              "round_trip_p95_ms": 73.88547500304412,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 11700,
+              "elapsed_s": 806.485,
+              "server_p95_ms": 52.11065,
+              "round_trip_p95_ms": 76.1808899580501,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 11800,
+              "elapsed_s": 813.485,
+              "server_p95_ms": 51.806850000000004,
+              "round_trip_p95_ms": 83.82975000713486,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 11900,
+              "elapsed_s": 820.469,
+              "server_p95_ms": 55.84245,
+              "round_trip_p95_ms": 81.76773503655568,
+              "threshold_ms": 50
+            },
+            {
+              "reason": "100-frame p95 timing limit reached",
+              "end_frame": 12000,
+              "elapsed_s": 827.344,
+              "server_p95_ms": 51.88545,
+              "round_trip_p95_ms": 75.30059002747294,
+              "threshold_ms": 50
+            }
+          ],
+          "phone_timing_pass": false,
+          "adb_round_trip_timing_pass": false
+        }
+      ],
+      "source_files": [
+        {
+          "file": "pixel10-full-tests-20261101/preflight-protocol.json",
+          "sha256": "f1780268d59313fec346ae039ddd54badb4018e6761d0cba67e4c142d65d4539"
+        },
+        {
+          "file": "pixel10-full-tests-20261101/run-1.json",
+          "sha256": "38f9e3bbe630c5c8827a7f92e016914ef757d488f698dd2d6a10f04052284651"
+        },
+        {
+          "file": "pixel10-full-tests-20261101/run-1-frames.json",
+          "sha256": "08261a16961e8e8974f5082ba05fd72385fe1827ad8ca308383d0cecdbd7b12e"
+        }
+      ]
+    },
+    {
+      "phone": "Pixel 11 Pro XL",
+      "soc": "Tensor_G6",
+      "measured_frames": 12000,
+      "requested_frames": 12000,
+      "completed_runs": 1,
+      "requested_runs": 1,
+      "total_elapsed_s": 604.515000000014,
+      "phone_guard_pass": true,
+      "average_ms": 32.041759416666665,
+      "p95_ms": 33.92205,
+      "worst_ms": 41.662,
+      "measured_frames_over_50ms": 0,
+      "measured_frames_at_or_over_100ms": 0,
+      "warmup_frames": 20,
+      "warmup_frames_over_50ms": 1,
+      "warmup_worst_ms": 52.947,
+      "battery_c_start": 27.7,
+      "battery_c_end": 34.4,
+      "battery_c_peak": 34.4,
+      "thermal_status_max": 0,
+      "runs": [
+        {
+          "run": 1,
+          "measured_frames": 12000,
+          "requested_frames": 12000,
+          "complete": true,
+          "stop_reasons": [],
+          "elapsed_s": 604.515000000014,
+          "timing_mode": "strict-stop",
+          "timing_guard_pass": true,
+          "recorded_timing_overrun_events": [],
+          "phone_timing_pass": true,
+          "adb_round_trip_timing_pass": false
+        }
+      ],
+      "source_files": [
+        {
+          "file": "pixel-long-tests-20261101/preflight-protocol.json",
+          "sha256": "e0542ada8139af80575fb1103c125fe6097adeb455eef46acf3578373e2375e5"
+        },
+        {
+          "file": "pixel-long-tests-20261101/run-1.json",
+          "sha256": "42b1227f21595a9c2d16854bf263a5dc016f5f0d276b9914e613b2575d42a89a"
+        },
+        {
+          "file": "pixel-long-tests-20261101/run-1-frames.json",
+          "sha256": "9a6e3d9f72774b6636779197165aae0e7553616647140487c865213eedf08cd0"
+        }
+      ]
+    }
+  ],
+  "selected_run_ids": [
+    1
+  ],
+  "bar_scale_metrics": [
+    "average_ms",
+    "p95_ms"
+  ],
+  "maximum_display": "Exact worst measured times shown separately; no outliers discarded",
+  "equal_completed_frame_counts": true,
+  "pixel10_timing_overruns_recorded_without_stopping": true,
+  "direct_comma_usb_tested": false
+}

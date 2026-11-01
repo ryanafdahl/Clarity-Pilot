@@ -1,0 +1,17 @@
+{
+  "source_sha256": "09d080f36965bb2a0790500452bd328aa03c484d0222aa79d1ad9f021a522aec",
+  "compiled_sha256": "9a4481fde9229db6362778c218eae8b28e97774e46d73ad2358ff91bde823ca2",
+  "soc": "Tensor_G5",
+  "litert": "2.3.0",
+  "source_converted_sha256": "60c74bc8ce8bc111b110571b40bc6bfae86483f3857a8e052fe7a670de2af897",
+  "sdk_sha256": "14e84153cbcf60463d011ba739fc15ff222188c6448a283c0abea639fa19cb68",
+  "sdk_executables_sha256": {
+    "compiler_worker": "e6a8f7c0bdfebbb754e18f82b7bcde83b22c526c1297ce555a1797a2cd099294"
+  },
+  "sdk_worker": "compiler_worker",
+  "sdk_worker_sha256": "e6a8f7c0bdfebbb754e18f82b7bcde83b22c526c1297ce555a1797a2cd099294",
+  "precision": "half",
+  "sharding": "minimal",
+  "compiled_bytes": 777647632,
+  "sdk_release": "2.1_2026_10_14"
+}

@@ -2,6 +2,8 @@
 
 ADB forwarding is a desk transport, not the comma's direct USB protocol.
 The optional ADB thermal monitor stops at Android severe or battery 43 C.
+Desk-only --record-timing-overruns keeps measuring after timing violations;
+it does not relax the timing pass criteria or health/output checks.
 """
 import argparse
 import datetime
@@ -27,6 +29,8 @@ def main():
     p.add_argument('--frames', type=int, default=1200)
     p.add_argument('--warmup', type=int, default=20)
     p.add_argument('--period-ms', type=float, default=50)
+    p.add_argument('--record-timing-overruns', action='store_true',
+                   help='Desk diagnostic: record timing violations and continue; timing pass criteria remain unchanged')
     p.add_argument('--transport', required=True)
     p.add_argument('--adb', help='ADB executable for bounded thermal sampling')
     p.add_argument('--serial', help='Explicit ADB device serial')
@@ -45,7 +49,7 @@ def main():
     samples, rows = [], []
     frame_rows = []
     phone_samples = []
-    guard = TimingGuard()
+    guard = TimingGuard(record_overruns=a.record_timing_overruns)
     stop = threading.Event()
     unsafe = threading.Event()
     failures = []
@@ -87,7 +91,8 @@ def main():
     c = None
     result = {'date_utc': datetime.datetime.now(datetime.timezone.utc).isoformat(),
               'transport': a.transport, 'source_sha256': a.source_sha256, 'warmup_frames': a.warmup,
-              'requested_frames': a.frames, 'period_ms': a.period_ms}
+              'requested_frames': a.frames, 'period_ms': a.period_ms,
+              'timing_mode': 'record-overruns' if a.record_timing_overruns else 'stop-on-overrun'}
     try:
         c = JetlinkClient.open_tcp(a.host, a.port, want_hidden=True)
         hello = c.hello()
@@ -137,7 +142,8 @@ def main():
         if a.wake_frame is not None: result['wake_stimulus'] = wake_stimulus
         result.update(measured_frames=len(rows), finite_frames=len(rows), failures=failures,
                       elapsed_s=time.monotonic()-started, thermal_samples=samples, phone_thermal_samples=phone_samples,
-                      blocks_100=guard.blocks, driving_ready=False,
+                      blocks_100=guard.blocks, timing_overruns=guard.overruns,
+                      timing_guard_pass=not guard.overruns, driving_ready=False,
                       server_guard='100-frame server p95 <50 ms and each server time <100 ms')
         data = np.asarray(rows)
         if len(rows):
@@ -150,7 +156,7 @@ def main():
                 'round_trip_p95_ms':float(np.percentile(data[i:i+1200,0],95)),
                 'server_p95_ms':float(np.percentile(data[i:i+1200,3],95))} for i in range(0,len(rows),1200)]
         result['protocol_pass']=len(rows)==a.frames and not failures
-        result['server_timing_pass']=result['protocol_pass'] and result.get('server_total',{}).get('p95_ms',float('inf'))<50 and result.get('server_total',{}).get('max_ms',float('inf'))<100
+        result['server_timing_pass']=result['protocol_pass'] and result['timing_guard_pass'] and result.get('server_total',{}).get('p95_ms',float('inf'))<50 and result.get('server_total',{}).get('max_ms',float('inf'))<100
         result['round_trip_timing_pass']=result['protocol_pass'] and result.get('round_trip',{}).get('p95_ms',float('inf'))<50 and result.get('round_trip',{}).get('max_ms',float('inf'))<100
         a.output.parent.mkdir(parents=True, exist_ok=True)
         a.output.write_text(json.dumps(result,indent=2)+'\n', encoding='utf-8')

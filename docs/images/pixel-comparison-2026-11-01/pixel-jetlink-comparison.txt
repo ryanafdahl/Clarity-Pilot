@@ -1,0 +1,17 @@
+Pixel 10 vs Pixel 11 — JetLink phone processing
+App: 0.8.12-clarity-tensor.11 | Model: Cinque Terre V2
+Selected run IDs: 1 for each phone. Lower times are better.
+
+Pixel 10 Pro XL (Tensor G5): 12,000/12,000 measured frames; 1/1 runs completed; phone timing budget exceeded.
+Average 50.62 ms | p95 52.17 ms | worst 58.08 ms | over 50 ms: 9,127/12,000 (76.1%) | elapsed 13.79 min.
+Battery temperature: 27.0 → 34.4 °C; peak 34.4 °C.
+Warmup excluded: 20 frames; 12 over 50 ms; maximum 75.85 ms.
+
+Pixel 11 Pro XL (Tensor G6): 12,000/12,000 measured frames; 1/1 runs completed; phone timing passed.
+Average 32.04 ms | p95 33.92 ms | worst 41.66 ms | over 50 ms: 0/12,000 (0.0%) | elapsed 10.08 min.
+Battery temperature: 27.7 → 34.4 °C; peak 34.4 °C.
+Warmup excluded: 20 frames; 1 over 50 ms; maximum 52.95 ms.
+
+Pixel 10 timing overruns were recorded without stopping; all measured slow frames are included.
+Synthetic desk tests through PC ADB. These are phone-processing times, not total vehicle latency; direct comma USB was not tested.
+Earlier Pixel 11 275 ms stall remains unresolved. This comparison does not establish driving readiness.

@@ -45,18 +45,31 @@ class TimingGuard:
 
     ADB desk tests guard server time. Direct USB also guards full exchange
     time. This distinction prevents a desk transport result from passing USB.
+    Optional desk-only record mode retains the same violations without
+    raising, so a full measurement can finish without becoming a timing pass.
     """
-    def __init__(self, direct_usb=False):
+    def __init__(self, direct_usb=False, record_overruns=False):
+        if direct_usb and record_overruns:
+            raise ValueError('Recording timing overruns without stopping is for desk tests only')
         self.direct_usb = direct_usb
+        self.record_overruns = record_overruns
         self.pending = []
         self.blocks = []
         self.frames = 0
+        self.overruns = []
+
+    def _overrun(self, reason, elapsed, **values):
+        self.overruns.append(dict(reason=reason, end_frame=self.frames,
+                                  elapsed_s=round(elapsed, 3), **values))
+        if not self.record_overruns:
+            raise RuntimeError(reason + '; test stopped')
 
     def observe(self, row, elapsed):
         self.pending.append(row)
         self.frames += 1
         if row[3] >= 100 or (self.direct_usb and row[0] >= 100):
-            raise RuntimeError('100 ms timing limit reached; test stopped')
+            self._overrun('100 ms timing limit reached', elapsed,
+                          server_total_ms=row[3], round_trip_ms=row[0], threshold_ms=100)
         if len(self.pending) == 100:
             data = np.asarray(self.pending)
             block = {'end_frame': self.frames, 'elapsed_s': round(elapsed, 3),
@@ -65,4 +78,6 @@ class TimingGuard:
             self.blocks.append(block)
             self.pending.clear()
             if block['server_total']['p95_ms'] >= 50 or (self.direct_usb and block['round_trip']['p95_ms'] >= 50):
-                raise RuntimeError('100-frame p95 timing limit reached; test stopped')
+                self._overrun('100-frame p95 timing limit reached', elapsed,
+                              server_p95_ms=block['server_total']['p95_ms'],
+                              round_trip_p95_ms=block['round_trip']['p95_ms'], threshold_ms=50)

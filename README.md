@@ -133,6 +133,8 @@ A TensorRT or model change can require a new engine even when the ONNX download 
 
 The subsequent [two longer Pixel 11 tests](docs/PIXEL_LONG_TESTS_2026-11-01.md) each completed 12,000 measured frames, with phone averages of 32.04 and 32.14 ms and no measured phone frames over 50 ms. Two warmup frames exceeded 50 ms, PC round-trip timing still failed, and the earlier 275 ms stall remains unresolved. These are desk results, not direct-comma USB qualification.
 
+**Pixel 10 vs Pixel 11:** one complete 12,000-frame run per phone averaged **50.62 ms vs 32.04 ms**, using the same APK and V2 source model with the correct chipset compilation. Pixel 10 recorded timing overruns without stopping: 9,127 measured frames (76.1%) exceeded 50 ms, so completing the measurement did not pass the frame budget. [Shareable chart](docs/images/pixel-comparison-2026-11-01/pixel-jetlink-comparison.png) · [Copyable text](docs/images/pixel-comparison-2026-11-01/pixel-jetlink-comparison.txt) · [Pixel 10 setup, checks and results](docs/PIXEL10_TESTS_2026-11-01.md).
+
 The installed app is **0.8.12-clarity-tensor.11**, built from pinned upstream `a863c380` with Tensor, USB recovery, bounded requests and Android CPU performance hints. **The parked-only handshake and temporary USB test switch are removed.** Normal Tensor engine requests are accepted; phone health monitoring and thermal stops remain active. [USB stability, LiteRT upgrade and results](docs/PIXEL_USB_STABILITY_LITERT23_2026-10-10.md).
 
 The [Android directory](android/README.md) contains the **exact installed APK**, its SHA-256, source patch and install steps. [Download the Tensor APK](https://github.com/ryanafdahl/Clarity-Pilot/raw/refs/heads/main/android/jetlink-0.8.12-clarity-tensor.11-pixel.apk). Install with `adb install -r android/jetlink-0.8.12-clarity-tensor.11-pixel.apk`, open JetLink and allow notifications. The installed processor is **Tensor TPU (precompiled)** with **Cinque Terre Model V2**; both were preserved by the update.
@@ -202,6 +204,7 @@ sudo journalctl -b -u nvpmodel.service -u nvidia-cdi-refresh.service -u jetlink-
 
 | Report | Covers |
 | --- | --- |
+| [November 1 Pixel 10 / Pixel 11 comparison](docs/PIXEL10_TESTS_2026-11-01.md) | Same APK and source model, G5 setup, one complete 12,000-frame run per phone, chart and copyable results |
 | [October 17 Tensor compiler/runtime investigation](docs/TENSOR_COMPILER_RUNTIME_2026-10-17.md) | SDK v2.1 compiler gain, actual-app validation, supported buffer/runtime experiments and remaining wake limits |
 | [October 10 Pixel road miles and screen-off review](docs/PIXEL_DRIVE_SCREEN_OFF_2026-10-10.md) | 8.67 assisted miles on the Pixel large-model path, three USB resets, steady finish, charging/Android Auto timeline and Jetson commute-history clarification |
 | [October 17 device maintenance](docs/DEVICE_MAINTENANCE_2026-10-17.md) | Recent full-rate drive analysis, Jetson 0.8.7, security updates, compatibility and reinstall recovery |

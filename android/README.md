@@ -6,6 +6,8 @@
 
 **Longer follow-up:** [two approximately 10-minute Pixel 11 runs](../docs/PIXEL_LONG_TESTS_2026-11-01.md) completed 24,000 measured frames, all below 50 ms on the phone. Average processing was 32.04 and 32.14 ms. Warmup and PC-transport outliers remain in the report; the earlier stall is not considered resolved.
 
+**Pixel 10 is also installed and tested:** the same APK with a Tensor G5 V2 compilation completed one 12,000-frame measurement averaging **50.62 ms**, versus **32.04 ms** for Pixel 11's first 12,000-frame run. Pixel 10's timing overruns were recorded without stopping; 76.1% of measured frames exceeded 50 ms. [Setup and full evidence](../docs/PIXEL10_TESTS_2026-11-01.md) · [Comparison chart](../docs/images/pixel-comparison-2026-11-01/pixel-jetlink-comparison.png) · [Copyable text](../docs/images/pixel-comparison-2026-11-01/pixel-jetlink-comparison.txt).
+
 [Download jetlink-0.8.12-clarity-tensor.11-pixel.apk](https://github.com/ryanafdahl/Clarity-Pilot/raw/refs/heads/main/android/jetlink-0.8.12-clarity-tensor.11-pixel.apk)
 
 | Field | Value |
@@ -34,7 +36,7 @@ adb -s YOUR_DEVICE_SERIAL shell am start -n io.zoompilot.jetlink.android/io.zoom
 
 Compare the APK hash above before installation. An in-place update preserves settings, imported models and prepared engines. A different signing key cannot update this installation; do not uninstall to bypass that restriction because it removes app data.
 
-The qualified processor is **Tensor TPU (precompiled)**. It requires the matched Tensor G6 V2 model and [manifest](tensor/qualified-model.json), uses explicit FP16, and refuses silent GPU fallback. **Tensor NPU (on-device)** is a separate upstream path. The private SDK and model weights are not bundled in this APK. [Model setup and import](tensor/README.md).
+The tested processor is **Tensor TPU (precompiled)**. Import the V2 compilation for the phone's chipset: [Tensor G6 for Pixel 11](tensor/qualified-model.json) or [Tensor G5 for Pixel 10](tensor/validated-model-g5.json). The app checks the chipset and uses explicit FP16, refusing silent GPU fallback. Numerical validation and meeting the frame budget are separate checks. **Tensor NPU (on-device)** is a separate upstream path. The private SDK and model weights are not bundled in this APK. [Model setup and import](tensor/README.md).
 
 ## Model choices and USB
 
