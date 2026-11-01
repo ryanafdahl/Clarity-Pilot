@@ -246,7 +246,7 @@ index b7da0ff..abcadf2 100644
  inline bool IsUserCustomBuffer(LiteRtTensorBufferType buffer_type) {
    return buffer_type >= kLiteRtTensorBufferTypeUserCustomBuffer &&
 diff --git a/JetlinkKit/Sources/JetlinkAndroid/Bridge.swift b/JetlinkKit/Sources/JetlinkAndroid/Bridge.swift
-index cd8bf8e..29e4ba2 100644
+index 29e537b..e498a4a 100644
 --- a/JetlinkKit/Sources/JetlinkAndroid/Bridge.swift
 +++ b/JetlinkKit/Sources/JetlinkAndroid/Bridge.swift
 @@ -136,6 +136,11 @@
@@ -292,7 +292,7 @@ index cd8bf8e..29e4ba2 100644
          // libraries, from the app's own and the system's: a phone LiteRT
          // cannot run on says so now, not at the first build.
 diff --git a/JetlinkKit/Sources/JetlinkLiteRT/LiteRt.swift b/JetlinkKit/Sources/JetlinkLiteRT/LiteRt.swift
-index e4e37f2..418c89c 100644
+index 72e8ac3..2b8406a 100644
 --- a/JetlinkKit/Sources/JetlinkLiteRT/LiteRt.swift
 +++ b/JetlinkKit/Sources/JetlinkLiteRT/LiteRt.swift
 @@ -11,7 +11,7 @@ public enum LiteRtRuntime {
@@ -336,7 +336,7 @@ index e4e37f2..418c89c 100644
        shim.cpu_threads = Int32(threads)
      }
 diff --git a/JetlinkKit/Sources/JetlinkLiteRT/LiteRtBackend.swift b/JetlinkKit/Sources/JetlinkLiteRT/LiteRtBackend.swift
-index 5ebd613..e60be0c 100644
+index 2c0af98..eed2811 100644
 --- a/JetlinkKit/Sources/JetlinkLiteRT/LiteRtBackend.swift
 +++ b/JetlinkKit/Sources/JetlinkLiteRT/LiteRtBackend.swift
 @@ -27,6 +27,8 @@ public enum LiteRtProfile: String, CaseIterable, Sendable {
@@ -532,7 +532,7 @@ index 5ebd613..e60be0c 100644
        copyLiteRtLog(since: loadStarted)
      }
 diff --git a/JetlinkKit/Sources/JetlinkLiteRT/LiteRtEngine.swift b/JetlinkKit/Sources/JetlinkLiteRT/LiteRtEngine.swift
-index a24b60e..2b2806d 100644
+index f8070cf..b321d49 100644
 --- a/JetlinkKit/Sources/JetlinkLiteRT/LiteRtEngine.swift
 +++ b/JetlinkKit/Sources/JetlinkLiteRT/LiteRtEngine.swift
 @@ -1,3 +1,4 @@
@@ -540,7 +540,7 @@ index a24b60e..2b2806d 100644
  import Foundation
  import JetlinkServer
  
-@@ -34,6 +35,7 @@ public final class LiteRtEngine: EngineCore, @unchecked Sendable {
+@@ -32,6 +33,7 @@ public final class LiteRtEngine: EngineCore, @unchecked Sendable {
    public override var accelerator: String { label }
  
    private var model: LiteRtModel?
@@ -548,7 +548,7 @@ index a24b60e..2b2806d 100644
    /// Every buffer a run reads or writes, alive as long as the sets below.
    private var buffers: [LiteRtBuffer] = []
    /// One set without a loop, two with one.
-@@ -42,6 +44,8 @@ public final class LiteRtEngine: EngineCore, @unchecked Sendable {
+@@ -40,6 +42,8 @@ public final class LiteRtEngine: EngineCore, @unchecked Sendable {
    private var deviceState: [String: [LiteRtBuffer]] = [:]
    /// Which of the GPU buffers the next run reads.
    private var phase = 0
@@ -557,7 +557,7 @@ index a24b60e..2b2806d 100644
  
    /// What one run reads and writes: the buffers' pointers in signature
    /// order, and on an NPU the host buffers copied into the NPU's own before
-@@ -61,11 +65,12 @@ public final class LiteRtEngine: EngineCore, @unchecked Sendable {
+@@ -59,11 +63,12 @@ public final class LiteRtEngine: EngineCore, @unchecked Sendable {
  
    /// Loads and compiles `model`. LiteRT must be open (`LiteRtRuntime.load`).
    /// `label` names what runs it, given what does.
@@ -571,7 +571,7 @@ index a24b60e..2b2806d 100644
      self.label = label(hardware)
      fullyAccelerated = try compiled.fullyAccelerated
      try super.init(
-@@ -173,16 +178,29 @@ public final class LiteRtEngine: EngineCore, @unchecked Sendable {
+@@ -171,16 +176,29 @@ public final class LiteRtEngine: EngineCore, @unchecked Sendable {
      self.sets = sets
    }
  
@@ -601,7 +601,7 @@ index a24b60e..2b2806d 100644
      if stateOnDevice {
        phase ^= 1
      }
-@@ -213,11 +231,12 @@ public final class LiteRtEngine: EngineCore, @unchecked Sendable {
+@@ -211,11 +229,12 @@ public final class LiteRtEngine: EngineCore, @unchecked Sendable {
    /// steady state.
    public override func warm() throws -> String {
      _ = try super.warm()
@@ -650,7 +650,7 @@ index 0000000..7205dd0
 +  }
 +}
 diff --git a/JetlinkKit/Sources/JetlinkServer/Backend.swift b/JetlinkKit/Sources/JetlinkServer/Backend.swift
-index c03fb23..f959bc0 100644
+index 58692b2..0a22fd3 100644
 --- a/JetlinkKit/Sources/JetlinkServer/Backend.swift
 +++ b/JetlinkKit/Sources/JetlinkServer/Backend.swift
 @@ -34,6 +34,7 @@ public protocol Engine: AnyObject {
@@ -661,7 +661,7 @@ index c03fb23..f959bc0 100644
    /// What ran beside the model, for a benchmark report's build line: "CPU
    /// keep-warm on". Empty when there is nothing to say.
    var notes: String { get }
-@@ -103,3 +104,7 @@ extension EngineBackend {
+@@ -107,3 +108,7 @@ extension EngineBackend {
  public func sanitize(_ s: String) -> String {
    String(s.map { $0.isASCII && ($0.isLetter || $0.isNumber || $0 == "." || $0 == "_" || $0 == "-") ? $0 : "_" })
  }
@@ -670,10 +670,10 @@ index c03fb23..f959bc0 100644
 +  var lastRunProfile: InferenceProfile? { nil }
 +}
 diff --git a/JetlinkKit/Sources/JetlinkServer/EngineCore.swift b/JetlinkKit/Sources/JetlinkServer/EngineCore.swift
-index 4f85b18..03ab5f6 100644
+index 537e94b..9de0188 100644
 --- a/JetlinkKit/Sources/JetlinkServer/EngineCore.swift
 +++ b/JetlinkKit/Sources/JetlinkServer/EngineCore.swift
-@@ -169,6 +169,7 @@ open class EngineCore: Engine, @unchecked Sendable {
+@@ -173,6 +173,7 @@ open class EngineCore: Engine, @unchecked Sendable {
      return "\(type(of: self)) warm in \(lastGpuUs) us"
    }
  
@@ -1016,7 +1016,7 @@ index 1833863..a9c15ed 100644
      self.gadgetIdle = gadgetIdle
      self.shutdown = shutdown
 diff --git a/JetlinkKit/Sources/JetlinkServer/Session.swift b/JetlinkKit/Sources/JetlinkServer/Session.swift
-index d8d8715..fb975be 100644
+index 6ea2e6f..ae34d1d 100644
 --- a/JetlinkKit/Sources/JetlinkServer/Session.swift
 +++ b/JetlinkKit/Sources/JetlinkServer/Session.swift
 @@ -9,6 +9,8 @@ import JetlinkRegistry
@@ -1036,13 +1036,13 @@ index d8d8715..fb975be 100644
      outputCapacity = 18_452
      outputBuffer = .allocate(capacity: outputCapacity)
      responseHead = .allocate(byteCount: Wire.inferRespSize, alignment: 8)
-@@ -302,13 +305,19 @@ final class Session: @unchecked Sendable {
+@@ -309,13 +312,19 @@ final class Session: @unchecked Sendable {
        try error(message.seq, "bad_request", "ENGINE_REQ needs sha256 and nbytes")
        return
      }
 +    if try refuseUnhealthyPhone(message.seq) { return }
      let skip = (d["frame_skip"] as? NSNumber)?.intValue ?? ModelConstants.defaultFrameSkip
-     let request = try Request(sha256: sha, nbytes: nbytes, frameSkip: skip)
+     let request = try Request(sha256: sha, nbytes: nbytes, frameSkip: skip, fetch: (d["fetch"] as? Bool) ?? false, ref: d["ref"] as? String)
 +    healthStopped = false
      self.request = request
      try sendJSON(.engineResp, seq: message.seq, host.request(request, session: self))
@@ -1056,7 +1056,7 @@ index d8d8715..fb975be 100644
      let (sha, skip) = wanted()
      try sendJSON(.engineResp, seq: seq, host.status(sha, frameSkip: skip))
    }
-@@ -364,10 +373,25 @@ final class Session: @unchecked Sendable {
+@@ -371,10 +380,25 @@ final class Session: @unchecked Sendable {
  
    // MARK: the hot path
  
@@ -1082,7 +1082,7 @@ index d8d8715..fb975be 100644
      let (sha, skip) = wanted()
      host.lock.lock()
      guard let loaded = host.loaded, loaded.sha256 == sha, loaded.spec.frameSkip == skip, !host.benchmarking else {
-@@ -401,6 +425,10 @@ final class Session: @unchecked Sendable {
+@@ -408,6 +432,10 @@ final class Session: @unchecked Sendable {
          "slow frame \(reply.frameID): gpu \(Double(reply.gpuUs) / 1000) queue \(Double(reply.queueUs) / 1000) total \(Double(reply.totalUs) / 1000) send \(Double(sendUs) / 1000) ms"
        )
      }
@@ -1093,7 +1093,7 @@ index d8d8715..fb975be 100644
      host.frameStats.record(totalUs: reply.totalUs, gpuUs: reply.gpuUs, queueUs: reply.queueUs, sendUs: sendUs)
    }
  
-@@ -420,6 +448,7 @@ final class Session: @unchecked Sendable {
+@@ -427,6 +455,7 @@ final class Session: @unchecked Sendable {
      var ran = false
      /// Why it failed, when it did.
      var failure: (any Error)?
@@ -1101,7 +1101,7 @@ index d8d8715..fb975be 100644
    }
  
    /// INFER_RESP: the head, the output buffer less hidden_state, and the
-@@ -512,7 +541,7 @@ final class Session: @unchecked Sendable {
+@@ -519,7 +548,7 @@ final class Session: @unchecked Sendable {
      return InferReply(
        frameID: frameID, status: status, gpuUs: loaded.engine.lastGpuUs, queueUs: queueUs, totalUs: microseconds(since: started),
        outputCount: replied ? count : 0, hidden: replied && !flags.contains(.wantHidden) ? layout.hidden : nil,
@@ -1243,7 +1243,7 @@ index 0000000..194ff22
 +}
 \ No newline at end of file
 diff --git a/JetlinkKit/Tests/JetlinkServerTests/LiteRtBackendTests.swift b/JetlinkKit/Tests/JetlinkServerTests/LiteRtBackendTests.swift
-index 84382d0..a7ae4f0 100644
+index b78a73c..5085905 100644
 --- a/JetlinkKit/Tests/JetlinkServerTests/LiteRtBackendTests.swift
 +++ b/JetlinkKit/Tests/JetlinkServerTests/LiteRtBackendTests.swift
 @@ -7,7 +7,7 @@ import Testing
@@ -1475,7 +1475,7 @@ index 0000000..c3b70b9
 +  }
 +}
 diff --git a/android/app/build.gradle.kts b/android/app/build.gradle.kts
-index 058b1c9..e57786c 100644
+index 058b1c9..66981f5 100644
 --- a/android/app/build.gradle.kts
 +++ b/android/app/build.gradle.kts
 @@ -34,8 +34,8 @@ android {
@@ -1484,8 +1484,8 @@ index 058b1c9..e57786c 100644
          targetSdk = 36
 -        versionCode = jetlinkVersionCode
 -        versionName = jetlinkVersion
-+        versionCode = jetlinkVersionCode * 100 + 10
-+        versionName = jetlinkVersion + "-clarity-tensor.10"
++        versionCode = jetlinkVersionCode * 100 + 11
++        versionName = jetlinkVersion + "-clarity-tensor.11"
          // The QNN runtime is arm64 only, and so is every Snapdragon with an NPU
          // worth driving on. The emulator on an Apple silicon Mac is arm64 too.
          ndk { abiFilters += "arm64-v8a" }
@@ -1749,7 +1749,7 @@ index 1addc86..924f6e6 100644
      val isEmulator: Boolean
          get() = Build.HARDWARE.contains("ranchu") || Build.HARDWARE.contains("goldfish") || Build.PRODUCT.contains("sdk")
 diff --git a/android/app/src/main/java/io/zoompilot/jetlink/settings/Settings.kt b/android/app/src/main/java/io/zoompilot/jetlink/settings/Settings.kt
-index 1b09ead..ea08a8f 100644
+index c484592..a9c2184 100644
 --- a/android/app/src/main/java/io/zoompilot/jetlink/settings/Settings.kt
 +++ b/android/app/src/main/java/io/zoompilot/jetlink/settings/Settings.kt
 @@ -33,7 +33,7 @@ enum class Processor(val backend: Backend, val device: String, val title: String
@@ -1762,7 +1762,7 @@ index 1b09ead..ea08a8f 100644
      /** The whole model on the GPU through LiteRT, which drives any phone's: Adreno, Mali, PowerVR. */
      Gpu(Backend.LiteRt, "gpu", "GPU"),
 @@ -43,11 +43,12 @@ enum class Processor(val backend: Backend, val device: String, val title: String
-      * Listed after the GPU: on the first phone measured it was the slowest of the three.
+      * Listed after the GPU: the slowest of the three measured on an 8+ Gen 1.
       */
      NpuGpu(Backend.Ort, "htp", "NPU + GPU"),
 +    Tensor(Backend.LiteRt, "tensor", "Tensor TPU (precompiled)"),
@@ -1775,7 +1775,7 @@ index 1b09ead..ea08a8f 100644
      val usesQnn: Boolean get() = backend == Backend.Ort && device != Cpu.device
  
      /** The choice the server runs: Automatic's pick for this phone, or this one. */
-@@ -89,10 +90,10 @@ enum class Processor(val backend: Backend, val device: String, val title: String
+@@ -88,10 +89,10 @@ enum class Processor(val backend: Backend, val device: String, val title: String
           * CPU is offered on a Snapdragon only once chosen; the emulator offers
           * everything, for testing.
           */
@@ -1836,7 +1836,7 @@ index e92e718..f5d3a4f 100644
          ValueRow("Chip", info.chip)
          RowDivider()
 diff --git a/android/app/src/test/java/io/zoompilot/jetlink/settings/ProcessorTest.kt b/android/app/src/test/java/io/zoompilot/jetlink/settings/ProcessorTest.kt
-index 55ff577..dbcbf05 100644
+index 78a2fa1..4894f91 100644
 --- a/android/app/src/test/java/io/zoompilot/jetlink/settings/ProcessorTest.kt
 +++ b/android/app/src/test/java/io/zoompilot/jetlink/settings/ProcessorTest.kt
 @@ -71,7 +71,7 @@ class ProcessorTest {
@@ -1860,7 +1860,7 @@ index 55ff577..dbcbf05 100644
          assertEquals("GPU", Processor.Gpu.summary(null, automatic = Processor.TensorNpu))
      }
 @@ -94,7 +94,7 @@ class ProcessorTest {
-         // what a Pixel 10 Pro Fold off Google's EdgeTPU allowlist reported (2026-10-03)
+         // what a Tensor phone off Google's EdgeTPU allowlist reports
          assertTrue(Processor.Auto.fellBack("GPU(fp16)", automatic = Processor.TensorNpu))
          assertEquals("Automatic (GPU)", Processor.Auto.summary("GPU(fp16)", automatic = Processor.TensorNpu))
 -        assertEquals("NPU (GPU)", Processor.TensorNpu.summary("GPU(fp16)", automatic = Processor.TensorNpu))
@@ -1907,6 +1907,7 @@ index e711806..ddfac5c 100644
  [plugins]
 diff --git a/android/scripts/compile-tensor.py b/android/scripts/compile-tensor.py
 new file mode 100644
+index 0000000..d8acd1d
 --- /dev/null
 +++ b/android/scripts/compile-tensor.py
 @@ -0,0 +1,97 @@
@@ -2033,7 +2034,7 @@ index a7bbe9c..f8fdcc2 100644
  }
  
 diff --git a/jetlink/transport/tcp.py b/jetlink/transport/tcp.py
-index 5fbc4ed..d74521f 100644
+index b042e3b..e1ab9b0 100644
 --- a/jetlink/transport/tcp.py
 +++ b/jetlink/transport/tcp.py
 @@ -142,7 +142,11 @@ class TcpTransport(StreamTransport):

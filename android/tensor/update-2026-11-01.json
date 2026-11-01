@@ -1,0 +1,292 @@
+{
+  "date": "2026-11-01",
+  "upstream_tag": "v0.8.12",
+  "upstream_commit": "a863c3801da6fd925d14eb1f5b1e250f8efcc649",
+  "installed": {
+    "date": "2026-11-01",
+    "app": "0.8.12-clarity-tensor.11",
+    "version_code": 81211,
+    "apk_sha256": "30880b942fbc44b8d09f4c54ba25321e60df7f5c0dce235d50b8e74f6f9e6f3e",
+    "apk_bytes": 104224964,
+    "in_place_install": true,
+    "source_sha256": "09d080f36965bb2a0790500452bd328aa03c484d0222aa79d1ad9f021a522aec",
+    "compiled_sha256": "328ae315dcd6e62e08aa670e04f11219e4766a11cfc37c261a54ef89f7c6c571",
+    "model_manifest_matches": true,
+    "processor": "Tensor TPU (precompiled)",
+    "runtime": "LiteRT 2.3.0",
+    "selected_model": "Cinque Terre Model V2",
+    "final_status": "Waiting for Comma",
+    "v3_imports_quarantined": true,
+    "v3_engine_absent_and_request_rejected": true,
+    "developer_listener_disabled_after_restart": true,
+    "owned_adb_forward_removed": true,
+    "temporary_phone_ui_file_removed": true,
+    "battery_c": 27.5,
+    "thermal_status": 0,
+    "comma_contacted": false,
+    "comma_configuration_changed": false,
+    "physical_usb_test_performed": false,
+    "comma_connection_window_armed": false,
+    "driving_qualified": false
+  },
+  "artifact": {
+    "apk_sha256": "30880b942fbc44b8d09f4c54ba25321e60df7f5c0dce235d50b8e74f6f9e6f3e",
+    "apk_bytes": 104224964,
+    "runtime_libraries": {
+      "lib/arm64-v8a/libLiteRt.so": {
+        "sha256": "e5b7e3413a8b428b1a1b669f368cf613058868bc7b63e10d0b9c2e6ba55c97d8",
+        "unchanged": true
+      },
+      "lib/arm64-v8a/libLiteRtClGlAccelerator.so": {
+        "sha256": "ffb5b0e5e2fc36c5c71564cbf6ece0788dfd8020ae5779a86e1d1880c502cc65",
+        "unchanged": true
+      },
+      "lib/arm64-v8a/libLiteRtCompilerPlugin_google_tensor.so": {
+        "sha256": "ee5a1a44fa0373db4d8b91684de239c44f989cd4fb701d13d0156250da9deec0",
+        "unchanged": true
+      },
+      "lib/arm64-v8a/libLiteRtDispatch_GoogleTensor.so": {
+        "sha256": "d8f21434cd28a2dd2d0806461213c3ced256ec60b2429c1879c2fcab9faaa9fe",
+        "unchanged": true
+      }
+    }
+  },
+  "signer_certificate_sha256": "50e670489a4ba19aec5e9fbad6f06074556d4d07be629ba012b3ca78f1eabb4e",
+  "same_signer_as_previous": true,
+  "source_patch_sha256": "9596ca04dc01aab95192e186aeed772306664a8cbea09dfc2f4c59bfeee296c9",
+  "tests": {
+    "android": {
+      "tests": 59,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "native_passed": 226,
+    "native_host_runtime": "ONNX Runtime 1.29.0",
+    "host_setup_failures": [
+      "Missing host ONNX Runtime shared library",
+      "Host 1.26.0 did not supply required API 29"
+    ],
+    "final_native_run_passed": true
+  },
+  "parity": {
+    "stage": "updated",
+    "source_sha256": "09d080f36965bb2a0790500452bd328aa03c484d0222aa79d1ad9f021a522aec",
+    "finite_full_output_frames": 160,
+    "reference_frames_passed": 32,
+    "reference_slices": 15,
+    "updated_exact_baseline_frames": 160,
+    "v3_absent_from_cache": true
+  },
+  "timing_attempts": {
+    "baseline": {
+      "date_utc": "2026-11-01T15:26:04.349303+00:00",
+      "transport": "desk ADB TCP baseline .10",
+      "measured_frames": 1200,
+      "requested_frames": 1200,
+      "warmup_frames": 20,
+      "finite_frames": 1200,
+      "failures": [],
+      "inference": {
+        "mean_ms": 30.708073333333328,
+        "p50_ms": 30.716,
+        "p95_ms": 32.1904,
+        "p99_ms": 32.75441,
+        "max_ms": 35.81,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 31.883639166666665,
+        "p50_ms": 31.9165,
+        "p95_ms": 33.4841,
+        "p99_ms": 34.16345999999999,
+        "max_ms": 37.502,
+        "over_50ms": 0
+      },
+      "round_trip": {
+        "mean_ms": 46.61511974986448,
+        "p50_ms": 46.2258999759797,
+        "p95_ms": 50.12363498972263,
+        "p99_ms": 59.97889800637495,
+        "max_ms": 69.71720000728965,
+        "over_50ms": 65
+      },
+      "protocol_pass": true,
+      "server_timing_pass": true,
+      "round_trip_timing_pass": false,
+      "thermal_samples": [
+        {
+          "elapsed_s": 0.4,
+          "status": 0,
+          "battery_c": 24.5
+        },
+        {
+          "elapsed_s": 10.6,
+          "status": 0,
+          "battery_c": 24.5
+        },
+        {
+          "elapsed_s": 20.8,
+          "status": 0,
+          "battery_c": 24.5
+        },
+        {
+          "elapsed_s": 31.0,
+          "status": 0,
+          "battery_c": 24.5
+        },
+        {
+          "elapsed_s": 41.2,
+          "status": 0,
+          "battery_c": 25.0
+        },
+        {
+          "elapsed_s": 51.4,
+          "status": 0,
+          "battery_c": 25.0
+        },
+        {
+          "elapsed_s": 61.5,
+          "status": 0,
+          "battery_c": 25.0
+        }
+      ]
+    },
+    "updated": {
+      "date_utc": "2026-11-01T15:31:11.107634+00:00",
+      "transport": "desk ADB TCP updated .11",
+      "measured_frames": 490,
+      "requested_frames": 1200,
+      "warmup_frames": 20,
+      "finite_frames": 490,
+      "failures": [
+        "100 ms timing limit reached; test stopped"
+      ],
+      "inference": {
+        "mean_ms": 30.724163265306125,
+        "p50_ms": 30.0455,
+        "p95_ms": 31.995049999999996,
+        "p99_ms": 32.85238,
+        "max_ms": 275.057,
+        "over_50ms": 1
+      },
+      "server_total": {
+        "mean_ms": 31.667610204081633,
+        "p50_ms": 31.044,
+        "p95_ms": 33.183,
+        "p99_ms": 34.275580000000005,
+        "max_ms": 275.406,
+        "over_50ms": 1
+      },
+      "round_trip": {
+        "mean_ms": 45.960712244577365,
+        "p50_ms": 45.06890001357533,
+        "p95_ms": 49.53543499868828,
+        "p99_ms": 61.20022295566745,
+        "max_ms": 287.8834999864921,
+        "over_50ms": 22
+      },
+      "protocol_pass": false,
+      "server_timing_pass": false,
+      "round_trip_timing_pass": false,
+      "thermal_samples": [
+        {
+          "elapsed_s": 0.4,
+          "status": 0,
+          "battery_c": 25.7
+        },
+        {
+          "elapsed_s": 10.5,
+          "status": 0,
+          "battery_c": 25.7
+        },
+        {
+          "elapsed_s": 20.8,
+          "status": 0,
+          "battery_c": 25.7
+        }
+      ]
+    },
+    "updated-repeat": {
+      "date_utc": "2026-11-01T15:32:34.144576+00:00",
+      "transport": "desk ADB TCP updated .11 repeat",
+      "measured_frames": 1200,
+      "requested_frames": 1200,
+      "warmup_frames": 20,
+      "finite_frames": 1200,
+      "failures": [],
+      "inference": {
+        "mean_ms": 30.895412499999996,
+        "p50_ms": 30.823,
+        "p95_ms": 32.34315,
+        "p99_ms": 33.07399,
+        "max_ms": 34.53,
+        "over_50ms": 0
+      },
+      "server_total": {
+        "mean_ms": 32.137302500000004,
+        "p50_ms": 32.071,
+        "p95_ms": 33.63805,
+        "p99_ms": 34.61661,
+        "max_ms": 37.261,
+        "over_50ms": 0
+      },
+      "round_trip": {
+        "mean_ms": 46.950561250317456,
+        "p50_ms": 46.52430000714958,
+        "p95_ms": 50.60463502886705,
+        "p99_ms": 57.51669600256717,
+        "max_ms": 66.9383000349626,
+        "over_50ms": 70
+      },
+      "protocol_pass": true,
+      "server_timing_pass": true,
+      "round_trip_timing_pass": false,
+      "thermal_samples": [
+        {
+          "elapsed_s": 0.4,
+          "status": 0,
+          "battery_c": 26.7
+        },
+        {
+          "elapsed_s": 10.6,
+          "status": 0,
+          "battery_c": 26.7
+        },
+        {
+          "elapsed_s": 20.8,
+          "status": 0,
+          "battery_c": 26.7
+        },
+        {
+          "elapsed_s": 31.0,
+          "status": 0,
+          "battery_c": 26.7
+        },
+        {
+          "elapsed_s": 41.1,
+          "status": 0,
+          "battery_c": 26.7
+        },
+        {
+          "elapsed_s": 51.3,
+          "status": 0,
+          "battery_c": 26.7
+        },
+        {
+          "elapsed_s": 61.5,
+          "status": 0,
+          "battery_c": 26.7
+        }
+      ]
+    }
+  },
+  "first_updated_stall_cause": "unresolved",
+  "first_updated_failed_run_retained": true,
+  "model_precision_changed": false,
+  "tensor_runtime_library_bytes_unchanged": true,
+  "updated_hello_protocol": 3,
+  "updated_hello_pick": null,
+  "performance_improvement_established": false,
+  "physical_usb_or_driving_qualification": false
+}
