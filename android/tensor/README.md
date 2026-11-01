@@ -1,5 +1,7 @@
 # Google Tensor support on the Pixel
 
+**Pixel 10 owners:** follow the [complete Tensor G5 compilation and reproduction guide](PIXEL10_COMPILE.md) for SDK access, pinned model download, converter/build commands, import, numerical checks and the 12,000-frame timing run. It also explains SDK approval versus phone-side app allowlisting.
+
 **November 1 update:** JetLink v0.8.12 is installed; the current comma selection was not checked or changed. V3 remains unqualified. A Tensor image-history defect was repaired, but the 160-frame check still failed one accuracy criterion. The Pixel remains on V2. [Evidence and rollback](../../docs/PIXEL_V3_MODEL_2026-10-21.md) · [Unqualified V3 reproduction tools](v3-2026-10-21/README.md). The qualified V2 instructions below remain unchanged.
 
 The installed **0.8.12-clarity-tensor.11** app uses pinned upstream source plus precompiled Tensor support and the October 10 USB stability repairs, optional Android CPU hints and the matched LiteRT 2.3.0 runtime. **The parked-only handshake and Parked USB Test switch are removed.** Ordinary protocol-v3 engine requests and USB service are enabled. The selected processor is **Tensor TPU (precompiled)**, and the selected model remains **Cinque Terre V2**. [APK, installation and build provenance](../README.md).

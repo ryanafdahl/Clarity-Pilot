@@ -38,6 +38,8 @@ Compare the APK hash above before installation. An in-place update preserves set
 
 The tested processor is **Tensor TPU (precompiled)**. Import the V2 compilation for the phone's chipset: [Tensor G6 for Pixel 11](tensor/qualified-model.json) or [Tensor G5 for Pixel 10](tensor/validated-model-g5.json). The app checks the chipset and uses explicit FP16, refusing silent GPU fallback. Numerical validation and meeting the frame budget are separate checks. **Tensor NPU (on-device)** is a separate upstream path. The private SDK and model weights are not bundled in this APK. [Model setup and import](tensor/README.md).
 
+For Pixel 10, use the [step-by-step Tensor G5 compilation guide](tensor/PIXEL10_COMPILE.md). It includes the exact source-model hash, SDK/compiler settings, fresh-cache preparation and repeatable desk test.
+
 ## Model choices and USB
 
 Upstream v0.8.12 shares the newest explicit model choice between the phone and comma. Tapping **Use Model** on the phone records a choice that may replace an older comma choice at the next connection. A newer comma choice can likewise take precedence. Updating the app or running a desk engine check does not itself create a phone-side choice. Check the applied model identity before any physical test; do not change a selection merely to complete the app update.
