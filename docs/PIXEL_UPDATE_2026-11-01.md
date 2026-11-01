@@ -4,6 +4,8 @@ The Pixel 11 Pro XL was updated in place from `.10` to **`0.8.12-clarity-tensor.
 
 The validated Tensor model remains Cinque Terre V2. **V3 is still unqualified:** the October 21 compile failed one extended accuracy criterion and its candidates remain quarantined. This maintenance release does not repair that numerical failure. The comma was not contacted for this app update, so this report makes no claim about its current model selection. [V3 evidence](PIXEL_V3_MODEL_2026-10-21.md).
 
+The later [two longer Pixel 11 tests](PIXEL_LONG_TESTS_2026-11-01.md) completed 24,000 measured frames under 50 ms on the phone. Their successful sustained timing does not erase the first failed attempt recorded here.
+
 ## What changed
 
 The app advances from upstream v0.8.7 to stable [v0.8.12](https://github.com/zoompilot/jetlink/releases/tag/v0.8.12), source `a863c3801da6fd925d14eb1f5b1e250f8efcc649`. Upstream adds model-choice sharing and model downloads by ONNX hash, alongside its intervening maintenance fixes. This is an app maintenance update; no speed improvement is claimed.

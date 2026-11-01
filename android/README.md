@@ -4,6 +4,8 @@
 
 **V3 remains unqualified on the Pixel.** Its October 21 Tensor compilation failed the extended accuracy check. The validated Pixel model is Cinque Terre V2; the V3 candidates remain quarantined. The comma's current model was not checked for this app update. [V3 findings](../docs/PIXEL_V3_MODEL_2026-10-21.md).
 
+**Longer follow-up:** [two approximately 10-minute Pixel 11 runs](../docs/PIXEL_LONG_TESTS_2026-11-01.md) completed 24,000 measured frames, all below 50 ms on the phone. Average processing was 32.04 and 32.14 ms. Warmup and PC-transport outliers remain in the report; the earlier stall is not considered resolved.
+
 [Download jetlink-0.8.12-clarity-tensor.11-pixel.apk](https://github.com/ryanafdahl/Clarity-Pilot/raw/refs/heads/main/android/jetlink-0.8.12-clarity-tensor.11-pixel.apk)
 
 | Field | Value |

@@ -1,0 +1,331 @@
+{
+  "date": "2026-11-01",
+  "app": "0.8.12-clarity-tensor.11",
+  "upstream_tag": "v0.8.12",
+  "source_sha256": "09d080f36965bb2a0790500452bd328aa03c484d0222aa79d1ad9f021a522aec",
+  "transport": "PC ADB TCP forwarding over USB; not direct comma USB",
+  "input_method": "32 synthetic inputs generated with seed 17, cycled with continuous recurrent state; reset only at frame zero",
+  "requested_period_ms": 50,
+  "inter_run_rest_s": 30,
+  "guards_unchanged": {
+    "maximum_server_ms": 100,
+    "block_100_server_p95_ms": 50,
+    "stop_battery_c": 43,
+    "stop_thermal_status": 3
+  },
+  "benchmark_sha256": "5e57a43e4ab47f6cb422b47c5e74ccb48698ad392e57c0f65cef9be0aa017c92",
+  "runs": [
+    {
+      "run": 1,
+      "requested_frames": 12000,
+      "measured_frames": 12000,
+      "warmup_frames": 20,
+      "completed_requested_frames": true,
+      "elapsed_s": 604.515000000014,
+      "measured_duration_s": 603.3150485999649,
+      "achieved_measured_hz": 19.89010555570733,
+      "stop_reasons": [],
+      "metrics": {
+        "server_total": {
+          "mean_ms": 32.041759416666665,
+          "p50_ms": 32.048,
+          "p95_ms": 33.92205,
+          "p99_ms": 34.78107,
+          "max_ms": 41.662,
+          "over_50ms": 0,
+          "at_or_over_100ms": 0
+        },
+        "inference": {
+          "mean_ms": 30.939072916666667,
+          "p50_ms": 30.873,
+          "p95_ms": 32.619,
+          "p99_ms": 33.38502,
+          "max_ms": 36.807,
+          "over_50ms": 0,
+          "at_or_over_100ms": 0
+        },
+        "queues": {
+          "mean_ms": 0.9494188333333334,
+          "p50_ms": 0.978,
+          "p95_ms": 1.297,
+          "p99_ms": 1.6380200000000003,
+          "max_ms": 7.337,
+          "over_50ms": 0,
+          "at_or_over_100ms": 0
+        },
+        "round_trip": {
+          "mean_ms": 46.71997334969152,
+          "p50_ms": 46.41755000920966,
+          "p95_ms": 50.27440497942734,
+          "p99_ms": 58.05614098033402,
+          "max_ms": 87.41330000339076,
+          "over_50ms": 671,
+          "at_or_over_100ms": 0
+        }
+      },
+      "warmup_phone": {
+        "mean_ms": 32.434250000000006,
+        "p50_ms": 31.5235,
+        "p95_ms": 33.413100000000014,
+        "p99_ms": 49.04021999999998,
+        "max_ms": 52.947,
+        "over_50ms": 1,
+        "at_or_over_100ms": 0
+      },
+      "slow_phone_frames": [],
+      "blocks_1200": [
+        {
+          "start_frame": 0,
+          "frames": 1200,
+          "round_trip_p95_ms": 50.96309504006058,
+          "server_p95_ms": 33.984
+        },
+        {
+          "start_frame": 1200,
+          "frames": 1200,
+          "round_trip_p95_ms": 49.47379505028948,
+          "server_p95_ms": 33.92165
+        },
+        {
+          "start_frame": 2400,
+          "frames": 1200,
+          "round_trip_p95_ms": 51.87736000516452,
+          "server_p95_ms": 33.83155
+        },
+        {
+          "start_frame": 3600,
+          "frames": 1200,
+          "round_trip_p95_ms": 50.1490800146712,
+          "server_p95_ms": 33.93925
+        },
+        {
+          "start_frame": 4800,
+          "frames": 1200,
+          "round_trip_p95_ms": 49.926000004052185,
+          "server_p95_ms": 33.8106
+        },
+        {
+          "start_frame": 6000,
+          "frames": 1200,
+          "round_trip_p95_ms": 50.08868000295479,
+          "server_p95_ms": 33.777100000000004
+        },
+        {
+          "start_frame": 7200,
+          "frames": 1200,
+          "round_trip_p95_ms": 51.227324962383136,
+          "server_p95_ms": 33.9543
+        },
+        {
+          "start_frame": 8400,
+          "frames": 1200,
+          "round_trip_p95_ms": 49.99811997113284,
+          "server_p95_ms": 33.87855
+        },
+        {
+          "start_frame": 9600,
+          "frames": 1200,
+          "round_trip_p95_ms": 49.678100034361705,
+          "server_p95_ms": 33.9231
+        },
+        {
+          "start_frame": 10800,
+          "frames": 1200,
+          "round_trip_p95_ms": 50.849454975104884,
+          "server_p95_ms": 34.106300000000005
+        }
+      ],
+      "health": {
+        "before": {
+          "battery_c": 27.7,
+          "battery_percent": 86,
+          "thermal_status": 0
+        },
+        "after": {
+          "battery_c": 34.4,
+          "battery_percent": 87,
+          "thermal_status": 0
+        },
+        "battery_c_min": 27.7,
+        "battery_c_max": 34.4,
+        "thermal_status_max": 0,
+        "max_recorded_phone_sample_age_s": 1.0047377739974763,
+        "phone_samples": 602,
+        "external_samples": 60
+      },
+      "phone_timing_pass": true,
+      "adb_round_trip_timing_pass": false
+    },
+    {
+      "run": 2,
+      "requested_frames": 12000,
+      "measured_frames": 12000,
+      "warmup_frames": 20,
+      "completed_requested_frames": true,
+      "elapsed_s": 605.2970000000205,
+      "measured_duration_s": 604.0460409000516,
+      "achieved_measured_hz": 19.86603534743733,
+      "stop_reasons": [],
+      "metrics": {
+        "server_total": {
+          "mean_ms": 32.1369915,
+          "p50_ms": 32.167,
+          "p95_ms": 34.006099999999996,
+          "p99_ms": 34.83901,
+          "max_ms": 39.794,
+          "over_50ms": 0,
+          "at_or_over_100ms": 0
+        },
+        "inference": {
+          "mean_ms": 31.026513083333334,
+          "p50_ms": 30.98,
+          "p95_ms": 32.700050000000005,
+          "p99_ms": 33.44903,
+          "max_ms": 38.612,
+          "over_50ms": 0,
+          "at_or_over_100ms": 0
+        },
+        "queues": {
+          "mean_ms": 0.95721575,
+          "p50_ms": 0.99,
+          "p95_ms": 1.3230499999999992,
+          "p99_ms": 1.6700700000000015,
+          "max_ms": 4.96,
+          "over_50ms": 0,
+          "at_or_over_100ms": 0
+        },
+        "round_trip": {
+          "mean_ms": 47.02796764194985,
+          "p50_ms": 46.679249964654446,
+          "p95_ms": 51.05002500349655,
+          "p99_ms": 59.421260999515695,
+          "max_ms": 114.14929997408763,
+          "over_50ms": 872,
+          "at_or_over_100ms": 1
+        }
+      },
+      "warmup_phone": {
+        "mean_ms": 32.949650000000005,
+        "p50_ms": 31.7215,
+        "p95_ms": 34.76575000000002,
+        "p99_ms": 53.39714999999997,
+        "max_ms": 58.055,
+        "over_50ms": 1,
+        "at_or_over_100ms": 0
+      },
+      "slow_phone_frames": [],
+      "blocks_1200": [
+        {
+          "start_frame": 0,
+          "frames": 1200,
+          "round_trip_p95_ms": 50.33527499472256,
+          "server_p95_ms": 33.8012
+        },
+        {
+          "start_frame": 1200,
+          "frames": 1200,
+          "round_trip_p95_ms": 49.6708000311628,
+          "server_p95_ms": 34.02985
+        },
+        {
+          "start_frame": 2400,
+          "frames": 1200,
+          "round_trip_p95_ms": 53.293489976204,
+          "server_p95_ms": 33.9922
+        },
+        {
+          "start_frame": 3600,
+          "frames": 1200,
+          "round_trip_p95_ms": 50.91429502062965,
+          "server_p95_ms": 33.9412
+        },
+        {
+          "start_frame": 4800,
+          "frames": 1200,
+          "round_trip_p95_ms": 51.68894503440242,
+          "server_p95_ms": 33.9634
+        },
+        {
+          "start_frame": 6000,
+          "frames": 1200,
+          "round_trip_p95_ms": 50.29931499157101,
+          "server_p95_ms": 33.846849999999996
+        },
+        {
+          "start_frame": 7200,
+          "frames": 1200,
+          "round_trip_p95_ms": 51.98938998510128,
+          "server_p95_ms": 34.0031
+        },
+        {
+          "start_frame": 8400,
+          "frames": 1200,
+          "round_trip_p95_ms": 50.30077498231549,
+          "server_p95_ms": 34.06735
+        },
+        {
+          "start_frame": 9600,
+          "frames": 1200,
+          "round_trip_p95_ms": 52.17865497688763,
+          "server_p95_ms": 34.153749999999995
+        },
+        {
+          "start_frame": 10800,
+          "frames": 1200,
+          "round_trip_p95_ms": 50.62784499314148,
+          "server_p95_ms": 34.171749999999996
+        }
+      ],
+      "health": {
+        "before": {
+          "battery_c": 34.4,
+          "battery_percent": 87,
+          "thermal_status": 0
+        },
+        "after": {
+          "battery_c": 37.9,
+          "battery_percent": 88,
+          "thermal_status": 1
+        },
+        "battery_c_min": 34.1,
+        "battery_c_max": 37.9,
+        "thermal_status_max": 1,
+        "max_recorded_phone_sample_age_s": 1.0035258210045868,
+        "phone_samples": 602,
+        "external_samples": 60
+      },
+      "phone_timing_pass": true,
+      "adb_round_trip_timing_pass": false
+    }
+  ],
+  "cross_run_outputs": {
+    "common_frames_including_warmup": 12020,
+    "hash_mismatch_count": 0,
+    "first_mismatch_frame_ids": [],
+    "establishes_reference_accuracy": false
+  },
+  "new_reference_accuracy_test_performed": false,
+  "physical_comma_usb_test_performed": false,
+  "driving_qualified": false,
+  "handoff": {
+    "date": "2026-11-01",
+    "app": "0.8.12-clarity-tensor.11",
+    "apk_sha256": "30880b942fbc44b8d09f4c54ba25321e60df7f5c0dce235d50b8e74f6f9e6f3e",
+    "source_sha256": "09d080f36965bb2a0790500452bd328aa03c484d0222aa79d1ad9f021a522aec",
+    "compiled_sha256": "328ae315dcd6e62e08aa670e04f11219e4766a11cfc37c261a54ef89f7c6c571",
+    "app_and_model_unchanged": true,
+    "final_status": "Waiting for Comma \u00b7 Cinque Terre Model V2",
+    "listener_off_after_restart": true,
+    "owned_adb_forward_removed": true,
+    "temporary_phone_ui_file_removed": true,
+    "tests_running": false,
+    "battery_c": 35.5,
+    "thermal_status": 0,
+    "usb_powered": true,
+    "wireless_powered": false,
+    "comma_contacted": false,
+    "comma_configuration_changed": false,
+    "physical_comma_usb_test_performed": false,
+    "driving_qualified": false
+  }
+}

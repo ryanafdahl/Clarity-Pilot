@@ -10,6 +10,8 @@ The separate **Tensor NPU (on-device)** choice uses upstream's runtime compiler 
 
 ## Current results and remaining checks
 
+[Two longer November 1 Pixel 11 runs](../../docs/PIXEL_LONG_TESTS_2026-11-01.md) each completed 12,000 measured frames with no phone frames over 50 ms; averages were 32.04 and 32.14 ms. Both included one warmup frame above 50 ms, and both missed the PC round-trip p95 target. Temperature reached 37.9°C with light thermal pressure. These desk runs do not resolve the prior isolated stall or qualify direct USB.
+
 [November 1 app update](../../docs/PIXEL_UPDATE_2026-11-01.md) preserves the model and matched Tensor runtime. All 160 captured outputs matched the previous app exactly. The first timing run stopped on a 275 ms inference stall; all timing attempts are retained in the update report.
 
 [October 17 compiler/runtime investigation](../../docs/TENSOR_COMPILER_RUNTIME_2026-10-17.md) found a repeatable gain from Tensor SDK v2.1: two separate balanced comparisons on the unchanged `.10` app showed **7.4–8.4% lower average processing time**. The subsequent 6,000-frame screen-off run averaged **34.19 ms**, with one frame at **50.10 ms**. Three subsequent wake checks still hit the timing guard, with maxima of 84–93 ms. The source model and FP16 precision stay unchanged. This is desk phone processing, not full vehicle latency. [Earlier TPU profiling](../../docs/TPU_PERFORMANCE_2026-10-11.md) and the [isolated profiler](profiling/README.md) retain the hardware-counter workflow and unsuccessful candidates.
